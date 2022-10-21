@@ -44,7 +44,7 @@ const LandingPage = () => {
                         Already a User?
                     </Typography>
                     <Stack direction="row" justifyContent="center" alignItems="center" spacing={4}>
-                        <SignUpButton label="Login" /> 
+                        <LoginButton color="secondary" variant="contained" /> 
                     </Stack>
                     
 
