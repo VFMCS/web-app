@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import LandingPage from './pages/LandingPage';
@@ -8,7 +7,9 @@ function App() {
     <BrowserRouter>
       <Routes>
           <Route path="/" element={<LandingPage />}>
-              
+              {
+              // TODO: Add routes to other pages
+              }
           </Route>
       </Routes>
     </BrowserRouter>

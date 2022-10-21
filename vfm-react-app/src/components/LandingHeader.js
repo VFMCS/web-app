@@ -6,6 +6,8 @@ import MenuIcon from "@mui/icons-material/Menu"
 import SignUpButton from './buttons/SignUpButton';
 import LoginButton from './buttons/LoginButton';
 
+// A Header Component used for the General Landing Page
+// Contains a Menu Item, the logo/title, sign up button, and login button
 const LandingHeader = () => {
     return (
         <ThemeProvider theme={theme}>

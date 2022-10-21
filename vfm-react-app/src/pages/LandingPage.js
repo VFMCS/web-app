@@ -6,6 +6,8 @@ import theme from '../css/theme.js'
 import SignUpButton from '../components/buttons/SignUpButton.js';
 import LoginButton from '../components/buttons/LoginButton.js';
 
+// The General Landing Page for all users
+// TODO: We still have to add actions for all buttons (to sign up/login)
 const LandingPage = () => {
     return ( 
         <ThemeProvider theme={theme}>
@@ -17,6 +19,7 @@ const LandingPage = () => {
                         Welcome to the Virtual Farmer's Market!
                     </Typography>
                     <Typography variant="body2" sx={{margin: 4}}>
+                        {/* TODO: Change this text/body */}
                         <p>
                         We will develop a Web Application to allow farmers to post fresh produce they have recently harvested to be purchased by consumers online. 
                         We hope that this product gives consumers a platform to purchase directly from farmers, as opposed to having to purchase from a large-chain grocery store. 
