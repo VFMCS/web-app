@@ -26,3 +26,16 @@ Our server is hosted on Google Cloud Platform and is available at vfmcs.com
 Bug tracking will be done with the Github Issues section of this repository. There are both Bug Templates and Feature Templates for our developers to document bugs and features requests as they are necessary.
 
 ## Database Access
+Our database is built with PostgreSQL. PostgreSQL can be installed [here](https://www.postgresql.org/download/). Once installed, run the command:
+
+- `psql "sslmode=disable dbname=vfmcs1 user=guest hostaddr=34.134.101.113"`
+(Please note that currently your address or network must be whitelisted before being able to connect.)
+
+When promopted, enter **guestpass** for the password. You should now be connected and able to query the database.
+An example query:
+
+- `SELECT username FROM users WHERE is_vendor = true;`
+
+This returns our users that are vendors.
+
+
