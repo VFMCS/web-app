@@ -26,8 +26,13 @@ Our server is hosted on Google Cloud Platform and is available at vfmcs.com
 Bug tracking will be done with the Github Issues section of this repository. There are both Bug Templates and Feature Templates for our developers to document bugs and features requests as they are necessary.
 
 ## Database Access
-Our database is built with PostgreSQL. PostgreSQL can be installed [here](https://www.postgresql.org/download/). Once installed, run the command:
+### Access Database with Google Cloud Console
+- Login to Google Cloud console with vfmcs2022@gmail.com credentials. 
+- Open Cloud Shell by clicking the icon at the top right.
+- run: `temp`
 
+### Access Database with Google Cloud Console
+Our database is built with PostgreSQL. PostgreSQL can be installed [here](https://www.postgresql.org/download/). Once installed, run the command:
 - `psql "sslmode=disable dbname=vfmcs1 user=guest hostaddr=34.134.101.113"`
 (Please note that currently your address or network must be whitelisted before being able to connect.)
 
