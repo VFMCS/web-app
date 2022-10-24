@@ -31,7 +31,7 @@ Our database is built with PostgreSQL. PostgreSQL can be installed [here](https:
 - `psql "sslmode=disable dbname=vfmcs1 user=guest hostaddr=34.134.101.113"`
 (Please note that currently your address or network must be whitelisted before being able to connect.)
 
-When promopted, enter **guestpass** for the password. You should now be connected and able to query the database.
+When promopted, enter '**guestpass**' when prompted for the password. You should now be connected and able to query the database.
 An example query:
 
 - `SELECT username FROM users WHERE is_vendor = true;`
