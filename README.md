@@ -29,9 +29,14 @@ Bug tracking will be done with the Github Issues section of this repository. The
 ### Access Database with Google Cloud Console
 - Login to Google Cloud console with vfmcs2022@gmail.com credentials. 
 - Open Cloud Shell by clicking the icon at the top right.
-- run: `temp`
+- run: `gcloud sql connect vfmcs-db`
+- You may encounter a popup in which case select authorize
+- Enter password
+- run: `\connect vfmcs1`
+- Re-enter password
 
-### Access Database with Google Cloud Console
+
+### Access Database from Local psql Client
 Our database is built with PostgreSQL. PostgreSQL can be installed [here](https://www.postgresql.org/download/). Once installed, run the command:
 - `psql "sslmode=disable dbname=vfmcs1 user=guest hostaddr=34.134.101.113"`
 (Please note that currently your address or network must be whitelisted before being able to connect.)
