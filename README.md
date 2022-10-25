@@ -9,9 +9,15 @@ Our frontend is dependent upon ReactJS and its libraries. Therefore, you will ne
 
 `npm install`
 
-More information about how to run the frontend application once you have installed the necessary libraries can be found in the README on the vfm-react-app directory. All dependencies neccessary for running this application can be found within the package.json file.
+Once all dependencies are installed, run the following command to start both the server and front end locally:
 
-Our server is hosted on Google Cloud Platform and is available at vfmcs.com
+`npm start`
+
+More information about how to run the frontend application locally (without the server) can be found in the README in the vfm-react-app directory. 
+
+All dependencies necessary for running this application can be found within the package.json file.
+
+Our server is hosted on Google Cloud Platform and is available at [vfmcs.com](vfmcs.com)
 
 ## Bug Tracking
 Bug tracking will be done with the Github Issues section of this repository. There are both Bug Templates and Feature Templates for our developers to document bugs and features requests as they are necessary.
