@@ -13,7 +13,10 @@ Once all dependencies are installed, run the following command to start both the
 
 ### `npm start`
 
-More information about how to run the frontend application locally (without the server) can be found in the README in the vfm-react-app directory. 
+We use [concurrently](https://www.npmjs.com/package/concurrently) to build and run both the client and the server using a single command (`npm start`).
+For more information about the commands that run under the hood, check out the `Package.json` file under `scripts`.
+
+More information about how to run the frontend application locally (and without the server) can be found in the README in the vfm-react-app directory. 
 
 All dependencies necessary for running this application can be found within the package.json file.
 
