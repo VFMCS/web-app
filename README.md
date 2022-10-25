@@ -7,11 +7,11 @@ For this project, our frontend is coded in ReactJS, our backend is coded in Node
 ## Installation
 Our frontend is dependent upon ReactJS and its libraries. Therefore, you will need to install npm and run the following commands once you have cloned the repository and navigated to the web-app. Our backend is dependent upon NodeJS and some of its libraries. [Click this link](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) for more information on how to install npm. Once you have npm installed, go to the web-app directory and run the following command:
 
-`npm install`
+### `npm install`
 
 Once all dependencies are installed, run the following command to start both the server and front end locally:
 
-`npm start`
+### `npm start`
 
 More information about how to run the frontend application locally (without the server) can be found in the README in the vfm-react-app directory. 
 
