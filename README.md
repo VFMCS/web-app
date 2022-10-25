@@ -34,12 +34,12 @@ Bug tracking will be done with the Github Issues section of this repository. The
 - Enter password
 
 ### Access Database from Local psql Client with Google Auth Proxy (reccomended)
-- Our database is built with PostgreSQL. Install PostgreSQL from here[here](https://www.postgresql.org/download/)
+- Our database is built with PostgreSQL. Install PostgreSQL from [here](https://www.postgresql.org/download/)
 - Next install Cloud SQL Auth Proxy from [here](https://cloud.google.com/sql/docs/postgres/connect-instance-auth-proxy#install-proxy). Be sure the file is executable and renamd to cloud_sql_proxy.
 - For linux environments run: `./cloud_sql_proxy -instances=radiant-saga-366418:us-central1:vfmcs-db=tcp:5432`
 - In Powershell on Windows run: `.\cloud_sql_proxy.exe -instances=radiant-saga-366418:us-central1:vfmcs-db=tcp:5432`
 - Note: ensure that port 5432 is not in use. If it is it should be changed to an available port
-- Open another terminal and run (change port if necassary): `psql "host=127.0.0.1 port=5432 sslmode=disable dbname=vfmcs1 user=[user]"`
+- Open another terminal and run (change port if necassary): `psql "host=127.0.0.1 port=5432 sslmode=disable dbname=vfmcs1 user=guest"`
 - Guest crendentials are user=**guest** pass=**guestpass**
 - Enter password when prompted
 
