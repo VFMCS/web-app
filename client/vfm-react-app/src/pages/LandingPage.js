@@ -1,14 +1,129 @@
 import * as React from 'react' 
 import LandingHeader from '../components/LandingHeader.js';
-import {Box, ThemeProvider, CssBaseline, Typography} from "@mui/material"
+import {Box, ThemeProvider, CssBaseline, Typography, Button} from "@mui/material"
 import { Stack } from '@mui/system';
 import theme from '../css/theme.js'
 import SignUpButton from '../components/buttons/SignUpButton.js';
 import LoginButton from '../components/buttons/LoginButton.js';
 
+//import {farmersMockData} from '../mockData.js';
+
+//import {data} from '../../server/controllers/data.js';
+
 // The General Landing Page for all users
 // TODO: We still have to add actions for all buttons (to sign up/login)
 const LandingPage = () => {
+    const [text, setText] = React.useState("No data")
+
+    /*
+    const [farmers, setFarmers] = React.useState([])
+
+    React.useEffect(() => {
+        const fetchData = async () => {
+        const result = await fetch('http://localhost:3001/farmers')
+        const jsonResult = await result.json()
+
+        setFarmers(jsonResult)
+        }
+
+        fetchData()
+    }, [])
+
+    const submitFarmer = async () => {
+        const myData = {
+          avatar: 'https://picsum.photos/id/1014/100/100',
+          'avatar-full': 'https://picsum.photos/id/1014/600/600',
+          name: 'User 5'
+        }
+    
+        const result = await fetch('http://localhost:3001/farmers', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(myData)
+        })
+    
+        const resultInJson = await result.json()
+        setFarmers(prev => [...prev, resultInJson])
+    }
+    
+
+    const baseURL = 'http://localhost:3001/farmers'
+    async function getInfo() {
+        const res = await fetch(baseURL, {
+            method: 'GET'
+        })
+        console.log(res)
+    }
+    
+    
+    fetch('http://localhost:3001/farmers')
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(err => console.error(err));
+    */
+
+    //console.log(data);
+    
+
+    //const[data, setData] = useState(data)
+
+    let dataButtonHandler = () => {
+        
+        // Fetch data here and update text below
+        /*
+        React.useEffect(() => {
+            const fetchData = async () => {
+                const result = await fetch('http://localhost:3001/farmers/')
+            }
+        })
+        */
+
+        /*
+        const {Client} = require('pg')
+
+        const client = new Client({
+            host: "34.134.101.113",
+            user: "guest",
+            port: 5432,
+            password: "guestpass",
+            database: "vfmcs1"
+
+        })
+
+        client.connect();
+
+        client.query("SELECT username FROM users WHERE is_vendor = true", (err, res) => {
+            if(!err){
+                console.log(res.rows);
+                data = res.rows;
+            }
+            else{
+                console.log(err.message);
+            }
+
+            client.end;
+        })
+
+        const text = "";
+
+        for(let i = 0; i < data.length; i++){
+            text += data[0].username + " ";
+        }
+        */
+        
+        fetch('http://localhost:3001/farmers').then(response => console.log(response)).then(data => console.log(data))
+        .catch(err => console.error(err));
+
+        let data = [ { username: 'nealshuh' } ];
+        let text = "";
+        for(let i = 0; i < data.length; i++){
+            text += data[0].username + " ";
+        }
+
+        setText("Farmers: " + text);
+    }
     return ( 
         <ThemeProvider theme={theme}>
             <CssBaseline enableColorScheme />
@@ -21,7 +136,7 @@ const LandingPage = () => {
                     <Typography variant="body2" sx={{margin: 4}}>
                         {/* TODO: Change this text/body */}
                         <p>
-                        We will develop a Web Application to allow farmers to post fresh produce they have recently harvested to be purchased by consumers online. 
+                        We are developing a Web Application to allow farmers to post fresh produce they have recently harvested to be purchased by consumers online. 
                         We hope that this product gives consumers a platform to purchase directly from farmers, as opposed to having to purchase from a large-chain grocery store. 
                         With this in mind, we anticipate that this will allow our customers to get better quality produce that is in season, build relationships with local farmers, and get a better picture of where and how their food is produced. 
                         </p>
@@ -36,6 +151,14 @@ const LandingPage = () => {
                     </Typography>
                 </Box>
                 <Box alignItems="center" justifyContent="center" sx={{backgroundColor: "white"}}>
+                    <Stack direction="column" justifyContent="center" alignItems="center" spacing={4} sx={{margin: 4}}>
+                        <Button onClick={dataButtonHandler} color="secondary" variant="contained"> 
+                            Click to show data
+                        </Button>
+                        <Typography variant="h3" align="center" sx={{margin: 4, color: "primary.main"}}>
+                            {text}
+                        </Typography>
+                    </Stack>
                     <Typography variant="h3" align="center" sx={{margin: 4, color: "primary.main"}}>
                         Ready to Join?
                     </Typography>
