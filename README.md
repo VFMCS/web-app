@@ -43,7 +43,7 @@ This method requires the google account being used to access the database, be gi
 In Powershell on Windows run: `.\cloud_sql_proxy.exe -instances=radiant-saga-366418:us-central1:vfmcs-db=tcp:5432`
 Note: ensure that port 5432 is not in use. If it is, it should be changed to an available port.
 - Open another terminal and run (change port if necassary): `psql "host=127.0.0.1 port=5432 sslmode=disable dbname=vfmcs1 user=guest"`
-- Guest crendentials are user=**guest** pass=**guestpass**.
+- Guest credentials are user=**guest** pass=**guestpass**.
 - Enter password when prompted.
 
 You should now be connected and able to query the database. 
