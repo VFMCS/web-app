@@ -20,7 +20,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon app.js",
+    "dev": "cd server && nodemon app.js",
     "client": "cd client && cd vfm-react-app && npm start",
     "start": "concurrently \"npm run dev\" \"npm run client\""
   },
