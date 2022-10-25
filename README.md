@@ -26,22 +26,14 @@ Our server is hosted on Google Cloud Platform and is available at [vfmcs.com](ht
 Bug tracking will be done with the Github Issues section of this repository. There are both Bug Templates and Feature Templates for our developers to document bugs and features requests as they are necessary.
 
 ## Database Access
-### Access Database with Google Cloud Console
-This method is for developers with access to the Cloud Console.
-- Login to Google Cloud console with vfmcs2022@gmail.com credentials. 
-- Open Cloud Shell by clicking the icon at the top right.
-- run: `gcloud sql connect vfmcs-db --database=vfmcs1 --user=[USER]`
-- You may encounter a popup in which case select authorize
-- Enter password
-
 ### Access Database from Local psql Client with Cloud SQL Proxy (recommended)
 This method requires the google account being used to access the database, be given permissions ahead of time.
-- Our database is built with PostgreSQL. Install PostgreSQL from [here](https://www.postgresql.org/download/)
+- Our database is built with PostgreSQL. Install PostgreSQL from [here](https://www.postgresql.org/download/). Take note of the installation location and add the \bin folder to your PATH.
 - Next download Cloud SQL Auth Proxy from [here](https://cloud.google.com/sql/docs/postgres/connect-instance-auth-proxy#install-proxy). Be sure the file is executable and renamed to cloud_sql_proxy.
-- Next download and run the Google Cloud CLI Installer from [here](https://dl.google.com/dl/cloudsdk/channels/rapid/GoogleCloudSDKInstaller.exe). You do not need to make an changes to the default installation. After the installions finishes, make sure that you leave the options to start the shell and configure your installation selected. If nothing happens after the installation completes, open a terminal and run `gcloud init` to set your google account configuration. This is the account that must have permissions to access the database.
-- Follow the prompts and sign into your google account.
-- For linux environments run: `./cloud_sql_proxy -instances=radiant-saga-366418:us-central1:vfmcs-db=tcp:5432`
-In Powershell on Windows run: `.\cloud_sql_proxy.exe -instances=radiant-saga-366418:us-central1:vfmcs-db=tcp:5432`
+- Next download and run the Google Cloud CLI Installer from [here](https://dl.google.com/dl/cloudsdk/channels/rapid/GoogleCloudSDKInstaller.exe). You do not need to make any changes to the default installation. After the installions finishes, make sure that you leave the options to start the shell and run `gcloud init` selected. If nothing happens after the installation completes, open a terminal and run `gcloud init` to set your google account configuration. This is the account that must have permissions to access the database.
+- Follow the prompts and sign into your google account. You may be prompted to select a project. The window can be closed at this point.
+- Navigate to the directory where cloud_sql_proxy.exe is saved. For linux environments run: `./cloud_sql_proxy -instances=radiant-saga-366418:us-central1:vfmcs-db=tcp:5432`.
+On Windows run: `.\cloud_sql_proxy.exe -instances=radiant-saga-366418:us-central1:vfmcs-db=tcp:5432`
 Note: ensure that port 5432 is not in use. If it is, it should be changed to an available port.
 - Open another terminal and run (change port if necassary): `psql "host=127.0.0.1 port=5432 sslmode=disable dbname=vfmcs1 user=guest"`
 - Guest credentials are user=**guest** pass=**guestpass**.
@@ -53,6 +45,14 @@ An example query:
 - `SELECT username FROM users WHERE is_vendor = true;`
 
 This returns users that are vendors.
+
+### Access Database with Google Cloud Console
+This method is for developers with access to the Cloud Console.
+- Login to Google Cloud console with vfmcs2022@gmail.com credentials. 
+- Open Cloud Shell by clicking the icon at the top right.
+- run: `gcloud sql connect vfmcs-db --database=vfmcs1 --user=[USER]`
+- You may encounter a popup in which case select authorize
+- Enter password
 
 
 ### Access Database from Local psql Client without Cloud SQL Proxy
