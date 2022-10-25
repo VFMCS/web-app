@@ -27,7 +27,7 @@ Bug tracking will be done with the Github Issues section of this repository. The
 
 ## Database Access
 ### Access Database from Local psql Client with Cloud SQL Proxy (recommended)
-This method requires the google account being used to access the database, be given permissions ahead of time.
+This method requires the google account being used to access the database be given permissions ahead of time.
 - Our database is built with PostgreSQL. Install PostgreSQL from [here](https://www.postgresql.org/download/). Take note of the installation location and add the \bin folder to your PATH.
 - Next download Cloud SQL Auth Proxy from [here](https://cloud.google.com/sql/docs/postgres/connect-instance-auth-proxy#install-proxy). Be sure the file is executable and renamed to cloud_sql_proxy.
 - Next download and run the Google Cloud CLI Installer from [here](https://cloud.google.com/sdk/docs/install-sdk#installing_the_latest_version). You do not need to make any changes to the default installation. After the installions finishes, make sure that you leave the options to start the shell and run `gcloud init` selected. If nothing happens after the installation completes, open a terminal and run `gcloud init` to set your google account configuration. This is the account that must have permissions to access the database.
