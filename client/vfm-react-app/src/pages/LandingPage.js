@@ -1,6 +1,6 @@
 import * as React from 'react' 
 import LandingHeader from '../components/LandingHeader.js';
-import {Box, ThemeProvider, CssBaseline, Typography} from "@mui/material"
+import {Box, ThemeProvider, CssBaseline, Typography, Button} from "@mui/material"
 import { Stack } from '@mui/system';
 import theme from '../css/theme.js'
 import SignUpButton from '../components/buttons/SignUpButton.js';
@@ -9,6 +9,11 @@ import LoginButton from '../components/buttons/LoginButton.js';
 // The General Landing Page for all users
 // TODO: We still have to add actions for all buttons (to sign up/login)
 const LandingPage = () => {
+    const [text, setText] = React.useState("No data")
+    let dataButtonHandler = () => {
+        // Fetch data here and update text below
+        setText("New Data")
+    }
     return ( 
         <ThemeProvider theme={theme}>
             <CssBaseline enableColorScheme />
@@ -21,7 +26,7 @@ const LandingPage = () => {
                     <Typography variant="body2" sx={{margin: 4}}>
                         {/* TODO: Change this text/body */}
                         <p>
-                        We will develop a Web Application to allow farmers to post fresh produce they have recently harvested to be purchased by consumers online. 
+                        We are developing a Web Application to allow farmers to post fresh produce they have recently harvested to be purchased by consumers online. 
                         We hope that this product gives consumers a platform to purchase directly from farmers, as opposed to having to purchase from a large-chain grocery store. 
                         With this in mind, we anticipate that this will allow our customers to get better quality produce that is in season, build relationships with local farmers, and get a better picture of where and how their food is produced. 
                         </p>
@@ -36,6 +41,14 @@ const LandingPage = () => {
                     </Typography>
                 </Box>
                 <Box alignItems="center" justifyContent="center" sx={{backgroundColor: "white"}}>
+                    <Stack direction="column" justifyContent="center" alignItems="center" spacing={4} sx={{margin: 4}}>
+                        <Button onClick={dataButtonHandler} color="secondary" variant="contained"> 
+                            Click to show data
+                        </Button>
+                        <Typography variant="h3" align="center" sx={{margin: 4, color: "primary.main"}}>
+                            {text}
+                        </Typography>
+                    </Stack>
                     <Typography variant="h3" align="center" sx={{margin: 4, color: "primary.main"}}>
                         Ready to Join?
                     </Typography>
