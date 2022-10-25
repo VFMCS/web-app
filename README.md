@@ -35,7 +35,7 @@ This method is for developers with access to the Cloud Console.
 - Enter password
 
 ### Access Database from Local psql Client with Cloud SQL Proxy (recommended)
-This method requires the google account being used to access the database be given permissions ahead of time.
+This method requires the google account being used to access the database, be given permissions ahead of time.
 - Our database is built with PostgreSQL. Install PostgreSQL from [here](https://www.postgresql.org/download/)
 - Next install Cloud SQL Auth Proxy from [here](https://cloud.google.com/sql/docs/postgres/connect-instance-auth-proxy#install-proxy). Be sure the file is executable and renamed to cloud_sql_proxy.
 - For linux environments run: `./cloud_sql_proxy -instances=radiant-saga-366418:us-central1:vfmcs-db=tcp:5432`
