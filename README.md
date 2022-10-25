@@ -27,6 +27,7 @@ Bug tracking will be done with the Github Issues section of this repository. The
 
 ## Database Access
 ### Access Database with Google Cloud Console
+This method is for developers with access to the Cloud Console.
 - Login to Google Cloud console with vfmcs2022@gmail.com credentials. 
 - Open Cloud Shell by clicking the icon at the top right.
 - run: `gcloud sql connect vfmcs-db --database=vfmcs1 --user=[USER]`
@@ -34,15 +35,22 @@ Bug tracking will be done with the Github Issues section of this repository. The
 - Enter password
 
 ### Access Database from Local psql Client with Cloud SQL Proxy (recommended)
-
+This method requires the google account being used to access the database be given permissions ahead of time.
 - Our database is built with PostgreSQL. Install PostgreSQL from [here](https://www.postgresql.org/download/)
-- Next install Cloud SQL Auth Proxy from [here](https://cloud.google.com/sql/docs/postgres/connect-instance-auth-proxy#install-proxy). Be sure the file is executable and renamd to cloud_sql_proxy.
+- Next install Cloud SQL Auth Proxy from [here](https://cloud.google.com/sql/docs/postgres/connect-instance-auth-proxy#install-proxy). Be sure the file is executable and renamed to cloud_sql_proxy.
 - For linux environments run: `./cloud_sql_proxy -instances=radiant-saga-366418:us-central1:vfmcs-db=tcp:5432`
-- In Powershell on Windows run: `.\cloud_sql_proxy.exe -instances=radiant-saga-366418:us-central1:vfmcs-db=tcp:5432`
-- Note: ensure that port 5432 is not in use. If it is it should be changed to an available port
+In Powershell on Windows run: `.\cloud_sql_proxy.exe -instances=radiant-saga-366418:us-central1:vfmcs-db=tcp:5432`
+Note: ensure that port 5432 is not in use. If it is, it should be changed to an available port.
 - Open another terminal and run (change port if necassary): `psql "host=127.0.0.1 port=5432 sslmode=disable dbname=vfmcs1 user=guest"`
-- Guest crendentials are user=**guest** pass=**guestpass**
-- Enter password when prompted
+- Guest crendentials are user=**guest** pass=**guestpass**.
+- Enter password when prompted.
+
+You should now be connected and able to query the database. 
+An example query:
+
+- `SELECT username FROM users WHERE is_vendor = true;`
+
+This returns users that are vendors.
 
 
 ### Access Database from Local psql Client without Cloud SQL Proxy
@@ -51,10 +59,6 @@ Our database is built with PostgreSQL. PostgreSQL can be installed [here](https:
 (Please note that currently your address or network must be whitelisted before being able to connect.)
 
 Enter '**guestpass**' when prompted for the password. You should now be connected and able to query the database.
-An example query:
 
-- `SELECT username FROM users WHERE is_vendor = true;`
-
-This returns our users that are vendors.
 
 
