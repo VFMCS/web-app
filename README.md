@@ -33,7 +33,7 @@ Bug tracking will be done with the Github Issues section of this repository. The
 - You may encounter a popup in which case select authorize
 - Enter password
 
-### Access Database from Local psql Client with Google Auth Proxy (recommended)
+### Access Database from Local psql Client with Cloud SQL Proxy (recommended)
 
 - Our database is built with PostgreSQL. Install PostgreSQL from [here](https://www.postgresql.org/download/)
 - Next install Cloud SQL Auth Proxy from [here](https://cloud.google.com/sql/docs/postgres/connect-instance-auth-proxy#install-proxy). Be sure the file is executable and renamd to cloud_sql_proxy.
@@ -45,7 +45,7 @@ Bug tracking will be done with the Github Issues section of this repository. The
 - Enter password when prompted
 
 
-### Access Database from Local psql Client without Google Auth Proxy
+### Access Database from Local psql Client without Cloud SQL Proxy
 Our database is built with PostgreSQL. PostgreSQL can be installed [here](https://www.postgresql.org/download/). Once installed, run the command:
 - `psql "sslmode=disable dbname=vfmcs1 user=guest hostaddr=34.134.101.113"`
 (Please note that currently your address or network must be whitelisted before being able to connect.)
