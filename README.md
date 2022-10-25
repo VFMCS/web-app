@@ -17,7 +17,7 @@ More information about how to run the frontend application locally (without the 
 
 All dependencies necessary for running this application can be found within the package.json file.
 
-Our server is hosted on Google Cloud Platform and is available at [vfmcs.com](https://www.vfmcs.com)
+Our server is hosted on Google Cloud Platform and is available at [vfmcs.com](http://www.vfmcs.com)
 
 ## Bug Tracking
 Bug tracking will be done with the Github Issues section of this repository. There are both Bug Templates and Feature Templates for our developers to document bugs and features requests as they are necessary.
