@@ -50,9 +50,9 @@ This returns users that are vendors.
 This method is for developers with access to the Cloud Console.
 - Login to Google Cloud console with vfmcs2022@gmail.com credentials. 
 - Open Cloud Shell by clicking the icon at the top right.
-- run: `gcloud sql connect vfmcs-db --database=vfmcs1 --user=[USER]`
+- run: `gcloud sql connect vfmcs-db --database=vfmcs1 --user=guest`
 - You may encounter a popup in which case select authorize
-- Enter password
+- Enter guestpass
 
 
 ### Access Database from Local psql Client without Cloud SQL Proxy
