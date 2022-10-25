@@ -38,7 +38,7 @@ This method is for developers with access to the Cloud Console.
 This method requires the google account being used to access the database, be given permissions ahead of time.
 - Our database is built with PostgreSQL. Install PostgreSQL from [here](https://www.postgresql.org/download/)
 - Next install Cloud SQL Auth Proxy from [here](https://cloud.google.com/sql/docs/postgres/connect-instance-auth-proxy#install-proxy). Be sure the file is executable and renamed to cloud_sql_proxy.
-- Next download and run the Google Cloud CLI Installer from [here](https://dl.google.com/dl/cloudsdk/channels/rapid/GoogleCloudSDKInstaller.exe). Navigate through the installation wizard making sure that you leave the options to start the shell and configure your installation selected.
+- Next download and run the Google Cloud CLI Installer from [here](https://dl.google.com/dl/cloudsdk/channels/rapid/GoogleCloudSDKInstaller.exe). Navigate through the installation wizard making sure that you leave the options to start the shell and configure your installation selected. If nothing happens, open a terminal and run `gcloud init` to set your google account configuration. This is the account that must have permissions to access the database.
 - For linux environments run: `./cloud_sql_proxy -instances=radiant-saga-366418:us-central1:vfmcs-db=tcp:5432`
 In Powershell on Windows run: `.\cloud_sql_proxy.exe -instances=radiant-saga-366418:us-central1:vfmcs-db=tcp:5432`
 Note: ensure that port 5432 is not in use. If it is, it should be changed to an available port.
