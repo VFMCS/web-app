@@ -14,115 +14,21 @@ import LoginButton from '../components/buttons/LoginButton.js';
 // TODO: We still have to add actions for all buttons (to sign up/login)
 const LandingPage = () => {
     const [text, setText] = React.useState("No data")
-
-    /*
-    const [farmers, setFarmers] = React.useState([])
+    const [data, setData] = React.useState({})
 
     React.useEffect(() => {
-        const fetchData = async () => {
-        const result = await fetch('http://localhost:3001/farmers')
-        const jsonResult = await result.json()
-
-        setFarmers(jsonResult)
-        }
-
-        fetchData()
-    }, [])
-
-    const submitFarmer = async () => {
-        const myData = {
-          avatar: 'https://picsum.photos/id/1014/100/100',
-          'avatar-full': 'https://picsum.photos/id/1014/600/600',
-          name: 'User 5'
-        }
-    
-        const result = await fetch('http://localhost:3001/farmers', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(myData)
-        })
-    
-        const resultInJson = await result.json()
-        setFarmers(prev => [...prev, resultInJson])
-    }
-    
-
-    const baseURL = 'http://localhost:3001/farmers'
-    async function getInfo() {
-        const res = await fetch(baseURL, {
-            method: 'GET'
-        })
-        console.log(res)
-    }
-    
-    
-    fetch('http://localhost:3001/farmers')
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(err => console.error(err));
-    */
-
-    //console.log(data);
-    
-
-    //const[data, setData] = useState(data)
-
-    let dataButtonHandler = () => {
-        
-        // Fetch data here and update text below
-        /*
-        React.useEffect(() => {
-            const fetchData = async () => {
-                const result = await fetch('http://localhost:3001/farmers/')
-            }
-        })
-        */
-
-        /*
-        const {Client} = require('pg')
-
-        const client = new Client({
-            host: "34.134.101.113",
-            user: "guest",
-            port: 5432,
-            password: "guestpass",
-            database: "vfmcs1"
-
-        })
-
-        client.connect();
-
-        client.query("SELECT username FROM users WHERE is_vendor = true", (err, res) => {
-            if(!err){
-                console.log(res.rows);
-                data = res.rows;
-            }
-            else{
-                console.log(err.message);
-            }
-
-            client.end;
-        })
-
-        const text = "";
-
-        for(let i = 0; i < data.length; i++){
-            text += data[0].username + " ";
-        }
-        */
-        
-        fetch('http://localhost:3001/farmers').then(response => console.log(response)).then(data => console.log(data))
+        fetch('http://localhost:3001/farmers').then(response => response.json()).then(data => setData(data))
         .catch(err => console.error(err));
+    }, [])
+    
+    let dataButtonHandler = () => {
+        var dataOutput = "";
 
-        let data = [ { username: 'nealshuh' } ];
-        let text = "";
-        for(let i = 0; i < data.length; i++){
-            text += data[0].username + " ";
+        for(let i = 0; i < data.data.length; i++){
+            dataOutput += data.data[i].username.toString() + " ";
         }
 
-        setText("Farmers: " + text);
+        setText("Farmers: " + dataOutput);
     }
     return ( 
         <ThemeProvider theme={theme}>
