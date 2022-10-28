@@ -22,8 +22,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/farmers', cors(), (req, res) => {
-
-  let data = 'hi';
+  let data = {};
 
   const {Client} = require('pg')
 
@@ -49,7 +48,6 @@ app.get('/farmers', cors(), (req, res) => {
 
       client.end;
   })
-
 
   res.json(data);
 })

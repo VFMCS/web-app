@@ -22,7 +22,7 @@ const LandingPage = () => {
     }, [])
     
     let dataButtonHandler = () => {
-        var dataOutput = "";
+        let dataOutput = "";
 
         for(let i = 0; i < data.data.length; i++){
             dataOutput += data.data[i].username.toString() + " ";
