@@ -18,7 +18,7 @@ const CustomerLandingPage = () => {
                     Featured Farmers
                 </Typography>
                 <Box sx={{backgroundColor: "secondary.light"}}>
-                    <ImageList variant="masonry" cols={3} gap={8}>
+                    {/*<ImageList variant="masonry" cols={3} gap={8}>
                         {itemData.map((item) => (
                             <ImageListItem key={item.img}>
                             <img
@@ -30,7 +30,7 @@ const CustomerLandingPage = () => {
                             <ImageListItemBar position="below" title={item.author} />
                             </ImageListItem>
                         ))}
-                        </ImageList>
+                        </ImageList>*/}
                 </Box>
                 
 

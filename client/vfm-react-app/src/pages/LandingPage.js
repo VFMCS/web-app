@@ -78,8 +78,6 @@ const LandingPage = () => {
                     <Stack direction="row" justifyContent="center" alignItems="center" spacing={4}>
                         <LoginButton color="secondary" variant="contained" /> 
                     </Stack>
-                    
-
                 </Box>
             </Stack>
         </ThemeProvider>
