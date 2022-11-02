@@ -11,7 +11,7 @@ const client = new Client({
 
 client.connect();
 
-client.query("SELECT username FROM users WHERE is_vendor = true", (err, res) => {
+client.query("SELECT first_name, last_name, about_me FROM users WHERE is_vendor = true", (err, res) => {
     if(!err){
         console.log(res.rows);
         data = res.rows;

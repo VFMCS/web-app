@@ -16,6 +16,8 @@ const LandingPage = () => {
         fetch('http://localhost:3001/farmers').then(response => response.json()).then(data => setData(data))
         .catch(err => console.error(err));
     }, [])
+
+    console.log(data);
     
     let dataButtonHandler = () => {
         let dataOutput = "";
