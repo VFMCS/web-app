@@ -21,6 +21,7 @@ app.get('/', (req, res) => {
     res.status(200).json('start');
 })
 
+
 app.get('/farmers', cors(), (req, res) => {
   let data = {};
 
@@ -51,6 +52,7 @@ app.get('/farmers', cors(), (req, res) => {
 
   res.json(data);
 })
+
 
 app.listen(PORT, () =>{
   const url = `http://localhost:${PORT}/`

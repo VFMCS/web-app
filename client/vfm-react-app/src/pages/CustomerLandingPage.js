@@ -21,7 +21,28 @@ import LandingHeader from '../components/LandingHeader.js';
 //Customer landing page upon customer being signed in
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
+
 const CustomerLandingPage = () => {
+  const [featuredFarmersInfo, setFeaturedFarmersInfo] = React.useState({}) // capture data from GET request
+
+    React.useEffect(() => {
+          fetch('http://localhost:3001/farmers').then(response => response.json()).then(data => console.log(data))
+          .catch(err => console.error(err));
+    }, [])
+
+    //console.log(featuredFarmersInfo);
+
+    //featuredFarmersInfo[0].image = <img src='https://thumbs.dreamstime.com/b/pengzhou-china-farmer-bicycle-16230465.jpg'/>
+    //featuredFarmersInfo[1].image = <img src='https://www.gazettenet.com/getattachment/d3ceb3a3-e856-44a5-9557-d76987b2d7bf/hl090916-storyplace-ph06'/>
+    //featuredFarmersInfo[2].image = <img src='https://usfarmersandranchers.org/wp-content/uploads/2022/10/DougSaathoff-880x596.jpg'/>
+
+
+    /*
+    <div className="featured-farmers-names">
+          {featuredFarmersInfo.map(farmer => <div>{farmer.name}</div>)}
+    </div>
+    */
+
     return (
         <ThemeProvider theme={theme}>
           <CssBaseline />
@@ -55,11 +76,16 @@ const CustomerLandingPage = () => {
                 </Stack>
               </Container>
             </Box>
+            
+            <Typography variant="h4" align="center" sx={{ pt: 4 }}>
+                Featured Farmers
+            </Typography>
+
             <Container sx={{ py: 8 }} maxWidth="lg">
               {/* End hero unit */}
               <Grid container spacing={4}>
-                {cards.map((card) => (
-                  <Grid item key={card} xs={12} sm={6} md={4}>
+                {featuredFarmersInfo.map((farmer) => (
+                  <Grid item key={farmer} xs={12} sm={6} md={4}>
                     <Card
                       sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
                     >
@@ -67,24 +93,21 @@ const CustomerLandingPage = () => {
                         component="img"
                         sx={{
                           // 16:9
-                          pt: '56.25%',
+                          height: 300,
+                          pt: '0%',
                         }}
                         image="https://source.unsplash.com/random"
+                        //image =
                         alt="random"
                       />
                       <CardContent sx={{ flexGrow: 1 }}>
                         <Typography gutterBottom variant="h5" component="h2">
-                          Heading
+                          <center>{farmer.first_name}</center>
                         </Typography>
                         <Typography>
-                          This is a media card. You can use this section to describe the
-                          content.
+                        <center>{farmer.about_me}</center>
                         </Typography>
                       </CardContent>
-                      <CardActions>
-                        <Button size="small">View</Button>
-                        <Button size="small">Edit</Button>
-                      </CardActions>
                     </Card>
                   </Grid>
                 ))}
