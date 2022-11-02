@@ -15,7 +15,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import { ThemeProvider } from '@mui/material/styles';
-import theme from '../css/theme.js'
+import theme from '../theme/theme.js'
 import LandingHeader from '../components/LandingHeader.js';
 
 //Customer landing page upon customer being signed in

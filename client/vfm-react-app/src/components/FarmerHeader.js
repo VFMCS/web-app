@@ -3,20 +3,15 @@ import { AppBar, Toolbar, Button, Box, ThemeProvider, CssBaseline, Typography, I
 import headerLogo from "../images/logo-simple.png"
 import theme from "../theme/theme"
 import MenuIcon from "@mui/icons-material/Menu"
-import SignUpButton from './buttons/SignUpButton';
-import LoginButton from './buttons/LoginButton';
 import { useNavigate } from "react-router-dom";
 
-// A Header Component used for the General Landing Page
-// Contains a Menu Item, the logo/title, sign up button, and login button
-const LandingHeader = () => {
+// A Header Component used by the Farmer
+// Contains: Menu button, Logo, Dashboard button, and Products Button
+const FarmerHeader = () => {
     let navigate = useNavigate()
-    let toFarmer = () => {
-        navigate('/farmer')
-    }
-    let toConsumer = () => {
-        navigate('/customer')
-    }
+    let toDashboard = () => navigate("/dashboard")
+    let toProducts = () => navigate("/farmer")
+
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline enableColorScheme />
@@ -34,16 +29,14 @@ const LandingHeader = () => {
                             </Typography>
                         </Button>
                         </Box>
-                        <LoginButton />
-                        <SignUpButton />
-                        <Button onClick={toFarmer}>
+                        <Button onClick={toDashboard}>
                             <Typography sx={{ color: "primary.dark", fontWeight: "bold"}}>
-                                Farmer Page {/* TEMPORARY */}
+                                Dashboard
                             </Typography>
                         </Button>
-                        <Button onClick={toConsumer}>
+                        <Button onClick={toProducts}>
                             <Typography sx={{ color: "primary.dark", fontWeight: "bold"}}>
-                                Consumer Page {/* TEMPORARY */}
+                                Your Products
                             </Typography>
                         </Button>
                     </Toolbar>
@@ -53,4 +46,4 @@ const LandingHeader = () => {
     );
 };
   
-export default LandingHeader;
+export default FarmerHeader;
