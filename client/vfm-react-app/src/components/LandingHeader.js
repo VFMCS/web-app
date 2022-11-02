@@ -14,6 +14,9 @@ const LandingHeader = () => {
     let toFarmer = () => {
         navigate('/farmer')
     }
+    let toConsumer = () => {
+        navigate('/customer')
+    }
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline enableColorScheme />
@@ -36,6 +39,11 @@ const LandingHeader = () => {
                         <Button onClick={toFarmer}>
                             <Typography sx={{ color: "primary.dark", fontWeight: "bold"}}>
                                 Farmer Page {/* TEMPORARY */}
+                            </Typography>
+                        </Button>
+                        <Button onClick={toConsumer}>
+                            <Typography sx={{ color: "primary.dark", fontWeight: "bold"}}>
+                                Consumer Page {/* TEMPORARY */}
                             </Typography>
                         </Button>
                     </Toolbar>
