@@ -2,19 +2,15 @@ import * as React from 'react'
 import LandingHeader from '../components/LandingHeader.js';
 import {Box, ThemeProvider, CssBaseline, Typography, Button} from "@mui/material"
 import { Stack } from '@mui/system';
-import theme from '../css/theme.js'
+import theme from '../theme/theme.js'
 import SignUpButton from '../components/buttons/SignUpButton.js';
 import LoginButton from '../components/buttons/LoginButton.js';
-
-//import {farmersMockData} from '../mockData.js';
-
-//import {data} from '../../server/controllers/data.js';
 
 // The General Landing Page for all users
 // TODO: We still have to add actions for all buttons (to sign up/login)
 const LandingPage = () => {
-    const [text, setText] = React.useState("No data")
-    const [data, setData] = React.useState({})
+    const [text, setText] = React.useState("No data") // update displayed text and rerender
+    const [data, setData] = React.useState({}) // capture data from GET request
 
     React.useEffect(() => {
         fetch('http://localhost:3001/farmers').then(response => response.json()).then(data => setData(data))

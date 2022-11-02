@@ -1,13 +1,9 @@
 import * as React from 'react' 
-import { Stack, ThemeProvider, CssBaseline, Typography, IconButton, Card, CardContent, CardActionArea, CardMedia} from '@mui/material';
+import {ThemeProvider, CssBaseline, Typography, Card, CardContent, CardActionArea, CardMedia} from '@mui/material';
 import basketImage from "../images/vegetable-basket.png"
-import theme from "../css/theme"
-import MenuIcon from "@mui/icons-material/Menu"
-import SignUpButton from './buttons/SignUpButton';
-import LoginButton from './buttons/LoginButton';
+import theme from "../theme/theme"
 
-// A Header Component used for the General Landing Page
-// Contains a Menu Item, the logo/title, sign up button, and login button
+// This is a component that displays important information about a product
 const ProductCard = (props) => {
     let item = props.item || {name: "Item", price: "0", description: "This is a description"}
     return (

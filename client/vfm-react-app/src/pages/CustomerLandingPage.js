@@ -2,7 +2,7 @@ import * as React from 'react'
 import LandingHeader from '../components/LandingHeader.js';
 import {Box, ThemeProvider, CssBaseline, ImageList, Typography} from "@mui/material"
 import { Stack } from '@mui/system';
-import theme from '../css/theme.js'
+import theme from '../theme/theme.js'
 import SignUpButton from '../components/buttons/SignUpButton.js';
 import LoginButton from '../components/buttons/LoginButton.js';
 

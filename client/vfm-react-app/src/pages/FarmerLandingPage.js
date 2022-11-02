@@ -1,8 +1,7 @@
 import * as React from 'react' 
-import LandingHeader from '../components/LandingHeader.js';
-import {Box, ThemeProvider, CssBaseline, ImageList, Typography, Grid, Card, CardActionArea, CardContent, Divider} from "@mui/material"
+import {Box, ThemeProvider, CssBaseline, Typography, Grid, Divider} from "@mui/material"
 import { Stack } from '@mui/system';
-import theme from '../css/theme.js'
+import theme from '../theme/theme.js'
 import FarmerHeader from '../components/FarmerHeader.js';
 import ProductCard from '../components/ProductCard.js'
 
