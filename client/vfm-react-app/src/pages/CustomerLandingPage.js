@@ -1,112 +1,63 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Button from '@mui/material/Button';
-import CameraIcon from '@mui/icons-material/PhotoCamera';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
+
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import Link from '@mui/material/Link';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../theme/theme.js'
 import LandingHeader from '../components/LandingHeader.js';
+import { Divider } from '@mui/material';
+import ProductCard from '../components/ProductCard.js';
+import FarmerCard from '../components/FarmerCard.js';
 
 //Customer landing page upon customer being signed in
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const CustomerLandingPage = () => {
+  let farmerArr = Array(10).fill({name: "Steve", location : "1234 Street Street", description : "Coolest farmer in Amherst"})
+  let farmers = [{name : "Greg", location : "152 North Street", descripton : "Great potatoes"}, {name : "John", location : "100 South Street", description : "dope squash"}].concat(farmerArr)
+  let potatoArr = Array(10).fill({name: "Potato", price: "75", description: "This is a potato"})
+  let products = [{name: "Tomato", price: "500", description: "This is a tomato"},{name: "Squash", price: "30", description: "This is a squash"}].concat(potatoArr)
     return (
         <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <LandingHeader />
-          <main>
-            {/* Hero unit */}
-            <Box
-              sx={{
-                backgroundColor : "secondary.light"
-              }}
-            >
-              <Container maxWidth="sm">
-                <Typography
-                  component="h1"
-                  variant="h2"
-                  align="center"
-                  color="text.primary"
-                  gutterBottom
-                >
-                  Customer Home Page
+          <CssBaseline enableColorScheme />
+          <Stack direction = "column">
+            <LandingHeader />
+              <Typography variant="h5" sx={{margin: 2, color: "primary.main"}}>
+                Featured Farmers
+              </Typography>
+              <Divider/>
+              <Box sx={{margin: 4}}>
+                    <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                        {farmers.map((item) => (
+                            <Grid item xs={2} sm={2} md={2} key={item.name}>
+                                <FarmerCard item={item}/>
+                            </Grid>
+                        ))}
+                    </Grid>
+                </Box>
+                <Divider />
+                <Typography variant="h5" sx={{margin: 2, color: "primary.main"}}>
+                Featured Products
                 </Typography>
-                <Typography variant="h5" align="center" color="text.secondary" paragraph>
-                  Welcome! Here are the products currently available in your area:
-                </Typography>
-                <Stack
-                  sx={{ pt: 4 }}
-                  direction="row"
-                  spacing={2}
-                  justifyContent="center"
-                >
-                </Stack>
-              </Container>
-            </Box>
-            <Container sx={{ py: 8 }} maxWidth="lg">
-              {/* End hero unit */}
-              <Grid container spacing={4}>
-                {cards.map((card) => (
-                  <Grid item key={card} xs={12} sm={6} md={4}>
-                    <Card
-                      sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
-                    >
-                      <CardMedia
-                        component="img"
-                        sx={{
-                          // 16:9
-                          pt: '56.25%',
-                        }}
-                        image="https://source.unsplash.com/random"
-                        alt="random"
-                      />
-                      <CardContent sx={{ flexGrow: 1 }}>
-                        <Typography gutterBottom variant="h5" component="h2">
-                          Heading
-                        </Typography>
-                        <Typography>
-                          This is a media card. You can use this section to describe the
-                          content.
-                        </Typography>
-                      </CardContent>
-                      <CardActions>
-                        <Button size="small">View</Button>
-                        <Button size="small">Edit</Button>
-                      </CardActions>
-                    </Card>
-                  </Grid>
-                ))}
-              </Grid>
-            </Container>
-          </main>
-          {/* Footer */}
-          <Box sx={{ bgcolor: 'secondary.light', p: 6 }} component="footer">
-            <Typography variant="h6" align="center" gutterBottom>
-              Footer
-            </Typography>
-            <Typography
-              variant="subtitle1"
-              align="center"
-              color="text.secondary"
-              component="p"
-            >
-              Something here to give the footer a purpose!
-            </Typography>
-          </Box>
-          {/* End footer */}
+                <Box sx={{margin: 4}}>
+                    <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                        {products.map((item) => (
+                            <Grid item xs={2} sm={2} md={2} key={item.name}>
+                                <ProductCard item={item}/>
+                            </Grid>
+                        ))}
+                    </Grid>
+                </Box>
+
+
+
+          </Stack>
+
         </ThemeProvider>
+
       );
 };
 
