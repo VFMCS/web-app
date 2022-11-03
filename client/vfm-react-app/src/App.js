@@ -1,6 +1,7 @@
 import './App.css';
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import LandingPage from './pages/LandingPage';
+import FarmerPostItem from './pages/FarmerPostItem';
 
 function App() {
   return (
@@ -10,6 +11,9 @@ function App() {
               {
               // TODO: Add routes to other pages
               }
+          </Route>
+          <Route path="/postitem" element={<FarmerPostItem />}>
+          
           </Route>
       </Routes>
     </BrowserRouter>
