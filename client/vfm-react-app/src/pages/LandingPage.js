@@ -8,6 +8,7 @@ import LoginButton from '../components/buttons/LoginButton.js';
 
 // The General Landing Page for all users
 // TODO: We still have to add actions for all buttons (to sign up/login)
+
 const LandingPage = () => {
     const [text, setText] = React.useState("No data") // update displayed text and rerender
     const [data, setData] = React.useState({}) // capture data from GET request
@@ -23,11 +24,13 @@ const LandingPage = () => {
         let dataOutput = "";
 
         for(let i = 0; i < data.data.length; i++){
-            dataOutput += data.data[i].username.toString() + " ";
+            dataOutput += data.data[i].first_name.toString() + " ";
         }
 
         setText("Farmers: " + dataOutput);
     }
+
+    
     return ( 
         <ThemeProvider theme={theme}>
             <CssBaseline enableColorScheme />
@@ -83,5 +86,6 @@ const LandingPage = () => {
         
     );
 };
-  
+
+//export {farmers};
 export default LandingPage;
