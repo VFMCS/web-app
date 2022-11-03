@@ -6,10 +6,10 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../theme/theme.js'
-import LandingHeader from '../components/LandingHeader.js';
 import { Divider } from '@mui/material';
 import ProductCard from '../components/ProductCard.js';
 import FarmerCard from '../components/FarmerCard.js';
+import ConsumerHeader from '../components/ConsumerHeader.js';
 
 //Customer landing page upon customer being signed in
 //const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
