@@ -10,6 +10,7 @@ import { Divider } from '@mui/material';
 import ProductCard from '../components/ProductCard.js';
 import FarmerCard from '../components/FarmerCard.js';
 import ConsumerHeader from '../components/headers/ConsumerHeader.js';
+import ConsumerHeader from '../components/ConsumerHeader.js';
 
 //Customer landing page upon customer being signed in
 //const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -43,11 +44,11 @@ const CustomerLandingPage = () => {
         <ThemeProvider theme={theme}>
           <CssBaseline enableColorScheme />
           <Stack direction = "column">
-            <LandingHeader />
-              <center><Typography variant="h5" sx={{margin: 2, color: "black"}}>
-                Featured Farmers 
-              </Typography></center>
-              
+            <ConsumerHeader />
+              <Typography variant="h5" sx={{margin: 2, color: "primary.main"}}>
+                Featured Farmers
+              </Typography>
+              <Divider/>
               <Box sx={{margin: 4}}>
                     <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                         {(farmers.slice(0, 3)).map((item) => (
