@@ -1,4 +1,6 @@
 const express = require("express");
+const usrapi = require("./user-api/routes.js");
+const prdapi = require("./products-api/routes.js");
 const app = express();
 app.use(express.json());
 
