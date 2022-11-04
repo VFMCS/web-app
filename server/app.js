@@ -40,8 +40,8 @@ app.get('/search/:key', cors(), (req, res) => {
 
     client.connect();
     
-    query_string = "SELECT * FROM products WHERE UPPER(CONCAT(name, '#', '#', product_type, '#', product_category)) LIKE UPPER(" + "'%" + search_query + "%')";
-    //console.log(query_string)
+    query_string = "SELECT * FROM products WHERE UPPER(CONCAT(name, '#', product_type, '#', product_category)) LIKE UPPER(" + "'%" + search_query + "%')";
+    console.log(query_string);
 
     let data = [];
     client.query(query_string, (err, resp) => {
@@ -59,7 +59,38 @@ app.get('/search/:key', cors(), (req, res) => {
 })
 
 app.get('/search/', cors(), (req, res) => {
-    res.send([]);
+  search_query = req.params.key;
+  console.log(search_query);
+
+  const {Client} = require('pg')
+
+    const client = new Client({
+        host: "34.134.101.113",
+        user: "guest",
+        port: 5432,
+        password: "guestpass",
+        database: "vfmcs1"
+
+    })
+
+    client.connect();
+    
+    query_string = "SELECT * FROM products";
+    console.log(query_string);
+
+    let data = [];
+    client.query(query_string, (err, resp) => {
+        if(!err){
+            //console.log(res.rows);
+            data = resp.rows;
+            res.send(resp.rows)
+        }
+        else{
+            console.log(err.message);
+        }
+
+        client.end;
+    })
 })
 
 
