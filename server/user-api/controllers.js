@@ -37,16 +37,11 @@ const deleteUser = (req,res) => {
         })
 }
 
-const getFarmers = (req,res) => {
-    pool.query(queries.getFarmers,(error,results)=>{
-        res.status(200).json(results.rows);
-    })
-}
+
 
 module.exports = {
     getUsers,
     getUserByID,
     createUser,
     deleteUser,
-    getFarmers,
 }
