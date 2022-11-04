@@ -4,11 +4,6 @@ const prdapi = require('./products-api/routes.js')
 const farmapi = require('./farmers-api/routes.js')
 const cors = require('cors');
 const app = express();
-<<<<<<< HEAD
-const PORT = process.env.PORT || 3001;
-
-=======
-
 const PORT = process.env.PORT || 3001;
 >>>>>>> 1b40592d (Fixed express server port)
 
