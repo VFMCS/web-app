@@ -43,28 +43,32 @@ const CustomerLandingPage = () => {
         <ThemeProvider theme={theme}>
           <CssBaseline enableColorScheme />
           <Stack direction = "column">
-            <ConsumerHeader />
-              <Typography variant="h5" sx={{margin: 2, color: "primary.main"}}>
+            <center><ConsumerHeader />
+              <Typography variant="h5" sx={{margin: 6, color: "black"}}>
                 Featured Farmers
               </Typography>
-              <Divider/>
-              <Box sx={{margin: 4}}>
-                    <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-                        {(farmers.slice(0, 3)).map((item) => (
-                            <Grid item xs={2} sm={3} md={4} key={item.name}>
-                                <FarmerCard item={item}/>
-                            </Grid>
-                        ))}
-                    </Grid>
-                </Box>
+            </center>
+            <center>
+              <Box sx={{ margin: 2}} maxWidth="lg">
+                <Grid container spacing={10}>
+                    {(farmers.slice(0, 3)).map((item) => (
+                        <Grid item xs={12} sm={6} md={4} key={item.user_id}>
+                            <FarmerCard item={item}/>
+                        </Grid>
+                    ))}
+                    
+                </Grid>
+              </Box></center>
                 
-                <center><Typography variant="h5" sx={{margin: 2, color: "black"}}>
+                
+                <center><Typography variant="h5" sx={{margin: 6, color: "black"}}>
                 Featured Products
                 </Typography> </center>
-                <Box sx={{margin: 4}}>
+
+                <Box sx={{margin: 2}}>
                     <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 4, sm: 4, md: 20 }}>
                         {(products.slice(0, 5)).map((item) => (
-                            <Grid item xs={1} sm={3} md={4} key={item.name}>
+                            <Grid item xs={1} sm={3} md={4} key={item.product_id}>
                                 <ProductCard item={item}/>
                             </Grid>
                         ))}

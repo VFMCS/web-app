@@ -6,7 +6,7 @@ import theme from "../theme/theme"
 // This is a component that displays important information about a product
 const ProductCard = (props) => {
     //let item = props.item || {name: "Item", price: "0", description: "This is a description"}
-    console.log(props);
+    //console.log(props);
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline enableColorScheme />
@@ -14,8 +14,8 @@ const ProductCard = (props) => {
                 <CardActionArea>
                     <CardMedia
                     component="img"
-                    height="140"
-                    image={basketImage}
+                    height="200"
+                    image={props.item.image_url}
                     alt="Product Image"
                     />
                     <CardContent>
