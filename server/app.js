@@ -1,9 +1,8 @@
 const express = require("express");
+const usrapi = require('./user-api/routes.js')
+const prdapi = require('./products-api/routes.js')
+const farmapi = require('./farmers-api/routes.js')
 const cors = require('cors');
-const usrapi = require("./user-api/routes.js");
-const prdapi = require("./products-api/routes.js");
-const farmapi = require("./farmers-api/routes.js");
-const farmapi = require("./farmers-api/routes.js");
 const app = express();
 const PORT = process.env.PORT || 3001;
 
