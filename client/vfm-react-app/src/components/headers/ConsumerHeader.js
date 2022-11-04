@@ -7,9 +7,6 @@ import { useNavigate } from "react-router-dom";
 import SearchBar from '../SearchBar';
 import ShoppingCartButton from '../buttons/ShoppingCartButton';
 import ConsumerSidebar from '../sidebars/ConsumerSidebar';
-import SearchBar from '../SearchBar';
-import ShoppingCartButton from '../buttons/ShoppingCartButton';
-import ConsumerSidebar from '../sidebars/ConsumerSidebar';
 
 // A Header Component used by the Consumer
 // Contains: Menu button, Logo, Dashboard button, and Products Button
