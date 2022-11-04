@@ -23,13 +23,13 @@ const ProductCard = (props) => {
                             {props.item.name}
                         </Typography>
                         <Typography variant="body2" color="text.secondary" component="div" >
-                            {item.details}
+                            {props.item.details}
                         </Typography>
                         <Typography gutterBottom variant="subtitle1" component="div" margin={1}>
-                            {" $" + item.price + "/item"}
+                            {" $" + props.item.price + "/item"}
                         </Typography>
                         <Typography gutterBottom variant="subtitle1" component="div" margin={-1}>
-                            {item.quantity} in Stock
+                            {props.item.quantity} in Stock
                         </Typography>
                         
                     </CardContent>
