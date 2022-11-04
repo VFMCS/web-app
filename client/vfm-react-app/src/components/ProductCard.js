@@ -5,7 +5,8 @@ import theme from "../theme/theme"
 
 // This is a component that displays important information about a product
 const ProductCard = (props) => {
-    let item = props.item || {name: "Item", price: "0", description: "This is a description"}
+    //let item = props.item || {name: "Item", price: "0", description: "This is a description"}
+    console.log(props);
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline enableColorScheme />
@@ -19,7 +20,7 @@ const ProductCard = (props) => {
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="div">
-                            {item.name}
+                            {props.item.name}
                         </Typography>
                         <Typography variant="body2" color="text.secondary" component="div" >
                             {item.details}
