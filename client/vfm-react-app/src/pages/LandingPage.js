@@ -13,7 +13,7 @@ const LandingPage = () => {
     const [data, setData] = React.useState([]) // capture data from GET request
 
     React.useEffect(() => {
-        fetch('http://localhost:3001/data').then(response => response.json()).then(data => setData(data))
+        fetch('http://localhost:3001/api/farm').then(response => response.json()).then(data => setData(data))
         .catch(err => console.error(err));
     }, [])
 
