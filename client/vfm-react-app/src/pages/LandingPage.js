@@ -21,7 +21,7 @@ const LandingPage = () => {
         let dataOutput = "";
 
         for(let i = 0; i < data.data.length; i++){
-            dataOutput += data.data[i].username.toString() + " ";
+            dataOutput += data.data[i].first_name.toString() + " ";
         }
 
         setText("Farmers: " + dataOutput);

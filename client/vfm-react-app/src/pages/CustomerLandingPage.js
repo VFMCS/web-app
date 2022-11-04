@@ -20,7 +20,17 @@ const CustomerLandingPage = () => {
   let farmers = [{name : "Greg", location : "152 North Street", descripton : "Great potatoes"}, {name : "John", location : "100 South Street", description : "dope squash"}].concat(farmerArr)
   let potatoArr = Array(10).fill({name: "Potato", price: "75", description: "This is a potato"})
   let products = [{name: "Tomato", price: "500", description: "This is a tomato"},{name: "Squash", price: "30", description: "This is a squash"}].concat(potatoArr)
-    return (
+  
+  const [data, setData] = React.useState({}) // capture data from GET request
+
+  React.useEffect(() => {
+      fetch('http://localhost:3001/farmers').then(response => response.json()).then(data => setData(data))
+      .catch(err => console.error(err));
+  }, [])
+  
+
+
+  return (
         <ThemeProvider theme={theme}>
           <CssBaseline enableColorScheme />
           <Stack direction = "column">
@@ -45,7 +55,7 @@ const CustomerLandingPage = () => {
                 <Box sx={{margin: 4}}>
                     <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                         {products.map((item) => (
-                            <Grid item xs={2} sm={2} md={2} key={item.name}>
+                            <Grid item xs={1} sm={3} md={4} key={item.name}>
                                 <ProductCard item={item}/>
                             </Grid>
                         ))}

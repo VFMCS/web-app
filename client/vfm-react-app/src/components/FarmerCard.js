@@ -19,13 +19,13 @@ const FarmerCard = (props) => {
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="div">
-                            {item.name}
+                            {props.first_name}
                         </Typography>
                         <Typography gutterBottom variant="subtitle1" component="div">
-                            {item.location}
+                            {props.location}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                            {item.description}
+                            {props.about_me}
                         </Typography>
                     </CardContent>
                 </CardActionArea>
