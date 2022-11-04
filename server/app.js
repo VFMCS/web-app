@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+app.use(express.json());
 
 const cors = require('cors');
 app.use(cors());
@@ -22,61 +23,43 @@ app.get('/', (req, res) => {
 })
 
 
-app.get('/farmers', cors(), (req, res) => {
+app.get('/search/:key', cors(), (req, res) => {
+  search_query = req.params.key;
+  console.log(search_query);
+
   const {Client} = require('pg')
 
-const client = new Client({
-    host: "34.134.101.113",
-    user: "guest",
-    port: 5432,
-    password: "guestpass",
-    database: "vfmcs1"
+    const client = new Client({
+        host: "34.134.101.113",
+        user: "guest",
+        port: 5432,
+        password: "guestpass",
+        database: "vfmcs1"
 
-})
-
-client.connect();
-
-client.query("SELECT * FROM users WHERE is_vendor = true", (err, res) => {
-    if(!err){
-        //console.log(res.rows);
-        farmers = res.rows;
-    }
-    else{
-        console.log(err.message);
-    }
-
-    client.end;
-})
-
-client.query("SELECT * FROM users WHERE is_vendor = false", (err, res) => {
-    if(!err){
-        //console.log(res.rows);
-        customers = res.rows;
-    }
-    else{
-        console.log(err.message);
-    }
-
-    client.end;
-})
-
-client.query("SELECT * FROM products", (err, res) => {
-    if(!err){
-        //console.log(res.rows);
-        products = res.rows;
-    }
-    else{
-        console.log(err.message);
-    }
-
-    client.end;
-})
-
-exports.data = (req, res) => {
-    res.json({
-        farmers, customers, products
     })
-};
+
+    client.connect();
+    
+    query_string = "SELECT * FROM products WHERE UPPER(CONCAT(name, '#', '#', product_type, '#', product_category)) LIKE UPPER(" + "'%" + search_query + "%')";
+    console.log(query_string)
+    let data = [];
+    client.query(query_string, (err, resp) => {
+        if(!err){
+            //console.log(res.rows);
+            data = resp.rows;
+            console.log(data);
+            res.send(resp.rows)
+        }
+        else{
+            console.log(err.message);
+        }
+
+        client.end;
+    })
+})
+
+app.get('/search/', cors(), (req, res) => {
+    res.send([]);
 })
 
 

@@ -21,15 +21,16 @@ const ProductCard = (props) => {
                         <Typography gutterBottom variant="h5" component="div">
                             {item.name}
                         </Typography>
-                        <Typography gutterBottom variant="subtitle1" component="div">
+                        <Typography variant="body2" color="text.secondary" component="div" >
+                            {item.details}
+                        </Typography>
+                        <Typography gutterBottom variant="subtitle1" component="div" margin={1}>
                             {" $" + item.price + "/item"}
                         </Typography>
-                        <Typography gutterBottom variant="subtitle1" component="div">
-                            3 in Stock
+                        <Typography gutterBottom variant="subtitle1" component="div" margin={-1}>
+                            {item.quantity} in Stock
                         </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            {item.description}
-                        </Typography>
+                        
                     </CardContent>
                 </CardActionArea>
             </Card>
