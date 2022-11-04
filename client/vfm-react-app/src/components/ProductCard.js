@@ -13,8 +13,8 @@ const ProductCard = (props) => {
                 <CardActionArea>
                     <CardMedia
                     component="img"
-                    height="140"
-                    image={basketImage}
+                    height="200"
+                    image={props.item.image_url}
                     alt="Product Image"
                     />
                     <CardContent>
