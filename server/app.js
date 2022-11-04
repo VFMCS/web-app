@@ -1,8 +1,11 @@
 const express = require("express");
+const cors = require('cors');
 const usrapi = require("./user-api/routes.js");
 const prdapi = require("./products-api/routes.js");
 const farmapi = require("./farmers-api/routes.js");
 const app = express();
+
+app.use(cors());
 app.use(express.json());
 
 const cors = require('cors');
