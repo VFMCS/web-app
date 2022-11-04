@@ -10,11 +10,11 @@ const ProductCard = (props) => {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline enableColorScheme />
-            <Card sx={{ maxWidth: 345 }}>
+            <Card sx={{ maxWidth: 320 }}>
                 <CardActionArea>
                     <CardMedia
                     component="img"
-                    height="200"
+                    height="220"
                     image={props.item.image_url}
                     alt="Product Image"
                     />
