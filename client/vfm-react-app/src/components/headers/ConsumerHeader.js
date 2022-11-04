@@ -4,7 +4,6 @@ import headerLogo from "../../images/logo-simple.png"
 import theme from "../../theme/theme"
 import MenuIcon from "@mui/icons-material/Menu"
 import { useNavigate } from "react-router-dom";
-import AddCircleIcon from '@mui/icons-material/AddCircle';
 import SearchBar from '../SearchBar';
 import ShoppingCartButton from '../buttons/ShoppingCartButton';
 import ConsumerSidebar from '../sidebars/ConsumerSidebar';
@@ -36,21 +35,10 @@ const ConsumerHeader = () => {
                             </Typography>
                         </Button>
                         </Box>
-                        <Box sx={{flexGrow: 2}}>
-                            <Button  variant="contained" sx={{ bgcolor: "primary.dark", fontWeight: "bold"}} startIcon={<AddCircleIcon fontSize="large" />}>
-                                Create Product
-                            </Button>
+                        <Box sx={{flexGrow: 3}}>
+                        <SearchBar />
                         </Box>
-                        <Button onClick={toDashboard}>
-                            <Typography sx={{ color: "primary.dark", fontWeight: "bold"}}>
-                                Dashboard
-                            </Typography>
-                        </Button>
-                        <Button onClick={toProducts}>
-                            <Typography sx={{ color: "primary.dark", fontWeight: "bold"}}>
-                                Your Products
-                            </Typography>
-                        </Button>
+                        <ShoppingCartButton />
                     </Toolbar>
                 </AppBar>
             </Box>
