@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../theme/theme.js'
-import LandingHeader from '../components/LandingHeader.js';
+import LandingHeader from '../components/headers/LandingHeader.js';
 import { Divider } from '@mui/material';
 import ProductCard from '../components/ProductCard.js';
 import FarmerCard from '../components/FarmerCard.js';
@@ -45,6 +45,7 @@ const CustomerLandingPage = () => {
           <CssBaseline enableColorScheme />
           <Stack direction = "column">
             <LandingHeader />
+            <center>
               <Typography variant="h5" sx={{margin: 2, color: "primary.main"}}>
                 Featured Farmers
               </Typography>

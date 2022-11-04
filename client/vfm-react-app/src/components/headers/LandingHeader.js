@@ -6,7 +6,7 @@ import MenuIcon from "@mui/icons-material/Menu"
 import SignUpButton from '../buttons/SignUpButton';
 import LoginButton from '../buttons/LoginButton';
 import { useNavigate } from "react-router-dom";
-import AddCircleIcon from '@mui/icons-material/AddCircle';
+import GeneralSidebar from '../sidebars/GeneralSidebar';
 
 // A Header Component used for the General Landing Page
 // Contains a Menu Item, the logo/title, sign up button, and login button
@@ -40,12 +40,9 @@ const LandingHeader = () => {
                             </Typography>
                         </Button>
                         </Box>
-                        <Box sx={{flexGrow: 2}}>
-                            <Button  variant="contained" sx={{ bgcolor: "primary.dark", fontWeight: "bold"}} startIcon={<AddCircleIcon fontSize="large" />}>
-                                Create Product
-                            </Button>
-                        </Box>
-                        <Button onClick={toDashboard}>
+                        <LoginButton />
+                        <SignUpButton />
+                        <Button onClick={toFarmer}>
                             <Typography sx={{ color: "primary.dark", fontWeight: "bold"}}>
                                 Farmer Page {/* TEMPORARY */}
                             </Typography>
