@@ -1,13 +1,23 @@
 import * as React from 'react'
 import {IconButton, Paper, InputBase} from '@mui/material';
 import SearchIcon from "@mui/icons-material/Search"
+import { useNavigate } from "react-router-dom";
+
+let search_query = '';
 
 const SearchBar = () => {
-    let [text, setText] = React.useState("")
-    let [query, setQuery] = React.useState("")
+    let [text, setText] = React.useState("");
+    let [query, setQuery] = React.useState("");
+    let navigate = useNavigate();
+
     const onSubmit = () => {
-        setQuery(text)
-        console.log(query)
+        setQuery(text);
+        search_query = text;
+
+        console.log("searching: " + search_query)
+
+        navigate('/customer-search', {state:{refresh:true}});
+        //window.location.reload(false);
     }
     return (
       <Paper
@@ -27,4 +37,5 @@ const SearchBar = () => {
     );
   }
 
+  export {search_query};
   export default SearchBar;
