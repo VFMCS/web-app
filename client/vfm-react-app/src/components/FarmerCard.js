@@ -5,7 +5,7 @@ import theme from "../theme/theme"
 
 // This is a component that displays important information about a product
 const FarmerCard = (props) => {
-    let item = props.item || {name: "Item", location: "0", description: "This is a description"}
+    //let item = props.item || {name: "Item", location: "0", description: "This is a description"}
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline enableColorScheme />
@@ -13,19 +13,19 @@ const FarmerCard = (props) => {
                 <CardActionArea>
                     <CardMedia
                     component="img"
-                    height="140"
-                    image={basketImage}
-                    alt="Product Image"
-                    />
+                    height="300"
+                    image={props.item.image_url}
+                  />
+                
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="div">
-                            {item.name}
+                            {props.item.first_name}
                         </Typography>
                         <Typography gutterBottom variant="subtitle1" component="div">
-                            {item.location}
+                            {props.item.location}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                            {item.description}
+                            {props.item.about_me}
                         </Typography>
                     </CardContent>
                 </CardActionArea>
