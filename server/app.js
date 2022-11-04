@@ -7,10 +7,6 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-
-const cors = require('cors');
-app.use(cors());
-
 require('dotenv').config()
 app.set('view engine', 'ejs')
 app.use('/api/', require('./routes/hello'))
@@ -108,6 +104,4 @@ app.listen(PORT, () =>{
 
 /*
 const playersRouter = require("./routes/players");
-
-
-
+*/
