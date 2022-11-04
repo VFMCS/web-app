@@ -1,5 +1,5 @@
-import * as React from 'react' 
-import {ThemeProvider, CssBaseline, Typography, Card, CardContent, CardActionArea, CardMedia, Button} from '@mui/material';
+import * as React from 'react'
+import { ThemeProvider, CssBaseline, Typography, Card, CardContent, CardActionArea, CardMedia, Button } from '@mui/material';
 import basketImage from "../images/vegetable-basket.png"
 import theme from "../theme/theme"
 import { useNavigate } from 'react-router-dom';
@@ -15,11 +15,11 @@ const FarmerCard = (props) => {
             <Card sx={{ maxWidth: 345 }}>
                 <CardActionArea>
                     <CardMedia
-                    component="img"
-                    height="300"
-                    image={props.item.image_url}
-                  />
-                
+                        component="img"
+                        height="300"
+                        image={props.item.image_url}
+                    />
+
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="div">
                             {props.item.first_name}
@@ -31,7 +31,7 @@ const FarmerCard = (props) => {
                             {props.item.about_me}
                         </Typography>
                         <Button onClick={toFarmerProfile}>
-                            <Typography sx={{ color: "primary.dark", fontWeight: "bold"}}>
+                            <Typography sx={{ color: "primary.dark", fontWeight: "bold" }}>
                                 View Profile
                             </Typography>
                         </Button>
@@ -41,5 +41,5 @@ const FarmerCard = (props) => {
         </ThemeProvider>
     );
 };
-  
+
 export default FarmerCard;
