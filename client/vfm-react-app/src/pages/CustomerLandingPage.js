@@ -11,6 +11,7 @@ import { Divider } from '@mui/material';
 import ProductCard from '../components/ProductCard.js';
 import FarmerCard from '../components/FarmerCard.js';
 import ConsumerHeader from '../components/headers/ConsumerHeader.js';
+import { useNavigate } from 'react-router-dom';
 
 //Customer landing page upon customer being signed in
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -20,6 +21,8 @@ const CustomerLandingPage = () => {
   let farmers = [{name : "Greg", location : "152 North Street", descripton : "Great potatoes"}, {name : "John", location : "100 South Street", description : "dope squash"}].concat(farmerArr)
   let potatoArr = Array(10).fill({name: "Potato", price: "75", description: "This is a potato"})
   let products = [{name: "Tomato", price: "500", description: "This is a tomato"},{name: "Squash", price: "30", description: "This is a squash"}].concat(potatoArr)
+
+
     return (
         <ThemeProvider theme={theme}>
           <CssBaseline enableColorScheme />
