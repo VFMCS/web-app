@@ -5,7 +5,6 @@ const farmapi = require('./farmers-api/routes.js')
 const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3001;
->>>>>>> 1b40592d (Fixed express server port)
 
 app.use(cors());
 app.use(express.json());
