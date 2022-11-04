@@ -18,7 +18,7 @@ const SearchBar = () => {
 
         navigate('/customer-search', {state:{refresh:true}});
         //window.location.reload(false);
-=======
+
     }
     return (
       <Paper
