@@ -8,7 +8,7 @@ import {search_query} from '../components/SearchBar.js'
 import { useLocation } from "react-router-dom";
 import ConsumerHeader from '../components/headers/ConsumerHeader.js';
 
-const CustomerSearch = () => {
+const FarmerSearch = () => {
     //let [products, setProducts] = React.useState([])
     //let potatoArr = Array(10).fill({name: "Potato", price: "75", description: "This is a potato"})
     //let products = [{name: "Tomato", price: "500", description: "This is a tomato"},{name: "Squash", price: "30", description: "This is a squash"}].concat(potatoArr)
@@ -42,7 +42,7 @@ const CustomerSearch = () => {
             <ThemeProvider theme={theme}>
             <CssBaseline enableColorScheme />
             <Stack direction="column">
-            <ConsumerHeader />
+            <FarmerHeader />
                 <Typography variant="h5" sx={{margin: 2, color: "primary.main"}}>
                     Search Results    
                 </Typography>
@@ -61,7 +61,7 @@ const CustomerSearch = () => {
                 <ThemeProvider theme={theme}>
                 <CssBaseline enableColorScheme />
                 <Stack direction="column">
-                <ConsumerHeader />
+                <FarmerHeader />
                     <Typography variant="h5" sx={{margin: 2, color: "primary.main"}}>
                         Search Results    
                     </Typography>
@@ -82,5 +82,5 @@ const CustomerSearch = () => {
         );
 };
 
-export default CustomerSearch
+export default FarmerSearch
 

@@ -6,6 +6,8 @@ import FarmerLandingPage from './pages/FarmerLandingPage'
 import FarmerDashboard from './pages/FarmerDashboard';
 import CustomerLandingPage from './pages/CustomerLandingPage';
 import CustomerSearch from './pages/CustomerSearch';
+import FarmerSearch from './pages/FarmerSearch';
+
 
 function App() {
   // We may want to move this out or make it static
@@ -18,6 +20,7 @@ function App() {
         <Route path="/dashboard" element={<FarmerDashboard />} />
         <Route path="/customer" element={<CustomerLandingPage />} />
         <Route path="/customer-search" element={<CustomerSearch/>} />
+        <Route path="/farmer-search" element={<FarmerSearch/>} />
         {/*Add more routes here (can also create nested routes)*/}
       </Routes>
     </BrowserRouter>
