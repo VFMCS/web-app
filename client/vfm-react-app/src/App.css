@@ -28,6 +28,19 @@
   color: #61dafb;
 }
 
+#uploadBox {
+  height: 100%;
+  width: 100%;
+  border-style: dashed;
+  border-width: 10px;
+  border-color: grey;
+  padding-bottom: 50%;
+  padding-top: 50%;
+  padding-left: 35%;
+  padding-right: 35%;
+  cursor: pointer;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
