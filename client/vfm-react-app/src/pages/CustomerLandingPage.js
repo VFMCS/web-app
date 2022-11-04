@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../theme/theme.js'
 import LandingHeader from '../components/headers/LandingHeader.js';
+
 import { Divider } from '@mui/material';
 import ProductCard from '../components/ProductCard.js';
 import FarmerCard from '../components/FarmerCard.js';
