@@ -43,7 +43,7 @@ const CustomerLandingPage = () => {
         <ThemeProvider theme={theme}>
           <CssBaseline enableColorScheme />
           <Stack direction = "column">
-            <LandingHeader />
+            <ConsumerHeader />
               <center><Typography variant="h5" sx={{margin: 2, color: "black"}}>
                 Featured Farmers 
               </Typography></center>
