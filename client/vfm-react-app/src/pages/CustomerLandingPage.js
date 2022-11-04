@@ -45,12 +45,13 @@ const CustomerLandingPage = () => {
           <CssBaseline enableColorScheme />
           <Stack direction = "column">
             <ConsumerHeader />
-              <center><Typography variant="h5" sx={{margin: 2, color: "black"}}>
+              <center><Typography variant="h5" sx={{margin: 6, color: "black"}}>
                 Featured Farmers 
               </Typography></center>
               
-              <Box sx={{margin: 4}}>
-                    <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+              <center>
+              <Box sx={{margin: 0}}>
+                    <Grid container spacing={{ xs: 0, md: 2 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                         {(farmers.slice(0, 3)).map((item) => (
                             <Grid item xs={2} sm={3} md={4} key={item.name}>
                                 <FarmerCard item={item}/>
@@ -58,10 +59,13 @@ const CustomerLandingPage = () => {
                         ))}
                     </Grid>
                 </Box>
+              </center>
                 
                 <center><Typography variant="h5" sx={{margin: 2, color: "black"}}>
                 Featured Products
                 </Typography> </center>
+              
+              <center>
                 <Box sx={{margin: 4}}>
                     <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 4, sm: 4, md: 20 }}>
                         {(products.slice(0, 5)).map((item) => (
@@ -70,7 +74,10 @@ const CustomerLandingPage = () => {
                             </Grid>
                         ))}
                     </Grid>
+                 
+              
                 </Box>
+                </center> 
 
 
 
