@@ -8,7 +8,7 @@ import ProductCard from '../components/ProductCard.js'
 //Customer landing page upon customer being signed in
 
 const FarmerLandingPage = () => {
-    //let [products, setProducts] = React.useState([])
+    //const [products, setProducts] = React.useState([]);
     let potatoArr = Array(10).fill({name: "Potato", price: "75", description: "This is a potato"})
     let products = [{name: "Tomato", price: "500", description: "This is a tomato"},{name: "Squash", price: "30", description: "This is a squash"}].concat(potatoArr)
     return (

@@ -64,7 +64,7 @@ app.get('/search/:key', cors(), (req, res) => {
     })
 })
 
-app.get('/search/', cors(), (req, res) => {
+app.get('/search/ers', cors(), (req, res) => {
   search_query = req.params.key;
   console.log(search_query);
 
