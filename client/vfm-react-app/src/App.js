@@ -21,9 +21,9 @@ function App() {
         <Route path="/farmer" element={<FarmerLandingPage />} />
         <Route path="/dashboard" element={<FarmerDashboard />} />
         <Route path="/customer" element={<CustomerLandingPage />} />
+        <Route path = "/farmerprofile" element = {<FarmerDashboard />}/>
         <Route path="/customer-search" element={<CustomerSearch/>} />
         <Route path="/farmer-search" element={<FarmerSearch/>} />
-        <Route path = "/farmerprofile" element = {<FarmerDashboard />}/>
         <Route path="/sign-in" element={<Login />} />
         <Route path="/sign-up" element={<Register />} />
         {/*Add more routes here (can also create nested routes)*/}
