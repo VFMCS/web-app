@@ -189,7 +189,4 @@ app.listen(PORT, () =>{
 
 /*
 const playersRouter = require("./routes/players");
-
-
-
->>>>>>> 1afcfe3f (initial)
+*/
