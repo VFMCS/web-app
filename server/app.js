@@ -9,8 +9,6 @@ app.use(cors());
 app.use(express.json());
 require('dotenv').config()
 app.set('view engine', 'ejs')
-app.use('/api/', require('./routes/hello'))
-app.use('/data/', require('./routes/data'))
 /*
 app.get('/', (req, res) => {
   res.send('hello ab')
@@ -60,7 +58,7 @@ app.get('/search/:key', cors(), (req, res) => {
     })
 })
 
-app.get('/search/ers', cors(), (req, res) => {
+app.get('/search/', cors(), (req, res) => {
   search_query = req.params.key;
   console.log(search_query);
 
