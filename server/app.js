@@ -6,6 +6,7 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+<<<<<<< HEAD
 app.use(cors());
 app.use(express.json());
 app.use('/api/users', usrapi);
