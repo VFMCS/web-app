@@ -18,7 +18,10 @@ const SearchBar = () => {
 
         navigate('/customer-search', {state:{refresh:true}});
         //window.location.reload(false);
+<<<<<<< HEAD
 
+=======
+>>>>>>> af06bcb6 (syntax error)
     }
     return (
       <Paper
