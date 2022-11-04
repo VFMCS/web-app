@@ -16,7 +16,7 @@ const SearchBar = () => {
 
         console.log("searching: " + search_query)
 
-        navigate('/search', {state:{refresh:true}});
+        navigate('/customer-search', {state:{refresh:true}});
         //window.location.reload(false);
     }
     return (

@@ -6,10 +6,12 @@ import FarmerHeader from '../components/headers/FarmerHeader.js';
 import ProductCard from '../components/ProductCard.js'
 import {search_query} from '../components/SearchBar.js'
 import { useLocation } from "react-router-dom";
+import ConsumerHeader from '../components/headers/ConsumerHeader.js';
+
 
 //Customer landing page upon customer being signed in
 
-const Search = () => {
+const CustomerSearch = () => {
     //let [products, setProducts] = React.useState([])
     //let potatoArr = Array(10).fill({name: "Potato", price: "75", description: "This is a potato"})
     //let products = [{name: "Tomato", price: "500", description: "This is a tomato"},{name: "Squash", price: "30", description: "This is a squash"}].concat(potatoArr)
@@ -43,7 +45,7 @@ const Search = () => {
             <ThemeProvider theme={theme}>
             <CssBaseline enableColorScheme />
             <Stack direction="column">
-            <FarmerHeader />
+            <ConsumerHeader />
                 <Typography variant="h5" sx={{margin: 2, color: "primary.main"}}>
                     Search Results    
                 </Typography>
@@ -62,7 +64,7 @@ const Search = () => {
                 <ThemeProvider theme={theme}>
                 <CssBaseline enableColorScheme />
                 <Stack direction="column">
-                <FarmerHeader />
+                <ConsumerHeader />
                     <Typography variant="h5" sx={{margin: 2, color: "primary.main"}}>
                         Search Results    
                     </Typography>
@@ -83,5 +85,5 @@ const Search = () => {
         );
 };
 
-export default Search
+export default CustomerSearch
 
