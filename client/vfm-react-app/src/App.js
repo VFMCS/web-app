@@ -21,6 +21,7 @@ function App() {
         <Route path="/customer" element={<CustomerLandingPage />} />
         <Route path="/customer-search" element={<CustomerSearch/>} />
         <Route path="/farmer-search" element={<FarmerSearch/>} />
+        <Route path = "/farmerprofile" element = {<FarmerDashboard />}/>
         {/*Add more routes here (can also create nested routes)*/}
       </Routes>
     </BrowserRouter>
