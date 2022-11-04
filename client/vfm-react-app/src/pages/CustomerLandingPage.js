@@ -27,12 +27,13 @@ const CustomerLandingPage = () => {
 
   const [farmers, setFarmers] = React.useState([]) // capture data from GET request
 
-
+  fetch('http://localhost:3001/api/farm').then(response => response.json()).then(data => console.log(data));  
   
   React.useEffect(() => {
-    fetch('http://localhost:3001/api/farm').then(response => response.json()).then(data => setFarmers(data.rows))
+    fetch('http://localhost:3001/api/farm').then(response => response.json()).then(data => setFarmers(data))
     .catch(err => console.error(err));
   }, [])
+
 
   const [products, setProducts] = React.useState([]) // capture data from GET request
 
@@ -40,8 +41,6 @@ const CustomerLandingPage = () => {
     fetch('http://localhost:3001/data').then(response => response.json()).then(data => setProducts(data.products))
     .catch(err => console.error(err));
   }, [])
-  
-      
   return (
         <ThemeProvider theme={theme}>
           <CssBaseline enableColorScheme />
