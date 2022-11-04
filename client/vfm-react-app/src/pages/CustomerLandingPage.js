@@ -43,11 +43,11 @@ const CustomerLandingPage = () => {
         <ThemeProvider theme={theme}>
           <CssBaseline enableColorScheme />
           <Stack direction = "column">
-            <ConsumerHeader />
-              <Typography variant="h5" sx={{margin: 2, color: "primary.main"}}>
-                Featured Farmers
-              </Typography>
-              <Divider/>
+            <LandingHeader />
+              <center><Typography variant="h5" sx={{margin: 2, color: "black"}}>
+                Featured Farmers 
+              </Typography></center>
+              
               <Box sx={{margin: 4}}>
                     <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                         {(farmers.slice(0, 3)).map((item) => (
