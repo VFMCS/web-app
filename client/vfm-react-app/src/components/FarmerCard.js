@@ -30,7 +30,7 @@ const FarmerCard = (props) => {
                             {props.item.about_me}
                         </Typography>
                         <Button onClick={toFarmerProfile}>
-                            <Typography sx={{ color: "primary.dark", fontWeight: "bold"}}>
+                            <Typography sx={{ color: "primary.dark", fontWeight: "bold" }}>
                                 View Profile
                             </Typography>
                         </Button>
