@@ -28,8 +28,10 @@ const CustomerLandingPage = () => {
 
   const [farmers, setFarmers] = React.useState([]) // capture data from GET request
 
+
+  
   React.useEffect(() => {
-    fetch('http://localhost:3001/data').then(response => response.json()).then(data => setFarmers(data.farmers))
+    fetch('http://localhost:3001/api/farm').then(response => response.json()).then(data => setFarmers(data.rows))
     .catch(err => console.error(err));
   }, [])
 

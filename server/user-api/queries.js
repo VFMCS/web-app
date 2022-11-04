@@ -12,5 +12,4 @@ module.exports = {
     createUser,
     deleteUser,
     checkExistingUsers,
-    getFarmers,
 }
