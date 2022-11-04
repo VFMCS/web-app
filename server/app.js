@@ -5,17 +5,23 @@ const prdapi = require("./products-api/routes.js");
 const farmapi = require("./farmers-api/routes.js");
 const app = express();
 
+const PORT = process.env.PORT || 3001;
+
+
 app.use(cors());
 app.use(express.json());
-require('dotenv').config()
-app.set('view engine', 'ejs')
+app.use(cors());
+app.use(express.json());
+app.use('/api/users', usrapi);
+app.use('/api/products', prdapi);
+app.use('/api/farmers', farmapi);
+
 /*
 app.get('/', (req, res) => {
   res.send('hello ab')
 })
 */
 
-const PORT = process.env.PORT || 3001;
 
 app.get('/', (req, res) => {
     console.log(hi);
