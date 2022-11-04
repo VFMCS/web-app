@@ -14,9 +14,9 @@ const SearchBar = () => {
         setQuery(text);
         search_query = text;
 
-        //console.log(search_query);
-        
-        navigate('/search');
+        console.log("searching: " + search_query)
+
+        navigate('/search', {state:{refresh:true}});
         //window.location.reload(false);
     }
     return (

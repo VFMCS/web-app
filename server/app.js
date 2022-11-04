@@ -41,13 +41,13 @@ app.get('/search/:key', cors(), (req, res) => {
     client.connect();
     
     query_string = "SELECT * FROM products WHERE UPPER(CONCAT(name, '#', '#', product_type, '#', product_category)) LIKE UPPER(" + "'%" + search_query + "%')";
-    console.log(query_string)
+    //console.log(query_string)
+
     let data = [];
     client.query(query_string, (err, resp) => {
         if(!err){
             //console.log(res.rows);
             data = resp.rows;
-            console.log(data);
             res.send(resp.rows)
         }
         else{
