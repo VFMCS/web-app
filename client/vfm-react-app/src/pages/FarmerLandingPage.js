@@ -2,7 +2,7 @@ import * as React from 'react'
 import {Box, ThemeProvider, CssBaseline, Typography, Grid, Divider} from "@mui/material"
 import { Stack } from '@mui/system';
 import theme from '../theme/theme.js'
-import FarmerHeader from '../components/FarmerHeader.js';
+import FarmerHeader from '../components/headers/FarmerHeader.js';
 import ProductCard from '../components/ProductCard.js'
 
 //Customer landing page upon customer being signed in

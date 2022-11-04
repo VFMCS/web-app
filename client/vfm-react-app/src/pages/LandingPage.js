@@ -1,5 +1,5 @@
 import * as React from 'react' 
-import LandingHeader from '../components/LandingHeader.js';
+import LandingHeader from '../components/headers/LandingHeader.js';
 import {Box, ThemeProvider, CssBaseline, Typography, Button} from "@mui/material"
 import { Stack } from '@mui/system';
 import theme from '../theme/theme.js'
