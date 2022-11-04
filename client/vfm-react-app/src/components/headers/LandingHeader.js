@@ -40,12 +40,9 @@ const LandingHeader = () => {
                             </Typography>
                         </Button>
                         </Box>
-                        <Box sx={{flexGrow: 2}}>
-                            <Button  variant="contained" sx={{ bgcolor: "primary.dark", fontWeight: "bold"}} startIcon={<AddCircleIcon fontSize="large" />}>
-                                Create Product
-                            </Button>
-                        </Box>
-                        <Button onClick={toDashboard}>
+                        <LoginButton />
+                        <SignUpButton />
+                        <Button onClick={toFarmer}>
                             <Typography sx={{ color: "primary.dark", fontWeight: "bold"}}>
                                 Farmer Page {/* TEMPORARY */}
                             </Typography>
