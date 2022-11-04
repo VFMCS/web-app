@@ -7,7 +7,7 @@ app.use(cors());
 require('dotenv').config()
 app.set('view engine', 'ejs')
 app.use('/api/', require('./routes/hello'))
-app.use('/farmers/', require('./routes/data'))
+app.use('/data/', require('./routes/data'))
 /*
 app.get('/', (req, res) => {
   res.send('hello ab')
@@ -21,36 +21,64 @@ app.get('/', (req, res) => {
     res.status(200).json('start');
 })
 
-app.get('/farmers', cors(), (req, res) => {
-  let data = {};
 
+app.get('/farmers', cors(), (req, res) => {
   const {Client} = require('pg')
 
-  const client = new Client({
-      host: "34.134.101.113",
-      user: "guest",
-      port: 5432,
-      password: "guestpass",
-      database: "vfmcs1"
+const client = new Client({
+    host: "34.134.101.113",
+    user: "guest",
+    port: 5432,
+    password: "guestpass",
+    database: "vfmcs1"
 
-  })
-
-  client.connect();
-
-  client.query("SELECT username FROM users WHERE is_vendor = true", (err, res) => {
-      if(!err){
-          console.log(res.rows);
-          data = res.rows;
-      }
-      else{
-          console.log(err.message);
-      }
-
-      client.end;
-  })
-
-  res.json(data);
 })
+
+client.connect();
+
+client.query("SELECT * FROM users WHERE is_vendor = true", (err, res) => {
+    if(!err){
+        //console.log(res.rows);
+        farmers = res.rows;
+    }
+    else{
+        console.log(err.message);
+    }
+
+    client.end;
+})
+
+client.query("SELECT * FROM users WHERE is_vendor = false", (err, res) => {
+    if(!err){
+        //console.log(res.rows);
+        customers = res.rows;
+    }
+    else{
+        console.log(err.message);
+    }
+
+    client.end;
+})
+
+client.query("SELECT * FROM products", (err, res) => {
+    if(!err){
+        //console.log(res.rows);
+        products = res.rows;
+    }
+    else{
+        console.log(err.message);
+    }
+
+    client.end;
+})
+
+exports.data = (req, res) => {
+    res.json({
+        farmers, customers, products
+    })
+};
+})
+
 
 app.listen(PORT, () =>{
   const url = `http://localhost:${PORT}/`
