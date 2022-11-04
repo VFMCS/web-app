@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+app.use(express.json());
 
 const cors = require('cors');
 app.use(cors());
@@ -7,7 +8,7 @@ app.use(cors());
 require('dotenv').config()
 app.set('view engine', 'ejs')
 app.use('/api/', require('./routes/hello'))
-app.use('/farmers/', require('./routes/data'))
+app.use('/data/', require('./routes/data'))
 /*
 app.get('/', (req, res) => {
   res.send('hello ab')
@@ -21,36 +22,77 @@ app.get('/', (req, res) => {
     res.status(200).json('start');
 })
 
-app.get('/farmers', cors(), (req, res) => {
-  let data = {};
+
+app.get('/search/:key', cors(), (req, res) => {
+  search_query = req.params.key;
+  console.log(search_query);
 
   const {Client} = require('pg')
 
-  const client = new Client({
-      host: "34.134.101.113",
-      user: "guest",
-      port: 5432,
-      password: "guestpass",
-      database: "vfmcs1"
+    const client = new Client({
+        host: "34.134.101.113",
+        user: "guest",
+        port: 5432,
+        password: "guestpass",
+        database: "vfmcs1"
 
-  })
+    })
 
-  client.connect();
+    client.connect();
+    
+    query_string = "SELECT * FROM products WHERE UPPER(CONCAT(name, '#', product_type, '#', product_category)) LIKE UPPER(" + "'%" + search_query + "%')";
+    console.log(query_string);
 
-  client.query("SELECT username FROM users WHERE is_vendor = true", (err, res) => {
-      if(!err){
-          console.log(res.rows);
-          data = res.rows;
-      }
-      else{
-          console.log(err.message);
-      }
+    let data = [];
+    client.query(query_string, (err, resp) => {
+        if(!err){
+            //console.log(res.rows);
+            data = resp.rows;
+            res.send(resp.rows)
+        }
+        else{
+            console.log(err.message);
+        }
 
-      client.end;
-  })
-
-  res.json(data);
+        client.end;
+    })
 })
+
+app.get('/search/', cors(), (req, res) => {
+  search_query = req.params.key;
+  console.log(search_query);
+
+  const {Client} = require('pg')
+
+    const client = new Client({
+        host: "34.134.101.113",
+        user: "guest",
+        port: 5432,
+        password: "guestpass",
+        database: "vfmcs1"
+
+    })
+
+    client.connect();
+    
+    query_string = "SELECT * FROM products";
+    console.log(query_string);
+
+    let data = [];
+    client.query(query_string, (err, resp) => {
+        if(!err){
+            //console.log(res.rows);
+            data = resp.rows;
+            res.send(resp.rows)
+        }
+        else{
+            console.log(err.message);
+        }
+
+        client.end;
+    })
+})
+
 
 app.listen(PORT, () =>{
   const url = `http://localhost:${PORT}/`

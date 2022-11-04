@@ -5,31 +5,33 @@ import theme from "../theme/theme"
 
 // This is a component that displays important information about a product
 const ProductCard = (props) => {
-    let item = props.item || {name: "Item", price: "0", description: "This is a description"}
+    //let item = props.item || {name: "Item", price: "0", description: "This is a description"}
+    console.log(props);
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline enableColorScheme />
-            <Card sx={{ maxWidth: 345 }}>
+            <Card sx={{ maxWidth: 320 }}>
                 <CardActionArea>
                     <CardMedia
                     component="img"
-                    height="140"
-                    image={basketImage}
+                    height="220"
+                    image={props.item.image_url}
                     alt="Product Image"
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="div">
-                            {item.name}
+                            {props.item.name}
                         </Typography>
-                        <Typography gutterBottom variant="subtitle1" component="div">
-                            {" $" + item.price + "/item"}
+                        <Typography variant="body2" color="text.secondary" component="div" >
+                            {props.item.details}
                         </Typography>
-                        <Typography gutterBottom variant="subtitle1" component="div">
-                            3 in Stock
+                        <Typography gutterBottom variant="subtitle1" component="div" margin={1}>
+                            {" $" + props.item.price + "/item"}
                         </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            {item.description}
+                        <Typography gutterBottom variant="subtitle1" component="div" margin={-1}>
+                            {props.item.quantity} in Stock
                         </Typography>
+                        
                     </CardContent>
                 </CardActionArea>
             </Card>
