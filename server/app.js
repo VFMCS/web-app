@@ -18,7 +18,7 @@ app.listen(PORT, () => {
   console.log(`Listening on Port: ${PORT}`)
 })
 
-
+/*
 app.use(logger("dev"));
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -28,3 +28,4 @@ app.listen(port, function() {
   console.log("Runnning on " + port);
 });
 module.exports = app;
+*/
