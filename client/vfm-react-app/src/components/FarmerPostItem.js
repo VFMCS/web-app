@@ -5,7 +5,7 @@ import { Stack } from '@mui/system';
 import { Select, MenuItem, InputLabel, FormControl, TextField, ThemeProvider, InputAdornment } from '@mui/material';
 import UploadButton from './buttons/UploadButton.js';
 import ConfirmEditButton from './buttons/ConfirmEditButton.js';
-import InputMask from "react-input-mask";
+import InputMask from 'react-input-mask';
 import { Lemon, Apple, Pear, Orange, Grapefruit, Lime, Peaches, Tomato, Blueberry, Cherry, Onion, Garlic, Potato, Asparagus, Celery, Broccoli, Cabbage, Cauliflower }
 from '..';
 
