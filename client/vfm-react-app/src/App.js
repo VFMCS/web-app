@@ -2,6 +2,7 @@ import './App.css';
 import * as React from 'react' 
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import LandingPage from './pages/LandingPage';
+import FarmerPostItem from './components/FarmerPostItem';
 import FarmerLandingPage from './pages/FarmerLandingPage'
 import FarmerDashboard from './pages/FarmerDashboard';
 import CustomerLandingPage from './pages/CustomerLandingPage';
@@ -18,6 +19,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LandingPage />} />
+        
         <Route path="/farmer" element={<FarmerLandingPage />} />
         <Route path="/dashboard" element={<FarmerDashboard />} />
         <Route path="/customer" element={<CustomerLandingPage />} />

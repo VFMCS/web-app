@@ -1,17 +1,16 @@
 import * as React from 'react';
 import { useState } from 'react';
-import theme from '../css/theme.js'
+import theme from '../theme/theme.js'
 import { Stack } from '@mui/system';
 import { Select, MenuItem, InputLabel, FormControl, TextField, ThemeProvider, InputAdornment } from '@mui/material';
-import UploadButton from '../components/buttons/UploadButton.js';
-import ConfirmEditButton from '../components/buttons/ConfirmEditButton.js';
+import UploadButton from './buttons/UploadButton.js';
+import ConfirmEditButton from './buttons/ConfirmEditButton.js';
 import InputMask from "react-input-mask";
 import { Lemon, Apple, Pear, Orange, Grapefruit, Lime, Peaches, Tomato, Blueberry, Cherry, Onion, Garlic, Potato, Asparagus, Celery, Broccoli, Cabbage, Cauliflower }
 from '..';
 
 
 const FarmerPostItem = (props) => {
-    document.body.style.margin = "25px";
 
     const [show, setShow] = useState(true);
 
