@@ -32,7 +32,7 @@ const FarmerHeader = () => {
                         </IconButton>
                         <FarmerSidebar isOpen={sideBarOpen} toggle={toggleSidebar}/>
                         <Box sx={{flexGrow: 1}}>
-                            <Button>
+                            <Button onClick={toProducts}>
                                 <img src={headerLogo} alt="Logo" />
                                 <Typography sx={{ color: "primary.dark", fontSize: 20, fontWeight: "bold"}}>
                                     Virtual Farmers Market

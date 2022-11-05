@@ -16,7 +16,7 @@ const ProductCard = (props) => {
         <ThemeProvider theme={theme}>
             <CssBaseline enableColorScheme />
             <Card sx={{ maxWidth: 320 }}>
-                <CardActionArea>
+                <CardActionArea disableTouchRipple={props.editMode}>
                     <CardMedia
                     component="img"
                     height="220"
@@ -40,8 +40,9 @@ const ProductCard = (props) => {
                             <Box>
                                 <Fab color="secondary" aria-label="edit" sx={{position: 'absolute',
                                 bottom: 16,
-                                right: 16}}>
-                                    <EditIcon onClick={toPostItem} />
+                                right: 16}}
+                                onClick={toPostItem}>
+                                    <EditIcon />
                                 </Fab>
                                 <Modal open={modalOpen} onClose={() => setModalState(false)} closeAfterTransition sx={{display: 'flex', p: 1, alignItems: 'center', justifyContent: 'center'}}>
                                     <Box sx={{

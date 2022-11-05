@@ -4,6 +4,7 @@ import { Stack } from '@mui/system';
 import theme from '../theme/theme.js'
 import LandingHeader from '../components/headers/LandingHeader.js';
 import ProductCard from '../components/ProductCard.js';
+import FarmerHeader from '../components/headers/FarmerHeader.js';
 
 //Customer views this farmer profile upon being signed in an hitting the view profile from the landing page
 
@@ -15,7 +16,7 @@ const FarmerDashboard = (props) => {
             <ThemeProvider theme={theme}>
             <CssBaseline enableColorScheme />
             <Stack direction="column">
-            <LandingHeader />
+            <FarmerHeader />
             <Box sx={{backgroundColor: "secondary.light"}}>
                     <Typography variant="h3" align="center" sx={{margin: 4, color: "secondary.contrastText"}}>
                         Welcome to my farm!

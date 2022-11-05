@@ -12,6 +12,7 @@ import ConsumerSidebar from '../sidebars/ConsumerSidebar';
 // Contains: Menu button, Logo, Dashboard button, and Products Button
 const ConsumerHeader = () => {
     let navigate = useNavigate()
+    let toProducts = () => navigate("/customer")
     let [sideBarOpen, setSidebarState] = React.useState(false)
     let toggleSidebar = () => {
         setSidebarState(!sideBarOpen)
@@ -28,7 +29,7 @@ const ConsumerHeader = () => {
                         </IconButton>
                         <ConsumerSidebar isOpen={sideBarOpen} toggle={toggleSidebar} />
                         <Box sx={{flexGrow: 1}}>
-                        <Button>
+                        <Button onClick={toProducts}>
                             <img src={headerLogo} alt="Logo" />
                             <Typography sx={{ color: "primary.dark", fontSize: 20, fontWeight: "bold"}}>
                                 Virtual Farmers Market
