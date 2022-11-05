@@ -20,12 +20,10 @@ app.listen(PORT, () =>{
   
 })
 
-
 app.get('/', (req, res) => {
     console.log(hi);
     res.status(200).json('start');
 })
-*/
 
 
 app.get('/', (req, res) => {
