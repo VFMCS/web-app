@@ -7,6 +7,8 @@ import FarmerDashboard from './pages/FarmerDashboard';
 import CustomerLandingPage from './pages/CustomerLandingPage';
 import CustomerSearch from './pages/CustomerSearch';
 import FarmerSearch from './pages/FarmerSearch';
+import Register from './pages/Register';
+import Login from './pages/Login';
 
 
 function App() {
@@ -22,6 +24,8 @@ function App() {
         <Route path="/customer-search" element={<CustomerSearch/>} />
         <Route path="/farmer-search" element={<FarmerSearch/>} />
         <Route path = "/farmerprofile" element = {<FarmerDashboard />}/>
+        <Route path="/sign-in" element={<Login />} />
+        <Route path="/sign-up" element={<Register />} />
         {/*Add more routes here (can also create nested routes)*/}
       </Routes>
     </BrowserRouter>
