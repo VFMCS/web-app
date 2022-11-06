@@ -11,7 +11,6 @@ from '..';
 
 
 const FarmerPostItem = (props) => {
-    document.body.style.margin = "25px";
 
     const [showUploadButton, setShowUploadButton] = useState(true);
     const [showPriceValidError, setShowPriceValidError] = useState(false);
