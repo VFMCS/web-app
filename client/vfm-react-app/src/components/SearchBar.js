@@ -16,8 +16,8 @@ const SearchBar = () => {
 
         console.log("searching: " + search_query)
 
-        navigate('/customer-search', {state:{refresh:true}});
-        //window.location.reload(false);
+        //navigate to specific search path given the user's type as a vendor or customer
+        navigate('/farmer-search', {state:{refresh:true}});
     }
     return (
       <Paper
