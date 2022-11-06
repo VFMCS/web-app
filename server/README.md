@@ -4,7 +4,7 @@ This page will be updated with more server specific documentation in the future
 
 ## How to Add an Endpoint to an Existing API
 1) Locate the desired API directory (eg: server/user-api).
-2) Define your sql in queries.js as such:
+2) Define your sql query in queries.js as such:
 
         const myQuery = "SELECT * FROM example_table";
 
