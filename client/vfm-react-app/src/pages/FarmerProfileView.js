@@ -7,7 +7,7 @@ import ProductCard from '../components/ProductCard.js';
 
 //Customer views this farmer profile upon being signed in an hitting the view profile from the landing page
 
-const FarmerDashboard = (props) => {
+const FarmerProfileView = (props) => {
     let potatoArr = Array(10).fill({name: "Potato", price: "75", description: "This is a potato"})
     let products = [{name: "Tomato", price: "500", description: "This is a tomato"},{name: "Squash", price: "30", description: "This is a squash"}].concat(potatoArr)
   
@@ -46,5 +46,5 @@ const FarmerDashboard = (props) => {
     );
 };
 
-export default FarmerDashboard
+export default FarmerProfileView
 

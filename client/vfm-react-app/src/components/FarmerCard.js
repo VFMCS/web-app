@@ -7,7 +7,12 @@ import { useNavigate } from 'react-router-dom';
 // This is a component that displays important information about a product
 const FarmerCard = (props) => {
     //let item = props.item || {name: "Item", location: "0", description: "This is a description"}
-    const toFarmerProfile = () => 0;
+    let navigate = useNavigate();
+    const toFarmerProfile = () => {
+        navigate('/farmer-profile')
+    };
+    
+
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline enableColorScheme />
