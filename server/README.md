@@ -78,7 +78,7 @@ This page will be updated with more server specific documentation in the future
 
         module.exports = {
         }
-5) In quereies.js add `module.exports = {}` .
+5) In queries.js add `module.exports = {}` .
 6) In app.js add 
         
         const myApiRoutes = require('./myApi/routes.js');
