@@ -32,15 +32,15 @@ const FarmerPostItem = (props) => {
 
     var onSave = () => {
         var valid = true
-        if(item["name"] == null){
+        if(item["name"] === null){
             errorExp = errorExp + "name ";
             valid = false;
         }
-        if(item["quantity"] == null){
+        if(item["quantity"] === null){
             errorExp = errorExp + "quantity "
             valid = false;
         }
-        if(item["price"] == null){
+        if(item["price"] === null){
             errorExp = errorExp + "price "
             valid = false;
         }
@@ -59,7 +59,7 @@ const FarmerPostItem = (props) => {
             //save to database
         }
         else {
-            if(errorExp != ""){
+            if(errorExp !== ""){
                 setShowEmptyEntryError("The following fields need to be filled: " + errorExp)
             }
         }
@@ -71,21 +71,21 @@ const FarmerPostItem = (props) => {
         var value = e.target.value
         var valid = true
 
-        if(name == "product_type"){
+        if(name === "product_type"){
             handleImageChange(e)
         }
-        if(name == 'name'){
-            if(value.length == 0){
+        if(name ==='name'){
+            if(value.length === 0){
                 valid = false
             }
         }
-        if(name == 'price'){
-            if(value.length == 0){
+        if(name === 'price'){
+            if(value.length === 0){
                 valid = false
             }
         }
-        else if(name == 'quantity'){
-            if(value.length == 0){
+        else if(name === 'quantity'){
+            if(value.length === 0){
                 valid = false
             }
         }

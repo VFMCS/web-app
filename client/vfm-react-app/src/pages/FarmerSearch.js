@@ -9,19 +9,18 @@ import { useLocation } from "react-router-dom";
 import ConsumerHeader from '../components/headers/ConsumerHeader.js';
 
 const FarmerSearch = () => {
-    //let [products, setProducts] = React.useState([])
-    //let potatoArr = Array(10).fill({name: "Potato", price: "75", description: "This is a potato"})
-    //let products = [{name: "Tomato", price: "500", description: "This is a tomato"},{name: "Squash", price: "30", description: "This is a squash"}].concat(potatoArr)
-
     const location = useLocation();
 
-    const [searchOutput, setSearchOutput] = React.useState([]) // capture data from GET request
+    const [searchOutput, setSearchOutputProducts] = React.useState([]) // capture data from GET request
+
     React.useEffect(() => {
-        let url = 'http://localhost:3001/search/' + search_query;
-
-        fetch(url).then(response => response.json()).then(data => setSearchOutput(data))
+        //using placeholder farmer of vendor_id=0
+        let url = 'http://localhost:3001/farmer-search/' + 0 + '/' + search_query;
+        if(search_query === ''){
+            url = 'http://localhost:3001/products/' + 0;
+        }
+        fetch(url).then(response => response.json()).then(data => setSearchOutputProducts(data))
             .catch(err => console.error(err));
-
     }, [location.state])
 
     /*
