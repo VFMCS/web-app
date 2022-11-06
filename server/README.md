@@ -52,7 +52,7 @@ This page will be updated with more server specific documentation in the future
 
     `"/"` should be replaced with your desired **relative** path for the endpoint. The base URL for your current API is defined in app.js. 
     
-    For example, the user-api URL is `localhost:{PORT}/api/users`. The `/user-api.routes.js` file defines a GET request at `"/"` which actually refers to `localhost:{PORT}/api/users`.
+    For example, the user-api URL is `localhost:{PORT}/api/users`. The /user-api/routes.js file defines a GET request at `"/"` which actually refers to `localhost:{PORT}/api/users`.
 
     Replace `.makeQuery` with the controller function you defined in `controllers.js`
 
