@@ -14,8 +14,11 @@ const FarmerSearch = () => {
     const [searchOutput, setSearchOutputProducts] = React.useState([]) // capture data from GET request
 
     React.useEffect(() => {
-        //using placeholder farmer
+        //using placeholder farmer of vendor_id=0
         let url = 'http://localhost:3001/farmer-search/' + 0 + '/' + search_query;
+        if(search_query === ''){
+            url = 'http://localhost:3001/products/' + 0;
+        }
         fetch(url).then(response => response.json()).then(data => setSearchOutputProducts(data))
             .catch(err => console.error(err));
     }, [location.state])

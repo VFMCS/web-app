@@ -22,7 +22,6 @@ app.listen(PORT, () => {
   console.log(`Listening on Port: ${PORT}`)
 })
 
-
 /*
 app.get('/search/:key', cors(), (req, res) => {
     search_query = req.params.key;
@@ -130,10 +129,10 @@ app.get('/products/:key', cors(), (req, res) => {
 })
 
 app.get('/farmer-search/:farmerKey/:productKey', cors(), (req, res) => {
-    console.log
+    //console.log("hi")
     farmer_query = req.params.farmerKey;
     product_query = req.params.productKey
-  
+    console.log(product_query);
     const {Client} = require('pg')
   
       const client = new Client({
@@ -146,6 +145,7 @@ app.get('/farmer-search/:farmerKey/:productKey', cors(), (req, res) => {
       })
   
       client.connect();
+      
       
       query_string = "SELECT * FROM products WHERE vendor_id=" + farmer_query + " AND UPPER(CONCAT(name, '#', product_type, '#', product_category)) LIKE UPPER(" + "'%" + product_query + "%')";
       console.log(query_string);
@@ -164,8 +164,9 @@ app.get('/farmer-search/:farmerKey/:productKey', cors(), (req, res) => {
           client.end;
       })
 })
+*/
 
-
+/*
 app.use(logger("dev"));
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
