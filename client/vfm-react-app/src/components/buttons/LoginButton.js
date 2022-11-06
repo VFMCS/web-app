@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 const LoginButton = (props) => {
     let navigate = useNavigate()
     let onClick = () => {
-        navigate('/farmer') // Change to Login (or show Login Modal)
+        navigate('/sign-in') // Change to Login (or show Login Modal)
     }
     return (
         <Button onClick={onClick} color={props.color || "success"} variant={props.variant || "text"} sx={{marginRight: 2, fontWeight: "bold"}}> {props.label || "Login" } </Button>
