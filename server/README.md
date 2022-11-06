@@ -33,7 +33,7 @@ This page will be updated with more server specific documentation in the future
 
     To fill parameters create an array of desired values. Value1 (index 0) corresponds to `'$1'` in the query and so on. The array can be passed to pool.query() like this:
 
-        pool.query(queries.myQuery,[value1,value2](error,results) => {
+        pool.query(queries.myQuery,[value1,value2],(error,results) => {
             if (error) throw error;
             res.status(200).json(results.rows);
         })
