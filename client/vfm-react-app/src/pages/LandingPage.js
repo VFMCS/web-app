@@ -5,9 +5,11 @@ import { Stack } from '@mui/system';
 import theme from '../theme/theme.js'
 import SignUpButton from '../components/buttons/SignUpButton.js';
 import LoginButton from '../components/buttons/LoginButton.js';
+import axios from "axios";
 
 // The General Landing Page for all users
 // TODO: We still have to add actions for all buttons (to sign up/login)
+
 const LandingPage = () => {
     return ( 
         <ThemeProvider theme={theme}>
@@ -35,7 +37,7 @@ const LandingPage = () => {
                         </p>
                     </Typography>
                 </Box>
-                <Box alignItems="center" justifyContent="center" sx={{backgroundColor: "white"}}>
+                <Box alignItems="center" justifyContent="center" sx={{backgroundColor: "white", marginBottom: 4}}>
                     <Typography variant="h3" align="center" sx={{margin: 4, color: "primary.main"}}>
                         Ready to Join?
                     </Typography>
@@ -46,8 +48,8 @@ const LandingPage = () => {
                     <Typography variant="h3" align="center" sx={{margin: 4, color: "primary.main"}}>
                         Already a User?
                     </Typography>
-                    <Stack direction="row" justifyContent="center" alignItems="center" spacing={4}>
-                        <LoginButton color="secondary" variant="contained" /> 
+                    <Stack  direction="row" justifyContent="center" alignItems="center" spacing={4}>
+                        <LoginButton sx={{margin: 4}} color="secondary" variant="contained" /> 
                     </Stack>
                 </Box>
             </Stack>

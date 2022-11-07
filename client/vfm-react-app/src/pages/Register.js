@@ -1,27 +1,35 @@
+import * as React from 'react'
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 //import Login from "../Login";
 import LoginHeader from '../components/headers/LandingHeader.js';
+import FarmerLandingPage from "./FarmerLandingPage.js";
+import { NavigateBefore } from '@mui/icons-material';
 import FarmerProfileModal from "../components/FarmerProfileModal.js"
 import {Modal, Box, Paper} from "@mui/material"
 
 
 export const Register = () => {
-  let navigate = useNavigate()
+  let navigate = useNavigate();
 
   let [profileModalOpen, setProfileModalState] = useState(false);
   const [credentials, setCredentials] = useState({
-    firstname: "",
-    lastname: "",
-    email: "",
+    user_id: Math.round(Math.random() * 10000) + 10,
+    username: "",
     password: "",
-    role: "",
+    first_name: "",
+    last_name: "",
+    address:"",
+    is_vendor:false,
+    photo:null,
+    about_me:"",
+    email: "",
+    created_on: new Date(),
+    image_url:"",
+    role:"farmer"
   });
 
-	const isVendor = credentials.role === "farmer";
-  const isConsumer = credentials.role === "consumer";
-
-  const roleOptions = [
+  const is_vendor_options = [
     { value: "farmer", label: "Farmer" },
     { value: "consumer", label: "Consumer" },
   ];
@@ -37,17 +45,52 @@ export const Register = () => {
     });
   };
 
+  React.useEffect(() => {
+   setCredentials({
+    user_id: Math.round(Math.random() * 10000) + 10,
+    username: credentials.first_name,
+    password: credentials.password,
+    first_name: credentials.first_name,
+    last_name: credentials.last_name,
+    address:"",
+    is_vendor: credentials.is_vendor === "farmer",
+    photo:null,
+    about_me:"",
+    email: credentials.email,
+    created_on: new Date(),
+    image_url:"",
+   })
+}, [])
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    credentials.is_vendor = credentials.is_vendor === "farmer";
+    
+    //Using random number for user_id for now, should check for collisions of user_id in the future
+    fetch('http://localhost:3001/api/users', {
+    method: 'POST', // or 'PUT'
+    body: JSON.stringify(credentials),
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('Success:', data);
+    })
+    .catch((error) => {
+      //console.error('Error:', error);
+    });
+    
+    //set curr_user_id and print values
+    localStorage.setItem('curr_user_id', credentials.user_id);
+    console.log(localStorage.getItem('curr_user_id'))    
     console.log(credentials);
-    if (isVendor) {
-      setProfileModalState(true)
-    } else if (isConsumer) {
-      navigate('/customer')
-    } else {
-      // Error message to select a role
+
+    if(credentials.is_vendor){
+      navigate('/farmer');
     }
-    // Need to do error handling to ensure all fields are filled in
+    else{
+      navigate('/customer');
+    }
   };
 
   
@@ -74,8 +117,8 @@ export const Register = () => {
               type="text"
               className="form-control"
               placeholder="First name"
-              name="firstname"
-              value={credentials.firstname}
+              name="first_name"
+              value={credentials.first_name}
               onChange={handleChange}
             />
           </div>
@@ -86,8 +129,8 @@ export const Register = () => {
               type="text"
               className="form-control"
               placeholder="Last name"
-              name="lastname"
-              value={credentials.lastname}
+              name="last_name"
+              value={credentials.last_name}
               onChange={handleChange}
             />
           </div>
@@ -118,17 +161,17 @@ export const Register = () => {
 
           <div className="radio-group">
             <label>Role</label>
-            {roleOptions.map((role) => (
-              <div className="radio-item" key={role.value}>
+            {is_vendor_options.map((is_vendor) => (
+              <div className="radio-item" key={is_vendor.value}>
                 <input
                   type="radio"
-                  id={role.value}
-                  name="role"
-                  value={role.value}
+                  id={is_vendor.value}
+                  name="is_vendor"
+                  value={is_vendor.value}
                   onChange={handleChange}
                 />
 
-                <label htmlFor={role.value}>{role.label}</label>
+                <label htmlFor={is_vendor.value}>{is_vendor.label}</label>
               </div>
             ))}
           </div>

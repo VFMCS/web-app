@@ -9,10 +9,15 @@ const getUsers = (req, res) => {
     })
 }
 
-const getUserByID = (req, res) => {
-    const user_id = req.params.user_id;
-    pool.query(queries.getUserByID, [user_id], (error, results) => {
-        if (error) throw error;
+const getUserByEmailAndPassword = (req,res) => {
+    const email = req.params.email;
+    const password = req.params.password
+
+    console.log("user email: " + email + " user password: " + password);
+
+    pool.query(queries.getUserByEmailAndPassword,[email,password],(error,results) => {
+        if(error) throw error;
+        console.log(results.rows);
         res.status(200).json(results.rows);
     })
 }
@@ -23,8 +28,8 @@ const createUser = (req, res) => {
         if (results.rows.length) {
             res.send("Username or email already in use")
         }
-        pool.query(queries.createUser, [username, password, first_name, last_name, address, is_vendor, about_me, email], (error, results) => {
-            if (error) throw error;
+        pool.query(queries.createUser,[username,password,first_name,last_name,address,is_vendor,about_me,email],(error,results)=>{
+            //if (error) throw error;
             res.status(201).send("User created");
         })
     })
@@ -38,10 +43,9 @@ const deleteUser = (req, res) => {
 }
 
 
-
 module.exports = {
     getUsers,
-    getUserByID,
     createUser,
     deleteUser,
+    getUserByEmailAndPassword
 }
