@@ -7,8 +7,14 @@ import ProductCard from '../components/ProductCard.js'
 import { search_query } from '../components/SearchBar.js'
 import { useLocation } from "react-router-dom";
 import ConsumerHeader from '../components/headers/ConsumerHeader.js';
+import {createStore} from 'state-pool';
+
+const store = createStore();  // Create store for storing our global state
+
 
 const CustomerSearch = () => {
+    const [user_id, setUser_id] = store.useState("user_id");
+
     //let [products, setProducts] = React.useState([])
     //let potatoArr = Array(10).fill({name: "Potato", price: "75", description: "This is a potato"})
     //let products = [{name: "Tomato", price: "500", description: "This is a tomato"},{name: "Squash", price: "30", description: "This is a squash"}].concat(potatoArr)
