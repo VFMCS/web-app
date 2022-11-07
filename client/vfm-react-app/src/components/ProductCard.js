@@ -52,7 +52,7 @@ const ProductCard = (props) => {
                                         boxShadow: (theme) => theme.shadows[5],
                                         p: 4,
                                         }}>
-                                            <FarmerPostItem /> {/* Update to support editing mode */}
+                                            <FarmerPostItem editMode/> {/* Update to support editing mode */}
                                     </Box>
                                 </Modal>
                             </Box>

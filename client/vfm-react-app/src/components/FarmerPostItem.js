@@ -9,8 +9,8 @@ import { Lemon, Apple, Pear, Orange, Grapefruit, Lime, Peaches, Tomato, Blueberr
 from '..';
 
 
-
-const FarmerPostItem = (props) => {
+// TODO: Update to support editing items
+const FarmerPostItem = ({editMode, currentItem}) => {
 
     const [showUploadButton, setShowUploadButton] = useState(true);
     const [showPriceValidError, setShowPriceValidError] = useState(false);
@@ -150,7 +150,7 @@ const FarmerPostItem = (props) => {
                         {showPriceValidError && <p style={{color: "tomato"}}>Please input a valid price</p>}
                     </Stack>
                     <Stack sx={{height: "40%"}} direction="row">
-                        <Button onClick={onSave} variant= "contained" style={{ height: '100%', width: '50%'}} size="medium" color="success" sx={{fontWeight: "bold"}}>Publish</Button>
+                        <Button onClick={onSave} variant= "contained" style={{ height: '100%', width: '50%'}} size="medium" color="success" sx={{fontWeight: "bold"}}>{editMode ? "Update" : "Publish"}</Button>
                         <ConfirmEditButton color="success" label="Cancel"></ConfirmEditButton>
                     </Stack>
                 </Stack>

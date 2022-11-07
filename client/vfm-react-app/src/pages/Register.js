@@ -53,6 +53,7 @@ export const Register = () => {
   
   let modalCloseHandler = (e, reason) => {
       if (reason === "backdropClick") {
+          setProfileModalState(false)
           return
       }
       setProfileModalState(false)
