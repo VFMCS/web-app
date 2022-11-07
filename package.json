@@ -9,9 +9,11 @@
     "dotenv": "^16.0.3",
     "ejs": "^3.1.8",
     "express": "^4.18.2",
+    "get-port": "^6.1.2",
     "nodemon": "^2.0.20",
     "pg": "^8.8.0",
     "react": "^18.2.0",
+    "react-input-mask": "^3.0.0-alpha.2",
     "react-router-dom": "^6.4.2",
     "react-scripts": "^5.0.1"
   },
@@ -20,10 +22,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "cd server && nodemon app.js",
     "client": "cd client && cd vfm-react-app && npm start",
-    "start": "concurrently \"npm run dev\" \"npm run client\""
+    "start": "concurrently \"npm run dev\" \"npm run client\"",
+    "test:server": "NODE_ENV='test' mocha tests/server-tests",
+    "test:client": "NODE_ENV='test' mocha tests/client-tests --require babel-core/register --require tests/client-tests/setup.js",
+    "test": "cd server && node mocha-backend-test.js"
   },
   "repository": {
     "type": "git",
@@ -37,6 +41,10 @@
   },
   "homepage": "https://github.com/VFMCS/web-app#readme",
   "devDependencies": {
+    "chai": "^4.3.6",
+    "jest": "^27.5.1",
+    "mocha": "^10.1.0",
+    "supertest": "^6.3.1",
     "web-vitals": "^3.0.4"
   }
 }
