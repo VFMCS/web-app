@@ -11,13 +11,6 @@ import axios from "axios";
 // TODO: We still have to add actions for all buttons (to sign up/login)
 
 const LandingPage = () => {
-    const [user_id, setUser_id] = React.useState(0) // capture data from GET request
-      
-    React.useEffect(() => {
-        fetch('http://localhost:3000/user_id').then(response => response.json()).then(data => setUser_id(data))
-        .catch(err => console.error(err));
-      }, [])
-
     return ( 
         <ThemeProvider theme={theme}>
             <CssBaseline enableColorScheme />

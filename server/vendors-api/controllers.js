@@ -8,6 +8,25 @@ const getFarmers = (req, res) => {
     })
 }
 
+const postFarmers = (req,res) => {
+    const requestbody = {
+        user_id: req.user_id,
+        username: req.first_name,
+        password: req.password,
+        first_name: req.first_name,
+        last_name: req.last_name,
+        address:"",
+        is_vendor: req.role === "farmer",
+        photo:null,
+        about_me:"",
+        email: req.email,
+        created_on: new Date(),
+        image_url:"",
+        role: req.role
+    };
+    res.json(requestbody);
+}
+
 module.exports = {
     getFarmers,
 }
