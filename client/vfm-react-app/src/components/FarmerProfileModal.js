@@ -9,7 +9,7 @@ import UploadButton from './buttons/UploadButton.js';
 // https://plainenglish.io/blog/how-to-add-a-file-input-button-and-display-a-preview-image-with-react-2568d9d849f5
 
 
-const FarmerProfileModal = ({open, setModalState, onClose}) => {
+const FarmerProfileModal = ({open, setModalState, onClose, editMode, defaultProfile}) => {
 
     const [showUploadButton, setShowUploadButton] = useState(true);
     const [showEmptyEntryError, setShowEmptyEntryError] = useState(false);
@@ -45,7 +45,7 @@ const FarmerProfileModal = ({open, setModalState, onClose}) => {
             return
         }
         setShowEmptyEntryError(false)
-        // POST or UPDATE profile
+        // POST or PATCH profile here
         setModalState(false)
         onClose()
     }

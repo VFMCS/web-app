@@ -7,6 +7,7 @@ import {Modal, Box, Paper} from "@mui/material"
 
 
 export const Register = () => {
+  let navigate = useNavigate()
 
   let [profileModalOpen, setProfileModalState] = useState(false);
   const [credentials, setCredentials] = useState({
@@ -18,6 +19,7 @@ export const Register = () => {
   });
 
 	const isVendor = credentials.role === "farmer";
+  const isConsumer = credentials.role === "consumer";
 
   const roleOptions = [
     { value: "farmer", label: "Farmer" },
@@ -40,10 +42,15 @@ export const Register = () => {
     console.log(credentials);
     if (isVendor) {
       setProfileModalState(true)
+    } else if (isConsumer) {
+      navigate('/customer')
+    } else {
+      // Error message to select a role
     }
+    // Need to do error handling to ensure all fields are filled in
   };
 
-  let navigate = useNavigate()
+  
   let modalCloseHandler = (e, reason) => {
       if (reason === "backdropClick") {
           return

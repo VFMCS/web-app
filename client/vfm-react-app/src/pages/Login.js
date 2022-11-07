@@ -24,6 +24,8 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(login);
+    // Check if Login is valid
+    // if valid, continue to appropriate page depending on whether farmer or consumer
   };
 
   return (
