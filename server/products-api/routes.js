@@ -4,5 +4,6 @@ const controller = require('./controllers.js');
 const router = Router();
 
 router.get("/",controller.getAllProducts);
+router.post("/",controller.insertProd);
 
 module.exports = router;

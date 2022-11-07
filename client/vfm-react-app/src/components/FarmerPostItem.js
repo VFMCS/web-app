@@ -8,17 +8,23 @@ import ConfirmEditButton from '../components/buttons/ConfirmEditButton.js';
 import { Lemon, Apple, Pear, Orange, Grapefruit, Lime, Peaches, Tomato, Blueberry, Cherry, Onion, Garlic, Potato, Asparagus, Celery, Broccoli, Cabbage, Cauliflower }
 from '..';
 
-
-
-const FarmerPostItem = (props) => {
+export const FarmerPostItem = (props) => {
     document.body.style.margin = "25px";
 
     const [showUploadButton, setShowUploadButton] = useState(true);
     const [showPriceValidError, setShowPriceValidError] = useState(false);
     const [showEmptyEntryError, setShowEmptyEntryError] = useState("");
     //here, we initially set the vendor_id to what we need it to be
-    const [item, setItem] = useState({ 'vendor_id': null, 'product_type': null, 'quantity': null, 'price': null, 'product_category': null,
-    'description': null, 'name': null });
+	
+    const [item, setItem] = useState({ 
+        'vendor_id': null, 
+        'product_type': null, 
+        'quantity': null, 
+        'price': null, 
+        'product_category': null,
+        'description': null, 
+        'name': null 
+    });
 
     var handleImageChange = (event) => {
         setShowUploadButton(prev => false)
@@ -55,9 +61,13 @@ const FarmerPostItem = (props) => {
             item["price"] = parseFloat(value)
         }
         if(valid){
+            console.log(item)
             errorExp = ""
             setShowEmptyEntryError("")
             //save to database
+			fetch("http://localhost:3001/api/products", {method: "GET"}).then(data => console.log(data));
+			fetch("http://localhost:3001/api/products", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(item)}).then(data => console.log(data));
+			fetch("http://localhost:3001/api/products", {method: "GET"}).then(data => console.log(data));
         }
         else {
             if(errorExp !== ""){
@@ -92,7 +102,7 @@ const FarmerPostItem = (props) => {
         }
         if(valid){
             item[name] = value
-        console.log(item)
+            //console.log(item)
         }
     }
 
