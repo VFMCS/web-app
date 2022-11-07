@@ -38,11 +38,17 @@ export const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(credentials);
-    setProfileModalState(true)
+    if (isVendor) {
+      setProfileModalState(true)
+    }
   };
 
   let navigate = useNavigate()
-  let toFarmerLanding = () => {
+  let modalCloseHandler = (e, reason) => {
+      if (reason === "backdropClick") {
+          return
+      }
+      setProfileModalState(false)
       navigate('/farmer')
   }
 
@@ -127,7 +133,7 @@ export const Register = () => {
           </p>
         </form>
       </div>
-      <FarmerProfileModal open={profileModalOpen} setModalState={setProfileModalState} onClose={toFarmerLanding}/>
+      <FarmerProfileModal open={profileModalOpen} setModalState={setProfileModalState} onClose={modalCloseHandler}/>
     </div>
   );
 };
