@@ -61,12 +61,12 @@ const CustomerLandingPage = () => {
           </Box>
         </center>
 
-        <center><Typography variant="h5" sx={{ margin: 2, color: "black" }}>
+        <center><Typography variant="h5" sx={{ margin: 6, color: "black" }}>
           Featured Products
         </Typography> </center>
 
         <center>
-          <Box sx={{ margin: 4 }}>
+          <Box sx={{ margin: 2, marginTop: 0, marginBottom: 4}}>
             <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 4, sm: 4, md: 20 }}>
               {(products.slice(0, 5)).map((item) => (
                 <Grid item xs={1} sm={3} md={4} key={item.name}>
