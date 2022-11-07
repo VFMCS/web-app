@@ -71,8 +71,8 @@ This page will be updated with more server specific documentation in the future
         module.exports = router;
 4) Copy this template into controllers.js.
         
-        const  pool = require("../db.js") 
-        const queries = require("./queries.js")
+        const  pool = require("../db/db.js").pool;
+        const queries = require("./queries.js");
 
         //Define controller functions here
 
