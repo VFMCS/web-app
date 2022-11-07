@@ -12,23 +12,7 @@ import axios from "axios";
 
 const LandingPage = () => {
     const [user_id, setUser_id] = React.useState(0) // capture data from GET request
-
-    const handleSubmit = async e => {
-        e.preventDefault();
-        const user = { username, password };
-        // send the username and password to the server
-        const response = await axios.post(
-          "http://blogservice.herokuapp.com/api/login",
-          user
-        );
-        // set the state of the user
-        setUser(response.data)
-        // store the user in localStorage
-        localStorage.setItem('user', response.data)
-        console.log(response.data)
-      };
       
-
     React.useEffect(() => {
         fetch('http://localhost:3000/user_id').then(response => response.json()).then(data => setUser_id(data))
         .catch(err => console.error(err));

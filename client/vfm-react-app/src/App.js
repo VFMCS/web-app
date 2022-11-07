@@ -13,14 +13,6 @@ import Login from './pages/Login';
 import axios from "axios";
 
 function App() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [user, setUser] = useState(); // once logged in this should be set to current user
-
-  const handleSubmit = async e => {
-    
-  };
-  
   return (
     <BrowserRouter>
       <Routes>
