@@ -2,9 +2,6 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 //import Login from "../Login";
 import LoginHeader from '../components/headers/LandingHeader.js';
-import FarmerProfileModal from "../components/FarmerProfileModal.js"
-import {Modal, Box, Paper} from "@mui/material"
-
 
 export const Register = () => {
   let navigate = useNavigate()
