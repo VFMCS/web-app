@@ -1,4 +1,4 @@
-import {Button} from "@mui/material"
+import {Button} from "@mui/material";
 
 //Button used on the bottom of the Modify Item screens
 //Can be customized as both a 'Save changes' and 'cancel button'
