@@ -22,7 +22,6 @@ const startAuthProxy = () => {
     })
 }
 
-
 const pool = new Pool({
     user: "guest",
     host: "127.0.0.1",
