@@ -29,13 +29,11 @@ Bug tracking will be done with the Github Issues section of this repository. The
 ### Access Database from Local psql Client with Cloud SQL Proxy (recommended)
 This method requires the google account being used to access the database be given permissions ahead of time.
 - Our database is built with PostgreSQL. Install PostgreSQL from [here](https://www.postgresql.org/download/). Take note of the installation location and add the \bin folder to your PATH.
-- Next download Cloud SQL Auth Proxy from [here](https://cloud.google.com/sql/docs/postgres/connect-instance-auth-proxy#install-proxy). Be sure the file is executable and renamed to cloud_sql_proxy.
-- Next download and run the Google Cloud CLI Installer from [here](https://cloud.google.com/sdk/docs/install-sdk#installing_the_latest_version). You do not need to make any changes to the default installation. After the installions finishes, make sure that you leave the options to start the shell and run `gcloud init` selected. If nothing happens after the installation completes, open a terminal and run `gcloud init` to set your google account configuration. This is the account that must have permissions to access the database.
-- Follow the prompts and sign into your google account. You may be prompted to select a project. The window can be closed at this point.
-- Navigate to the directory where cloud_sql_proxy.exe is saved. For linux environments run: `./cloud_sql_proxy -instances=radiant-saga-366418:us-central1:vfmcs-db=tcp:5432`.
-On Windows run: `.\cloud_sql_proxy.exe -instances=radiant-saga-366418:us-central1:vfmcs-db=tcp:5432`
-Note: ensure that port 5432 is not in use. If it is, it should be changed to an available port.
-- Open another terminal and run (change port if necassary): `psql "host=127.0.0.1 port=5432 sslmode=disable dbname=vfmcs1 user=guest"`
+- Navigate to /web-app/server/db
+- From your terminal run `./cloud_sql_proxy.exe -instances=radiant-saga-366418:us-central1:vfmcs-db=tcp:5433 credential_file=./db/db-service-account.json`
+
+    You may receive an error if port 5433 is in use. In that case replace 5433 with a different port number.
+- Open another terminal and run (change port if necassary): `psql "host=127.0.0.1 port=5433 sslmode=disable dbname=vfmcs1 user=guest"`
 - Guest credentials are user=**guest** pass=**guestpass**.
 - Enter password when prompted.
 
