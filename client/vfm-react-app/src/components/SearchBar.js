@@ -18,7 +18,7 @@ const SearchBar = () => {
 
     //navigate to specific search path given the user's type as a vendor or customer
     //placeholder value for is_vendor
-    let is_vendor = true;
+    let is_vendor = false;
     if (is_vendor) navigate('/farmer-search', { state: { refresh: true } });
     else navigate('/customer-search', { state: { refresh: true } });
   }
