@@ -1,13 +1,19 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "../login-styles/auth.css";
 import LoginHeader from '../components/headers/LandingHeader.js';
 import LandingHeader from '../components/headers/LandingHeader.js';
+import { useNavigate } from 'react-router-dom';
+
 
 const Login = () => {
+  let navigate = useNavigate();
+
   const [login, setLogin] = useState({
     email: "",
     password: "",
   });
+
+  const [curr_user_id, setCurr_User_Id] = useState(localStorage.getItem('curr_user_id'));
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,15 +25,42 @@ const Login = () => {
         [name]: value,
       };
     });
-  };
+  }; 
+
+  React.useEffect(() => {
+    localStorage.setItem('curr_user_id', curr_user_id);
+  }, [curr_user_id])
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(login);
-    // Check if Login is valid
-    // if valid, continue to appropriate page depending on whether farmer or consumer
-  };
 
+    console.log(login)
+
+    //Check if user has entered info
+    if(login.email === "" || login.password === ""){
+      console.log("error"); return;
+    }
+
+    //Get the user by id
+    let url = 'http://localhost:3001/api/users/' + login.email + "/" + login.password;
+    console.log(url);
+    fetch(url).then(response => response.json()).then(data => {if(data === []) return; console.log("login user id: " + data[0].user_id); setCurr_User_Id(data[0].user_id); localStorage.setItem('curr_user_id', data[0].user_id)}).then(() => {
+      console.log("curr_user_id: " + localStorage.getItem('curr_user_id'));
+
+      //navigate to user's corresponding landing page
+      let curr_user_is_vendor = true;
+      fetch('http://localhost:3001/curr-user-api/' + localStorage.getItem('curr_user_id')).then(response => response.json()).then(data => {console.log(data); curr_user_is_vendor = data[0].is_vendor})
+        .catch(err => console.error(err));
+
+      if(curr_user_is_vendor){
+        navigate('/farmer');
+      }
+      else{
+        navigate('customer');
+      }
+
+    }).catch(err => console.error(err));   
+  };
   return (
 
     <div className="auth-wrapper">

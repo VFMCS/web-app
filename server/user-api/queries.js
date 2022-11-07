@@ -7,10 +7,13 @@ const getFarmers = "SELECT * FROM users WHERE is_vendor = true";
 
 const checkExistingUsers = "SELECT u FROM users u WHERE u.username = $1 OR u.email = $2";
 
+const getUserByEmailAndPassword = "Select u.user_id from users u WHERE u.email = $1 AND u.password = $2";
+
 module.exports = {
     getUsers,
     getUserByID,
     createUser,
     deleteUser,
     checkExistingUsers,
+    getUserByEmailAndPassword
 }

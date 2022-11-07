@@ -8,12 +8,11 @@ import FarmerHeader from '../components/headers/FarmerHeader.js';
 
 //Customer views this farmer profile upon being signed in an hitting the view profile from the landing page
 const FarmerProfileView = (props) => {
-
     const [products, setProducts] = React.useState([]) // capture data from GET request
 
     React.useEffect(() => {
         //using placeholder farmer of vendor_id=0
-        let url = 'http://localhost:3001/api/products/' + 0;
+        let url = 'http://localhost:3001/api/products/' + localStorage.getItem('curr_user_id');
         
         console.log(url);
         fetch(url).then(response => response.json()).then(data => setProducts(data))

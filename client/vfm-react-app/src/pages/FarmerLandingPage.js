@@ -9,24 +9,26 @@ import EditIcon from '@mui/icons-material/Edit';
 //Customer landing page upon customer being signed in
 
 const FarmerLandingPage = () => {
-
-    let defaultProducts = [{name: "Tomato", price: "500", description: "This is a tomato"},{name: "Squash", price: "30", description: "This is a squash"},{name: "Potato", price: "75", description: "This is a potato"}]
-    const [products, setProducts] = React.useState(defaultProducts) // capture data from GET request
+    const [products, setProducts] = React.useState([]) // capture data from GET request
 
     React.useEffect(() => {
-        fetch('http://localhost:3001/api/products').then(response => response.json()).then(data => {
-            setProducts(data)
-            console.log(data)
-    })
-        .catch(err => console.error(err));
+        console.log("curr_user_id for products: " + localStorage.getItem('curr_user_id'));
+        let url = 'http://localhost:3001/api/products/' + localStorage.getItem('curr_user_id');
+        
+        console.log(url);
+        fetch(url).then(response => response.json()).then(data => setProducts(data))
+            .catch(err => console.error(err));
     }, [])
+
+    //let potatoArr = Array(1).fill({name: "Potato", price: "75", description: "This is a potato"})
+    //let products = [{name: "Tomato", price: "500", description: "This is a tomato"},{name: "Squash", price: "30", description: "This is a squash"}].concat(potatoArr)
     return (
             <ThemeProvider theme={theme}>
             <CssBaseline enableColorScheme />
             <Stack direction="column">
             <FarmerHeader />
                 <Typography variant="h5" sx={{margin: 2, color: "primary.main"}}>
-                    Your Products    
+                    Your Products
                 </Typography>
                 <Divider />
                 <center>
