@@ -5,13 +5,35 @@ import { Stack } from '@mui/system';
 import theme from '../theme/theme.js'
 import SignUpButton from '../components/buttons/SignUpButton.js';
 import LoginButton from '../components/buttons/LoginButton.js';
-import {store, useGlobalState} from 'state-pool';
-
+import axios from "axios";
 
 // The General Landing Page for all users
 // TODO: We still have to add actions for all buttons (to sign up/login)
 
 const LandingPage = () => {
+    const [user_id, setUser_id] = React.useState(0) // capture data from GET request
+
+    const handleSubmit = async e => {
+        e.preventDefault();
+        const user = { username, password };
+        // send the username and password to the server
+        const response = await axios.post(
+          "http://blogservice.herokuapp.com/api/login",
+          user
+        );
+        // set the state of the user
+        setUser(response.data)
+        // store the user in localStorage
+        localStorage.setItem('user', response.data)
+        console.log(response.data)
+      };
+      
+
+    React.useEffect(() => {
+        fetch('http://localhost:3000/user_id').then(response => response.json()).then(data => setUser_id(data))
+        .catch(err => console.error(err));
+      }, [])
+
     return ( 
         <ThemeProvider theme={theme}>
             <CssBaseline enableColorScheme />

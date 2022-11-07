@@ -10,11 +10,17 @@ import CustomerSearch from './pages/CustomerSearch';
 import FarmerSearch from './pages/FarmerSearch';
 import Register from './pages/Register';
 import Login from './pages/Login';
-
+import axios from "axios";
 
 function App() {
-  // We may want to move this out or make it static
-  let [user, setUser] = React.useState(null) // once logged in this should be set to current user
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [user, setUser] = useState(); // once logged in this should be set to current user
+
+  const handleSubmit = async e => {
+    
+  };
+  
   return (
     <BrowserRouter>
       <Routes>
