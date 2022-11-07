@@ -13,7 +13,6 @@ const store = createStore();  // Create store for storing our global state
 
 
 const CustomerSearch = () => {
-    const [user_id, setUser_id] = store.useState("user_id");
 
     //let [products, setProducts] = React.useState([])
     //let potatoArr = Array(10).fill({name: "Potato", price: "75", description: "This is a potato"})
