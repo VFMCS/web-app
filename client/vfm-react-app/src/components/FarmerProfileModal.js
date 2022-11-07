@@ -9,17 +9,16 @@ import UploadButton from './buttons/UploadButton.js';
 // https://plainenglish.io/blog/how-to-add-a-file-input-button-and-display-a-preview-image-with-react-2568d9d849f5
 
 
-const FarmerProfileModal = ({open, setModalState, onClose, editMode, defaultProfile}) => {
+const FarmerProfileModal = ({open, setModalState, onClose, editMode, profile, changeHandler}) => {
 
     const [showUploadButton, setShowUploadButton] = useState(true);
     const [showEmptyEntryError, setShowEmptyEntryError] = useState(false);
     const [imageUrl, setImageUrl] = useState(null);
     const [selectedImage, setSelectedImage] = useState(null);
 
-    let profile = {name: "", location: "", description: "", image: ""}
-
     var handleImageChange = (event) => {
         setShowUploadButton(false)
+        console.log(event)
         console.log(event.target.files[0])
         setSelectedImage(event.target.files[0])
         document.getElementById("uploadBox").style.border = 0
@@ -37,26 +36,19 @@ const FarmerProfileModal = ({open, setModalState, onClose, editMode, defaultProf
         // if profile is valid
         // trigger onClose and pass back updated profile
         // otherwise display error message
-        console.log(profile)
-        profile["image"] = imageUrl
-        if (Object.values(profile).includes("")) {
+        let required = [
+            profile.address,
+            profile.about_me,
+            profile.name
+        ]
+        if (required.includes("")) {
             setShowEmptyEntryError(true)
-            console.log("Invalid Input")
             return
         }
         setShowEmptyEntryError(false)
         // POST or PATCH profile here
         setModalState(false)
         onClose()
-    }
-
-    var handleChange = (e) => {
-        let name = e.target.name
-        let value = e.target.value
-        console.log(name)
-        console.log(value)
-        profile[name] = value    
-        console.log(profile)
     }
 
     return (
@@ -74,16 +66,16 @@ const FarmerProfileModal = ({open, setModalState, onClose, editMode, defaultProf
                         <Stack spacing={2} direction="column" sx={{ width: '50%', height: '100%'}}>
                             {showUploadButton &&
                             <div id="uploadBox">
-                                 <UploadButton id="uploadButton" onChange={handleImageChange} color="secondary" />
+                                 <UploadButton id="uploadButton" name="image_url" onChange={handleImageChange} color="secondary" />
                             </div>}
                             {imageUrl && selectedImage && (
                                     <img src={imageUrl} alt={selectedImage.name} width="100%"/>
                             )}
                         </Stack>
                         <Stack spacing={2} direction="column" >
-                            <TextField required name="name" onChange={handleChange} id="outlined-basic" label="Name" variant="outlined" />
-                            <TextField required name="location" onChange={handleChange} id="outlined-basic" label="Location" variant="outlined" />
-                            <TextField required onChange={handleChange} name="description" multiline={true} rows={6} id="outlined-basic" label="Description" variant="outlined" />
+                            <TextField required name="name" onChange={() => false} id="outlined-basic" label="Name" variant="outlined" />
+                            <TextField required name="address" onChange={changeHandler} id="outlined-basic" label="Location" variant="outlined" />
+                            <TextField required onChange={changeHandler} name="about_me" multiline={true} rows={6} id="outlined-basic" label="Description" variant="outlined" />
                             <Stack sx={{height: '60%'}}>
                                 <p style={{color: "tomato"}}>
                                     {showEmptyEntryError && "You have invalid or missing data"}
