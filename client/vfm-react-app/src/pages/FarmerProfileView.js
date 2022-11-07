@@ -4,6 +4,7 @@ import { Stack } from '@mui/system';
 import theme from '../theme/theme.js'
 import LandingHeader from '../components/headers/LandingHeader.js';
 import ProductCard from '../components/ProductCard.js';
+import FarmerHeader from '../components/headers/FarmerHeader.js';
 
 //Customer views this farmer profile upon being signed in an hitting the view profile from the landing page
 const FarmerProfileView = (props) => {

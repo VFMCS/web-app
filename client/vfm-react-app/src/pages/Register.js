@@ -1,10 +1,15 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 //import Login from "../Login";
 import LoginHeader from '../components/headers/LandingHeader.js';
+import FarmerProfileModal from "../components/FarmerProfileModal.js"
+import {Modal, Box, Paper} from "@mui/material"
 
 
 export const Register = () => {
+  let navigate = useNavigate()
+
+  let [profileModalOpen, setProfileModalState] = useState(false);
   const [credentials, setCredentials] = useState({
     firstname: "",
     lastname: "",
@@ -14,6 +19,7 @@ export const Register = () => {
   });
 
 	const isVendor = credentials.role === "farmer";
+  const isConsumer = credentials.role === "consumer";
 
   const roleOptions = [
     { value: "farmer", label: "Farmer" },
@@ -34,7 +40,25 @@ export const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(credentials);
+    if (isVendor) {
+      setProfileModalState(true)
+    } else if (isConsumer) {
+      navigate('/customer')
+    } else {
+      // Error message to select a role
+    }
+    // Need to do error handling to ensure all fields are filled in
   };
+
+  
+  let modalCloseHandler = (e, reason) => {
+      if (reason === "backdropClick") {
+          setProfileModalState(false)
+          return
+      }
+      setProfileModalState(false)
+      navigate('/farmer')
+  }
 
   return (
     <div className="auth-wrapper">
@@ -117,6 +141,7 @@ export const Register = () => {
           </p>
         </form>
       </div>
+      <FarmerProfileModal open={profileModalOpen} setModalState={setProfileModalState} onClose={modalCloseHandler}/>
     </div>
   );
 };
