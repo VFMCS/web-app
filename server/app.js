@@ -1,5 +1,5 @@
 //See server readme for endpoint documentation
-
+const proxy = require('./db/db.js');
 const express = require("express");
 const usrapi = require('./user-api/routes.js');
 const prdapi = require('./products-api/routes.js');
@@ -8,6 +8,7 @@ const srchEndpoint = require('./search-endpoint/routes.js');
 const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3001;
+proxy.startProxy();
 
 app.use(cors());
 app.use(express.json());
@@ -19,7 +20,7 @@ app.use('/search', srchEndpoint);
 
 
 app.listen(PORT, () => {
-  console.log(`Listening on Port: ${PORT}`)
+  console.log(`Express server listening on Port: ${PORT}`)
 })
 
 /*

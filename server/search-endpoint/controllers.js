@@ -1,4 +1,4 @@
-const pool = require("../db.js")
+const pool = require("../db/db.js").pool;
 const queries = require("./queries.js")
 
 const productSearch = (req, res) => {
