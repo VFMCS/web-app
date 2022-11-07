@@ -45,7 +45,6 @@ const deleteUser = (req, res) => {
 
 module.exports = {
     getUsers,
-    getUserByID,
     createUser,
     deleteUser,
     getUserByEmailAndPassword
