@@ -8,6 +8,7 @@ import FarmerHeader from '../components/headers/FarmerHeader.js';
 
 //Customer views this farmer profile upon being signed in an hitting the view profile from the landing page
 const FarmerProfileView = (props) => {
+    const [user_id, setUser_id] = store.useState("user_id");
 
     const [products, setProducts] = React.useState([]) // capture data from GET request
 

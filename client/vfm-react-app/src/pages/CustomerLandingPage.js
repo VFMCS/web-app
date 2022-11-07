@@ -18,7 +18,6 @@ import { useNavigate } from 'react-router-dom';
 //const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const CustomerLandingPage = () => {
-
   //TESTING///////
   /*
   let farmerArr = Array(10).fill({name: "Steve", location : "1234 Street Street", description : "Coolest farmer in Amherst"})
