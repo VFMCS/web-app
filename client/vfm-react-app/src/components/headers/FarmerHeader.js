@@ -12,10 +12,11 @@ import FarmerPostItem from '../FarmerPostItem';
 // A Header Component used by the Farmer
 // Contains: Menu button, Logo, Dashboard button, and Products Button
 const FarmerHeader = () => {
-    let [modalOpen, setModalState] = React.useState(false);
+    const [modalOpen, setModalState] = React.useState(false);
     let navigate = useNavigate()
     let toDashboard = () => navigate("/dashboard")
     let toPostItem = () => setModalState(true)
+    const toClosePost = () =>  setModalState(false) 
     let toProducts = () => navigate("/farmer")
     let [sideBarOpen, setSidebarState] = React.useState(false)
     let toggleSidebar = () => {
@@ -48,12 +49,14 @@ const FarmerHeader = () => {
                         <Modal open={modalOpen} onClose={() => setModalState(false)} closeAfterTransition sx={{display: 'flex', p: 1, alignItems: 'center', justifyContent: 'center'}}>
                             <Box sx={{
                                 position: 'relative',
+                                width: '1000px',
+                                height: '650px',
                                 bgcolor: 'background.paper',
                                 border: '2px solid #000',
                                 boxShadow: (theme) => theme.shadows[5],
                                 p: 4,
                                 }}>
-                                <FarmerPostItem />
+                                <FarmerPostItem setModalState={setModalState} />
                             </Box>
                         </Modal>
                     </Toolbar>
