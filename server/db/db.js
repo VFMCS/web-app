@@ -12,7 +12,7 @@ const pool = new Pool({
 
 
 //This is for local development, will potentially need modification for deployment
-const startProxy = () => {
+const startAuthProxy = () => {
     instance = `radiant-saga-366418:us-central1:vfmcs-db=tcp:${port}`;
     cred_file = "./db/db-service-account.json";
     console.log(`Starting cloud sql auth proxy on port: ${port}...`);
@@ -33,7 +33,7 @@ const pool = new Pool({
 
 module.exports = {
     pool,
-    startProxy,
+    startAuthProxy,
 }
 
 //startProxy();
