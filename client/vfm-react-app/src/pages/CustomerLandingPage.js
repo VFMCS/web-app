@@ -30,8 +30,8 @@ const CustomerLandingPage = () => {
   const [farmers, setFarmers] = React.useState([]) // capture data from GET request
 
   React.useEffect(() => {
-    fetch('http://localhost:3001/api/farmers').then(response => response.json()).then(data => setFarmers(data))
-    .catch(err => console.error(err));
+    fetch('http://localhost:3001/api/vendors').then(response => response.json()).then(data => setFarmers(data))
+      .catch(err => console.error(err));
   }, [])
 
 
@@ -39,54 +39,54 @@ const CustomerLandingPage = () => {
 
   React.useEffect(() => {
     fetch('http://localhost:3001/api/products').then(response => response.json()).then(data => setProducts(data))
-    .catch(err => console.error(err));
+      .catch(err => console.error(err));
   }, [])
   return (
-        <ThemeProvider theme={theme}>
-          <CssBaseline enableColorScheme />
-          <Stack direction = "column">
-            <ConsumerHeader />
-              <center><Typography variant="h5" sx={{margin: 6, color: "black"}}>
-                Featured Farmers 
-              </Typography></center>
-              
-              <center>
-              <Box sx={{margin: 0}}>
-                    <Grid container spacing={{ xs: 0, md: 2 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-                        {(farmers.slice(0, 3)).map((item) => (
-                            <Grid item xs={2} sm={3} md={4} key={item.name}>
-                                <FarmerCard item={item}/>
-                            </Grid>
-                        ))}
-                    </Grid>
-                </Box>
-              </center>
-                
-                <center><Typography variant="h5" sx={{margin: 2, color: "black"}}>
-                Featured Products
-                </Typography> </center>
-              
-              <center>
-                <Box sx={{margin: 4}}>
-                    <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 4, sm: 4, md: 20 }}>
-                        {(products.slice(0, 5)).map((item) => (
-                            <Grid item xs={1} sm={3} md={4} key={item.name}>
-                                <ProductCard item={item}/>
-                            </Grid>
-                        ))}
-                    </Grid>
-                 
-              
-                </Box>
-                </center> 
+    <ThemeProvider theme={theme}>
+      <CssBaseline enableColorScheme />
+      <Stack direction="column">
+        <ConsumerHeader />
+        <center><Typography variant="h5" sx={{ margin: 6, color: "black" }}>
+          Featured Farmers
+        </Typography></center>
+
+        <center>
+          <Box sx={{ margin: 0 }}>
+            <Grid container spacing={{ xs: 0, md: 2 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+              {(farmers.slice(0, 3)).map((item) => (
+                <Grid item xs={2} sm={3} md={4} key={item.name}>
+                  <FarmerCard item={item} />
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
+        </center>
+
+        <center><Typography variant="h5" sx={{ margin: 2, color: "black" }}>
+          Featured Products
+        </Typography> </center>
+
+        <center>
+          <Box sx={{ margin: 4 }}>
+            <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 4, sm: 4, md: 20 }}>
+              {(products.slice(0, 5)).map((item) => (
+                <Grid item xs={1} sm={3} md={4} key={item.name}>
+                  <ProductCard item={item} />
+                </Grid>
+              ))}
+            </Grid>
+
+
+          </Box>
+        </center>
 
 
 
-          </Stack>
+      </Stack>
 
-        </ThemeProvider>
+    </ThemeProvider>
 
-      );
+  );
 };
 
 export default CustomerLandingPage
