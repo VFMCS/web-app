@@ -9,7 +9,7 @@ import { Lemon, Apple, Pear, Orange, Grapefruit, Lime, Peaches, Tomato, Blueberr
 from '..';
 
 // TODO: Update to support editing items
-const FarmerPostItem = ({editMode, currentItem}) => {
+const FarmerPostItem = ({editMode, currentItem, setModalState}) => {
 
     const [showUploadButton, setShowUploadButton] = useState(true);
     const [showPriceValidError, setShowPriceValidError] = useState(false);
@@ -67,13 +67,18 @@ const FarmerPostItem = ({editMode, currentItem}) => {
             //save to database
 			fetch("http://localhost:3001/api/products", {method: "GET"}).then(data => console.log(data));
 			fetch("http://localhost:3001/api/products", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(item)}).then(data => console.log(data));
-			fetch("http://localhost:3001/api/products", {method: "GET"}).then(data => console.log(data));
+            fetch("http://localhost:3001/api/products", {method: "GET"}).then(data => console.log(data));
+            
         }
         else {
             if(errorExp !== ""){
                 setShowEmptyEntryError("The following fields need to be filled: " + errorExp)
             }
         }
+    }
+
+    var onCancel = () => {
+        setModalState(false);
     }
 
     var handleChange = (e) => {
@@ -103,6 +108,9 @@ const FarmerPostItem = ({editMode, currentItem}) => {
         if(valid){
             item[name] = value
             //console.log(item)
+        }
+        else{
+            item[name] = null
         }
     }
 
@@ -161,8 +169,8 @@ const FarmerPostItem = ({editMode, currentItem}) => {
                         {showPriceValidError && <p style={{color: "tomato"}}>Please input a valid price</p>}
                     </Stack>
                     <Stack sx={{height: "40%"}} direction="row">
-                        <Button onClick={onSave} variant= "contained" style={{ height: '100%', width: '50%'}} size="medium" color="success" sx={{fontWeight: "bold"}}>{editMode ? "Update" : "Publish"}</Button>
-                        <ConfirmEditButton color="success" label="Cancel"></ConfirmEditButton>
+                        <Button onClick={onSave} variant= "contained" style={{ height: '100%', width: '50%'}} size="medium" color="success" sx={{fontWeight: "bold"}}>{editMode ? "Update" : "Publish"}</Button> 
+                        <Button onClick={onCancel} variant= "text" style={{ height: '100%', width: '50%'}} size="medium" color="success" sx={{fontWeight: "bold"}}>Cancel</Button>
                     </Stack>
                 </Stack>
             </Stack>
