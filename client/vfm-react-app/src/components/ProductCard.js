@@ -52,9 +52,7 @@ const ProductCard = (props) => {
                                         boxShadow: (theme) => theme.shadows[5],
                                         p: 4,
                                         }}>
-                                        <Paper>
                                             <FarmerPostItem /> {/* Update to support editing mode */}
-                                        </Paper>
                                     </Box>
                                 </Modal>
                             </Box>

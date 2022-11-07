@@ -1,15 +1,14 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 //import Login from "../Login";
 import LoginHeader from '../components/headers/LandingHeader.js';
-import FarmerProfileEdit from "../components/FarmerProfileEdit.js"
+import FarmerProfileModal from "../components/FarmerProfileModal.js"
 import {Modal, Box, Paper} from "@mui/material"
 
 
 export const Register = () => {
 
   let [profileModalOpen, setProfileModalState] = useState(false);
-
   const [credentials, setCredentials] = useState({
     firstname: "",
     lastname: "",
@@ -42,12 +41,10 @@ export const Register = () => {
     setProfileModalState(true)
   };
 
-  const handleModalClose = (e, reason) => {
-    if (reason === "backdropClick") {
-      return
-    }
-
-  };
+  let navigate = useNavigate()
+  let toFarmerLanding = () => {
+      navigate('/farmer')
+  }
 
   return (
     <div className="auth-wrapper">
@@ -130,19 +127,7 @@ export const Register = () => {
           </p>
         </form>
       </div>
-      <Modal open={profileModalOpen} onClose={handleModalClose} closeAfterTransition sx={{display: 'flex', p: 1, alignItems: 'center', justifyContent: 'center'}}>
-        <Box sx={{
-            position: 'relative',
-            bgcolor: 'background.paper',
-            border: '2px solid #000',
-            boxShadow: (theme) => theme.shadows[5],
-            p: 4,
-            }}>
-          <Paper>
-              <FarmerProfileEdit />
-          </Paper>
-        </Box>
-      </Modal>
+      <FarmerProfileModal open={profileModalOpen} setModalState={setProfileModalState} onClose={toFarmerLanding}/>
     </div>
   );
 };

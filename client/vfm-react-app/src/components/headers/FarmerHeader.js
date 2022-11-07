@@ -53,9 +53,7 @@ const FarmerHeader = () => {
                                 boxShadow: (theme) => theme.shadows[5],
                                 p: 4,
                                 }}>
-                                <Paper>
-                                    <FarmerPostItem />
-                                </Paper>
+                                <FarmerPostItem />
                             </Box>
                         </Modal>
                     </Toolbar>
