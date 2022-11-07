@@ -22,6 +22,14 @@ const getUserByEmailAndPassword = (req,res) => {
     })
 }
 
+const getUserByID = (req, res) => {
+    const user_id = req.params.user_id;
+    pool.query(queries.getUserByID, [user_id], (error, results) => {
+        if (error) throw error;
+        res.status(200).json(results.rows);
+    })
+}
+
 const createUser = (req, res) => {
     const { username, password, first_name, last_name, address, is_vendor, about_me, email } = req.body;
     pool.query(queries.checkExistingUsers, [password, email], (error, results) => {
@@ -43,9 +51,12 @@ const deleteUser = (req, res) => {
 }
 
 
+
+
 module.exports = {
     getUsers,
     createUser,
     deleteUser,
-    getUserByEmailAndPassword
+    getUserByEmailAndPassword,
+    getUserByID
 }

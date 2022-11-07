@@ -5,19 +5,28 @@ import theme from '../theme/theme.js'
 import LandingHeader from '../components/headers/LandingHeader.js';
 import ProductCard from '../components/ProductCard.js';
 import FarmerHeader from '../components/headers/FarmerHeader.js';
+import {clickedOnUserId} from '../components/FarmerCard'
 
 //Customer views this farmer profile upon being signed in an hitting the view profile from the landing page
 const FarmerProfileView = (props) => {
     const [products, setProducts] = React.useState([]) // capture data from GET request
+    const [farmer_first_name, setFarmer_First_Name] = React.useState('')
 
     React.useEffect(() => {
         //using placeholder farmer of vendor_id=0
-        let url = 'http://localhost:3001/api/products/' + localStorage.getItem('curr_user_id');
+        let url = 'http://localhost:3001/api/products/' + clickedOnUserId;
         
         console.log(url);
         fetch(url).then(response => response.json()).then(data => setProducts(data))
             .catch(err => console.error(err));
     }, [])
+
+    React.useEffect(() => {
+        let url = 'http://localhost:3001/api/vendors/' + clickedOnUserId;
+        console.log(url);
+        fetch(url).then(response => response.json()).then(data => setFarmer_First_Name(data[0].first_name))
+            .catch(err => console.error(err));
+    })
 
     let potatoArr = Array(10).fill({name: "Potato", price: "75", description: "This is a potato"})
     //let products = [{name: "Tomato", price: "500", description: "This is a tomato"},{name: "Squash", price: "30", description: "This is a squash"}].concat(potatoArr)
@@ -35,7 +44,7 @@ const FarmerProfileView = (props) => {
                     </Grid>
                     <Grid item>
                         <Typography variant="h4" align="left" sx={{margin: 4, color: "black"}}>
-                            John Smith
+                            {farmer_first_name}
                         </Typography>
                         <Typography variant="body2" sx={{marginLeft: 4, marginBottom:2}}>
                                     {/* TODO: Change this text/body */}
@@ -52,7 +61,7 @@ const FarmerProfileView = (props) => {
             </Box>
            
                 <Typography variant="h5" sx={{margin: 2, color: "black"}}>
-                    John's Products
+                {farmer_first_name}'s Products
                 </Typography>
                 <Divider />
                 <Box sx={{margin: 4}}>

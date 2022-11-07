@@ -4,12 +4,16 @@ import basketImage from "../images/vegetable-basket.png"
 import theme from "../theme/theme"
 import { useNavigate } from 'react-router-dom';
 
-// This is a component that displays important information about a product
+// This is a component that displays important information about a farmer
+
+let clickedOnUserId = 0;
+
 const FarmerCard = (props) => {
     //let item = props.item || {name: "Item", location: "0", description: "This is a description"}
     let navigate = useNavigate();
     const toFarmerProfile = () => {
-        navigate('/farmer-profile')
+        clickedOnUserId = props.item.user_id;
+        navigate('/farmer-profile');
     };
     
 
@@ -46,4 +50,5 @@ const FarmerCard = (props) => {
     );
 };
 
+export {clickedOnUserId}
 export default FarmerCard;

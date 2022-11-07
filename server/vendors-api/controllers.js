@@ -8,6 +8,14 @@ const getFarmers = (req, res) => {
     })
 }
 
+const getFarmerById = (req, res) => {
+    const user_id = req.params.user_id;
+    pool.query(queries.getFarmerById, [user_id], (error, results) => {
+        if (error) throw error;
+        res.status(200).json(results.rows);
+    })
+}
+
 const postFarmers = (req,res) => {
     const requestbody = {
         user_id: req.user_id,
@@ -29,4 +37,5 @@ const postFarmers = (req,res) => {
 
 module.exports = {
     getFarmers,
+    getFarmerById
 }
