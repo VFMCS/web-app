@@ -6,7 +6,7 @@ import LoginHeader from '../components/headers/LandingHeader.js';
 import FarmerLandingPage from "./FarmerLandingPage.js";
 import { NavigateBefore } from '@mui/icons-material';
 import FarmerProfileModal from "../components/FarmerProfileModal.js"
-import {Modal, Box, Paper} from "@mui/material"
+import {Alert} from "@mui/material"
 
 
 export const Register = () => {
@@ -28,6 +28,8 @@ export const Register = () => {
     image_url:"",
     role:"farmer"
   });
+
+  let [missingFieldError, setMissingFieldError] = useState(false);
 
   const is_vendor_options = [
     { value: "farmer", label: "Farmer" },
@@ -66,6 +68,16 @@ export const Register = () => {
     e.preventDefault();
 
     credentials.is_vendor = credentials.is_vendor === "farmer";
+
+    let required = [credentials.first_name, 
+      credentials.last_name, 
+      credentials.password, 
+      credentials.email]
+    if (required.includes("")) {
+      console.log(required)
+      setMissingFieldError(true)
+      return
+    }
     
     //Using random number for user_id for now, should check for collisions of user_id in the future
     fetch('http://localhost:3001/api/users', {
@@ -175,7 +187,8 @@ export const Register = () => {
               </div>
             ))}
           </div>
-
+          { missingFieldError &&
+          <Alert severity="error" sx={{m: 2}}> Please enter all fields </Alert>}
           <button type="submit" className="btn btn-primary btn-block">
             Sign Up
           </button>
