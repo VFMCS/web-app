@@ -3,7 +3,7 @@ const pool = require("../db/db.js").pool;
 const queries = require("./queries.js")
 
 const getFarmers = (req, res) => {
-    console.log(req)
+    //console.log(req)
     pool.query(queries.getFarmers, (error, results) => {
         res.status(200).json(results.rows);
     })
@@ -11,7 +11,7 @@ const getFarmers = (req, res) => {
 
 const getFarmerById = (req, res) => {
     const user_id = req.params.user_id;
-    console.log(req)
+    //console.log(req)
     pool.query(queries.getFarmerById, [user_id], (error, results) => {
         if (error) throw error;
         res.status(200).json(results.rows);

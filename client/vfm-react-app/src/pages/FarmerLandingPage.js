@@ -12,8 +12,9 @@ const FarmerLandingPage = () => {
     const [products, setProducts] = React.useState([]) // capture data from GET request
 
     React.useEffect(() => {
+        
         console.log("curr_user_id for products: " + localStorage.getItem('curr_user_id'));
-        let url = 'http://localhost:3001/api/products/' + 0//localStorage.getItem('curr_user_id');
+        let url = 'http://localhost:3001/api/products/' + localStorage.getItem('curr_user_id');
 
         console.log(url);
         fetch(url).then(response => response.json()).then(data => setProducts(data))

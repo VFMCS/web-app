@@ -20,7 +20,7 @@ const FarmerPostItem = ({ editMode, currentItem, setModalState }) => {
     //here, we initially set the vendor_id to what we need it to be
 
     const [item, setItem] = useState({
-        'vendor_id': 0, //localStorage.getItem('curr_user_id')
+        'vendor_id': localStorage.getItem('curr_user_id'),
         'product_type': null,
         'quantity': null,
         'price': null,
