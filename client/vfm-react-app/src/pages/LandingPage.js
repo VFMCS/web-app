@@ -5,7 +5,6 @@ import { Stack } from '@mui/system';
 import theme from '../theme/theme.js'
 import SignUpButton from '../components/buttons/SignUpButton.js';
 import LoginButton from '../components/buttons/LoginButton.js';
-import axios from "axios";
 
 // The General Landing Page for all users
 // TODO: We still have to add actions for all buttons (to sign up/login)

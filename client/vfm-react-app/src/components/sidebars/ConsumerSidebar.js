@@ -10,7 +10,10 @@ import LogoutIcon from '@mui/icons-material/Logout';
 // Contains: Menu button, Logo, Dashboard button, and Products Button
 const ConsumerSidebar = ({isOpen, toggle}) => {
     let navigate = useNavigate()
-    let toHome = () => navigate("/")
+    let toHome = () => {
+        localStorage.setItem('curr_user_id', JSON.stringify(-1));
+        navigate("/")
+    }
 
     return (
         <Drawer open={isOpen} onClose={toggle}>

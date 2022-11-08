@@ -14,7 +14,10 @@ const FarmerSidebar = ({isOpen, toggle}) => {
     
     let toDashboard = () => navigate("/dashboard")
     let toProducts = () => navigate("/farmer")
-    let toHome = () => navigate("/")
+    let toHome = () => {
+        localStorage.setItem('curr_user_id', JSON.stringify(-1));
+        navigate("/")
+    }
 
     return (
         <Drawer open={isOpen} onClose={toggle}>

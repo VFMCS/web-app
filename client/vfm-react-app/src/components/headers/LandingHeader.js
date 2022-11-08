@@ -11,13 +11,6 @@ import GeneralSidebar from '../sidebars/GeneralSidebar';
 // A Header Component used for the General Landing Page
 // Contains a Menu Item, the logo/title, sign up button, and login button
 const LandingHeader = () => {
-    let navigate = useNavigate()
-    let toFarmer = () => {
-        navigate('/farmer')
-    }
-    let toConsumer = () => {
-        navigate('/customer')
-    }
     let [sideBarOpen, setSidebarState] = React.useState(false)
     let toggleSidebar = () => {
         setSidebarState(!sideBarOpen)
@@ -42,16 +35,6 @@ const LandingHeader = () => {
                         </Box>
                         <LoginButton />
                         <SignUpButton />
-                        <Button onClick={toFarmer}>
-                            <Typography sx={{ color: "primary.dark", fontWeight: "bold"}}>
-                                Farmer Page {/* TEMPORARY */}
-                            </Typography>
-                        </Button>
-                        <Button onClick={toConsumer}>
-                            <Typography sx={{ color: "primary.dark", fontWeight: "bold"}}>
-                                Consumer Page {/* TEMPORARY */}
-                            </Typography>
-                        </Button>
                     </Toolbar>
                 </AppBar>
             </Box>

@@ -13,7 +13,7 @@ const LoginButton = (props) => {
         navigate('/sign-in') // Change to Login (or show Login Modal)
     }
     return (
-        <Button onClick={onClick} color={props.color || "success"} variant={props.variant || "text"} sx={{marginRight: 2, fontWeight: "bold"}}> {props.label || "Login" } </Button>
+        <Button data-testid="login-button" onClick={onClick} color={props.color || "success"} variant={props.variant || "text"} sx={{marginRight: 2, fontWeight: "bold"}}> {props.label || "Login" } </Button>
     )
 }
 

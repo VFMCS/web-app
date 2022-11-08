@@ -13,7 +13,7 @@ const ProductCard = (props) => {
     let toPostItem = () => setModalState(true)
 
     return (
-        <ThemeProvider theme={theme}>
+        <ThemeProvider data-testid="product-card" theme={theme}>
             <CssBaseline enableColorScheme />
             <Card sx={{ maxWidth: 320 }}>
                 <CardActionArea disableTouchRipple={props.editMode}>
