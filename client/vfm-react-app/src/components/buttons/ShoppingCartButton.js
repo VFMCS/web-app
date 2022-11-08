@@ -9,7 +9,7 @@ import {Button} from "@mui/material"
 // TODO: Add action to link to sign up page
 const ShoppingCartButton = (props) => {
     return (
-        <Button color={props.color || "secondary"} variant="contained" sx={{fontWeight: "bold"}}> 
+        <Button data-testid = "shopping" color={props.color || "secondary"} variant="contained" sx={{fontWeight: "bold"}}> 
             <ShoppingCartCheckoutIcon />
         </Button>
     )
