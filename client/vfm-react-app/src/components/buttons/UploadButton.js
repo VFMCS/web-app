@@ -6,7 +6,7 @@ import {Button} from "@mui/material"
 
 
 const UploadButton = (props) => {
-    return (<Button color={props.color || "secondary"} sx={{ p: '5', width: '100%', height: '100%'}} variant="contained" component="label">
+    return (<Button data-testid = "upload" color={props.color || "secondary"} sx={{ p: '5', width: '100%', height: '100%'}} variant="contained" component="label">
                         Upload
                         <input hidden accept="image/*" multiple type="file" onChange={props.onChange || (() => false)}/>
                         </Button>)
