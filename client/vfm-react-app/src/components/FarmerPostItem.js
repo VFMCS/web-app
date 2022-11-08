@@ -73,6 +73,7 @@ const FarmerPostItem = ({ editMode, currentItem, setModalState }) => {
             fetch("http://localhost:3001/api/products", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(item) }).then(data => console.log(data));
             fetch("http://localhost:3001/api/products", { method: "GET" }).then(data => console.log(data));
             setModalState(false);
+            navigate('/farmer');
         }
         else {
             if (errorExp !== "") {

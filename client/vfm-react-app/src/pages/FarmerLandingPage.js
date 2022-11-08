@@ -13,9 +13,8 @@ const FarmerLandingPage = () => {
 	const curr_user_id = localStorage.getItem('curr_user_id');
 
     React.useEffect(() => {
-        
-        console.log("curr_user_id for products: " + curr_user_id);
-        let url = 'http://localhost:3001/api/products/' + curr_user_id;
+        console.log("curr_user_id for products: " + localStorage.getItem('curr_user_id'));
+        let url = 'http://localhost:3001/api/products/' + localStorage.getItem('curr_user_id');
 
         console.log(url);
         fetch(url).then(response => response.json()).then(data => setProducts(data))
@@ -37,7 +36,7 @@ const FarmerLandingPage = () => {
                     <Box sx={{ margin: 4 }}>
                         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                             {/* Replace with current vendor id*/}
-                            {products.filter(p => p.vendor_id == curr_user_id).map((item) => (
+                            {products.map((item) => (
                                 <Grid item xs={2} sm={4} md={4} key={item.name}>
                                     <ProductCard editMode item={item} />
                                 </Grid>

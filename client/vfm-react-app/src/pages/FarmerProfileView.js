@@ -11,6 +11,7 @@ import {clickedOnUserId} from '../components/FarmerCard'
 const FarmerProfileView = (props) => {
     const [products, setProducts] = React.useState([]) // capture data from GET request
     const [farmer_first_name, setFarmer_First_Name] = React.useState('')
+    const [farmer_image_url, setFarmer_Image_Url] = React.useState('');
 
     React.useEffect(() => {
         //using placeholder farmer of vendor_id=0
@@ -24,9 +25,9 @@ const FarmerProfileView = (props) => {
     React.useEffect(() => {
         let url = 'http://localhost:3001/api/vendors/' + clickedOnUserId;
         console.log(url);
-        fetch(url).then(response => response.json()).then(data => setFarmer_First_Name(data[0].first_name))
+        fetch(url).then(response => response.json()).then(data => {setFarmer_First_Name(data[0].first_name); setFarmer_Image_Url(data[0].image_url)})
             .catch(err => console.error(err));
-    })
+    }, [])
 
     let potatoArr = Array(10).fill({name: "Potato", price: "75", description: "This is a potato"})
     //let products = [{name: "Tomato", price: "500", description: "This is a tomato"},{name: "Squash", price: "30", description: "This is a squash"}].concat(potatoArr)
@@ -39,7 +40,7 @@ const FarmerProfileView = (props) => {
             <Box sx={{backgroundColor: "secondary.light", display:"flex", alignItems:'center', justifyContent:'center'}} >
                 <Grid container direction="row" sx={{alignItems:"center", display:"flex", justifyContent:'center'}} >
                     <Grid item sx={{alignItems:"center", display:"flex", justifyContent:'center'}}>
-                        <img height='290' alt='' src='https://i.pinimg.com/236x/ef/aa/69/efaa696cd77be0b88d973d638ae90949.jpg'></img>
+                        <img height='290' alt='' src={farmer_image_url}></img>
                        
                     </Grid>
                     <Grid item>
@@ -48,7 +49,7 @@ const FarmerProfileView = (props) => {
                         </Typography>
                         <Typography variant="body2" sx={{marginLeft: 4, marginBottom:2}}>
                                     {/* TODO: Change this text/body */}
-                                    Bio: I am John
+                                    Bio: I am {farmer_first_name}
                         </Typography>
                         <Typography variant="body2" sx={{marginLeft: 4, marginTop:0}}>
                                     {/* TODO: Change this text/body */}

@@ -14,8 +14,6 @@ export const Register = () => {
 
   let [profileModalOpen, setProfileModalState] = useState(false);
   const [credentials, setCredentials] = useState({
-    user_id: Math.round(Math.random() * 10000) + 10,
-    username: "username",
     password: "",
     first_name: "",
     last_name: "",
@@ -50,8 +48,6 @@ export const Register = () => {
 
   React.useEffect(() => {
    setCredentials({
-    user_id: Math.round(Math.random() * 10000) + 10,
-    username: "username",
     password: credentials.password,
     first_name: credentials.first_name,
     last_name: credentials.last_name,
@@ -66,6 +62,11 @@ export const Register = () => {
 }, [])
 
   const postCredentials = () => {
+    console.log('post starting');
+
+    fetch("http://localhost:3001/api/users", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(credentials)}).then(data => console.log(data));
+
+    /*
     //Using random number for user_id for now, should check for collisions of user_id in the future
     fetch('http://localhost:3001/api/users', {
     method: 'POST', // or 'PUT'
@@ -78,9 +79,9 @@ export const Register = () => {
     .catch((error) => {
       //console.error('Error:', error);
     });
+    */
     
     //set curr_user_id and print values
-    localStorage.setItem('curr_user_id', credentials.user_id);
     console.log(localStorage.getItem('curr_user_id'))    
     console.log(credentials);
   }
@@ -123,6 +124,7 @@ export const Register = () => {
       }
       setProfileModalState(false)
       postCredentials()
+      localStorage.setItem('curr_user_is_vendor', true)
       navigate('/farmer')
   }
 

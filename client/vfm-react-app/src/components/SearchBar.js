@@ -8,6 +8,7 @@ let search_query = '';
 const SearchBar = () => {
   let [text, setText] = React.useState("");
   let [query, setQuery] = React.useState("");
+  let [is_vendor, setIs_Vendor] = React.useState("");
   let navigate = useNavigate();
 
   const onSubmit = () => {
@@ -17,9 +18,7 @@ const SearchBar = () => {
     console.log("searching: " + search_query)
 
     //navigate to specific search path given the user's type as a vendor or customer
-    //placeholder value for is_vendor
-    let is_vendor = false;
-    if (is_vendor) navigate('/farmer-search', { state: { refresh: true } });
+    if (localStorage.getItem('curr_user_is_vendor')) navigate('/farmer-search', { state: { refresh: true } });
     else navigate('/customer-search', { state: { refresh: true } });
   }
   return (

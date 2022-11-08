@@ -14,7 +14,7 @@ const getUserByEmailAndPassword = (req,res) => {
     const password = req.params.password
 
     console.log("user email: " + email + " user password: " + password);
-    
+
 
     pool.query(queries.getUserByEmailAndPassword,[email,password],(error,results) => {
         if(error) throw error;
@@ -32,14 +32,14 @@ const getUserByID = (req, res) => {
 }
 
 const createUser = (req, res) => {
-    const { username, password, first_name, last_name, address, is_vendor, about_me, email } = req.body;
+    const { password, first_name, last_name, address, is_vendor, about_me, email } = req.body;
     pool.query(queries.checkExistingUsers, [password, email], (error, results) => {
         if (results.rows.length) {
             res.send("Username or email already in use")
         }
-        pool.query(queries.createUser,[username,password,first_name,last_name,address,is_vendor,about_me,email],(error,results)=>{
-            //if (error) throw error;
-            res.status(201).send("User created");
+        pool.query(queries.createUser,[password,first_name,last_name,address,is_vendor,about_me,email],(error,results)=>{
+            if (error) throw error;
+            res.status(201).send(results.rows);
         })
     })
 }
