@@ -18,8 +18,13 @@ const SearchBar = () => {
     console.log("searching: " + search_query)
 
     //navigate to specific search path given the user's type as a vendor or customer
-    if (localStorage.getItem('curr_user_is_vendor')) navigate('/farmer-search', { state: { refresh: true } });
-    else navigate('/customer-search', { state: { refresh: true } });
+    console.log('curr_user_is_vendor: ' + localStorage.getItem('curr_user_is_vendor'));
+    if (localStorage.getItem('curr_user_is_vendor') === true){
+      navigate('/farmer-search', { state: { refresh: true } });
+    }
+    else{
+      navigate('/customer-search', { state: { refresh: true } });
+    }
   }
   return (
     <Paper

@@ -66,20 +66,28 @@ export const Register = () => {
   const postCredentials = () => {
     console.log('post starting');
 
-    fetch("http://localhost:3001/api/users", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(credentials)}).then(data => console.log(data));
+    fetch("http://localhost:3001/api/users", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(credentials)}).then(data => {console.log(data);
+      //Get the user by email and password to then retrieve the id
+      let url = 'http://localhost:3001/api/users/' + credentials.email + "/" + credentials.password;
+      console.log(url);
+      fetch(url).then(response => response.json()).then(data => {
+        console.log("data: " + data)
+        console.log("login user id: " + data[0].user_id); 
+        setCurr_User_Id(data[0].user_id); 
+        localStorage.setItem('curr_user_id', data[0].user_id);
+        localStorage.setItem('curr_user_is_vendor', credentials.is_vendor);
+      }).then(() => {
+        console.log("curr_user_id: " + localStorage.getItem('curr_user_id'));
+        console.log("curr_user_is_vendor: " + localStorage.getItem('curr_user_is_vendor'));
+    });
 
-    //Get the user by email and password to then retrieve the id
-    let url = 'http://localhost:3001/api/users/' + credentials.email + "/" + credentials.password;
-    console.log(url);
-    fetch(url).then(response => response.json()).then(data => {
-      if(data.length === 0) {
-        return Promise.reject("No user found");
-      }; 
-      console.log("login user id: " + data[0].user_id); 
-      setCurr_User_Id(data[0].user_id); 
-      localStorage.setItem('curr_user_id', data[0].user_id)
-    }).then(() => {
-      console.log("curr_user_id: " + localStorage.getItem('curr_user_id'))});
+    //set curr_user_id and print values
+    console.log(localStorage.getItem('curr_user_id'))    
+    console.log(credentials);
+  });
+}
+
+    
     
 
     /*
@@ -97,10 +105,8 @@ export const Register = () => {
     });
     */
     
-    //set curr_user_id and print values
-    console.log(localStorage.getItem('curr_user_id'))    
-    console.log(credentials);
-  }
+    
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
