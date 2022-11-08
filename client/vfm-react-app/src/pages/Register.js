@@ -79,13 +79,14 @@ export const Register = () => {
       }).then(() => {
         console.log("curr_user_id: " + localStorage.getItem('curr_user_id'));
         console.log("curr_user_is_vendor: " + localStorage.getItem('curr_user_is_vendor'));
+        console.log(credentials);
+      }).then(() => {
+        //set curr_user_id and print values
+        if(localStorage.getItem('curr_user_is_vendor') === true){navigate('/customer');}
+        else{navigate('/farmer');}
+      });
     });
-
-    //set curr_user_id and print values
-    console.log(localStorage.getItem('curr_user_id'))    
-    console.log(credentials);
-  });
-}
+  }
 
     
     
@@ -135,7 +136,7 @@ export const Register = () => {
     }
     else{
       postCredentials()
-      navigate('/customer');
+      
     }
   };
 
