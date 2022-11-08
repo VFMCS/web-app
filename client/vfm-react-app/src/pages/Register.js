@@ -13,6 +13,8 @@ export const Register = () => {
   let navigate = useNavigate();
 
   let [profileModalOpen, setProfileModalState] = useState(false);
+  let [curr_user_id, setCurr_User_Id] = useState(localStorage.getItem('curr_user_id'));
+
   const [credentials, setCredentials] = useState({
     password: "",
     first_name: "",
@@ -65,6 +67,20 @@ export const Register = () => {
     console.log('post starting');
 
     fetch("http://localhost:3001/api/users", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(credentials)}).then(data => console.log(data));
+
+    //Get the user by email and password to then retrieve the id
+    let url = 'http://localhost:3001/api/users/' + credentials.email + "/" + credentials.password;
+    console.log(url);
+    fetch(url).then(response => response.json()).then(data => {
+      if(data.length === 0) {
+        return Promise.reject("No user found");
+      }; 
+      console.log("login user id: " + data[0].user_id); 
+      setCurr_User_Id(data[0].user_id); 
+      localStorage.setItem('curr_user_id', data[0].user_id)
+    }).then(() => {
+      console.log("curr_user_id: " + localStorage.getItem('curr_user_id'))});
+    
 
     /*
     //Using random number for user_id for now, should check for collisions of user_id in the future
