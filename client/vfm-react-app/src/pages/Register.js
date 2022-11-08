@@ -76,7 +76,7 @@ export const Register = () => {
       console.log('Success:', data);
     })
     .catch((error) => {
-      console.error('Error:', error);
+      //console.error('Error:', error);
     });
     
     //set curr_user_id and print values
