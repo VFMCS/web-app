@@ -37,8 +37,8 @@ const createUser = (req, res) => {
             res.send("Username or email already in use")
         }
         pool.query(queries.createUser,[username,password,first_name,last_name,address,is_vendor,about_me,email],(error,results)=>{
-            //if (error) throw error;
-            res.status(201).send("User created");
+            if (error) throw error;
+            res.status(201).send(req.body);
         })
     })
 }

@@ -2,7 +2,6 @@ import './App.css';
 import * as React from 'react'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import LandingPage from './pages/LandingPage';
-import FarmerPostItem from './components/FarmerPostItem';
 import FarmerLandingPage from './pages/FarmerLandingPage'
 import FarmerProfileView from './pages/FarmerProfileView';
 import CustomerLandingPage from './pages/CustomerLandingPage';
@@ -10,7 +9,6 @@ import CustomerSearch from './pages/CustomerSearch';
 import FarmerSearch from './pages/FarmerSearch';
 import Register from './pages/Register';
 import Login from './pages/Login';
-import axios from "axios";
 
 function App() {
   //Access current user id using following statements: localStorage.getItem('curr_user_id'), localStorage.setItem('curr_user_id', JSON.stringify(curr_user_id))

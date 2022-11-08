@@ -1,10 +1,15 @@
 import { render, screen, cleanup } from "@testing-library/react";
 import LoginButton from "../../buttons/LoginButton";
 import "@testing-library/jest-dom";
+import {BrowserRouter} from "react-router-dom"
 
-test("login button shows correct text", () => {
-    render(<LoginButton />)
+test("login button shows up", () => {
+    render(
+        <BrowserRouter>
+            <LoginButton />
+        </BrowserRouter>
+    );
 
-    var textElem = screen.getByTestId("text");
-    expect(textElem).toBeInTheDocument();
+    var button = screen.getByTestId("login-button");
+    expect(button).toBeInTheDocument();
 })
