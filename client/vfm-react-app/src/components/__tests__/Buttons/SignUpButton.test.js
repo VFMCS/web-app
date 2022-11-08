@@ -28,7 +28,7 @@ test("sign up button displays text correctly", () => {
     expect(button).toBeInTheDocument();
 })
 
-test("sign up button displays text correctly", () => {
+test("sign up button has correct color", () => {
     render(
         <BrowserRouter>
             <SignUpButton />
@@ -36,9 +36,10 @@ test("sign up button displays text correctly", () => {
     );
 
     var button = screen.getByRole('button', {
-        label: /Sign up/i
+        color: /secondary/i
       });
     expect(button).toBeInTheDocument();
 })
+
 
 
