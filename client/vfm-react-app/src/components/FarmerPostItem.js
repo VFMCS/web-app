@@ -6,27 +6,27 @@ import { Select, MenuItem, InputLabel, FormControl, TextField, ThemeProvider, In
 import UploadButton from '../components/buttons/UploadButton.js';
 import ConfirmEditButton from '../components/buttons/ConfirmEditButton.js';
 import { Lemon, Apple, Pear, Orange, Grapefruit, Lime, Peaches, Tomato, Blueberry, Cherry, Onion, Garlic, Potato, Asparagus, Celery, Broccoli, Cabbage, Cauliflower }
-from '..';
+    from '..';
 import { useNavigate } from 'react-router-dom';
 
 
 // TODO: Update to support editing items
-const FarmerPostItem = ({editMode, currentItem, setModalState}) => {
+const FarmerPostItem = ({ editMode, currentItem, setModalState }) => {
     const navigate = useNavigate();
 
     const [showUploadButton, setShowUploadButton] = useState(true);
     const [showPriceValidError, setShowPriceValidError] = useState(false);
     const [showEmptyEntryError, setShowEmptyEntryError] = useState("");
     //here, we initially set the vendor_id to what we need it to be
-	
-    const [item, setItem] = useState({ 
-        'vendor_id': localStorage.getItem('curr_user_id'), 
-        'product_type': null, 
-        'quantity': null, 
-        'price': null, 
+
+    const [item, setItem] = useState({
+        'vendor_id': 0, //localStorage.getItem('curr_user_id')
+        'product_type': null,
+        'quantity': null,
+        'price': null,
         'product_category': null,
-        'description': null, 
-        'name': null 
+        'description': null,
+        'name': null
     });
 
     var handleImageChange = (event) => {
@@ -42,40 +42,40 @@ const FarmerPostItem = ({editMode, currentItem, setModalState}) => {
 
     var onSave = () => {
         var valid = true
-        if(item["name"] === null){
+        if (item["name"] === null) {
             errorExp = errorExp + "name ";
             valid = false;
         }
-        if(item["quantity"] === null){
+        if (item["quantity"] === null) {
             errorExp = errorExp + "quantity "
             valid = false;
         }
-        if(item["price"] === null){
+        if (item["price"] === null) {
             errorExp = errorExp + "price "
             valid = false;
         }
         const value = item["price"]
-        if(!(/^[0-9]*.[0-9][0-9]$/.test(value)) && !(/^[0-9]+$/.test(value))){
+        if (!(/^[0-9]*.[0-9][0-9]$/.test(value)) && !(/^[0-9]+$/.test(value))) {
             setShowPriceValidError(prev => true)
             valid = false;
         }
-        else{
+        else {
             setShowPriceValidError(prev => false)
             item["price"] = parseFloat(value)
         }
-        if(valid){
+        if (valid) {
             console.log(item)
             errorExp = ""
             setShowEmptyEntryError("")
             //save to database
             console.log("curr_user_id: " + localStorage.getItem('curr_user_id'));
-			fetch("http://localhost:3001/api/products", {method: "GET"}).then(data => console.log(data));
-			fetch("http://localhost:3001/api/products", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(item)}).then(data => console.log(data));
-            fetch("http://localhost:3001/api/products", {method: "GET"}).then(data => console.log(data));
+            fetch("http://localhost:3001/api/products", { method: "GET" }).then(data => console.log(data));
+            fetch("http://localhost:3001/api/products", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(item) }).then(data => console.log(data));
+            fetch("http://localhost:3001/api/products", { method: "GET" }).then(data => console.log(data));
             setModalState(false);
         }
         else {
-            if(errorExp !== ""){
+            if (errorExp !== "") {
                 setShowEmptyEntryError("The following fields need to be filled: " + errorExp)
             }
         }
@@ -86,62 +86,62 @@ const FarmerPostItem = ({editMode, currentItem, setModalState}) => {
     }
 
     var handleChange = (e) => {
-        
+
         var name = e.target.name
         var value = e.target.value
         var valid = true
 
-        if(name === "product_type"){
+        if (name === "product_type") {
             handleImageChange(e)
         }
-        if(name ==='name'){
-            if(value.length === 0){
+        if (name === 'name') {
+            if (value.length === 0) {
                 valid = false
             }
         }
-        if(name === 'price'){
-            if(value.length === 0){
+        if (name === 'price') {
+            if (value.length === 0) {
                 valid = false
             }
         }
-        else if(name === 'quantity'){
-            if(value.length === 0){
+        else if (name === 'quantity') {
+            if (value.length === 0) {
                 valid = false
             }
         }
-        if(valid){
+        if (valid) {
             item[name] = value
             //console.log(item)
         }
-        else{
+        else {
             item[name] = null
         }
     }
 
     return (
         <ThemeProvider theme={theme}>
-            <Stack spacing={2} direction="row" sx={{ width: '100%', height: 'max-content'}}>
-                <Stack spacing={2} direction="column" sx={{ width: '40%', height: '100%'}}>
+            <Stack spacing={2} direction="row" sx={{ width: '100%', height: 'max-content' }}>
+                <Stack spacing={2} direction="column" sx={{ width: '40%', height: '100%' }}>
                     <div id="uploadBox">
                         {showUploadButton && <UploadButton id="uploadButton" color="secondary" />}
                     </div>
                 </Stack>
-                <Stack spacing={2} direction="column" sx={{ width: '60%'}}>
+                <Stack spacing={2} direction="column" sx={{ width: '60%' }}>
                     <TextField name="name" onChange={handleChange} id="outlined-basic" label="Name" variant="outlined" />
                     <Stack spacing={2} direction="row">
-                        <TextField onChange={handleChange} name='price' type="number" id="outlined-basic" InputProps={{ endAdornment: <InputAdornment position="end">/lb.</InputAdornment>, startAdornment: <InputAdornment position="start">$</InputAdornment> }} label="Price/lb" variant="outlined" sx={{ width: '50%'}}>
+                        <TextField onChange={handleChange} name='price' type="number" id="outlined-basic" InputProps={{ endAdornment: <InputAdornment position="end">/lb.</InputAdornment>, startAdornment: <InputAdornment position="start">$</InputAdornment> }} label="Price/lb" variant="outlined" sx={{ width: '50%' }}>
                         </TextField>
-                        <TextField onChange={handleChange} name='quantity' id="outlined-basic" type="number" label="Quantity in lbs." variant="outlined" sx={{ width: '50%'}}/>
+                        <TextField onChange={handleChange} name='quantity' id="outlined-basic" type="number" label="Quantity in lbs." variant="outlined" sx={{ width: '50%' }} />
                     </Stack>
                     <Stack spacing={2} direction="row">
-                    <FormControl sx={{width: '50%'}}>
+                        <FormControl sx={{ width: '50%' }}>
                             <InputLabel id="demo-simple-select-label" value="Product Type">Type</InputLabel>
                             <Select
                                 name='product_type'
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 onChange={handleChange}
-                                defaultValue = ""
+                                defaultValue=""
                             >
                                 <MenuItem value={'Lemon'}>Lemon</MenuItem>
                                 <MenuItem value={'Apples'}>Apples</MenuItem>
@@ -163,18 +163,18 @@ const FarmerPostItem = ({editMode, currentItem, setModalState}) => {
                                 <MenuItem value={'Cauliflower'}>Cauliflower</MenuItem>
                             </Select>
                         </FormControl>
-                        <TextField onChange={handleChange} name="product_category" id="outlined-basic" label="Product Category" variant="outlined" sx={{ width: '50%'}}/>
+                        <TextField onChange={handleChange} name="product_category" id="outlined-basic" label="Product Category" variant="outlined" sx={{ width: '50%' }} />
                     </Stack>
                     <TextField onChange={handleChange} name="details" multiline={true} rows={6} id="outlined-basic" label="Description" variant="outlined" />
-                    <Stack sx={{height: '60%'}}>
-                        <p style={{color: "tomato"}}>
+                    <Stack sx={{ height: '60%' }}>
+                        <p style={{ color: "tomato" }}>
                             {showEmptyEntryError}
                         </p>
-                        {showPriceValidError && <p style={{color: "tomato"}}>Please input a valid price</p>}
+                        {showPriceValidError && <p style={{ color: "tomato" }}>Please input a valid price</p>}
                     </Stack>
-                    <Stack sx={{height: "40%"}} direction="row">
-                        <Button onClick={onSave} variant= "contained" style={{ height: '100%', width: '50%'}} size="medium" color="success" sx={{fontWeight: "bold"}}>{editMode ? "Update" : "Publish"}</Button> 
-                        <Button onClick={onCancel} variant= "text" style={{ height: '100%', width: '50%'}} size="medium" color="success" sx={{fontWeight: "bold"}}>Cancel</Button>
+                    <Stack sx={{ height: "40%" }} direction="row">
+                        <Button onClick={onSave} variant="contained" style={{ height: '100%', width: '50%' }} size="medium" color="success" sx={{ fontWeight: "bold" }}>{editMode ? "Update" : "Publish"}</Button>
+                        <Button onClick={onCancel} variant="text" style={{ height: '100%', width: '50%' }} size="medium" color="success" sx={{ fontWeight: "bold" }}>Cancel</Button>
                     </Stack>
                 </Stack>
             </Stack>

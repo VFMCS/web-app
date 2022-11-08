@@ -19,10 +19,12 @@ const getProductByVendorID = (req, res) => {
 }
 
 const insertProd = (req, res) => {
-	const values = [req.vendor_id, req.body.name, req.body.details, moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"), "true", req.body.quantity, req.body.price, req.body.photo, req.body.product_type, req.body.product_category];
-	pool.query(queries.insertProd, values, (error, results) => {
-		res.status(201).send("Product Created");
-	})
+    const values = [req.body.vendor_id, req.body.name, req.body.details, moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"), "true", req.body.quantity, req.body.price, req.body.photo, req.body.product_type, req.body.product_category];
+    console.log(req.vendor_id);
+    pool.query(queries.insertProd, values, (error, results) => {
+        if (error) throw error;
+        res.status(201).send("Product Created");
+    })
 }
 
 
@@ -31,16 +33,16 @@ const insertProdByID = (req, res) => {
     //const vendor_user_id = req.params.vendor_id;
     //console.log(vendor_user_id);
 
-	const values = [req.body.vendor_id, req.body.name, req.body.details, moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"), "true", req.body.quantity, req.body.price, req.body.photo, req.body.product_type, req.body.product_category];
-	pool.query(queries.insertProdByID, values, (error, results) => {
-		res.status(201).send("Product Created");
-	})
+    const values = [req.body.vendor_id, req.body.name, req.body.details, moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"), "true", req.body.quantity, req.body.price, req.body.photo, req.body.product_type, req.body.product_category];
+    pool.query(queries.insertProdByID, values, (error, results) => {
+        res.status(201).send("Product Created");
+    })
 }
 */
 
 module.exports = {
     getAllProducts,
-	insertProd,
+    insertProd,
     getProductByVendorID,
     //insertProdByID
 }
