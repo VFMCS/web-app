@@ -25,7 +25,7 @@ const Login = () => {
         [name]: value,
       };
     });
-  }; 
+  };
 
   React.useEffect(() => {
     localStorage.setItem('curr_user_id', curr_user_id);
@@ -37,19 +37,19 @@ const Login = () => {
     console.log(login)
 
     //Check if user has entered info
-    if(login.email === "" || login.password === ""){
+    if (login.email === "" || login.password === "") {
       console.log("error"); return;
     }
-    
+
     //Get the user by id
     let url = 'http://localhost:3001/api/users/' + login.email + "/" + login.password;
     console.log(url);
     fetch(url).then(response => response.json()).then(data => {
-      if(data.length === 0) {
+      if (data.length === 0) {
         return Promise.reject("No user found");
-      }; 
-      console.log("login user id: " + data[0].user_id); 
-      setCurr_User_Id(data[0].user_id); 
+      };
+      console.log("login user id: " + data[0].user_id);
+      setCurr_User_Id(data[0].user_id);
       localStorage.setItem('curr_user_id', data[0].user_id)
     }).then(() => {
       console.log("curr_user_id: " + localStorage.getItem('curr_user_id'));
@@ -57,23 +57,23 @@ const Login = () => {
       //navigate to user's corresponding landing page
       let curr_user_is_vendor = true;
       fetch('http://localhost:3001/curr-user-api/' + localStorage.getItem('curr_user_id')).then(response => response.json()).then(data => {
-        console.log(data); 
+        console.log(data);
         curr_user_is_vendor = data[0].is_vendor
       }).catch(err => console.error(err));
 
-      if(curr_user_is_vendor){
+      if (curr_user_is_vendor) {
         navigate('/farmer');
       }
-      else{
+      else {
         navigate('customer');
       }
 
-    }).catch(err => console.error(err));   
+    }).catch(err => console.error(err));
   };
   return (
 
     <div className="auth-wrapper">
-      <LoginHeader/>
+      <LoginHeader />
 
       <div className="auth-inner">
         <form onSubmit={handleSubmit}>
