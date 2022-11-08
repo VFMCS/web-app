@@ -15,7 +15,7 @@ export const Register = () => {
   let [profileModalOpen, setProfileModalState] = useState(false);
   const [credentials, setCredentials] = useState({
     user_id: Math.round(Math.random() * 10000) + 10,
-    username: "",
+    username: "username",
     password: "",
     first_name: "",
     last_name: "",
@@ -51,7 +51,7 @@ export const Register = () => {
   React.useEffect(() => {
    setCredentials({
     user_id: Math.round(Math.random() * 10000) + 10,
-    username: credentials.first_name,
+    username: "username",
     password: credentials.password,
     first_name: credentials.first_name,
     last_name: credentials.last_name,
