@@ -38,7 +38,7 @@ const createUser = (req, res) => {
         }
         pool.query(queries.createUser,[username,password,first_name,last_name,address,is_vendor,about_me,email],(error,results)=>{
             if (error) throw error;
-            res.status(201).send(req.body);
+            res.status(201).send({});
         })
     })
 }
