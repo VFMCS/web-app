@@ -40,8 +40,8 @@ const Login = () => {
     if (login.email === "" || login.password === "") {
       console.log("error"); return;
     }
-
-    //Get the user by id
+    
+    //Get the user by email and id
     let url = 'http://localhost:3001/api/users/' + login.email + "/" + login.password;
     console.log(url);
     fetch(url).then(response => response.json()).then(data => {
