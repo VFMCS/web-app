@@ -1,34 +1,34 @@
 import { render, screen, cleanup } from "@testing-library/react";
-import LoginButton from "../../buttons/LoginButton";
+import ConfirmEditButton from "../../buttons/ConfirmEditButton";
 import "@testing-library/jest-dom";
 import {BrowserRouter} from "react-router-dom"
 
-test("login button shows up", () => {
+test("Confirm Edit button shows up", () => {
     render(
         <BrowserRouter>
-            <LoginButton />
+            <ConfirmEditButton />
         </BrowserRouter>
     );
 
-    var button = screen.getByTestId("login-button");
+    var button = screen.getByTestId("confirm");
     expect(button).toBeInTheDocument();
 })
-test("login button displays default text correctly", () => {
+test("Confirm Edit button displays default text correctly", () => {
     render(
         <BrowserRouter>
-            <LoginButton />
+            <ConfirmEditButton />
         </BrowserRouter>
     );
 
     var button = screen.getByRole('button', {
         label: /Login/i
       });
-    expect(button).toHaveTextContent('Login')
+    expect(button).toHaveTextContent('Publish')
 })
-test("login button displays text param correctly", () => {
+test("Confirm Edit button displays text param correctly", () => {
     render(
         <BrowserRouter>
-            <LoginButton label="New Label" />
+            <ConfirmEditButton label="New Label" />
         </BrowserRouter>
     );
 
@@ -38,10 +38,10 @@ test("login button displays text param correctly", () => {
     expect(button).toHaveTextContent('New Label')
 })
 
-test("login button has correct color", () => {
+test("Confirm Edit button has correct color", () => {
     render(
         <BrowserRouter>
-            <LoginButton />
+            <ConfirmEditButton />
         </BrowserRouter>
     );
 
