@@ -39,6 +39,7 @@ const createUser = (req, res) => {
             res.status(201).send(results.rows);
         })
     })
+
 }
 
 const deleteUser = (req, res) => {
