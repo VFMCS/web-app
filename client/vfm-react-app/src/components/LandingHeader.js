@@ -1,50 +1,38 @@
-import * as React from 'react'
-import { AppBar, Toolbar, Button, Box, ThemeProvider, CssBaseline, Typography, IconButton } from '@mui/material';
+import * as React from 'react' 
+import { AppBar, Toolbar, Button, Box, ThemeProvider, CssBaseline, Typography, IconButton} from '@mui/material';
 import headerLogo from "../images/logo-simple.png"
 import theme from "../css/theme"
 import MenuIcon from "@mui/icons-material/Menu"
-import { useNavigate } from "react-router-dom";
-import SearchBar from '../SearchBar';
-import ShoppingCartButton from '../buttons/ShoppingCartButton';
-import ConsumerSidebar from '../sidebars/ConsumerSidebar';
+import SignUpButton from './buttons/SignUpButton';
+import LoginButton from './buttons/LoginButton';
 
-// A Header Component used by the Consumer
-// Contains: Menu button, Logo, Dashboard button, and Products Button
-const ConsumerHeader = () => {
-    let navigate = useNavigate()
-    let toProducts = () => navigate("/customer")
-    let [sideBarOpen, setSidebarState] = React.useState(false)
-    let toggleSidebar = () => {
-        setSidebarState(!sideBarOpen)
-    }
-
+// A Header Component used for the General Landing Page
+// Contains a Menu Item, the logo/title, sign up button, and login button
+const LandingHeader = () => {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline enableColorScheme />
-            <Box sx={{ flexGrow: 1 }}>
-                <AppBar position='static' sx={{ background: "white" }}>
-                    <Toolbar>
-                        <IconButton onClick={toggleSidebar}>
+            <Box sx={{flexGrow: 1}}>
+                <AppBar position='static' sx={{background: "white"}}>
+                    <Toolbar> 
+                        <IconButton>
                             <MenuIcon />
                         </IconButton>
-                        <ConsumerSidebar isOpen={sideBarOpen} toggle={toggleSidebar} />
-                        <Box sx={{ flexGrow: 1 }}>
-                            <Button onClick={toProducts}>
-                                <img src={headerLogo} alt="Logo" />
-                                <Typography sx={{ color: "primary.dark", fontSize: 20, fontWeight: "bold" }}>
-                                    Virtual Farmers Market
-                                </Typography>
-                            </Button>
+                        <Box sx={{flexGrow: 1}}>
+                        <Button>
+                            <img src={headerLogo} alt="Logo" />
+                            <Typography sx={{ color: "primary.dark", fontSize: 20, fontWeight: "bold"}}>
+                                Virtual Farmers Market
+                            </Typography>
+                        </Button>
                         </Box>
-                        <Box sx={{ flexGrow: 3 }}>
-                            <SearchBar />
-                        </Box>
-                        <ShoppingCartButton />
+                        <LoginButton />
+                        <SignUpButton />
                     </Toolbar>
                 </AppBar>
             </Box>
         </ThemeProvider>
     );
 };
-
-export default ConsumerHeader;
+  
+export default LandingHeader;

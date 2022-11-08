@@ -1,4 +1,4 @@
-import { Button } from "@mui/material"
+import {Button} from "@mui/material"
 
 // A general Sign Up Button
 // Takes 3 props:
@@ -8,7 +8,7 @@ import { Button } from "@mui/material"
 // TODO: Add action to link to sign up page
 const SignUpButton = (props) => {
     return (
-        <Button data-testid="signup-button" onClick={onClick} color={props.color || "secondary"} variant={props.variant || "contained"} sx={{ fontWeight: "bold" }}> {props.label || "Sign up"} </Button>
+        <Button color={props.color || "secondary"} variant={props.variant || "contained"} sx={{fontWeight: "bold"}}> {props.label || "Sign up"} </Button>
     )
 }
 
