@@ -8,7 +8,7 @@ import EditIcon from '@mui/icons-material/Edit';
 
 //Customer landing page upon customer being signed in
 
-const FarmerLandingPage = () => {
+const FarmerLandingPage = () => {    
     const [products, setProducts] = React.useState([]) // capture data from GET request
 	const curr_user_id = localStorage.getItem('curr_user_id');
 
