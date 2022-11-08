@@ -6,7 +6,7 @@ import LoginHeader from '../components/headers/LandingHeader.js';
 import FarmerLandingPage from "./FarmerLandingPage.js";
 import { NavigateBefore } from '@mui/icons-material';
 import FarmerProfileModal from "../components/FarmerProfileModal.js"
-import {Modal, Box, Paper} from "@mui/material"
+import {Alert} from "@mui/material"
 
 
 export const Register = () => {
@@ -29,6 +29,8 @@ export const Register = () => {
     role:"farmer"
   });
 
+  let [missingFieldError, setMissingFieldError] = useState(false);
+
   const is_vendor_options = [
     { value: "farmer", label: "Farmer" },
     { value: "consumer", label: "Consumer" },
@@ -43,6 +45,7 @@ export const Register = () => {
         [name]: value,
       };
     });
+    console.log(credentials)
   };
 
   React.useEffect(() => {
@@ -62,11 +65,7 @@ export const Register = () => {
    })
 }, [])
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    credentials.is_vendor = credentials.is_vendor === "farmer";
-    
+  const postCredentials = () => {
     //Using random number for user_id for now, should check for collisions of user_id in the future
     fetch('http://localhost:3001/api/users', {
     method: 'POST', // or 'PUT'
@@ -84,11 +83,35 @@ export const Register = () => {
     localStorage.setItem('curr_user_id', credentials.user_id);
     console.log(localStorage.getItem('curr_user_id'))    
     console.log(credentials);
+  }
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    credentials.is_vendor = credentials.is_vendor === "farmer";
+    console.log(credentials.is_vendor)
+
+    let required = [credentials.first_name, 
+      credentials.last_name, 
+      credentials.password, 
+      credentials.email]
+    if (required.includes("")) {
+      console.log(required)
+      setMissingFieldError(true)
+      return
+    }
+    if (is_vendor_options.map(o => document.getElementById(o.value).checked).every(x=>!x)) {
+      setMissingFieldError(true)
+      return
+    }
+
+    setMissingFieldError(false)
+  
     if(credentials.is_vendor){
-      navigate('/farmer');
+      setProfileModalState(true)
     }
     else{
+      postCredentials()
       navigate('/customer');
     }
   };
@@ -96,10 +119,10 @@ export const Register = () => {
   
   let modalCloseHandler = (e, reason) => {
       if (reason === "backdropClick") {
-          setProfileModalState(false)
           return
       }
       setProfileModalState(false)
+      postCredentials()
       navigate('/farmer')
   }
 
@@ -175,7 +198,8 @@ export const Register = () => {
               </div>
             ))}
           </div>
-
+          { missingFieldError &&
+          <Alert severity="error" sx={{m: 2}}> Please enter all fields </Alert>}
           <button type="submit" className="btn btn-primary btn-block">
             Sign Up
           </button>
@@ -184,7 +208,7 @@ export const Register = () => {
           </p>
         </form>
       </div>
-      <FarmerProfileModal open={profileModalOpen} setModalState={setProfileModalState} onClose={modalCloseHandler}/>
+      <FarmerProfileModal open={profileModalOpen} setModalState={setProfileModalState} onClose={modalCloseHandler} profile={credentials} changeHandler={handleChange}/>
     </div>
   );
 };
