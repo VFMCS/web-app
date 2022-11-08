@@ -14,6 +14,7 @@ const getUserByEmailAndPassword = (req,res) => {
     const password = req.params.password
 
     console.log("user email: " + email + " user password: " + password);
+    
 
     pool.query(queries.getUserByEmailAndPassword,[email,password],(error,results) => {
         if(error) throw error;
