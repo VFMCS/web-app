@@ -13,7 +13,7 @@ const SignUpButton = (props) => {
         navigate('/sign-up') // Change to Login (or show Login Modal)
     }
     return (
-        <Button onClick={onClick} color={props.color || "secondary"} variant={props.variant || "contained"} sx={{fontWeight: "bold"}}> {props.label || "Sign up"} </Button>
+        <Button data-testid = "signup-button" onClick={onClick} color={props.color || "secondary"} variant={props.variant || "contained"} sx={{fontWeight: "bold"}}> {props.label || "Sign up"} </Button>
     )
 }
 
