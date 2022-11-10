@@ -42,7 +42,7 @@ const startAuthProxy = () => {
 const pool = new Pool({
     user: "postgres",
     host: "127.0.0.1",
-    database: "vfmcs2",
+    database: "vfmcsdb",
     password: "VFMCS@2022",
     port: `${port}`,
 })
