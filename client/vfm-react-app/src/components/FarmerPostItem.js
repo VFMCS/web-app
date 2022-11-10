@@ -5,8 +5,9 @@ import { Stack } from '@mui/system';
 import { Select, MenuItem, InputLabel, FormControl, TextField, ThemeProvider, InputAdornment, Button } from '@mui/material';
 import UploadButton from '../components/buttons/UploadButton.js';
 import ConfirmEditButton from '../components/buttons/ConfirmEditButton.js';
-import { Lemon, Apple, Pear, Orange, Grapefruit, Lime, Peaches, Tomato, Blueberry, Cherry, Onion, Garlic, Potato, Asparagus, Celery, Broccoli, Cabbage, Cauliflower }
-    from '..';
+//import { Lemon, Apple, Pear, Orange, Grapefruit, Lime, Peaches, Tomato, Blueberry, Cherry, Onion, Garlic, Potato, Asparagus, Celery, Broccoli, Cabbage, Cauliflower }
+//    from '..';
+
 import { useNavigate } from 'react-router-dom';
 
 

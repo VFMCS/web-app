@@ -33,7 +33,7 @@ function App() {
     if(localStorage.getItem('curr_user_id') === null) {setCurr_User_Id(0); localStorage.setItem('curr_user_id', 0);}
     if(localStorage.getItem('curr_user_is_vendor') === null) {setCurr_User_Id(false); localStorage.setItem('curr_user_is_vendor', false);}
   }, [])
-  
+
 
   //localStorage.setItem('curr_user_id', JSON.stringify(curr_user_id));
 
