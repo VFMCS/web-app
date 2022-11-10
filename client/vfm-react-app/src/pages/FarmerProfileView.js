@@ -6,11 +6,16 @@ import LandingHeader from '../components/headers/LandingHeader.js';
 import ProductCard from '../components/ProductCard.js';
 import FarmerHeader from '../components/headers/FarmerHeader.js';
 import {clickedOnUserId} from '../components/FarmerCard'
+import ConsumerHeader from '../components/headers/ConsumerHeader.js';
 
 //Customer views this farmer profile upon being signed in an hitting the view profile from the landing page
 const FarmerProfileView = (props) => {
     const [products, setProducts] = React.useState([]) // capture data from GET request
+    const [farmer_name, setFarmer_Name] = React.useState('')
     const [farmer_first_name, setFarmer_First_Name] = React.useState('')
+    const [farmer_description, setFarmer_Description] = React.useState('')
+    const [farmer_location, setFarmer_Location] = React.useState('')
+
     const [farmer_image_url, setFarmer_Image_Url] = React.useState('');
 
     React.useEffect(() => {
@@ -25,7 +30,7 @@ const FarmerProfileView = (props) => {
     React.useEffect(() => {
         let url = 'http://localhost:3001/api/vendors/' + clickedOnUserId;
         console.log(url);
-        fetch(url).then(response => response.json()).then(data => {setFarmer_First_Name(data[0].first_name); setFarmer_Image_Url(data[0].image_url)})
+        fetch(url).then(response => response.json()).then(data => {setFarmer_Name(data[0].first_name + " " + data[0].last_name); setFarmer_First_Name(data[0].first_name); setFarmer_Description(data[0].about_me); setFarmer_Location(data[0].address); setFarmer_Image_Url(data[0].image_url)})
             .catch(err => console.error(err));
     }, [])
 
@@ -36,7 +41,7 @@ const FarmerProfileView = (props) => {
             <ThemeProvider theme={theme}>
             <CssBaseline enableColorScheme />
             <Stack direction="column">
-            <LandingHeader />
+            <ConsumerHeader />
             <Box sx={{backgroundColor: "secondary.light", display:"flex", alignItems:'center', justifyContent:'center'}} >
                 <Grid container direction="row" sx={{alignItems:"center", display:"flex", justifyContent:'center'}} >
                     <Grid item sx={{alignItems:"center", display:"flex", justifyContent:'center'}}>
@@ -45,15 +50,15 @@ const FarmerProfileView = (props) => {
                     </Grid>
                     <Grid item>
                         <Typography variant="h4" align="left" sx={{margin: 4, color: "black"}}>
-                            {farmer_first_name}
+                            {farmer_name}
                         </Typography>
                         <Typography variant="body2" sx={{marginLeft: 4, marginBottom:2}}>
                                     {/* TODO: Change this text/body */}
-                                    Bio: I am {farmer_first_name}
+                                    Bio: {farmer_description}
                         </Typography>
                         <Typography variant="body2" sx={{marginLeft: 4, marginTop:0}}>
                                     {/* TODO: Change this text/body */}
-                                    Farm Location: 20 Brigham Ln, Amherst, MA 01002
+                                    Farm Location: {farmer_location}
                         </Typography>
 
                     </Grid>        

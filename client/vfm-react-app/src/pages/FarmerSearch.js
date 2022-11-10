@@ -15,9 +15,9 @@ const FarmerSearch = () => {
 
     React.useEffect(() => {
         //using placeholder farmer of vendor_id=0
-        let url = 'http://localhost:3001/search/' + search_query + '/' + 0;
+        let url = 'http://localhost:3001/search/' + search_query + '/' + localStorage.getItem('curr_user_id');
         if (search_query === '') {
-            url = 'http://localhost:3001/api/products/' + 0;
+            url = 'http://localhost:3001/api/products/' + localStorage.getItem('curr_user_id');
         }
         console.log(url);
         fetch(url).then(response => response.json()).then(data => setSearchOutputProducts(data))

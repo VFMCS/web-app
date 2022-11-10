@@ -3,12 +3,19 @@ import "../login-styles/login-navbar.css";
 import logo from "../../public/logo.svg";
 
 const LoginHeader = () => {
+  let navigate = useNavigate();
+  let toLanding = () => navigate("/");
+
   return (
     <nav className="navbar">
       <div className="navbar-container">
         <Link to="/" className="navbar-logo">
-          <img src={logo} alt="logo" className="navbar-logo-img" />
-          <h1>VFM</h1>
+          <Button onClick={toLanding}>
+            <img src={headerLogo} alt="Logo" />
+            <Typography sx={{ color: "primary.dark", fontSize: 20, fontWeight: "bold"}}>
+              Virtual Farmers Market
+            </Typography>
+          </Button>
         </Link>
 
         <div className="navbar-links">
