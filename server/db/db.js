@@ -14,7 +14,7 @@ const pool = new Pool({
 //This is for local development, will potentially need modification for deployment
 const startAuthProxy = () => {
 
-    instance = `radiant-saga-366418:us-central1:vfmcs-db=tcp:${port}`;
+    instance = `sublime-flux-368014:us-central1:vfmcs2=tcp:${port}`;
     cred_file = "./db/db-service-account.json";
     console.log(`Starting cloud sql auth proxy on port: ${port}...`);
 
