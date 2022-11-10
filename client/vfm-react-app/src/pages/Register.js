@@ -152,7 +152,7 @@ export const Register = () => {
   }
 
   return (
-    <div className="auth-wrapper">
+    <div id="auth-wrapper-register" className="auth-wrapper">
       <LoginHeader />
 
       <div className="auth-inner">

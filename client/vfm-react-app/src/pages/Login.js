@@ -71,7 +71,7 @@ const Login = () => {
 }
   return (
 
-    <div className="auth-wrapper">
+    <div id="login-auth-wrap" className="auth-wrapper">
       <LoginHeader />
 
       <div className="auth-inner">
@@ -115,4 +115,3 @@ const Login = () => {
 };
 
 export default Login;
-

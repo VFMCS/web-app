@@ -1,3 +1,5 @@
+App.css
+
 .App {
   text-align: center;
 }
@@ -39,6 +41,14 @@
   padding-left: 35%;
   padding-right: 35%;
   cursor: pointer;
+}
+
+#login-auth-wrap {
+  height: 600px;
+}
+
+#auth-wrapper-register {
+  height: 725px;
 }
 
 @keyframes App-logo-spin {
