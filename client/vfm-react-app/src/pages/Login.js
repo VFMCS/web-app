@@ -53,23 +53,22 @@ const Login = () => {
       localStorage.setItem('curr_user_id', data[0].user_id)
     }).then(() => {
       console.log("curr_user_id: " + localStorage.getItem('curr_user_id'));
-
-      //navigate to user's corresponding landing page
-      let curr_user_is_vendor = true;
       fetch('http://localhost:3001/curr-user-api/' + localStorage.getItem('curr_user_id')).then(response => response.json()).then(data => {
         console.log(data);
-        curr_user_is_vendor = data[0].is_vendor
-      }).catch(err => console.error(err));
-
-      if (curr_user_is_vendor) {
-        navigate('/farmer');
+        localStorage.setItem('curr_user_is_vendor', data[0].is_vendor) 
+       
+      }).then(() => {
+        console.log("curr_user_is_vendor: " + localStorage.getItem('curr_user_is_vendor'));
+        if(localStorage.getItem('curr_user_is_vendor') === 'true') {
+          navigate('/farmer');
+        }
+        else {
+          navigate('/customer');
+        }
       }
-      else {
-        navigate('customer');
-      }
-
-    }).catch(err => console.error(err));
-  };
+    ).catch(err => console.error(err));     
+  }).catch(err => console.error(err));
+}
   return (
 
     <div className="auth-wrapper">
