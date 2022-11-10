@@ -82,7 +82,7 @@ export const Register = () => {
         console.log(credentials);
       }).then(() => {
         //set curr_user_id and print values
-        if(localStorage.getItem('curr_user_is_vendor') === true){navigate('/farmer');}
+        if(localStorage.getItem('curr_user_is_vendor') === 'true'){navigate('/farmer');}
         else{navigate('/customer');}
       });
     });
