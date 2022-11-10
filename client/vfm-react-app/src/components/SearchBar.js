@@ -19,7 +19,7 @@ const SearchBar = () => {
 
     //navigate to specific search path given the user's type as a vendor or customer
     console.log('curr_user_is_vendor: ' + localStorage.getItem('curr_user_is_vendor'));
-    if (localStorage.getItem('curr_user_is_vendor') === true){
+    if (localStorage.getItem('curr_user_is_vendor') === 'true'){
       navigate('/farmer-search', { state: { refresh: true } });
     }
     else{
