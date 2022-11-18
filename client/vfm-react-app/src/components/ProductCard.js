@@ -8,7 +8,6 @@ import FarmerPostItem from './FarmerPostItem';
 // This is a component that displays important information about a product
 const ProductCard = (props) => {
     //let item = props.item || {name: "Item", price: "0", description: "This is a description"}
-    console.log(props);
     let [modalOpen, setModalState] = React.useState(false);
     let toPostItem = () => setModalState(true)
 
@@ -52,7 +51,7 @@ const ProductCard = (props) => {
                                         boxShadow: (theme) => theme.shadows[5],
                                         p: 4,
                                         }}>
-                                            <FarmerPostItem editMode/> {/* Update to support editing mode */}
+                                            <FarmerPostItem initItem={props.item} setModalState={setModalState} editMode/> {/* Update to support editing mode */}
                                     </Box>
                                 </Modal>
                             </Box>
