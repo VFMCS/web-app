@@ -9,6 +9,14 @@ import LoginButton from './buttons/LoginButton';
 // A Header Component used for the General Landing Page
 // Contains a Menu Item, the logo/title, sign up button, and login button
 const LandingHeader = () => {
+
+    let navigate = useNavigate();
+    let toLanding = () => navigate("/");
+    let [sideBarOpen, setSidebarState] = React.useState(false)
+    let toggleSidebar = () => {
+        setSidebarState(!sideBarOpen)
+    }
+
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline enableColorScheme />
@@ -19,7 +27,7 @@ const LandingHeader = () => {
                             <MenuIcon />
                         </IconButton>
                         <Box sx={{flexGrow: 1}}>
-                        <Button>
+                        <Button onClick={toLanding}>
                             <img src={headerLogo} alt="Logo" />
                             <Typography sx={{ color: "primary.dark", fontSize: 20, fontWeight: "bold"}}>
                                 Virtual Farmers Market
