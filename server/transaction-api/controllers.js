@@ -10,6 +10,14 @@ const getCustomerCart = (req, res) => {
     })
 }
 
+const getVendorOrders = (req, res) => {
+    const vendor_id = req.params.id;
+    pool.query(queries.getVendorOrders, [vendor_id], (error, results) => {
+        if (error) throw error;
+        res.status(200).json(results.rows);
+    })
+}
+
 const addTransaction = (req, res) => {
     const { vendor_id, customer_id, quantity, product_id } = req.body;
     pool.query(queries.addTransaction, [vendor_id, customer_id, quantity, product_id], (error, results) => {
@@ -46,4 +54,5 @@ module.exports = {
     addTransaction,
     updateTransaction,
     getCustomerCart,
+    getVendorOrders,
 }
