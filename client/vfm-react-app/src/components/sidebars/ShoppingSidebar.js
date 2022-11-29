@@ -38,10 +38,8 @@ const ShoppingSidebar = ({isOpen, toggle}) => {
         <Drawer anchor = 'right' open={isOpen} onClose={toggle}>
             <Box
                 sx={{ width: 500 }}
-                role="presentation"
-                
-            >
-                
+                role="presentation"   
+            >   
                 <List>
                     {(products.slice(0, 5)).map((item) => (
                         <ListItem key={item.product_id} sx = {{marginBottom: '20'}}>

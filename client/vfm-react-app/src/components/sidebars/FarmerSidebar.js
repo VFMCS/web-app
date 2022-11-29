@@ -15,6 +15,7 @@ const FarmerSidebar = ({isOpen, toggle}) => {
     
     let toDashboard = () => navigate("/dashboard")
     let toProducts = () => navigate("/farmer")
+    let toFarmerReserveRequests = () => navigate("/farmer-reserve-requests")
     let toHome = () => {
         localStorage.setItem('curr_user_id', JSON.stringify(-1));
         navigate("/")
@@ -38,7 +39,7 @@ const FarmerSidebar = ({isOpen, toggle}) => {
                         </ListItemButton>
                     </ListItem>
                     <ListItem key={"Reserve Requests"} disablePadding>
-                        <ListItemButton>
+                        <ListItemButton onClick={toFarmerReserveRequests}>
                             <ListItemIcon>
                                 <PendingActionsIcon />
                             </ListItemIcon>

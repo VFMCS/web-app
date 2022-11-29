@@ -10,14 +10,33 @@ import ShoppingSidebar from './sidebars/ShoppingSidebar';
 
 // This is a component that displays important information about a product
 const ProductCard = (props) => {
-    //let item = props.item || {name: "Item", price: "0", description: "This is a description"}
+    //let item = props.item;
     let [modalOpen, setModalState] = React.useState(false);
     let toPostItem = () => setModalState(true)
 
-    let [shoppingSidebarOpen, setShoppingSidebarOpen] = React.useState(false);
-    let toAddItem = () => {console.log('setshoppingsidebaropen'); setShoppingSidebarOpen(true)}
 
-    let toggleShoppingSiderbar = () => {
+    let [shoppingSidebarOpen, setShoppingSidebarOpen] = React.useState(false);
+    
+    let toAddItem = () => {
+        console.log('setshoppingsidebaropen'); 
+        //const { vendor_id, customer_id, quantity, product_id } = req.body;
+        //console.log(props.item.vendor_id)
+        console.log(props.item.vendor_id);
+
+        const prod = {
+            'vendor_id': props.item.vendor_id,
+            'customer_id': props.item.customer_id,
+            'quantity': props.item.quantity,
+            'product_id': props.item.product_id,
+        };
+
+        fetch("http://localhost:3001/api/transaction", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({prod}) }).then(data => console.log(data));
+        setShoppingSidebarOpen(true);
+        
+    }
+
+    
+    let toggleShoppingSidebar = () => {
         setShoppingSidebarOpen(!shoppingSidebarOpen)
     }
 
@@ -75,7 +94,7 @@ const ProductCard = (props) => {
                                 onClick={toAddItem}>
                                     <AddIcon />
                                 </Fab>
-                                <ShoppingSidebar isOpen={shoppingSidebarOpen} toggle= {toggleShoppingSiderbar} onClose={() => setShoppingSidebarOpen(false)}/>
+                                <ShoppingSidebar isOpen={shoppingSidebarOpen} toggle= {toggleShoppingSidebar} onClose={() => setShoppingSidebarOpen(false)}/>
                                     
                                 
                             </Box>
