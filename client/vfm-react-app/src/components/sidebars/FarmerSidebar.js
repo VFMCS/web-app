@@ -6,6 +6,7 @@ import EqualizerIcon from '@mui/icons-material/Equalizer';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import PendingActionsIcon from '@mui/icons-material/PendingActions';
 
 // A Header Component used by the Farmer
 // Contains: Menu button, Logo, Dashboard button, and Products Button
@@ -34,6 +35,14 @@ const FarmerSidebar = ({isOpen, toggle}) => {
                                 <AccountCircleIcon />
                             </ListItemIcon>
                             <ListItemText primary="Profile" />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem key={"Reserve Requests"} disablePadding>
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <PendingActionsIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Reserve Requests" />
                         </ListItemButton>
                     </ListItem>
                     <ListItem key={"Dashboard"} disablePadding>

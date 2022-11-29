@@ -53,6 +53,7 @@ const ProductCard = (props) => {
                                 onClick={toPostItem}>
                                     <EditIcon />
                                 </Fab>
+
                                 <Modal open={modalOpen} onClose={() => setModalState(false)} closeAfterTransition sx={{display: 'flex', p: 1, alignItems: 'center', justifyContent: 'center'}}>
                                     <Box sx={{
                                         position: 'relative',
@@ -76,7 +77,6 @@ const ProductCard = (props) => {
                                 </Fab>
                                 <ShoppingSidebar isOpen={shoppingSidebarOpen} toggle= {toggleShoppingSiderbar} onClose={() => setShoppingSidebarOpen(false)}/>
                                     
-                                
                                 
                             </Box>
                         }
