@@ -4,12 +4,22 @@ import basketImage from "../images/vegetable-basket.png"
 import theme from "../theme/theme"
 import EditIcon from "@mui/icons-material/Edit"
 import FarmerPostItem from './FarmerPostItem';
+import AddIcon from '@mui/icons-material/Add';
+import ShoppingSidebar from './sidebars/ShoppingSidebar';
+
 
 // This is a component that displays important information about a product
 const ProductCard = (props) => {
     //let item = props.item || {name: "Item", price: "0", description: "This is a description"}
     let [modalOpen, setModalState] = React.useState(false);
     let toPostItem = () => setModalState(true)
+
+    let [shoppingSidebarOpen, setShoppingSidebarOpen] = React.useState(false);
+    let toAddItem = () => {console.log('setshoppingsidebaropen'); setShoppingSidebarOpen(true)}
+
+    let toggleShoppingSiderbar = () => {
+        setShoppingSidebarOpen(!shoppingSidebarOpen)
+    }
 
     return (
         <ThemeProvider data-testid="product-card" theme={theme}>
@@ -54,6 +64,20 @@ const ProductCard = (props) => {
                                             <FarmerPostItem initItem={props.item} setModalState={setModalState} editMode/> {/* Update to support editing mode */}
                                     </Box>
                                 </Modal>
+                            </Box>
+                        }
+                        {props.addMode &&
+                            <Box>
+                                <Fab color="primary" aria-label="add" sx={{position: 'absolute',
+                                bottom: 16,
+                                right: 16}}
+                                onClick={toAddItem}>
+                                    <AddIcon />
+                                </Fab>
+                                <ShoppingSidebar isOpen={shoppingSidebarOpen} toggle= {toggleShoppingSiderbar} onClose={() => setShoppingSidebarOpen(false)}/>
+                                    
+                                
+                                
                             </Box>
                         }
                     </CardContent>

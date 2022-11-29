@@ -29,7 +29,7 @@ const CustomerLandingPage = () => {
   const [farmers, setFarmers] = React.useState([]) // capture data from GET request
 
   React.useEffect(() => {
-    fetch('http://localhost:3001/api/vendors').then(response => response.json()).then(data => setFarmers(data))
+    fetch('http://localhost:3001/api/vendors').then(response => response.json()).then(data => {setFarmers(data); })
       .catch(err => console.error(err));
   }, [])
 
@@ -37,7 +37,7 @@ const CustomerLandingPage = () => {
   const [products, setProducts] = React.useState([]) // capture data from GET request
 
   React.useEffect(() => {
-    fetch('http://localhost:3001/api/products').then(response => response.json()).then(data => setProducts(data))
+    fetch('http://localhost:3001/api/products').then(response => response.json()).then(data => {setProducts(data);})
       .catch(err => console.error(err));
   }, [])
   return (
@@ -53,7 +53,7 @@ const CustomerLandingPage = () => {
           <Box sx={{ margin: 0 }}>
             <Grid container spacing={{ xs: 0, md: 2 }} columns={{ xs: 4, sm: 8, md: 12 }}>
               {(farmers.slice(0, 3)).map((item) => (
-                <Grid item xs={2} sm={3} md={4} key={item.name}>
+                <Grid item xs={2} sm={3} md={4} key={item.user_id}>
                   <FarmerCard item={item} />
                 </Grid>
               ))}
@@ -69,8 +69,8 @@ const CustomerLandingPage = () => {
           <Box sx={{ margin: 2, marginTop: 0, marginBottom: 4}}>
             <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 4, sm: 4, md: 20 }}>
               {(products.slice(0, 5)).map((item) => (
-                <Grid item xs={1} sm={3} md={4} key={item.name}>
-                  <ProductCard item={item} />
+                <Grid item xs={1} sm={3} md={4} key={item.product_id}>
+                  <ProductCard addMode item={item} />
                 </Grid>
               ))}
             </Grid>
