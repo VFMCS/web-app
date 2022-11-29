@@ -1,6 +1,6 @@
 const Pool = require('pg').Pool
 const exec = require('child_process').execFile;
-const port = process.env.PORT || 5433;
+const port = process.env.PORT || 3001;
 /*
 const pool = new Pool({
     user: "guest",

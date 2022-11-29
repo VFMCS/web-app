@@ -25,13 +25,13 @@ const ProductCard = (props) => {
 
         const prod = {
             'vendor_id': props.item.vendor_id,
-            'customer_id': localStorage.getItem('curr_user_id'),
+            'customer_id': parseInt(localStorage.getItem('curr_user_id')),
             'quantity': props.item.quantity,
             'product_id': props.item.product_id,
               
         };
-
-        fetch("http://localhost:3001/api/transaction", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(prod) }).then(data => console.log(data));
+        
+        fetch("http://localhost:3001/api/transaction", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(prod) }).then(data => {console.log(prod); console.log(data)});
         setShoppingSidebarOpen(true);
     }
 

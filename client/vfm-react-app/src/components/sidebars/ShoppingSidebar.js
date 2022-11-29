@@ -26,11 +26,32 @@ const ShoppingSidebar = ({isOpen, toggle}) => {
     }
 
     const [products, setProducts] = React.useState([]) // capture data from GET request
-    React.useEffect(() => {
-        fetch('http://localhost:3001/api/transactions/cart/' + localStorage.getItem('curr-user-id')).then(response => response.json()).then(data => {console.log("data: " + data); setProducts(data);})
-          .catch(err => console.error(err));
-      }, [])
 
+    React.useEffect(() => {
+        let url = 'http://localhost:3001/api/transaction/cart/' + localStorage.getItem('curr_user_id');
+        console.log(url);
+        fetch(url).then(response => response.json()).then(data => {console.log("data: " + data); setProducts(data);})
+          .catch(err => console.error(err));
+
+        
+    }, []);
+
+    let toShowCart = () => {
+        for(let i = 0; i < products.length; i++){
+            let url = 'http://localhost:3001/api/products/product/' + products[i].product_id;
+            //let url = 'http://localhost:3001/api/products/product/' + 15;
+            fetch(url).then(response => response.json()).then(data => {console.log("data: " + data); products[i] = data;})
+                .catch(err => console.error(err));
+            
+        }
+        console.log("products: " + products);
+    }
+
+
+
+
+
+    
     let [modalOpen, setModalState] = React.useState(false);
     let toPostItem = () => setModalState(true)
 
