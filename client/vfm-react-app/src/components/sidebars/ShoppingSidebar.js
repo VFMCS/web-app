@@ -36,6 +36,7 @@ const ShoppingSidebar = ({isOpen, toggle}) => {
         
     }, []);
 
+    //must add columns to transactions table to include image and details
     let toShowCart = () => {
         for(let i = 0; i < products.length; i++){
             let url = 'http://localhost:3001/api/products/product/' + products[i].product_id;
