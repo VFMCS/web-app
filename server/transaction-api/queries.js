@@ -4,9 +4,12 @@ const updateQuantity = "UPDATE transactions SET quantity = $1 WHERE transaction_
 const getCustomerCart = "SELECT * FROM transactions WHERE customer_id = $1 AND in_cart = TRUE";
 const getVendorOrders = "SELECT * FROM transactions WHERE vendor_id = $1 AND in_cart = TRUE";
 
+const deleteTransaction = "DELETE FROM transactions WHERE transaction_id = $1";
+
 module.exports = {
     addTransaction,
     updateQuantity,
     getCustomerCart,
     getVendorOrders,
+    deleteTransaction,
 }

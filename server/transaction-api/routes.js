@@ -7,5 +7,6 @@ router.post("/", controller.addTransaction);
 router.put("/update/", controller.updateTransaction);
 router.get("/cart/:id", controller.getCustomerCart);
 router.get("/order/:id", controller.getVendorOrders);
+router.delete("/:id", controller.deleteTransaction);
 
 module.exports = router;

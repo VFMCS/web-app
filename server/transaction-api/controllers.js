@@ -27,6 +27,14 @@ const addTransaction = (req, res) => {
     })
 }
 
+const deleteTransaction = (req, res) => {
+    const transaction_id = req.params.id;
+    pool.query(queries.deleteTransaction, [transaction_id], (error, results) => {
+        if (error) throw error;
+        res.status(200).json(results.rows);
+    })
+}
+
 //send null for values not being updated
 const updateTransaction = (req, res) => {
     const { transaction_id, quantity, is_InCart, is_Reserved } = req.body;
