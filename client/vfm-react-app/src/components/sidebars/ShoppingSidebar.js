@@ -27,7 +27,7 @@ const ShoppingSidebar = ({isOpen, toggle}) => {
 
     const [products, setProducts] = React.useState([]) // capture data from GET request
     React.useEffect(() => {
-        fetch('http://localhost:3001/api/products').then(response => response.json()).then(data => {setProducts(data);})
+        fetch('http://localhost:3001/api/transactions/cart/' + localStorage.getItem('curr-user-id')).then(response => response.json()).then(data => {console.log("data: " + data); setProducts(data);})
           .catch(err => console.error(err));
       }, [])
 
