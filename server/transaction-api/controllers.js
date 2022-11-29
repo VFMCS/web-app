@@ -11,8 +11,9 @@ const getCustomerCart = (req, res) => {
 }
 
 const addTransaction = (req, res) => {
-    const { vendor_id, customer_id, quantity, product_id } = req.body;
-    pool.query(queries.addTransaction, [vendor_id, customer_id, quantity, product_id], (error, results) => {
+    //const { vendor_id, customer_id, quantity, product_id } = req.body;
+    const values = [req.body.vendor_id, req.body.customer_id, req.body.quantity, req.body.product_id];
+    pool.query(queries.addTransaction, values, (error, results) => {
         if (error) throw error;
         res.status(200).json(results.rows);
     })
