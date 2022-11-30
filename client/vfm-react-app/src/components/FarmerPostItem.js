@@ -31,7 +31,7 @@ const FarmerPostItem = ({ editMode, setModalState, initItem }) => {
         'quantity': null,
         'price': null,
         'product_category': null,
-        'description': null,
+        'details': null,
         'name': null
         });
 
@@ -103,12 +103,11 @@ const FarmerPostItem = ({ editMode, setModalState, initItem }) => {
             item["price"] = parseFloat(value)
         }
         if (valid) {
-            console.log(item)
             errorExp = ""
             setShowEmptyEntryError("")
             //save to database
-            console.log(editMode)
             console.log(item)
+            console.log(editMode)
             if(!editMode){
                 console.log("curr_user_id: " + localStorage.getItem('curr_user_id'));
                 fetch("http://localhost:3001/api/products", { method: "GET" }).then(data => console.log(data));
@@ -119,13 +118,14 @@ const FarmerPostItem = ({ editMode, setModalState, initItem }) => {
                 navigate('/farmer');
             }
             else{
-                const url = "https://localhost:3001/api/products/" + item.product_id
-                fetch(url, { method: "GET"}).then(data => console.log(data))
+                const url = "http://localhost:3001/api/products/patch/" + item.product_id
+                console.log(item)
+                //fetch(url, { method: "GET"}).then(data => console.log(data))
                 fetch(url, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(item) }).then(data => console.log(data));
-                fetch(url, { method: "GET"}).then(data => console.log(data))
+                //fetch(url, { method: "GET"}).then(data => console.log(data))
                 setModalState(false);
                 //window.location.reload(false)
-                //navigate('/farmer');
+                navigate('/farmer');
             }
         }
         else {
@@ -225,7 +225,7 @@ const FarmerPostItem = ({ editMode, setModalState, initItem }) => {
                         </FormControl>
                         <TextField onChange={handleTextChange} name="product_category" id="outlined-basic" label="Product Category" defaultValue={item["product_category"]} variant="outlined" sx={{ width: '50%' }} />
                     </Stack>
-                    <TextField onChange={handleTextChange} name="details" multiline={true} rows={6} id="outlined-basic" defaultValue={item["description"]} label="Description" variant="outlined" />
+                    <TextField onChange={handleTextChange} name="details" multiline={true} rows={6} id="outlined-basic" defaultValue={item["details"]} label="Details" variant="outlined" />
                     <Stack sx={{ height: '60%' }}>
                         <p style={{ color: "tomato" }}>
                             {showEmptyEntryError}
