@@ -12,6 +12,7 @@ import { Divider } from '@mui/material';
 import ProductCard from '../components/ProductCard.js';
 import FarmerCard from '../components/FarmerCard.js';
 import ConsumerHeader from '../components/headers/ConsumerHeader.js';
+import FiltersBar from '../components/FiltersBar.js';
 import { useNavigate } from 'react-router-dom';
 
 //Customer landing page upon customer being signed in
@@ -36,6 +37,20 @@ const CustomerLandingPage = () => {
 
   const [products, setProducts] = React.useState([]) // capture data from GET request
 
+  const [selectedFilters, setSelectedFilters] = React.useState([]) // keep track of selected filters (from tags)
+
+  const [displayedProducts, setDisplayedProducts] = React.useState([])
+
+  React.useEffect( () => {
+    if (selectedFilters.length === 0) {
+      setDisplayedProducts(products.slice(0, 5)) // Featured Products
+    }
+    else {
+      console.log(selectedFilters)
+      setDisplayedProducts(products.filter(p => selectedFilters.includes(p.product_type) || selectedFilters.includes(p.product_category))) // Filtered Products
+    }
+  }, [selectedFilters, products])
+
   React.useEffect(() => {
     fetch('http://localhost:3001/api/products').then(response => response.json()).then(data => setProducts(data))
       .catch(err => console.error(err));
@@ -45,30 +60,35 @@ const CustomerLandingPage = () => {
       <CssBaseline enableColorScheme />
       <Stack direction="column">
         <ConsumerHeader />
+        <FiltersBar filters={["Vegetable", "Fruit", "Potatoes", "Tomatoes", "Oranges", "Grapefruit"]} exclusive selectedItems={selectedFilters} setSelectedItems={setSelectedFilters}/>
+        {selectedFilters.length === 0 &&
+        <div>
+          <center>
+            <Typography variant="h5" sx={{ margin: 6, color: "black" }}>
+            Featured Farmers
+            </Typography>
+          </center>
+          <center>
+            <Box sx={{ margin: 0 }}>
+              <Grid container spacing={{ xs: 0, md: 2 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                {(farmers.slice(0, 3)).map((item) => (
+                  <Grid item xs={2} sm={3} md={4} key={item.name}>
+                    <FarmerCard item={item} />
+                  </Grid>
+                ))}
+              </Grid>
+            </Box>
+          </center>
+        </div>
+        }
         <center><Typography variant="h5" sx={{ margin: 6, color: "black" }}>
-          Featured Farmers
-        </Typography></center>
-
-        <center>
-          <Box sx={{ margin: 0 }}>
-            <Grid container spacing={{ xs: 0, md: 2 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-              {(farmers.slice(0, 3)).map((item) => (
-                <Grid item xs={2} sm={3} md={4} key={item.name}>
-                  <FarmerCard item={item} />
-                </Grid>
-              ))}
-            </Grid>
-          </Box>
-        </center>
-
-        <center><Typography variant="h5" sx={{ margin: 6, color: "black" }}>
-          Featured Products
+          {(selectedFilters.length === 0 ? "Featured " : "") + "Products"}
         </Typography> </center>
 
         <center>
           <Box sx={{ margin: 2, marginTop: 0, marginBottom: 4}}>
             <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 4, sm: 4, md: 20 }}>
-              {(products.slice(0, 5)).map((item) => (
+              {displayedProducts.map((item) => (
                 <Grid item xs={1} sm={3} md={4} key={item.name}>
                   <ProductCard item={item} />
                 </Grid>
@@ -78,6 +98,7 @@ const CustomerLandingPage = () => {
 
           </Box>
         </center>
+        
 
 
 

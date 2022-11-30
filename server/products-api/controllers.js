@@ -27,18 +27,6 @@ const insertProd = (req, res) => {
     })
 }
 
-const patchProductbyProductID = (req, res) => {
-    const id = req.params.id
-    if(!id){
-        throw error;
-    }
-    const { name, description, quantity, price, product_type, product_category } = req.body
-    const values = [ name, description, quantity, price, product_type, product_category, id ]
-    pool.query(queries.patchProductbyProductID, values, (error, results) => {
-        if (error) throw error;
-        res.status(201).send("Product updated at product ID" + id)
-    })
-}
 
 /*
 const insertProdByID = (req, res) => {
@@ -56,6 +44,5 @@ module.exports = {
     getAllProducts,
     insertProd,
     getProductByVendorID,
-    patchProductbyProductID
     //insertProdByID
 }
