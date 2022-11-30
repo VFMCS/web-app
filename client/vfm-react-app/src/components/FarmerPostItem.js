@@ -119,12 +119,9 @@ const FarmerPostItem = ({ editMode, setModalState, initItem }) => {
             }
             else{
                 const url = "http://localhost:3001/api/products/patch/" + item.product_id
-                console.log(item)
-                //fetch(url, { method: "GET"}).then(data => console.log(data))
                 fetch(url, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(item) }).then(data => console.log(data));
-                //fetch(url, { method: "GET"}).then(data => console.log(data))
                 setModalState(false);
-                //window.location.reload(false)
+                window.location.reload(false)
                 navigate('/farmer');
             }
         }
