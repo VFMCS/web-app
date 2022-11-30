@@ -1,76 +1,28 @@
+//See server readme for endpoint documentation
 const express = require("express");
-const app = express();
-
 const cors = require('cors');
-app.use(cors());
-
-require('dotenv').config()
-app.set('view engine', 'ejs')
-app.use('/api/', require('./routes/hello'))
-app.use('/farmers/', require('./routes/data'))
-/*
-app.get('/', (req, res) => {
-  res.send('hello ab')
-})
-*/
-
+const authProxy = require('./db/db.js');
+const app = express();
 const PORT = process.env.PORT || 3001;
-
-app.get('/', (req, res) => {
-    console.log(hi);
-    res.status(200).json('start');
-})
-
-app.get('/farmers', cors(), (req, res) => {
-  let data = {};
-
-  const {Client} = require('pg')
-
-  const client = new Client({
-      host: "34.134.101.113",
-      user: "guest",
-      port: 5432,
-      password: "guestpass",
-      database: "vfmcs1"
-
-  })
-
-  client.connect();
-
-  client.query("SELECT username FROM users WHERE is_vendor = true", (err, res) => {
-      if(!err){
-          console.log(res.rows);
-          data = res.rows;
-      }
-      else{
-          console.log(err.message);
-      }
-
-      client.end;
-  })
-
-  res.json(data);
-})
-
-app.listen(PORT, () =>{
-  const url = `http://localhost:${PORT}/`
-  console.log(`Listening on Port: ${PORT}`)
-
-})
-
-/*
-const playersRouter = require("./routes/players");
-
-
-
-
-app.use(logger("dev"));
+//Start express server and cloud sql proxy
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.use("/players", playersRouter);
-app.listen(port, function() {
-  console.log("Runnning on " + port);
-});
-module.exports = app;
-*/
+app.use(express.json());
+app.listen(PORT, () => {
+  console.log(`Express server listening on Port: ${PORT}`)
+})
+authProxy.startAuthProxy();
+//Endpoint route files
+const usrapi = require('./user-api/routes.js');
+const prdapi = require('./products-api/routes.js');
+const farmapi = require('./vendors-api/routes.js');
+const srchEndpoint = require('./search-endpoint/routes.js');
+const curr_user_api = require('./curr-user-api/routes.js');
+
+//Endpoint main routes
+app.use('/api/users', usrapi);
+app.use('/api/products', prdapi);
+app.use('/api/vendors', farmapi);
+app.use('/search', srchEndpoint);
+app.use('/curr-user-api', curr_user_api);
+
+
