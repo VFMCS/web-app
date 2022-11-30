@@ -13,7 +13,6 @@ const getFarmerById = (req, res) => {
     const user_id = req.params.user_id;
     //console.log(req)
     pool.query(queries.getFarmerById, [user_id], (error, results) => {
-        console.log(results);
         if (error) throw error;
         res.status(200).json(results.rows);
     })

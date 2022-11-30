@@ -13,23 +13,24 @@ const pool = new Pool({
 
 //This is for local development, will potentially need modification for deployment
 const startAuthProxy = () => {
+    
     instance = `sublime-flux-368014:us-central1:vfmcs2=tcp:${port}`;
     cred_file = "./db/db-service-account.json";
     console.log(`Starting cloud sql auth proxy on port: ${port}...`);
-
-    if (process.platform === 'darwin') {
+    
+    if(process.platform === 'darwin'){
         exec('./db/cloud_sql_proxy_mac', ["-instances=" + instance, "-credential_file=" + cred_file], (err, data) => {
             if (err) throw err;
             console.log(data);
         })
     }
-    else if (process.platform === 'win32') {
+    else if(process.platform === 'win32'){
         exec('./db/cloud_sql_proxy.exe', ["-instances=" + instance, "-credential_file=" + cred_file], (err, data) => {
             if (err) throw err;
             console.log(data);
         })
     }
-    else if (process.platform === 'linux') {
+    else if(process.platform === 'linux'){
         exec('./db/cloud_sql_proxy_linux', ["-instances=" + instance, "-credential_file=" + cred_file], (err, data) => {
             if (err) throw err;
             console.log(data);
