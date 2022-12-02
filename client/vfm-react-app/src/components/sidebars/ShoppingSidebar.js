@@ -25,36 +25,38 @@ const ShoppingSidebar = ({isOpen, toggle}) => {
         navigate("/")
     }
 
-    const [products, setProducts] = React.useState([]) // capture data from GET request
+    let [transactions, setTransactions] = React.useState([]) // capture data from GET request
+    let [products, setProducts] = React.useState([]) // capture data from GET request
 
-    React.useEffect(() => {
+    const [cartMade, setCartMade] = React.useState(false)
+
+    let toMakeCart = () => {
         let url = 'http://localhost:3001/api/transaction/cart/' + localStorage.getItem('curr_user_id');
-        console.log(url);
-        fetch(url).then(response => response.json()).then(data => {console.log("data: " + data); setProducts(data);})
+        //console.log(url);
+        fetch(url).then(response => response.json()).then(data => {console.log("data: " + data[0].product_id); setTransactions(data);})
           .catch(err => console.error(err));
-
         
-    }, []);
-
-    //must add columns to transactions table to include image and details
-    let toShowCart = () => {
-        for(let i = 0; i < products.length; i++){
-            let url = 'http://localhost:3001/api/products/product/' + products[i].product_id;
-            //let url = 'http://localhost:3001/api/products/product/' + 15;
-            fetch(url).then(response => response.json()).then(data => {console.log("data: " + data); products[i] = data;})
+        transactions.forEach((item) => {
+            url = 'http://localhost:3001/api/products/product/' + item.product_id;
+            console.log(url);
+            fetch(url).then(response => response.json()).then(data => {console.log("data: " + JSON.stringify(data[0])); item = data[0];})
                 .catch(err => console.error(err));
-            
-        }
-        console.log("products: " + products);
+
+            console.log("product name: " + item.name);
+        })
+        
+          
+        
+        
+        setCartMade(true);
     }
 
+    React.useEffect(() => {
+        toMakeCart();
+    }, [isOpen])
 
 
-
-
-    
-    let [modalOpen, setModalState] = React.useState(false);
-    let toPostItem = () => setModalState(true)
+    let counter = 0;
 
     return (
         <Drawer anchor = 'right' open={isOpen} onClose={toggle}>
@@ -63,7 +65,7 @@ const ShoppingSidebar = ({isOpen, toggle}) => {
                 role="presentation"   
             >   
                 <List>
-                    {(products.slice(0, 5)).map((item) => (
+                    {transactions.map((item) => (
                         <ListItem key={item.product_id} sx = {{marginBottom: '20'}}>
                             <Card sx={{display: 'flex' }}>
                            
@@ -87,14 +89,12 @@ const ShoppingSidebar = ({isOpen, toggle}) => {
                                         </Typography>
                                         
                                     </CardContent>
-                                    
                                 </Box>
-                                
                                 <TextField
                                     id="outlined-quantityText"
                                     type="number"
                                     label="quantity"
-                                    defaultValue="1"
+                                    defaultValue={transactions[counter].quantity}
                                     inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
                                     sx={{marginTop: '10'}}
                                 />          
