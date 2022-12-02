@@ -3,8 +3,8 @@ import { useState, Component } from 'react';
 import theme from '../theme/theme.js'
 import { Stack } from '@mui/system';
 import { Select, MenuItem, InputLabel, FormControl, TextField, ThemeProvider, InputAdornment, Button } from '@mui/material';
-import UploadButton from '../components/buttons/UploadButton.js';
-import ConfirmEditButton from '../components/buttons/ConfirmEditButton.js';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
 import { Lemon, Apple, Pear, Orange, Grapefruit, Lime, Peaches, Tomato, Blueberry, Cherry, Onion, Garlic, Potato, Asparagus, Celery, Broccoli, Cabbage, Cauliflower }
     from '..';
 
@@ -12,15 +12,18 @@ import { useNavigate } from 'react-router-dom';
 
 
 // TODO: Update to support editing items
-const FarmerPostItem = ({ editMode, currentItem, setModalState, initItem}) => {
+const FarmerPostItem = ({ editMode, setModalState, initItem }) => {
     const navigate = useNavigate();
     
     const [showUploadButton, setShowUploadButton] = useState(true);
     const [showPriceValidError, setShowPriceValidError] = useState(false);
     const [showEmptyEntryError, setShowEmptyEntryError] = useState("");
+    const [typeEvent, setTypeEvent] = useState(null);
+    const [uploadMode, setUploadMode] = useState(false);
+    const [uploadImage, setUploadImage] = useState(null)
+    const [showBox, setShowBox] = useState(true)
     //here, we initially set the vendor_id to what we need it to be
 
-    
 
     const [item, setItem] = useState(editMode ? initItem : {
         'vendor_id': localStorage.getItem('curr_user_id'),
@@ -28,21 +31,54 @@ const FarmerPostItem = ({ editMode, currentItem, setModalState, initItem}) => {
         'quantity': null,
         'price': null,
         'product_category': null,
-        'description': null,
+        'details': null,
         'name': null
-    });
+        });
 
-    var handleImageChange = (event) => {
-        setShowUploadButton(prev => false)
+    var defaultImageCheck = () => {
+        setUploadMode(!uploadMode)
+        if(uploadMode){
+            setShowBox(true)
+            setShowUploadButton(true)
+            setUploadImage(null)
+        }
+        else{
+            if(typeEvent.target.value != null){
+                setShowBox(true)
+                setShowUploadButton(false)
+                handleDefaultImageChange(typeEvent)
+            }
+            else{
+                setShowBox(true)
+                setShowUploadButton(false)
+                setUploadImage(null)
+            }
+
+        }
+    }
+
+    var handleDefaultImageChange = (event) => {
         let selection = event.target.value;
-        console.log(selection)
         let curObj = { 'Lemon': Lemon, 'Apples': Apple, 'Pears': Pear, 'Oranges': Orange, 'Grapefruit': Grapefruit, 'Lime': Lime, 'Peaches': Peaches, 'Tomatoes': Tomato, 'Blueberries': Blueberry, 'Cherries': Cherry, 'Onion': Onion, 'Garlic': Garlic, 'Potatoes': Potato, 'Asparagus': Asparagus, 'Celery': Celery, 'Broccoli': Broccoli, 'Cabbage': Cabbage, 'Cauliflower': Cauliflower }
-        document.getElementById("uploadBox").style.backgroundImage = "url(" + curObj[selection] + ")"
-        document.getElementById("uploadBox").style.border = 0
+        setShowBox(false)
+        setShowUploadButton(false)
+        setUploadImage(curObj[selection])
+    }
+
+    var handleImageUpload = (event) => {
+        var file = event.target.files[0];
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.addEventListener("load", () => {
+            // convert image file to base64 string
+            const imgResult = reader.result
+            setUploadImage(imgResult)
+            setShowBox(false)
+            setShowUploadButton(false)
+        }, false);
     }
 
     var errorExp = ""
-
     var onSave = () => {
         var valid = true
         if (item["name"] === null) {
@@ -67,12 +103,11 @@ const FarmerPostItem = ({ editMode, currentItem, setModalState, initItem}) => {
             item["price"] = parseFloat(value)
         }
         if (valid) {
-            console.log(item)
             errorExp = ""
             setShowEmptyEntryError("")
             //save to database
-            console.log(editMode)
             console.log(item)
+            console.log(editMode)
             if(!editMode){
                 console.log("curr_user_id: " + localStorage.getItem('curr_user_id'));
                 fetch("http://localhost:3001/api/products", { method: "GET" }).then(data => console.log(data));
@@ -83,7 +118,7 @@ const FarmerPostItem = ({ editMode, currentItem, setModalState, initItem}) => {
                 navigate('/farmer');
             }
             else{
-                const url = "https://localhost:3001/api/products/" + item.product_id
+                const url = "http://localhost:3001/api/products/patch/" + item.product_id
                 fetch(url, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(item) }).then(data => console.log(data));
                 setModalState(false);
                 window.location.reload(false)
@@ -101,14 +136,15 @@ const FarmerPostItem = ({ editMode, currentItem, setModalState, initItem}) => {
         setModalState(false);
     }
 
-    var handleChange = (e) => {
+    var handleTextChange = (e) => {
 
         var name = e.target.name
         var value = e.target.value
         var valid = true
 
         if (name === "product_type") {
-            handleImageChange(e)
+            setTypeEvent(e)
+            handleDefaultImageChange(e)
         }
         if (name === 'name') {
             if (value.length === 0) {
@@ -138,16 +174,21 @@ const FarmerPostItem = ({ editMode, currentItem, setModalState, initItem}) => {
         <ThemeProvider theme={theme}>
             <Stack spacing={2} direction="row" sx={{ width: '100%', height: 'max-content' }}>
                 <Stack spacing={2} direction="column" sx={{ width: '40%', height: '100%' }}>
-                    <div id="uploadBox">
-                        {showUploadButton && <UploadButton id="uploadButton" color="secondary" />}
-                    </div>
+                    {showBox && (<div id="uploadBox">
+                        {showUploadButton && (<Button data-testid = "upload" color="secondary" sx={{ p: '5', width: '100%', height: '100%'}} variant="contained" component="label">
+                        Upload
+                        <input hidden accept="image/*" multiple type="file" onChange={handleImageUpload}/>
+                        </Button>)}
+                    </div>)}
+                    {uploadImage && (<img alt="sampleImg}" src={uploadImage} id="imageUpload"/>)}
+                    <FormControlLabel onChange={defaultImageCheck} sx={{ left: "50%" }} control={<Switch defaultChecked />} labelPlacement="bottom" label="Use Default Image" />
                 </Stack>
                 <Stack spacing={2} direction="column" sx={{ width: '60%' }}>
-                    <TextField name="name" onChange={handleChange} defaultValue={item["name"]} id="outlined-basic" label="Name" variant="outlined" />
+                    <TextField name="name" onChange={handleTextChange} defaultValue={item["name"]} id="outlined-basic" label="Name" variant="outlined" />
                     <Stack spacing={2} direction="row">
-                        <TextField onChange={handleChange} name='price' defaultValue={item["price"]} type="number" id="outlined-basic" InputProps={{ endAdornment: <InputAdornment position="end">/lb.</InputAdornment>, startAdornment: <InputAdornment position="start">$</InputAdornment> }} label="Price/lb" variant="outlined" sx={{ width: '50%' }}>
+                        <TextField onChange={handleTextChange} name='price' defaultValue={item["price"]} type="number" id="outlined-basic" InputProps={{ endAdornment: <InputAdornment position="end">/lb.</InputAdornment>, startAdornment: <InputAdornment position="start">$</InputAdornment> }} label="Price/lb" variant="outlined" sx={{ width: '50%' }}>
                         </TextField>
-                        <TextField onChange={handleChange} defaultValue={item["quantity"]} name='quantity' id="outlined-basic" type="number" label="Quantity in lbs." variant="outlined" sx={{ width: '50%' }} />
+                        <TextField onChange={handleTextChange} defaultValue={item["quantity"]} name='quantity' id="outlined-basic" type="number" label="Quantity in lbs." variant="outlined" sx={{ width: '50%' }} />
                     </Stack>
                     <Stack spacing={2} direction="row">
                         <FormControl sx={{ width: '50%' }}>
@@ -156,7 +197,7 @@ const FarmerPostItem = ({ editMode, currentItem, setModalState, initItem}) => {
                                 name='product_type'
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
-                                onChange={handleChange}
+                                onChange={handleTextChange}
                                 defaultValue={item["product_type"]}
                             >
                                 <MenuItem value={'Lemon'}>Lemon</MenuItem>
@@ -179,9 +220,9 @@ const FarmerPostItem = ({ editMode, currentItem, setModalState, initItem}) => {
                                 <MenuItem value={'Cauliflower'}>Cauliflower</MenuItem>
                             </Select>
                         </FormControl>
-                        <TextField onChange={handleChange} name="product_category" id="outlined-basic" label="Product Category" defaultValue={item["product_category"]} variant="outlined" sx={{ width: '50%' }} />
+                        <TextField onChange={handleTextChange} name="product_category" id="outlined-basic" label="Product Category" defaultValue={item["product_category"]} variant="outlined" sx={{ width: '50%' }} />
                     </Stack>
-                    <TextField onChange={handleChange} name="details" multiline={true} rows={6} id="outlined-basic" defaultValue={item["description"]} label="Description" variant="outlined" />
+                    <TextField onChange={handleTextChange} name="details" multiline={true} rows={6} id="outlined-basic" defaultValue={item["details"]} label="Details" variant="outlined" />
                     <Stack sx={{ height: '60%' }}>
                         <p style={{ color: "tomato" }}>
                             {showEmptyEntryError}

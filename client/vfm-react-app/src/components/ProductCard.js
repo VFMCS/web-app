@@ -75,11 +75,13 @@ const ProductCard = (props) => {
 
                                 <Modal open={modalOpen} onClose={() => setModalState(false)} closeAfterTransition sx={{display: 'flex', p: 1, alignItems: 'center', justifyContent: 'center'}}>
                                     <Box sx={{
-                                        position: 'relative',
-                                        bgcolor: 'background.paper',
-                                        border: '2px solid #000',
-                                        boxShadow: (theme) => theme.shadows[5],
-                                        p: 4,
+                                         position: 'relative',
+                                         width: '1000px',
+                                         height: '650px',
+                                         bgcolor: 'background.paper',
+                                         border: '2px solid #000',
+                                         boxShadow: (theme) => theme.shadows[5],
+                                         p: 4,
                                         }}>
                                             <FarmerPostItem initItem={props.item} setModalState={setModalState} editMode/> {/* Update to support editing mode */}
                                     </Box>
