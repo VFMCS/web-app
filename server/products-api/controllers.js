@@ -62,6 +62,6 @@ module.exports = {
     insertProd,
     getProductByVendorID,
     getProductByProductID,
-    patchProductbyProductID
+    patchProductByProductID
     //insertProdByID
 }

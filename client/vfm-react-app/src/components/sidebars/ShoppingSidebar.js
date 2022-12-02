@@ -44,7 +44,7 @@ const ShoppingSidebar = ({isOpen, toggle}) => {
 
         })
 
-        console.log("transactions: " + transactions[0].name);
+        console.log("transaction name: " + transactions[0].name);
         
         setCartMade(true);
     }
