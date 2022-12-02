@@ -33,20 +33,18 @@ const ShoppingSidebar = ({isOpen, toggle}) => {
     let toMakeCart = () => {
         let url = 'http://localhost:3001/api/transaction/cart/' + localStorage.getItem('curr_user_id');
         //console.log(url);
-        fetch(url).then(response => response.json()).then(data => {console.log("data: " + data[0].product_id); setTransactions(data);})
+        fetch(url).then(response => response.json()).then(data => {console.log("transaction data: " + data[0].product_id); setTransactions(data);})
           .catch(err => console.error(err));
         
         transactions.forEach((item) => {
             url = 'http://localhost:3001/api/products/product/' + item.product_id;
             console.log(url);
-            fetch(url).then(response => response.json()).then(data => {console.log("data: " + JSON.stringify(data[0])); item = data[0];})
+            fetch(url).then(response => response.json()).then(data => {console.log("product data: " + JSON.stringify(data[0])); item = JSON.stringify(data[0]); console.log("product: " + item); console.log("product name: " + item.name);})
                 .catch(err => console.error(err));
 
-            console.log("product name: " + item.name);
         })
-        
-          
-        
+
+        console.log("transactions: " + transactions[0].name);
         
         setCartMade(true);
     }
