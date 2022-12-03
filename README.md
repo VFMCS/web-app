@@ -18,7 +18,7 @@ For more information about the commands that run under the hood, check out the `
 
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-We recommend using Google Chrome as the Inspect Element feature makes development smoother (easier to view console, network data, etc)
+We recommend using **Google Chrome** as the Inspect Element feature makes development smoother (easier to view console, network data, etc)
 
 It is also possible to run only the React frontend application locally, without the server or database. More information about how to run the frontend application locally (without the server) can be found in the README in the vfm-react-app directory. 
 
