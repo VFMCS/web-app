@@ -5,7 +5,7 @@ The Virtual Farmers Market is a Web Application to allow farmers to post fresh p
 For this project, our frontend is coded in ReactJS, our backend is coded in NodeJS, our database has been made using PostgreSQL, and our server is hosted on Google Cloud Platform. 
 
 ## Installation
-Our frontend is dependent upon ReactJS and its libraries. Therefore, you will need to install npm and run the following commands once you have cloned the repository and navigated to the web-app. Our backend is dependent upon NodeJS and some of its libraries. [Click this link](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) for more information on how to install npm. Once you have npm installed, go to the web-app directory and run the following command:
+Our frontend is dependent upon ReactJS and its libraries. Therefore, you will need to install npm and run the following commands once you have cloned the repository and navigated to the web-app directory. Our backend is dependent upon NodeJS and some of its libraries. [Click this link](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) for more information on how to install npm. Once you have npm installed, go to the web-app directory and run the following command:
 
 ### `npm install`
 
@@ -16,7 +16,11 @@ Once all dependencies are installed, run the following command to start both the
 We use [concurrently](https://www.npmjs.com/package/concurrently) to build and run both the client and the server using a single command (`npm start`).
 For more information about the commands that run under the hood, check out the `package.json` file under `scripts`.
 
-More information about how to run the frontend application locally (and without the server) can be found in the README in the vfm-react-app directory. 
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+We recommend using Google Chrome as the Inspect Element feature makes development smoother (easier to view console, network data, etc)
+
+It is also possible to run only the React frontend application locally, without the server or database. More information about how to run the frontend application locally (without the server) can be found in the README in the vfm-react-app directory. 
 
 All dependencies necessary for running this application can be found within the `package.json` file.
 
