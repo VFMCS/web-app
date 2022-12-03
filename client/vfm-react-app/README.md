@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## To start the front end locally
+## To start the front end locally (without database access)
 
 In the `vfm-react-app` directory, you can run:
 
@@ -14,6 +14,8 @@ This will install all dependencies in the `package.json` file if they are not al
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+We recommend using Google Chrome as the Inspect Element feature makes development smoother.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
