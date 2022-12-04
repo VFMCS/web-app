@@ -10,6 +10,8 @@ import FarmerSearch from './pages/FarmerSearch';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import FarmerDashboard from './pages/FarmerDashboard';
+import CustomerFAQPage from './pages/CustomerFAQ';
+import FarmerFAQ from './pages/FarmerFAQ';
 
 function App() {
   //Access current user id using following statements: localStorage.getItem('curr_user_id'), localStorage.setItem('curr_user_id', JSON.stringify(curr_user_id))
@@ -50,6 +52,8 @@ function App() {
         <Route path="/sign-in" element={<Login />} />
         <Route path="/sign-up" element={<Register />} />
         <Route path="/dashboard" element={<FarmerDashboard />} />
+        <Route path="/customer/faq/" element={<CustomerFAQPage />} />
+        <Route path="/farmer/faq/" element={<FarmerFAQ />} />
         {/*Add more routes here (can also create nested routes)*/}
       </Routes>
     </BrowserRouter>
