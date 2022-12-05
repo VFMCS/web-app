@@ -22,6 +22,10 @@ const SearchBar = () => {
     if (localStorage.getItem('curr_user_is_vendor') === 'true'){
       navigate('/farmer-search', { state: { refresh: true } });
     }
+    else if(localStorage.getItem('isFarmerSearch') === 'true'){
+      navigate('/customer-search-vendor', { state: { refresh: true } });
+
+    }
     else{
       navigate('/customer-search', { state: { refresh: true } });
     }

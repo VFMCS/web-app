@@ -23,8 +23,9 @@ const ConsumerHeader = () => {
 
     let [shoppingSiderbarState, setShoppingSidebarState] = React.useState(false)
 
-    let [isFarmerSearch, setIsFarmerSearch] = React.useState(false)
-    let changeSearch = () => { setIsFarmerSearch(!isFarmerSearch) }
+    let [isFarmerSearch, setIsFarmerSearch] = React.useState(JSON.parse(localStorage.getItem('isFarmerSearch')) || false)
+
+    let changeSearch = () => { setIsFarmerSearch(!isFarmerSearch); localStorage.setItem('isFarmerSearch', !isFarmerSearch); console.log("isFarmerSearch: " + localStorage.getItem('isFarmerSearch'))}
 
     let toggleShoppingSiderbar = () => {
         console.log("show shopping sidebar")
@@ -51,7 +52,7 @@ const ConsumerHeader = () => {
                         </Box>
                         <Stack spacing="10px" direction="row" sx={{ flexGrow: 2 }}>
                             <SearchBar />
-                            <FormControlLabel onChange={changeSearch} sx={{ right: '2px'}} control={<Switch  />} labelPlacement="right" label={<Typography sx={{ color: "black" }} >{isFarmerSearch ? "Farmer Search" : "Product Search"}</Typography>} />
+                            <FormControlLabel onChange={changeSearch} sx={{ right: '2px'}} checked={isFarmerSearch} control={<Switch  />} labelPlacement="right" label={<Typography sx={{ color: "black" }} >{isFarmerSearch ? "Farmer Search" : "Product Search"}</Typography>} />
                         </Stack>
                         <ShoppingCartButton onClick={toggleShoppingSiderbar}>
                         </ShoppingCartButton>
