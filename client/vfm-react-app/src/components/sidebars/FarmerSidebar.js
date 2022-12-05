@@ -6,6 +6,9 @@ import EqualizerIcon from '@mui/icons-material/Equalizer';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import PendingActionsIcon from '@mui/icons-material/PendingActions';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 // A Header Component used by the Farmer
 // Contains: Menu button, Logo, Dashboard button, and Products Button
@@ -14,6 +17,8 @@ const FarmerSidebar = ({isOpen, toggle}) => {
     
     let toDashboard = () => navigate("/dashboard")
     let toProducts = () => navigate("/farmer")
+    let toFarmerReserves = () => navigate("/farmer-reserves")
+    let toFarmerReserveRequests = () => navigate("/farmer-reserve-requests")
     let toHome = () => {
         localStorage.setItem('curr_user_id', JSON.stringify(-1));
         navigate("/")
@@ -36,12 +41,20 @@ const FarmerSidebar = ({isOpen, toggle}) => {
                             <ListItemText primary="Profile" />
                         </ListItemButton>
                     </ListItem>
-                    <ListItem key={"Dashboard"} disablePadding>
-                        <ListItemButton onClick={toDashboard}>
+                    <ListItem key={"Current Reserves"} disablePadding>
+                        <ListItemButton onClick={toFarmerReserves}>
                             <ListItemIcon>
-                                <EqualizerIcon />
+                                <BookmarkBorderIcon />
                             </ListItemIcon>
-                            <ListItemText primary="Dashboard" />
+                            <ListItemText primary="Current Reserves" />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem key={"Reserve Requests"} disablePadding>
+                        <ListItemButton onClick={toFarmerReserveRequests}>
+                            <ListItemIcon>
+                                <PendingActionsIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Reserve Requests" />
                         </ListItemButton>
                     </ListItem>
                     <ListItem key={"Your Products"} disablePadding>
@@ -50,6 +63,14 @@ const FarmerSidebar = ({isOpen, toggle}) => {
                                 <InventoryIcon />
                             </ListItemIcon>
                             <ListItemText primary="Your Products" />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem key={"Dashboard"} disablePadding>
+                        <ListItemButton onClick={toDashboard}>
+                            <ListItemIcon>
+                                <EqualizerIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Dashboard" />
                         </ListItemButton>
                     </ListItem>
                     <ListItem key={"Sign Out"} disablePadding>

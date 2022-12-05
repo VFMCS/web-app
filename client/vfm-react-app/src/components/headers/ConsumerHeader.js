@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import SearchBar from '../SearchBar';
 import ShoppingCartButton from '../buttons/ShoppingCartButton';
 import ConsumerSidebar from '../sidebars/ConsumerSidebar';
+import ShoppingSidebar from '../sidebars/ShoppingSidebar';
 
 // A Header Component used by the Consumer
 // Contains: Menu button, Logo, Dashboard button, and Products Button
@@ -15,7 +16,15 @@ const ConsumerHeader = () => {
     let toProducts = () => navigate("/customer")
     let [sideBarOpen, setSidebarState] = React.useState(false)
     let toggleSidebar = () => {
+        console.log("show shopping sidebar")
         setSidebarState(!sideBarOpen)
+    }
+
+    let [shoppingSiderbarState, setShoppingSidebarState] = React.useState(false)
+
+    let toggleShoppingSiderbar = () => {
+        console.log("show shopping sidebar")
+        setShoppingSidebarState(!shoppingSiderbarState)
     }
 
     return (
@@ -39,7 +48,9 @@ const ConsumerHeader = () => {
                         <Box sx={{flexGrow: 3}}>
                         <SearchBar />
                         </Box>
-                        <ShoppingCartButton />
+                        <ShoppingCartButton onClick={toggleShoppingSiderbar}>
+                        </ShoppingCartButton>
+                        <ShoppingSidebar isOpen={shoppingSiderbarState} toggle={toggleShoppingSiderbar} />
                     </Toolbar>
                 </AppBar>
             </Box>
