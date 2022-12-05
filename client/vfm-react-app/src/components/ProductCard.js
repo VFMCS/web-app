@@ -6,6 +6,8 @@ import EditIcon from "@mui/icons-material/Edit"
 import FarmerPostItem from './FarmerPostItem';
 import AddIcon from '@mui/icons-material/Add';
 import ShoppingSidebar from './sidebars/ShoppingSidebar';
+import CloseIcon from '@mui/icons-material/Close';
+import CheckIcon from '@mui/icons-material/Check';
 
 
 // This is a component that displays important information about a product
@@ -14,8 +16,9 @@ const ProductCard = (props) => {
     let [modalOpen, setModalState] = React.useState(false);
     let toPostItem = () => setModalState(true)
 
-
     let [shoppingSidebarOpen, setShoppingSidebarOpen] = React.useState(false);
+
+    let [time_left, setTimeLeft] = React.useState("24h 0m")
     
     let toAddItem = () => {
         console.log('setshoppingsidebaropen'); 
@@ -40,12 +43,27 @@ const ProductCard = (props) => {
               
         };
         
-        fetch("http://localhost:3001/api/transaction", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(prod) }).then(data => {console.log(prod); console.log(data); });
-        
-        
+        fetch("http://localhost:3001/api/transaction", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(prod) }).then(data => {console.log(prod); console.log(data); });   
     }
 
-    
+    let toAcceptItem = item => () => {
+        item.is_reserved = true;
+        item.transaction_date = new Date();
+        const url = "http://localhost:3001/api/transaction/update/"
+        fetch(url, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(item) }).then(data => console.log(data));
+        window.location.reload(false)
+
+    }
+
+    let toRejectItem = item => () => {
+        //Handle if the farmer rejects the item in which consumer must be alerted if the reserve request was rejected
+        const url = "http://localhost:3001/api/transaction/" + item.transaction_id;
+        fetch(url, { method: "DELETE", headers: { "Content-Type": "application/json" }, body: JSON.stringify(item) }).then(data => console.log(data));
+        //window.location.reload(false)
+        window.location.reload(false)
+
+    }
+
     let toggleShoppingSidebar = () => {
         setShoppingSidebarOpen(!shoppingSidebarOpen)
     }
@@ -105,6 +123,27 @@ const ProductCard = (props) => {
                                 right: 16}}
                                 onClick={toAddItem}>
                                     <AddIcon />
+                                </Fab>
+                                <ShoppingSidebar isOpen={shoppingSidebarOpen} toggle= {toggleShoppingSidebar} onClose={() => setShoppingSidebarOpen(false)}/>                   
+                            </Box>
+                        }
+
+                        {props.reserveRequestMode &&
+                            <Box>
+                                <Fab color="primary" aria-label="add" sx={{position: 'absolute',
+                                bottom: 16,
+                                left: 16,
+                                }}
+                                onClick={toAcceptItem(props.item)}>
+                                    <CheckIcon />
+                                </Fab>
+
+                                <Fab color="secondary" ria-label="add" sx={{position: 'absolute',
+                                bottom: 16,
+                                right: 16,
+                                }}
+                                onClick={toRejectItem(props.item)}>
+                                    <CloseIcon />
                                 </Fab>
                                 <ShoppingSidebar isOpen={shoppingSidebarOpen} toggle= {toggleShoppingSidebar} onClose={() => setShoppingSidebarOpen(false)}/>
                                     

@@ -111,7 +111,7 @@ const CustomerLandingPage = () => {
             <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 4, sm: 4, md: 20 }}>
               {displayedProducts.map((item) => (
                 <Grid item xs={1} sm={3} md={4} key={item.product_id}>
-                  <ProductCard item={item} />
+                  <ProductCard addMode item={item} />
                 </Grid>
               ))}
             </Grid>

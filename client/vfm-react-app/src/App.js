@@ -9,6 +9,7 @@ import CustomerSearch from './pages/CustomerSearch';
 import FarmerSearch from './pages/FarmerSearch';
 import Register from './pages/Register';
 import Login from './pages/Login';
+import FarmerReserves from './pages/FarmerReserveRequests copy';
 import FarmerReserveRequests from './pages/FarmerReserveRequests';
 import FarmerDashboard from './pages/FarmerDashboard';
 
@@ -50,6 +51,7 @@ function App() {
         <Route path="/farmer-search" element={<FarmerSearch/>} />
         <Route path="/sign-in" element={<Login />} />
         <Route path="/sign-up" element={<Register />} />
+        <Route path="/farmer-reserves" element={<FarmerReserves />} />
         <Route path="/farmer-reserve-requests" element={<FarmerReserveRequests />} />
         <Route path="/dashboard" element={<FarmerDashboard />} />
         {/*Add more routes here (can also create nested routes)*/}

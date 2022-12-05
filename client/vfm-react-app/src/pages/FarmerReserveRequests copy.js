@@ -5,18 +5,19 @@ import theme from '../theme/theme.js'
 import FarmerHeader from '../components/headers/FarmerHeader.js';
 import ProductCard from '../components/ProductCard.js'
 import EditIcon from '@mui/icons-material/Edit';
+import ProductCardReserved from '../components/ProductCardReserved.js';
 
 //Customer landing page upon customer being signed in
 
-const FarmerReserveRequests = () => {    
+const FarmerReserves = () => {    
     const [products, setProducts] = React.useState([]) // capture data from GET request
 	const curr_user_id = localStorage.getItem('curr_user_id');
 
     React.useEffect(() => {
         console.log("curr_user_id for products: " + localStorage.getItem('curr_user_id'));
-        let url = 'http://localhost:3001/api/transaction/order/' + localStorage.getItem('curr_user_id');
-
+        let url = 'http://localhost:3001/api/transaction/reserves/' + localStorage.getItem('curr_user_id');
         console.log(url);
+
         fetch(url).then(response => response.json()).then(data => setProducts(data))
             .catch(err => console.error(err));
     }, [])
@@ -29,7 +30,7 @@ const FarmerReserveRequests = () => {
             <Stack direction="column">
                 <FarmerHeader />
                 <Typography variant="h5" sx={{ margin: 2, color: "primary.main" }}>
-                    Reserve Requests
+                    Current Reserves
                 </Typography>
                 <Divider />
                 <center>
@@ -38,7 +39,7 @@ const FarmerReserveRequests = () => {
                             {/* Replace with current vendor id*/}
                             {products.map((item) => (
                                 <Grid item xs={2} sm={4} md={4} key={item.name}>
-                                    <ProductCard reserveRequestMode item={item} />
+                                    <ProductCardReserved item={item} />
                                 </Grid>
                             ))}
                         </Grid>
@@ -49,5 +50,5 @@ const FarmerReserveRequests = () => {
     );
 };
 
-export default FarmerReserveRequests
+export default FarmerReserves
 
