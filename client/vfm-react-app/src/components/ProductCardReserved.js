@@ -45,11 +45,14 @@ const ProductCardReserved = (props) => {
         if(hour_diff < 0){
             hour_diff = 24 - (-1)*(hour_diff);
         }
+        */
 
         console.log("curr date: " + curr_date);
         console.log("transaction date: " + transaction_date);
         console.log("curr_date_time: " + curr_date_time);
         console.log("transaction_date_time: " + transaction_date_time);
+
+        /*
         console.log("curr hours: " + parseInt(curr_date_time.substring(0,2)));
         console.log("transaction hours: " + parseInt(transaction_date_time.substring(0,2)));
         console.log("curr mins: " + parseInt(curr_date_time.substring(3,5)));

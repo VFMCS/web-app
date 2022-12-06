@@ -8,6 +8,7 @@ import AddIcon from '@mui/icons-material/Add';
 import ShoppingSidebar from './sidebars/ShoppingSidebar';
 import CloseIcon from '@mui/icons-material/Close';
 import CheckIcon from '@mui/icons-material/Check';
+import { useNavigate } from 'react-router-dom';
 
 
 // This is a component that displays important information about a product
@@ -18,7 +19,9 @@ const ProductCard = (props) => {
 
     let [shoppingSidebarOpen, setShoppingSidebarOpen] = React.useState(false);
 
-    let [time_left, setTimeLeft] = React.useState("24h 0m")
+    let [time_left, setTimeLeft] = React.useState("24h 0m");
+    
+    let navigate = useNavigate();
     
     let toAddItem = () => {
         console.log('setshoppingsidebaropen'); 
@@ -53,7 +56,8 @@ const ProductCard = (props) => {
         item.transaction_date = new Date();
         const url = "http://localhost:3001/api/transaction/update/"
         fetch(url, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(item) }).then(data => console.log(data));
-        window.location.reload(false)
+        window.location.reload();
+        navigate('/farmer-reserves');
 
     }
 

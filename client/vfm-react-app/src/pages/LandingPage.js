@@ -19,7 +19,7 @@ const LandingPage = () => {
                 <LandingHeader/>
                 <Box marginTop={-12} sx={{height: '102vh', backgroundSize: 'cover', backgroundImage: `url(${HeaderImage})`}}>
                     <Typography variant="h3" align="left" sx={{margin: 4, marginTop: 20, color: "secondary.contrastText"}}>
-                        Welcome to Virtual Farmers Market!
+                        Welcome to FarmFresh!
                     </Typography>
 
                     <Stack direction="row" justifyContent="left" alignItems="center" spacing={4} sx={{marginLeft: 4}}>

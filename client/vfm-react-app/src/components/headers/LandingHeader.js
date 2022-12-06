@@ -32,7 +32,7 @@ const LandingHeader = () => {
                         <Button onClick={toLanding}>
                             <img src={headerLogo} alt="Logo" />
                             <Typography sx={{ color: "primary.light", fontSize: 20, fontWeight: "bold"}}>
-                                Virtual Farmers Market
+                                FarmFresh
                             </Typography>
                         </Button>
                         </Box>
