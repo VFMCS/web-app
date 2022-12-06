@@ -32,6 +32,9 @@ const CustomerFAQPage = () => {
             {   title: "How can I view featured farmers and products?",
                 content: "When on the products page, unselect all filters."
             },
+            {   title: "I reserved an item, now what?",
+                content: "Your reservation is now pending farmer approval. Once approved, you will have 24 hours to pick up the items from the farmer's location."
+            },
         ]
     }
     return (

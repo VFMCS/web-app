@@ -6,17 +6,13 @@ import MenuIcon from "@mui/icons-material/Menu"
 import SignUpButton from '../buttons/SignUpButton';
 import LoginButton from '../buttons/LoginButton';
 import { useNavigate } from "react-router-dom";
-import GeneralSidebar from '../sidebars/GeneralSidebar';
+import OurMissionButton from '../buttons/OurMissionButton';
 
 // A Header Component used for the General Landing Page
 // Contains a Menu Item, the logo/title, sign up button, and login button
-const LandingHeader = () => {
+const LandingHeader = ({landing}) => {
     let navigate = useNavigate();
     let toLanding = () => navigate("/");
-    let [sideBarOpen, setSidebarState] = React.useState(false)
-    let toggleSidebar = () => {
-        setSidebarState(!sideBarOpen)
-    }
  
     return (
         <ThemeProvider theme={theme}>
@@ -24,18 +20,17 @@ const LandingHeader = () => {
             <Box sx={{flexGrow: 1}}>
                 <AppBar position='static' sx={{background: "transparent"}}>
                     <Toolbar> 
-                        <IconButton onClick={toggleSidebar}>
-                            <MenuIcon />
-                        </IconButton>
-                        <GeneralSidebar isOpen={sideBarOpen} toggle={toggleSidebar} />
                         <Box sx={{flexGrow: 1}}>
                         <Button onClick={toLanding}>
                             <img src={headerLogo} alt="Logo" />
                             <Typography sx={{ color: "primary.light", fontSize: 20, fontWeight: "bold"}}>
-                                Virtual Farmers Market
+                                FarmFresh
                             </Typography>
                         </Button>
                         </Box>
+                        {landing &&
+                        <OurMissionButton />
+                        }
                         <LoginButton landingTextColor="primary.light"/>
                         <SignUpButton />
                     </Toolbar>

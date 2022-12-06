@@ -29,6 +29,9 @@ const FarmerFAQPage = () => {
             {   title: "What is the difference between product type and product category?",
                 content: "Product type is the specific item that you are creating (ex. Blueberries), while product category is a term used for filtering. We suggest something like 'Fruit' or 'Vegetable' for product category."
             },
+            {   title: "How do I deal with a fraudulent customer?",
+                content: "Please email _____@gmail.com about any fraudulent activity. State the issue and any parties involved."
+            },
         ]
     }
     return (
