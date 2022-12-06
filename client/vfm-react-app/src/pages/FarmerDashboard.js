@@ -56,48 +56,6 @@ const FarmerDashboard = () => {
           </Typography>
         </Grid>
 
-        <Grid item xs={12} sm={2} md={2} height="100%" width="100%">
-          <Stack
-            direction={{
-              xs: "row",
-              sm: "column",
-            }}
-            spacing={1}
-            height="100%"
-            width="100%"
-          >
-            <Card variant="outlined" height="100%">
-              <Stat label="Total Sales" value="1000" color="lightgreen" />
-            </Card>
-            <Card variant="outlined" height="100%">
-              <Stat label="Orders" value="100" color="lightblue" />
-            </Card>
-            <Card variant="outlined" height="100%">
-              <Stat label="Products" value="100" color="lightpink" />
-            </Card>
-          </Stack>
-        </Grid>
-
-        <Grid item xs={12} sm={6} md={4}>
-          <Card sx={{ p: 2 }} variant="outlined">
-            <Typography variant="h6" component="h2" gutterBottom>
-              Weekly Sales
-            </Typography>
-            <WeeklySales />
-          </Card>
-        </Grid>
-
-        <Grid item xs={12} sm={4} md={6}>
-          <Card variant="outlined" sx={{ p: 2 }}>
-            <Typography variant="h6" component="h2" gutterBottom>
-              Notifications
-            </Typography>
-            <Stack direction="column" spacing={1}>
-              <Notifications />
-            </Stack>
-          </Card>
-        </Grid>
-
         <Grid item xs={12} sm={6} md={4}>
           <Card variant="outlined" sx={{ p: 2 }}>
             <Typography variant="h5" component="h2" gutterBottom>
