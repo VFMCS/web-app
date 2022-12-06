@@ -25,8 +25,25 @@ const returnAllProducts = (req, res) => {
     })
 }
 
+const vendorSearch = (req, res) => {
+    search_query = '%' + req.params.key + '%';
+    pool.query(queries.vendorSearch, [search_query], (error, results) => {
+        if (error) throw error;
+        res.status(200).json(results.rows);
+    })
+}
+
+const returnAllVendors = (req, res) => {
+    pool.query(queries.returnAllVendors, (error, results) => {
+        if (error) throw error;
+        res.status(200).json(results.rows);
+    })
+}
+
 module.exports = {
     productSearch,
     productSearchByVendorID,
     returnAllProducts,
+    vendorSearch,
+    returnAllVendors
 }

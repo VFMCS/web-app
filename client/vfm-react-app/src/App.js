@@ -7,8 +7,11 @@ import FarmerProfileView from './pages/FarmerProfileView';
 import CustomerLandingPage from './pages/CustomerLandingPage';
 import CustomerSearch from './pages/CustomerSearch';
 import FarmerSearch from './pages/FarmerSearch';
+import CustomerSearchVendors from './pages/CustomerSearchVendors';
 import Register from './pages/Register';
 import Login from './pages/Login';
+import FarmerReserves from './pages/FarmerReserves';
+import FarmerReserveRequests from './pages/FarmerReserveRequests';
 import FarmerDashboard from './pages/FarmerDashboard';
 import CustomerFAQPage from './pages/CustomerFAQ';
 import FarmerFAQ from './pages/FarmerFAQ';
@@ -25,7 +28,7 @@ function App() {
   }
   */
   const [curr_user_id, setCurr_User_Id] = React.useState(
-    JSON.parse(localStorage.getItem('curr_user_id')) || 0
+    JSON.parse(localStorage.getItem('curr_user_id')) || -1
   );
   
   const [curr_user_is_vendor, setCurr_User_Is_Vendor] = React.useState(
@@ -33,8 +36,8 @@ function App() {
   );
   
   React.useEffect(() => {
-    if(localStorage.getItem('curr_user_id') === null) {setCurr_User_Id(0); localStorage.setItem('curr_user_id', 0);}
-    if(localStorage.getItem('curr_user_is_vendor') === null) {setCurr_User_Id(false); localStorage.setItem('curr_user_is_vendor', false);}
+    if(localStorage.getItem('curr_user_id') === null) {setCurr_User_Id(0); localStorage.setItem('curr_user_id', -1);}
+    if(localStorage.getItem('curr_user_is_vendor') === null) {setCurr_User_Is_Vendor(false); localStorage.setItem('curr_user_is_vendor', false);}
   }, [])
 
 
@@ -49,8 +52,11 @@ function App() {
         <Route path = "/farmer-profile" element = {<FarmerProfileView />}/>
         <Route path="/customer-search" element={<CustomerSearch/>} />
         <Route path="/farmer-search" element={<FarmerSearch/>} />
+        <Route path="/customer-search-vendor" element={<CustomerSearchVendors/>} />
         <Route path="/sign-in" element={<Login />} />
         <Route path="/sign-up" element={<Register />} />
+        <Route path="/farmer-reserves" element={<FarmerReserves />} />
+        <Route path="/farmer-reserve-requests" element={<FarmerReserveRequests />} />
         <Route path="/dashboard" element={<FarmerDashboard />} />
         <Route path="/customer/faq/" element={<CustomerFAQPage />} />
         <Route path="/farmer/faq/" element={<FarmerFAQ />} />

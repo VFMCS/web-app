@@ -3,8 +3,13 @@ const productSearchByVendorID = "SELECT * FROM products WHERE vendor_id= $1 AND 
 
 const returnAllProducts = "SELECT * FROM products";
 
+const vendorSearch = "SELECT * FROM users WHERE is_vendor=TRUE AND UPPER(CONCAT(first_name, '#', last_name, '#', address, '#', about_me)) LIKE UPPER($1)";
+const returnAllVendors = "SELECT * FROM users WHERE is_vendor=TRUE";
+
 module.exports = {
     productSearch,
     returnAllProducts,
-    productSearchByVendorID
+    productSearchByVendorID,
+    vendorSearch,
+    returnAllVendors
 }

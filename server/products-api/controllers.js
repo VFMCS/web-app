@@ -18,6 +18,14 @@ const getProductByVendorID = (req, res) => {
     })
 }
 
+const getProductByProductID = (req, res) => {
+    product_id = req.params.product_id;
+    pool.query(queries.getProductByProductID, [product_id], (error, results) => {
+        if (error) throw error;
+        res.status(200).json(results.rows);
+    })
+}
+
 const insertProd = (req, res) => {
     const values = [req.body.vendor_id, req.body.name, req.body.details, moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"), "true", req.body.quantity, req.body.price, req.body.photo, req.body.product_type, req.body.product_category];
     console.log(req.vendor_id);
@@ -53,6 +61,7 @@ module.exports = {
     getAllProducts,
     insertProd,
     getProductByVendorID,
-    patchProductByProductID,
+    getProductByProductID,
+    patchProductByProductID
     //insertProdByID
 }

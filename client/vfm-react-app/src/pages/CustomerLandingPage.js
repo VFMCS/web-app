@@ -18,6 +18,8 @@ import { useNavigate } from 'react-router-dom';
 //Customer landing page upon customer being signed in
 //const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
+localStorage.setItem('isFarmerSearch', false);
+
 const CustomerLandingPage = () => {
   //TESTING///////
   /*
@@ -51,7 +53,7 @@ const CustomerLandingPage = () => {
   const [farmers, setFarmers] = React.useState([]) // capture data from GET request
 
   React.useEffect(() => {
-    fetch('http://localhost:3001/api/vendors').then(response => response.json()).then(data => setFarmers(data))
+    fetch('http://localhost:3001/api/vendors').then(response => response.json()).then(data => {setFarmers(data); })
       .catch(err => console.error(err));
   }, [])
 
@@ -73,7 +75,7 @@ const CustomerLandingPage = () => {
   }, [selectedFilters, products])
 
   React.useEffect(() => {
-    fetch('http://localhost:3001/api/products').then(response => response.json()).then(data => setProducts(data))
+    fetch('http://localhost:3001/api/products').then(response => response.json()).then(data => {setProducts(data);})
       .catch(err => console.error(err));
   }, [])
   return (
@@ -111,7 +113,7 @@ const CustomerLandingPage = () => {
             <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 4, sm: 4, md: 20 }}>
               {displayedProducts.map((item) => (
                 <Grid item xs={1} sm={3} md={4} key={item.product_id}>
-                  <ProductCard item={item} />
+                  <ProductCard addMode item={item} />
                 </Grid>
               ))}
             </Grid>
