@@ -15,7 +15,6 @@ const FarmerCard = (props) => {
         clickedOnUserId = props.item.user_id;
         navigate('/farmer-profile');
     };
-    
 
     return (
         <ThemeProvider theme={theme}>

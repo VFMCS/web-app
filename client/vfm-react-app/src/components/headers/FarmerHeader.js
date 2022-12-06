@@ -36,7 +36,7 @@ const FarmerHeader = () => {
                             <Button onClick={toProducts}>
                                 <img src={headerLogo} alt="Logo" />
                                 <Typography sx={{ color: "primary.dark", fontSize: 20, fontWeight: "bold"}}>
-                                    Virtual Farmers Market
+                                    FarmFresh
                                 </Typography>
                             </Button>
                         </Box>

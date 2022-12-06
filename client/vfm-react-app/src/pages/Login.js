@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, ThemeProvider } from "react";
+import theme from '../theme/theme.js'
 import "../login-styles/auth.css";
 import LoginHeader from '../components/headers/LandingHeader.js';
 import LandingHeader from '../components/headers/LandingHeader.js';
@@ -70,9 +71,8 @@ const Login = () => {
   }).catch(err => console.error(err));
 }
   return (
-
     <div id="login-auth-wrap" className="auth-wrapper">
-      <LoginHeader />
+        <LandingHeader/>
 
       <div className="auth-inner">
         <form onSubmit={handleSubmit}>
@@ -111,6 +111,7 @@ const Login = () => {
         </form>
       </div>
     </div>
+
   );
 };
 

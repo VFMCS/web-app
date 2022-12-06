@@ -13,6 +13,7 @@ import Login from './pages/Login';
 import FarmerReserves from './pages/FarmerReserves';
 import FarmerReserveRequests from './pages/FarmerReserveRequests';
 import FarmerDashboard from './pages/FarmerDashboard';
+import CustomerCurrentOrders from './pages/CustomerCurrentOrders';
 
 function App() {
   //Access current user id using following statements: localStorage.getItem('curr_user_id'), localStorage.setItem('curr_user_id', JSON.stringify(curr_user_id))
@@ -49,6 +50,7 @@ function App() {
         <Route path="/customer" element={<CustomerLandingPage />} />
         <Route path = "/farmer-profile" element = {<FarmerProfileView />}/>
         <Route path="/customer-search" element={<CustomerSearch/>} />
+        <Route path="/customer-current-orders" element={<CustomerCurrentOrders/>} />
         <Route path="/farmer-search" element={<FarmerSearch/>} />
         <Route path="/customer-search-vendor" element={<CustomerSearchVendors/>} />
         <Route path="/sign-in" element={<Login />} />

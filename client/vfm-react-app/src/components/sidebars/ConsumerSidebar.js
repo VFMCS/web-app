@@ -5,14 +5,31 @@ import { useNavigate } from "react-router-dom";
 import EqualizerIcon from '@mui/icons-material/Equalizer';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import LogoutIcon from '@mui/icons-material/Logout';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+import ArchiveIcon from '@mui/icons-material/Archive';
+import SearchIcon from '@mui/icons-material/Search';
+
 
 // A Header Component used by the Farmer
 // Contains: Menu button, Logo, Dashboard button, and Products Button
 const ConsumerSidebar = ({isOpen, toggle}) => {
     let navigate = useNavigate()
     let toHome = () => {
-        localStorage.setItem('curr_user_id', JSON.stringify(-1));
+        localStorage.setItem('curr_user_id', -1)
         navigate("/")
+    }
+
+    let toSearch = () => {
+        navigate("/customer")
+    }
+
+    let toCustomerCurrentOrders = () => {
+        navigate("/customer-current-orders")
+    }
+
+    let toCustomerCompletedOrders = () => {
+
     }
 
     return (
@@ -24,12 +41,28 @@ const ConsumerSidebar = ({isOpen, toggle}) => {
                 onKeyDown={toggle}
             >
                 <List>
-                    <ListItem key={"Orders"} disablePadding>
-                        <ListItemButton>
+                    <ListItem key={"Search"} disablePadding>
+                        <ListItemButton onClick={toSearch}>
                             <ListItemIcon>
-                                <InventoryIcon />
+                                <SearchIcon />
                             </ListItemIcon>
-                            <ListItemText primary="Orders" />
+                            <ListItemText primary="Search" />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem key={"Reserves"} disablePadding>
+                        <ListItemButton onClick={toCustomerCurrentOrders}>
+                            <ListItemIcon>
+                                <BookmarkBorderIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Reserves" />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem key={"Completed Orders"} disablePadding>
+                        <ListItemButton onClick={toCustomerCompletedOrders}>
+                            <ListItemIcon>
+                                <ArchiveIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Completed Orders" />
                         </ListItemButton>
                     </ListItem>
                     <ListItem key={"Sign Out"} disablePadding>

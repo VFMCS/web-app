@@ -8,6 +8,7 @@ import AddIcon from '@mui/icons-material/Add';
 import ShoppingSidebar from './sidebars/ShoppingSidebar';
 import CloseIcon from '@mui/icons-material/Close';
 import CheckIcon from '@mui/icons-material/Check';
+import { useNavigate } from 'react-router-dom';
 
 
 // This is a component that displays important information about a product
@@ -18,15 +19,17 @@ const ProductCard = (props) => {
 
     let [shoppingSidebarOpen, setShoppingSidebarOpen] = React.useState(false);
 
-    let [time_left, setTimeLeft] = React.useState("24h 0m")
+    let [time_left, setTimeLeft] = React.useState("24h 0m");
+    
+    let navigate = useNavigate();
     
     let toAddItem = () => {
-        console.log('setshoppingsidebaropen'); 
+        //console.log('setshoppingsidebaropen'); 
         //const { vendor_id, customer_id, quantity, product_id } = req.body;
         //console.log(props.item.vendor_id)
-        console.log(props.item);
+        //console.log(props.item);
 
-        const prod = {
+        let prod = {
             'vendor_id': props.item.vendor_id,
             'customer_id': parseInt(localStorage.getItem('curr_user_id')),
             'quantity': 1,
@@ -42,8 +45,26 @@ const ProductCard = (props) => {
             'image_url': props.item.image_url
               
         };
+
+        console.log('getting');
+
+        fetch('http://localhost:3001/api/transaction/get-in-cart/' + prod.product_id).then(response => response.json()).then(data => {
+            console.log('get transaction data: ' + JSON.stringify(data))
+            if(JSON.stringify(data) === '[]'){
+                console.log('posting');
+                fetch("http://localhost:3001/api/transaction", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(prod) }).then(data => {console.log(prod); console.log("data: " + JSON.stringify(data)); toggleShoppingSidebar();});   
+            }
+            else{
+                console.log('incrementing prod quantity');
+                data[0].quantity = data[0].quantity + 1;
+                //prod = data;
+                //console.log('prod: ' + JSON.stringify(prod));
+                fetch("http://localhost:3001/api/transaction/update/", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data[0]) }).then(data => {console.log("data: " + JSON.stringify(data))})
+            }
+        }).then().catch(err => console.error(err))
         
-        fetch("http://localhost:3001/api/transaction", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(prod) }).then(data => {console.log(prod); console.log(data); });   
+        //window.location.reload();
+        
     }
 
     let toAcceptItem = item => () => {
@@ -51,7 +72,8 @@ const ProductCard = (props) => {
         item.transaction_date = new Date();
         const url = "http://localhost:3001/api/transaction/update/"
         fetch(url, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(item) }).then(data => console.log(data));
-        window.location.reload(false)
+        window.location.reload();
+        navigate('/farmer-reserves');
 
     }
 
@@ -111,7 +133,7 @@ const ProductCard = (props) => {
                                          boxShadow: (theme) => theme.shadows[5],
                                          p: 4,
                                         }}>
-                                            <FarmerPostItem initItem={props.item} setModalState={setModalState} editMode/> {/* Update to support editing mode */}
+                                        <FarmerPostItem initItem={props.item} setModalState={setModalState} editMode/> {/* Update to support editing mode */}
                                     </Box>
                                 </Modal>
                             </Box>

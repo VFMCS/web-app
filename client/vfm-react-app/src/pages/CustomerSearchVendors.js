@@ -48,7 +48,7 @@ const CustomerSearchVendors = () => {
                 <Stack direction="column">
                     <ConsumerHeader />
                     <Typography variant="h5" sx={{ margin: 2, color: "primary.main" }}>
-                        Search Results
+                        Search results for "{search_query}"
                     </Typography>
                     <Divider />
                     <center>

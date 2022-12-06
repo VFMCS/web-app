@@ -74,7 +74,7 @@ const FarmerProfileView = (props) => {
                     <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                         {products.map((item) => (
                             <Grid item xs={2} sm={2} md={2} key={item.name}>
-                                <ProductCard item={item}/>
+                                <ProductCard addMode item={item}/>
                             </Grid>
                         ))}
                     </Grid>
