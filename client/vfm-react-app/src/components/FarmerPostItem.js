@@ -32,7 +32,8 @@ const FarmerPostItem = ({ editMode, setModalState, initItem }) => {
         'price': null,
         'product_category': null,
         'details': null,
-        'name': null
+        'name': null,
+		'photo': null
         });
 
     var defaultImageCheck = () => {
@@ -67,6 +68,11 @@ const FarmerPostItem = ({ editMode, setModalState, initItem }) => {
 
     var handleImageUpload = (event) => {
         var file = event.target.files[0];
+		console.log(file)
+		const formData = new FormData();
+		formData.append("product", file);
+		console.log(formData)
+
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.addEventListener("load", () => {
@@ -76,7 +82,9 @@ const FarmerPostItem = ({ editMode, setModalState, initItem }) => {
             setShowBox(false)
             setShowUploadButton(false)
         }, false);
-    }
+		fetch("http://localhost:3001/api/cloudinary/upload-product", { method: "POST", body: formData}).then(res => res.json()).then(data => item["photo"] = data.result)
+		console.log(item)
+	}
 
     var errorExp = ""
     var onSave = () => {
@@ -177,7 +185,7 @@ const FarmerPostItem = ({ editMode, setModalState, initItem }) => {
                     {showBox && (<div id="uploadBox">
                         {showUploadButton && (<Button data-testid = "upload" color="secondary" sx={{ p: '5', width: '100%', height: '100%'}} variant="contained" component="label">
                         Upload
-                        <input hidden accept="image/*" multiple type="file" onChange={handleImageUpload}/>
+                        <input hidden accept="image/*" multiple type="file" enctype='multipart/form-data' onChange={handleImageUpload}/>
                         </Button>)}
                     </div>)}
                     {uploadImage && (<img alt="sampleImg}" src={uploadImage} id="imageUpload"/>)}
