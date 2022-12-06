@@ -12,8 +12,11 @@ const LoginButton = (props) => {
     let onClick = () => {
         navigate('/sign-in') // Change to Login (or show Login Modal)
     }
+
+    let textColor = localStorage.getItem('curr_user_id') === '-1' ? props.color : "success";
+
     return (
-        <Button data-testid="login-button" onClick={onClick} color={props.color || "success"} variant={props.variant || "text"} sx={{marginRight: 2, fontWeight: "bold"}}> {props.label || "Login" } </Button>
+        <Button data-testid="login-button" onClick={onClick} color={textColor} variant={props.variant || "text"} sx={{marginRight: 2, fontWeight: "bold"}}> {props.label || "Login" } </Button>
     )
 }
 
