@@ -17,11 +17,12 @@ const LandingHeader = () => {
     let toggleSidebar = () => {
         setSidebarState(!sideBarOpen)
     }
+ 
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline enableColorScheme />
             <Box sx={{flexGrow: 1}}>
-                <AppBar position='static' sx={{background: "white"}}>
+                <AppBar position='static' sx={{background: "transparent"}}>
                     <Toolbar> 
                         <IconButton onClick={toggleSidebar}>
                             <MenuIcon />
@@ -30,12 +31,12 @@ const LandingHeader = () => {
                         <Box sx={{flexGrow: 1}}>
                         <Button onClick={toLanding}>
                             <img src={headerLogo} alt="Logo" />
-                            <Typography sx={{ color: "primary.dark", fontSize: 20, fontWeight: "bold"}}>
+                            <Typography sx={{ color: "primary.light", fontSize: 20, fontWeight: "bold"}}>
                                 Virtual Farmers Market
                             </Typography>
                         </Button>
                         </Box>
-                        <LoginButton />
+                        <LoginButton landingTextColor="primary.light"/>
                         <SignUpButton />
                     </Toolbar>
                 </AppBar>

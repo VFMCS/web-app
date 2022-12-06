@@ -26,7 +26,7 @@ function App() {
   }
   */
   const [curr_user_id, setCurr_User_Id] = React.useState(
-    JSON.parse(localStorage.getItem('curr_user_id')) || 0
+    JSON.parse(localStorage.getItem('curr_user_id')) || -1
   );
   
   const [curr_user_is_vendor, setCurr_User_Is_Vendor] = React.useState(
@@ -34,8 +34,8 @@ function App() {
   );
   
   React.useEffect(() => {
-    if(localStorage.getItem('curr_user_id') === null) {setCurr_User_Id(0); localStorage.setItem('curr_user_id', 0);}
-    if(localStorage.getItem('curr_user_is_vendor') === null) {setCurr_User_Id(false); localStorage.setItem('curr_user_is_vendor', false);}
+    if(localStorage.getItem('curr_user_id') === null) {setCurr_User_Id(0); localStorage.setItem('curr_user_id', -1);}
+    if(localStorage.getItem('curr_user_is_vendor') === null) {setCurr_User_Is_Vendor(false); localStorage.setItem('curr_user_is_vendor', false);}
   }, [])
 
 
