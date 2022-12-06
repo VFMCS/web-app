@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import EqualizerIcon from '@mui/icons-material/Equalizer';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import LogoutIcon from '@mui/icons-material/Logout';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+
 
 // A Header Component used by the Farmer
 // Contains: Menu button, Logo, Dashboard button, and Products Button
@@ -13,6 +15,10 @@ const ConsumerSidebar = ({isOpen, toggle}) => {
     let toHome = () => {
         localStorage.setItem('curr_user_id', JSON.stringify(-1));
         navigate("/")
+    }
+
+    let toCustomerCurrentORders = () => {
+        navigate("/customer-current-orders")
     }
 
     return (
@@ -24,12 +30,12 @@ const ConsumerSidebar = ({isOpen, toggle}) => {
                 onKeyDown={toggle}
             >
                 <List>
-                    <ListItem key={"Orders"} disablePadding>
-                        <ListItemButton>
+                    <ListItem key={"Reserves"} disablePadding>
+                        <ListItemButton onClick={toCustomerCurrentORders}>
                             <ListItemIcon>
-                                <InventoryIcon />
+                                <BookmarkBorderIcon />
                             </ListItemIcon>
-                            <ListItemText primary="Orders" />
+                            <ListItemText primary="Reserves" />
                         </ListItemButton>
                     </ListItem>
                     <ListItem key={"Sign Out"} disablePadding>

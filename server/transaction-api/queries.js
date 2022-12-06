@@ -6,6 +6,10 @@ const updateTransactionInCart = "UPDATE transactions SET in_cart = $2 WHERE tran
 const updateTransactionReserve = "UPDATE transactions SET is_reserved = $2 WHERE transaction_id = $1";
 
 const getCustomerCart = "SELECT * FROM transactions WHERE customer_id = $1 AND in_cart = TRUE";
+const getCustomerCurrentOrders = "SELECT * FROM transactions WHERE customer_id = $1 AND in_cart = FALSE";
+// const getCustomerPastOrders = "SELECT * FROM transactions WHERE customer_id = $1 AND in_cart = FALSE AND is_reserved = FALSE";
+
+
 const getVendorReserveRequests = "SELECT * FROM transactions WHERE vendor_id = $1 AND is_reserved=FALSE AND in_cart = FALSE";
 const getVendorReserves = "SELECT * FROM transactions WHERE vendor_id = $1 AND is_reserved=TRUE AND in_cart = FALSE";
 const deleteTransaction = "DELETE FROM transactions WHERE transaction_id = $1";
@@ -17,6 +21,7 @@ module.exports = {
     updateTransactionReserve,
     updateTransactionInCart,
     getCustomerCart,
+    getCustomerCurrentOrders,
     getVendorReserveRequests,
     getVendorReserves,
     deleteTransaction,

@@ -42,6 +42,8 @@ const ProductCard = (props) => {
             'image_url': props.item.image_url
               
         };
+        toggleShoppingSidebar();
+
         
         fetch("http://localhost:3001/api/transaction", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(prod) }).then(data => {console.log(prod); console.log(data); });   
     }
@@ -111,7 +113,7 @@ const ProductCard = (props) => {
                                          boxShadow: (theme) => theme.shadows[5],
                                          p: 4,
                                         }}>
-                                            <FarmerPostItem initItem={props.item} setModalState={setModalState} editMode/> {/* Update to support editing mode */}
+                                        <FarmerPostItem initItem={props.item} setModalState={setModalState} editMode/> {/* Update to support editing mode */}
                                     </Box>
                                 </Modal>
                             </Box>

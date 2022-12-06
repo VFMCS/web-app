@@ -10,6 +10,15 @@ const getCustomerCart = (req, res) => {
     })
 }
 
+const getCustomerCurrentOrders = (req, res) => {
+    const customer_id = req.params.id;
+    console.log(customer_id);
+    pool.query(queries.getCustomerCurrentOrders, [customer_id], (error, results) => {
+        if (error) throw error;
+        res.status(200).json(results.rows);
+    })
+}
+
 const getVendorReserveRequests = (req, res) => {
     const vendor_id = req.params.id;
     pool.query(queries.getVendorReserveRequests, [vendor_id], (error, results) => {
@@ -80,6 +89,7 @@ module.exports = {
     addTransaction,
     updateTransaction,
     getCustomerCart,
+    getCustomerCurrentOrders,
     getVendorReserveRequests,
     getVendorReserves,
     deleteTransaction

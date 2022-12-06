@@ -12,70 +12,37 @@ import {createStore} from 'state-pool';
 const store = createStore();  // Create store for storing our global state
 
 
-const CustomerSearch = () => {
-
+const CustomerCurrentOrders = () => {
     //let [products, setProducts] = React.useState([])
     //let potatoArr = Array(10).fill({name: "Potato", price: "75", description: "This is a potato"})
     //let products = [{name: "Tomato", price: "500", description: "This is a tomato"},{name: "Squash", price: "30", description: "This is a squash"}].concat(potatoArr)
 
     const location = useLocation();
 
-    const [searchOutput, setSearchOutput] = React.useState([]) // capture data from GET request
+    const [customer_current_orders, setCustomerCurrentOrders] = React.useState([]) // capture data from GET request
     React.useEffect(() => {
-        let url = 'http://localhost:3001/search/products/' + search_query;
+        let url = 'http://localhost:3001/api/transaction/customer-current-orders/' + localStorage.getItem('curr_user_id');
         console.log(url);
-        fetch(url).then(response => response.json()).then(data => setSearchOutput(data))
+        fetch(url).then(response => response.json()).then(data => setCustomerCurrentOrders(data))
             .catch(err => console.error(err));
 
-    }, [location.state])
-
-    /*
-    React.useEffect(() => {
-        const fetchData = async () => {
-            console.log(search_query);
-            let url = 'http://localhost:3001/search/' + search_query;
-
-            const result = await fetch(url).then(response => response.json()).then(data => setSearchOutput(data))
-            .catch(err => console.error(err));
-        }
-        fetchData();
     }, [])
-    */
-    if (searchOutput.length === 0) {
-        return (
-            <ThemeProvider theme={theme}>
-                <CssBaseline enableColorScheme />
-                <Stack direction="column">
-                    <ConsumerHeader />
-                    <Typography variant="h5" sx={{ margin: 2, color: "primary.main" }}>
-                        Search Results for "{search_query}"
-                    </Typography>
-                    <Divider />
-                    <center>
-                        <Typography variant="h5" sx={{ margin: 2, color: "black" }}>
-                            No Search Results Found
-                        </Typography>
-                    </center>
-                </Stack>
-            </ThemeProvider>
-        )
-    }
-    console.log(searchOutput);
+
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline enableColorScheme />
             <Stack direction="column">
                 <ConsumerHeader />
                 <Typography variant="h5" sx={{ margin: 2, color: "primary.main" }}>
-                    Search Results for "{search_query}"
+                    Reserves
                 </Typography>
                 <Divider />
                 <center>
                     <Box sx={{ margin: 4 }}>
                         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-                            {searchOutput.map((item) => (
+                            {customer_current_orders.map((item) => (
                                 <Grid item xs={2} sm={4} md={4} key={item.product_id}>
-                                    <ProductCard addMode item={item} />
+                                    <ProductCard item={item} />
                                 </Grid>
                             ))}
                         </Grid>
@@ -86,5 +53,5 @@ const CustomerSearch = () => {
     );
 };
 
-export default CustomerSearch
+export default CustomerCurrentOrders
 
