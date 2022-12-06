@@ -8,6 +8,7 @@ import AddIcon from '@mui/icons-material/Add';
 import ShoppingSidebar from './sidebars/ShoppingSidebar';
 import CloseIcon from '@mui/icons-material/Close';
 import CheckIcon from '@mui/icons-material/Check';
+import { useNavigate } from 'react-router-dom';
 
 
 // This is a component that displays important information about a product
@@ -17,10 +18,11 @@ const ProductCardReserved = (props) => {
 
     let [shoppingSidebarOpen, setShoppingSidebarOpen] = React.useState(false);
 
-    let [time_left, setTimeLeft] = React.useState("24h 0m")
+    let [time_left, setTimeLeft] = React.useState("24h 0m");
+    let navigate = useNavigate();
+
 
     React.useEffect(() => {
-        
         let curr_date = (new Date()).toString();
         let transaction_date = (props.item.transaction_date).toString();
         let curr_date_time = curr_date.substring(16,21);
@@ -37,8 +39,6 @@ const ProductCardReserved = (props) => {
 
         let time_left = parseInt(((24*60 - min_diff) / 60)).toString() + "h " + ((24*60 - min_diff) % 60).toString() + "m";
 
-        
- 
         /*
         let hour_diff = parseInt(curr_date_time.substring(0,2)) - parseInt(transaction_date_time.substring(0,2))
 
@@ -72,6 +72,24 @@ const ProductCardReserved = (props) => {
         setTimeLeft(time_left);
     }, []);
 
+    let toAcceptItem = item => () => {
+        item.is_reserved = true;
+        item.transaction_date = new Date();
+        const url = "http://localhost:3001/api/transaction/update/"
+        fetch(url, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(item) }).then(data => {console.log(data); window.location.reload();});
+        navigate('/farmer-reserves');
+
+    }
+
+    let toRejectItem = item => () => {
+        //Handle if the farmer rejects the item in which consumer must be alerted if the reserve request was rejected
+        const url = "http://localhost:3001/api/transaction/" + item.transaction_id;
+        fetch(url, { method: "DELETE", headers: { "Content-Type": "application/json" }, body: JSON.stringify(item) }).then(data => console.log(data));
+        //window.location.reload(false)
+        window.location.reload(false)
+
+    }
+
 
     let toggleShoppingSidebar = () => {
         setShoppingSidebarOpen(!shoppingSidebarOpen)
@@ -99,13 +117,37 @@ const ProductCardReserved = (props) => {
                             {" $" + props.item.price + "/item"}
                         </Typography>
                         <Typography gutterBottom variant="subtitle1" component="div" margin={-1}>
-                            {props.item.quantity} in Stock
+                            {props.item.vendor_quantity} in Stock
                         </Typography>
 
-                        <Typography sx={{marginTop: 2}} gutterBottom variant="subtitle1" component="div" margin={-1}>
+                        {props.isFarmer &&
+                            <Typography sx={{marginTop: 2}} gutterBottom variant="subtitle1" component="div" margin={-1}>
                             Time remaining to pickup reserved item: {time_left} 
-                        </Typography>
+                            </Typography>
+                        }
 
+                        {props.reserveRequestMode &&
+                            <Box>
+                                <Fab color="primary" aria-label="add" sx={{position: 'absolute',
+                                bottom: 16,
+                                left: 16,
+                                }}
+                                onClick={toAcceptItem(props.item)}>
+                                    <CheckIcon />
+                                </Fab>
+
+                                <Fab color="secondary" ria-label="add" sx={{position: 'absolute',
+                                bottom: 16,
+                                right: 16,
+                                }}
+                                onClick={toRejectItem(props.item)}>
+                                    <CloseIcon />
+                                </Fab>
+                                <ShoppingSidebar isOpen={shoppingSidebarOpen} toggle= {toggleShoppingSidebar} onClose={() => setShoppingSidebarOpen(false)}/>
+                                    
+                                
+                            </Box>
+                        }
                         
                     </CardContent>
                 </CardActionArea>

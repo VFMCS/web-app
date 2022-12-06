@@ -5,6 +5,7 @@ import theme from '../theme/theme.js'
 import FarmerHeader from '../components/headers/FarmerHeader.js';
 import ProductCard from '../components/ProductCard.js'
 import EditIcon from '@mui/icons-material/Edit';
+import ProductCardReserved from '../components/ProductCardReserved.js';
 
 //Customer landing page upon customer being signed in
 
@@ -38,7 +39,7 @@ const FarmerReserveRequests = () => {
                             {/* Replace with current vendor id*/}
                             {products.map((item) => (
                                 <Grid item xs={2} sm={4} md={4} key={item.name}>
-                                    <ProductCard reserveRequestMode item={item} />
+                                    <ProductCardReserved reserveRequestMode item={item} />
                                 </Grid>
                             ))}
                         </Grid>

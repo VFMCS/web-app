@@ -24,12 +24,12 @@ const ProductCard = (props) => {
     let navigate = useNavigate();
     
     let toAddItem = () => {
-        console.log('setshoppingsidebaropen'); 
+        //console.log('setshoppingsidebaropen'); 
         //const { vendor_id, customer_id, quantity, product_id } = req.body;
         //console.log(props.item.vendor_id)
-        console.log(props.item);
+        //console.log(props.item);
 
-        const prod = {
+        let prod = {
             'vendor_id': props.item.vendor_id,
             'customer_id': parseInt(localStorage.getItem('curr_user_id')),
             'quantity': 1,
@@ -45,10 +45,26 @@ const ProductCard = (props) => {
             'image_url': props.item.image_url
               
         };
-        toggleShoppingSidebar();
 
+        console.log('getting');
+
+        fetch('http://localhost:3001/api/transaction/get-in-cart/' + prod.product_id).then(response => response.json()).then(data => {
+            console.log('get transaction data: ' + JSON.stringify(data))
+            if(JSON.stringify(data) === '[]'){
+                console.log('posting');
+                fetch("http://localhost:3001/api/transaction", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(prod) }).then(data => {console.log(prod); console.log("data: " + JSON.stringify(data)); toggleShoppingSidebar();});   
+            }
+            else{
+                console.log('incrementing prod quantity');
+                data[0].quantity = data[0].quantity + 1;
+                //prod = data;
+                //console.log('prod: ' + JSON.stringify(prod));
+                fetch("http://localhost:3001/api/transaction/update/", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data[0]) }).then(data => {console.log("data: " + JSON.stringify(data))})
+            }
+        }).then().catch(err => console.error(err))
         
-        fetch("http://localhost:3001/api/transaction", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(prod) }).then(data => {console.log(prod); console.log(data); });   
+        //window.location.reload();
+        
     }
 
     let toAcceptItem = item => () => {

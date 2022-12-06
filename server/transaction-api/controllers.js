@@ -45,6 +45,16 @@ const addTransaction = (req, res) => {
     })
 }
 
+const getTransactionInCartByProdID = (req, res) => {
+    //const { vendor_id, customer_id, quantity, product_id } = req.body;
+    const product_id = req.params.id;
+    pool.query(queries.getTransactionInCartByProdID, [product_id], (error, results) => {
+        if (error) throw error
+        else {res.status(200).json(results.rows)};
+        
+    })
+}
+
 const deleteTransaction = (req, res) => {
     console.log("id: " + req.params.id);
     const transaction_id = req.params.id;
@@ -57,6 +67,7 @@ const deleteTransaction = (req, res) => {
 //send null for values not being updated
 const updateTransaction = (req, res) => {
     const values = [req.body.transaction_id, req.body.quantity, req.body.is_reserved, req.body.in_cart];
+    console.log(req.body.transaction_id);
     /*
     if (req.body.quantity != null) {
         pool.query(queries.updateTransactionQuantity, [req.body.transaction_id, req.body.quantity], (error, results) => {
@@ -78,8 +89,8 @@ const updateTransaction = (req, res) => {
     }
     */
     pool.query(queries.updateTransaction, values, (error, results) => {
-        if (error) throw error;
-        res.status(200).json(results.rows);
+        if (error) {}
+        else res.status(200).json(results.rows);
     })
 
     
@@ -87,6 +98,7 @@ const updateTransaction = (req, res) => {
 
 module.exports = {
     addTransaction,
+    getTransactionInCartByProdID,
     updateTransaction,
     getCustomerCart,
     getCustomerCurrentOrders,

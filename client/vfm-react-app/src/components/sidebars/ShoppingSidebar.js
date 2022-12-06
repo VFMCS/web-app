@@ -52,7 +52,7 @@ const ShoppingSidebar = ({isOpen, toggle}) => {
         }
         else{
             item.quantity = 0;
-            fetch(url, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(item) }).then(data => console.log(data));
+            //fetch(url, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(item) }).then(data => console.log(data));
         }             
     }
 
