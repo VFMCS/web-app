@@ -3,7 +3,15 @@ const pool = require("../db/db.js").pool;
 const queries = require("./queries.js")
 
 const createReview = (req, res) => {
-    const values = [req.body.rating, req.body.reviewer, req.body.reviewee, req.body.review];
+    const values = [
+        req.body.rating,
+        req.body.reviewer,
+        req.body.reviewee,
+        req.body.review,
+        req.body.title,
+        req.body.reviewer_first_name,
+        req.body.reviewee_full_name,
+        req.body.product_name];
     pool.query(queries.createReview, values, (error, results) => {
         if (error) throw error;
         res.status(200).json(results.rows);
