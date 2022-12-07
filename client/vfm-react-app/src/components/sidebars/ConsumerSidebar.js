@@ -13,8 +13,7 @@ import ArchiveIcon from '@mui/icons-material/Archive';
 import SearchIcon from '@mui/icons-material/Search';
 
 
-// A Header Component used by the Farmer
-// Contains: Menu button, Logo, Dashboard button, and Products Button
+// A Sidebar Menu Component used by the Consumer/Customer
 const ConsumerSidebar = ({isOpen, toggle}) => {
     let navigate = useNavigate()
     let toHome = () => {

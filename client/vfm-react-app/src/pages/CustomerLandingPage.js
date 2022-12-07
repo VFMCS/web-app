@@ -64,6 +64,7 @@ const CustomerLandingPage = () => {
 
   const [displayedProducts, setDisplayedProducts] = React.useState([])
 
+  // Set products to display based on selected filters
   React.useEffect( () => {
     if (selectedFilters.length === 0) {
       setDisplayedProducts(products.slice(0, 5)) // Featured Products
@@ -74,6 +75,7 @@ const CustomerLandingPage = () => {
     }
   }, [selectedFilters, products])
 
+  // Fetch all products on first render
   React.useEffect(() => {
     fetch('http://localhost:3001/api/products').then(response => response.json()).then(data => {setProducts(data);})
       .catch(err => console.error(err));

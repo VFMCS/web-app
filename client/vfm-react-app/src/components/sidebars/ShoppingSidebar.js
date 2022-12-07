@@ -18,7 +18,7 @@ import FarmerPostItem from '../FarmerPostItem';
 import { EventRepeat } from '@mui/icons-material';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-// A Header Component used by the Farmer
+// A Sidebar Menu Component used by the Shopping Pages
 // Contains: Menu button, Logo, Dashboard button, and Products Button
 const ShoppingSidebar = ({isOpen, toggle}) => {
     let navigate = useNavigate()

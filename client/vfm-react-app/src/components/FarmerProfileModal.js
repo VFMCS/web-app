@@ -8,6 +8,7 @@ import UploadButton from './buttons/UploadButton.js';
 // Upload Image Code based on:
 // https://plainenglish.io/blog/how-to-add-a-file-input-button-and-display-a-preview-image-with-react-2568d9d849f5
 
+// Modal for creating and updating farmer profile
 
 const FarmerProfileModal = ({open, setModalState, onClose, editMode, profile, changeHandler}) => {
 
@@ -16,6 +17,7 @@ const FarmerProfileModal = ({open, setModalState, onClose, editMode, profile, ch
     const [imageUrl, setImageUrl] = useState(null);
     const [selectedImage, setSelectedImage] = useState(null);
 
+    // When selected image is changed
     var handleImageChange = (event) => {
         setShowUploadButton(false)
         console.log(event)

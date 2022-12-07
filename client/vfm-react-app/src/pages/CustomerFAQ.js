@@ -3,11 +3,14 @@ import {ThemeProvider, CssBaseline, Stack, Box} from '@mui/material'
 import theme from '../theme/theme.js'
 import ConsumerHeader from '../components/headers/ConsumerHeader';
 import Faq from 'react-faq-component'
+
+//FAQ Page for Customer Reference
 const CustomerFAQPage = () => {
     const styles = {
         titleTextColor: "black",
         rowTitleColor: "green",
     };
+
     const data = {
         title: "Customer FAQ",
         rows: [

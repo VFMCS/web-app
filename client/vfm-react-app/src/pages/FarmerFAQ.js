@@ -3,11 +3,17 @@ import {ThemeProvider, CssBaseline, Stack, Box} from '@mui/material'
 import theme from '../theme/theme.js'
 import FarmerHeader from '../components/headers/FarmerHeader';
 import Faq from 'react-faq-component'
+
+// An FAQ Page for Farmer Reference
 const FarmerFAQPage = () => {
+
+    // Styles for text color
     const styles = {
         titleTextColor: "black",
         rowTitleColor: "green",
     };
+
+    //FAQ Data
     const data = {
         title: "Farmer FAQ",
         rows: [

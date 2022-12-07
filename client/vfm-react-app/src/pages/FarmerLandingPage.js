@@ -6,8 +6,7 @@ import FarmerHeader from '../components/headers/FarmerHeader.js';
 import ProductCard from '../components/ProductCard.js'
 import EditIcon from '@mui/icons-material/Edit';
 
-//Customer landing page upon customer being signed in
-
+// Farmer landing page upon Farmer being signed in (Products view)
 const FarmerLandingPage = () => {    
     const [products, setProducts] = React.useState([]) // capture data from GET request
 	const curr_user_id = localStorage.getItem('curr_user_id');
