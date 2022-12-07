@@ -68,9 +68,9 @@ const FarmerSearch = () => {
                 <Divider />
                 <center>
                     <Box sx={{ margin: 4, minHeight: "80vh"}}>
-                        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                        <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 4, sm: 8, md: 20 }}>
                             {searchOutput.map((item) => (
-                                <Grid item xs={2} sm={4} md={4} key={item.product_id}>
+                                <Grid item xs={2} sm={3} md={4} key={item.product_id}>
                                     <ProductCard editMode item={item} />
                                 </Grid>
                             ))}

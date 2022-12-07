@@ -40,9 +40,9 @@ const CustomerCurrentOrders = () => {
                 <Divider />
                 <center>
                     <Box sx={{ margin: 4, minHeight: "75vh"}}>
-                        <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                        <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 4, sm: 8, md: 20 }}>
                             {customer_current_orders.map((item) => (
-                                <Grid item xs={2} sm={4} md={4} key={item.product_id}>
+                                <Grid item xs={2} sm={3} md={4} key={item.product_id}>
                                     <ProductCardReserved isPending item={item} />
                                 </Grid>
                             ))}

@@ -124,7 +124,7 @@ const ProductCard = (props) => {
                             {" $" + props.item.price + "/lb"}
                         </Typography>
                         <Typography textAlign="left" gutterBottom variant="subtitle1" component="div">
-                            {props.item.quantity} in Stock
+                            {props.item.quantity} lb in Stock
                         </Typography>
 
                         <Typography sx={{textDecoration: 'underline'}} marginTop={2} textAlign="left" variant="subtitle1" color="primary" onClick={toFarmer(props.item)}>
