@@ -92,15 +92,15 @@ const CustomerLandingPage = () => {
             </Typography>
           </center>
           <center>
-            <Box sx={{ margin: 0 }}>
-              <Grid container spacing={{ xs: 0, md: 2 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-                {(farmers.slice(0, 3)).map((item) => (
-                  <Grid item xs={2} sm={3} md={4} key={item.user_id}>
-                    <FarmerCard item={item} />
-                  </Grid>
-                ))}
-              </Grid>
-            </Box>
+              <Box sx={{ margin: 4 }}>
+                <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 4, sm: 8, md: 20 }}>
+                    {(farmers.slice(0, 5)).map((item) => (
+                      <Grid item xs={2} sm={4} md={4} key={item.user_id}>
+                        <FarmerCard item={item} />
+                      </Grid>
+                    ))}
+                </Grid>
+              </Box>
           </center>
         </div>
         }
