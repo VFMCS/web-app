@@ -55,6 +55,16 @@ const getTransactionInCartByProdID = (req, res) => {
     })
 }
 
+const getTransactionsByVendorID = (req, res) => {
+    //const { vendor_id, customer_id, quantity, product_id } = req.body;
+    const vendor_id = req.params.id;
+    pool.query(queries.getTransactionsByVendorID, [vendor_id], (error, results) => {
+        if (error) throw error
+        else { res.status(200).json(results.rows) };
+
+    })
+}
+
 const deleteTransaction = (req, res) => {
     console.log("id: " + req.params.id);
     const transaction_id = req.params.id;
@@ -128,6 +138,7 @@ module.exports = {
     getPastVendorTransaction,
     addTransaction,
     getTransactionInCartByProdID,
+    getTransactionsByVendorID,
     updateTransaction,
     getCustomerCart,
     getCustomerCurrentOrders,
