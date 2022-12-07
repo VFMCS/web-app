@@ -19,7 +19,7 @@ const LandingPage = () => {
             <CssBaseline enableColorScheme />
             <Stack direction="column">
                 <LandingHeader landing/>
-                <Box marginTop={-12} sx={{height: '100vh', backgroundSize: 'cover', backgroundImage: `url(${HeaderImage})`}}>
+                <Box marginTop={-12} sx={{height: '102vh', backgroundSize: 'cover', backgroundImage: `url(${HeaderImage})`}}>
                     <Typography variant="h3" align="left" sx={{margin: 4, marginTop: 20, color: "secondary.contrastText"}}>
                         Welcome to FarmFresh!
                     </Typography>
@@ -30,17 +30,17 @@ const LandingPage = () => {
                         <LoginButton color="primary" variant="contained"/>    
                     </Stack>
                 </Box>
-                <Box id="explanation" display="flex" justifyContent="center" alignItems="center" height="100vh" sx={{ backgroundSize: 'cover', backgroundImage: `url(${HowItWorksBackground})`}}>
-                    <Paper sx={{width: "50vw", height: "50vh", p: 2}}>
-                        <Typography variant="h3" align="center" sx={{m: 2, color: "primary.dark"}}>
-                            How it works
+                <Box id="explanation" display="flex" justifyContent="center" alignItems="center" height="90vh" sx={{ backgroundSize: 'cover', backgroundColor:'primary.light'}}>
+                    <Paper sx={{width: "50vw", height: "50vh", p: 2, backgroundColor:'primary.light'}}>
+                        <Typography variant="h3" align="center" sx={{m: 2, color: "white"}}>
+                            How FarmFresh Works
                         </Typography>
                                           
                     </Paper>
                 </Box>
                 <Box id="mission" display="flex" justifyContent="center" alignItems="center" height="100vh" sx={{ backgroundSize: 'cover', backgroundImage: `url(${BackgroundFarmImage})`}}>
                     <Paper sx={{width: "50vw", height: "50vh", p: 2}}>
-                        <Typography variant="h3" align="center" sx={{m: 2, color: "primary.dark"}}>
+                        <Typography variant="h3" align="center" sx={{m: 2, color: "primary.light"}}>
                             Our Mission
                         </Typography>
                         <Typography variant="h6" align="center" sx={{m: 2, color: "primary.dark"}}>
