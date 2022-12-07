@@ -17,16 +17,18 @@ let reviewee = '';
 const ProductCardReserved = (props) => {
     //let item = props.item;
     let [modalOpen, setModalState] = React.useState(false);
-
     let [shoppingSidebarOpen, setShoppingSidebarOpen] = React.useState(false);
-
     let [time_left, setTimeLeft] = React.useState("24h 0m");
     let navigate = useNavigate();
 
 
     React.useEffect(() => {
         let curr_date = (new Date()).toString();
+        let curr_date_full = new Date();
         let transaction_date = (props.item.transaction_date).toString();
+        let transaction_date_full = new Date((props.item.transaction_date).toString());
+
+
         let curr_date_time = curr_date.substring(16,21);
         let transaction_date_time = transaction_date.substring(11,16);
 
@@ -39,7 +41,23 @@ const ProductCardReserved = (props) => {
             min_diff = 24 * 60 - (-1) * min_diff;
         }
 
+        console.log("curr date full: " + curr_date_full);
+        console.log("transaction date full: " + transaction_date_full);
+        
+        //console.log("curr_date_time: " + curr_date_time);
+        //console.log("transaction_date_time: " + transaction_date_time);
+
+        let time_diff = curr_date_full.getTime() - transaction_date_full.getTime();
+        console.log("time_diff: " + parseInt(time_diff));
+
+        if(time_diff >= (1000*60*60*24)){
+            
+        }
+
+
         let time_left = parseInt(((24*60 - min_diff) / 60)).toString() + "h " + ((24*60 - min_diff) % 60).toString() + "m";
+
+        
 
         /*
         let hour_diff = parseInt(curr_date_time.substring(0,2)) - parseInt(transaction_date_time.substring(0,2))
@@ -49,10 +67,6 @@ const ProductCardReserved = (props) => {
         }
         */
 
-        console.log("curr date: " + curr_date);
-        console.log("transaction date: " + transaction_date);
-        console.log("curr_date_time: " + curr_date_time);
-        console.log("transaction_date_time: " + transaction_date_time);
 
         /*
         console.log("curr hours: " + parseInt(curr_date_time.substring(0,2)));
@@ -123,7 +137,7 @@ const ProductCardReserved = (props) => {
                             {" $" + props.item.price + "/lb"}
                         </Typography>
                         <Typography textAlign="left" gutterBottom variant="subtitle1" component="div">
-                            Reserve quantity: {props.item.quantity} 
+                            Reserve quantity: {props.item.quantity} lb
                         </Typography>
 
                         {props.isFarmer &&
@@ -135,23 +149,21 @@ const ProductCardReserved = (props) => {
                         {props.reserveRequestMode &&
                             <Box>
                                 <Fab color="primary" aria-label="add" sx={{position: 'absolute',
-                                bottom: 16,
-                                left: 16,
+                                bottom: 77,
+                                right: 16,
                                 }}
                                 onClick={toAcceptItem(props.item)}>
                                     <CheckIcon />
                                 </Fab>
 
                                 <Fab color="secondary" ria-label="add" sx={{position: 'absolute',
-                                bottom: 16,
+                                bottom: 12,
                                 right: 16,
                                 }}
                                 onClick={toRejectItem(props.item)}>
                                     <CloseIcon />
                                 </Fab>
-                                <ShoppingSidebar isOpen={shoppingSidebarOpen} toggle= {toggleShoppingSidebar} onClose={() => setShoppingSidebarOpen(false)}/>
-                                    
-                                
+                                <ShoppingSidebar isOpen={shoppingSidebarOpen} toggle= {toggleShoppingSidebar} onClose={() => setShoppingSidebarOpen(false)}/>            
                             </Box>
                         }
 
