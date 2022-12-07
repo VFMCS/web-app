@@ -29,7 +29,7 @@ const ConsumerSidebar = ({isOpen, toggle}) => {
     }
 
     let toCustomerCompletedOrders = () => {
-
+        navigate("/customer-completed-orders");
     }
 
     return (
