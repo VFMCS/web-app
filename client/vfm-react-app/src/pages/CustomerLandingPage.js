@@ -83,8 +83,6 @@ const CustomerLandingPage = () => {
       <CssBaseline enableColorScheme />
       <Stack direction="column">
         <ConsumerHeader />
-        <FiltersBar filters={["Fruit", "Vegetable", "Organic"].concat(allCategories.slice(0,5))} exclusive selectedItems={selectedFilters} setSelectedItems={setSelectedFilters}/>
-        {selectedFilters.length === 0 &&
         <div>
           <center>
             <Typography textAlign="left" variant="h5" sx={{ margin: 4, color: "black" }}>
@@ -102,12 +100,13 @@ const CustomerLandingPage = () => {
                 </Grid>
               </Box>
           </center>
-        </div>
-        }
-        <center><Typography textAlign="left" variant="h5" sx={{ margin: 4, color: "black" }}>
-          {(selectedFilters.length === 0 ? "Featured " : "") + "Products"}
+        </div>  
+        <center><Typography textAlign="left" variant="h5" sx={{ margin: 4, marginBottom: 0, color: "black" }}>
+          Featured Products       
         </Typography> </center>
 
+        <FiltersBar noOutput={selectedFilters.length === 0} filters={["Fruit", "Vegetable", "Organic"].concat(allCategories.slice(0,5))} exclusive selectedItems={selectedFilters} setSelectedItems={setSelectedFilters}/> 
+        
         <center>
           <Box sx={{ margin: 2, marginTop: 0, marginBottom: 4}}>
             <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 4, sm: 4, md: 20 }}>
@@ -121,8 +120,6 @@ const CustomerLandingPage = () => {
 
           </Box>
         </center>
-        
-
 
 
       </Stack>

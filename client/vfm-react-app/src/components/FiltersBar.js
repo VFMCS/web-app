@@ -3,7 +3,7 @@ import { Chip, Box, Stack,ToggleButton } from '@mui/material';
 
 
 
-const FiltersBar = ({filters, exclusive, selectedItems, setSelectedItems}) => {
+const FiltersBar = ({filters, exclusive, selectedItems, setSelectedItems, noOutput}) => {
     let createInitialItemStates = () => {
         const filterStates = {};
         for (const name of filters) {
@@ -13,7 +13,6 @@ const FiltersBar = ({filters, exclusive, selectedItems, setSelectedItems}) => {
     }
 
     let [itemStates, setItemStates] = React.useState(createInitialItemStates())
-    
 
     let toggleItem = (itemName) => {
         return () => {
@@ -49,10 +48,10 @@ const FiltersBar = ({filters, exclusive, selectedItems, setSelectedItems}) => {
         } 
     }
     return (
-        <Box sx={{m: 4}}>
+        <Box sx={{m: 3}}>
             <center>
-            <Stack spacing={2} direction="row" justifyContent="center">
-                {filters.map( x => <Chip disableRipple color={itemStates[x] ? "primary" : "secondary"} name={x} variant={itemStates[x] ? "contained" : "outlined"} label={x} onClick={toggleItem(x)} />)}
+            <Stack spacing={2} direction="row" justifyContent="left">
+                {filters.map( x => <Chip disableRipple fontWeight="bold" color={itemStates[x] ? "primary" : "secondary"} name={x} variant={itemStates[x] ? "contained" : "outlined"} label={x} onClick={toggleItem(x)} />)}
             </Stack>
             </center>
             
