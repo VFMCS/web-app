@@ -41,6 +41,38 @@ const FarmerHeader = () => {
       });
 
       
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+
+        setCredentials((prev) => {
+            return {
+            ...prev,
+            [name]: value,
+            };
+        });
+        console.log(credentials)
+    };
+
+    const patchCredentials = () => {
+        // Send patch request with credentials
+    }
+
+    React.useEffect(() => {
+        let url = 'http://localhost:3001/api/vendors/' + (localStorage.getItem('curr_user_id'));
+        console.log(url);
+        fetch(url).then(response => response.json()).then(data => {setCredentials(data[0])})
+            .catch(err => console.error(err));
+    }, [])
+
+    let modalCloseHandler = (e, reason) => {
+        if (reason === "backdropClick") {
+            setProfileModalState(false)
+            return
+        }
+        setProfileModalState(false)
+        patchCredentials()
+    }
+
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline enableColorScheme />
@@ -62,7 +94,7 @@ const FarmerHeader = () => {
                         <Box sx={{flexGrow: 3}}>
                         <SearchBar />
                         </Box>
-                        <IconButton  onClick={() => setProfileModalState(true)} variant="contained" sx={{ bgcolor: "primary.dark", fontWeight: "bold"}}>
+                        <IconButton disableRipple onClick={() => setProfileModalState(true)} variant="contained" color='inherit' sx={{ bgcolor: "primary.dark", fontWeight: "bold", mr: 2}}>
                             <AccountCircleIcon />
                         </IconButton>
                         <Button  onClick={toPostItem} variant="contained" sx={{ bgcolor: "primary.dark", fontWeight: "bold"}} startIcon={<AddCircleIcon fontSize="large" />}>
@@ -81,6 +113,7 @@ const FarmerHeader = () => {
                                 <FarmerPostItem setModalState={setModalState} />
                             </Box>
                         </Modal>
+                        <FarmerProfileModal editMode open={profileModalOpen} setModalState={setProfileModalState} onClose={modalCloseHandler} profile={credentials} changeHandler={handleChange} />
                     </Toolbar>
                 </AppBar>
             </Box>
