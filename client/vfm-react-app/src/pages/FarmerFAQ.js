@@ -27,7 +27,7 @@ const FarmerFAQPage = () => {
                 content: "Approving transactions ensures that the customers reserving your produce are reliable and likely to honor their reservation."
             },
             {   title: "How do I approve transactions?",
-                content: "Navigate to the Reserve Requests page (using the sidebar) and choose the appropriate option to approve or reject"
+                content: "Navigate to the Reserve Requests page (using the sidebar) and choose the appropriate option to approve or reject <br /> Your customer will have 24 hours to pick up their items once approved."
             },
             {   title: "What is the difference between product type and product category?",
                 content: "Product type is the specific item that you are creating (ex. Blueberries), while product category is a term used for filtering. <br />We suggest something like 'Fruit' or 'Vegetable' for product category."
