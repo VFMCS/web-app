@@ -26,6 +26,9 @@ const FarmerSidebar = ({isOpen, toggle}) => {
     let toFAQ = () => {
         navigate("/farmer/faq")
     }
+    let toFarmerProfileView = () => {
+        navigate("/farmer/profile")
+    }
 
     return (
         <Drawer open={isOpen} onClose={toggle}>
@@ -37,7 +40,7 @@ const FarmerSidebar = ({isOpen, toggle}) => {
             >
                 <List>
                     <ListItem key={"Profile"} disablePadding>
-                        <ListItemButton>
+                        <ListItemButton onClick={toFarmerProfileView}>
                             <ListItemIcon>
                                 <AccountCircleIcon />
                             </ListItemIcon>

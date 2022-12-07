@@ -33,7 +33,7 @@ const ConsumerSidebar = ({isOpen, toggle}) => {
             >
                 <List>
                     <ListItem key={"View Products"} disablePadding>
-                        <ListItemButton>
+                        <ListItemButton onClick={toProducts}>
                             <ListItemIcon>
                                 <StoreIcon />
                             </ListItemIcon>

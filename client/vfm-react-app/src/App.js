@@ -60,6 +60,7 @@ function App() {
         <Route path="/dashboard" element={<FarmerDashboard />} />
         <Route path="/customer/faq/" element={<CustomerFAQPage />} />
         <Route path="/farmer/faq/" element={<FarmerFAQ />} />
+        <Route path="/farmer/profile/" element={<FarmerProfileView forFarmer />} />
         {/*Add more routes here (can also create nested routes)*/}
       </Routes>
     </BrowserRouter>

@@ -8,11 +8,14 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import SearchBar from '../SearchBar';
 import FarmerSidebar from '../sidebars/FarmerSidebar';
 import FarmerPostItem from '../FarmerPostItem';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import FarmerProfileModal from '../FarmerProfileModal';
 
 // A Header Component used by the Farmer
 // Contains: Menu button, Logo, Dashboard button, and Products Button
 const FarmerHeader = () => {
     const [modalOpen, setModalState] = React.useState(false);
+    const [profileModalOpen, setProfileModalState] = React.useState(false);
     let navigate = useNavigate()
     let toDashboard = () => navigate("/dashboard")
     let toPostItem = () => setModalState(true)
@@ -22,6 +25,22 @@ const FarmerHeader = () => {
     let toggleSidebar = () => {
         setSidebarState(!sideBarOpen)
     }
+
+    const [credentials, setCredentials] = React.useState({
+        password: "",
+        first_name: "",
+        last_name: "",
+        address:"",
+        is_vendor:false,
+        photo:null,
+        about_me:"",
+        email: "",
+        created_on: new Date(),
+        image_url:"",
+        role:"farmer"
+      });
+
+      
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline enableColorScheme />
@@ -43,6 +62,9 @@ const FarmerHeader = () => {
                         <Box sx={{flexGrow: 3}}>
                         <SearchBar />
                         </Box>
+                        <IconButton  onClick={setProfileModalState(true)} variant="contained" sx={{ bgcolor: "primary.dark", fontWeight: "bold"}}>
+                            <AccountCircleIcon />
+                        </IconButton>
                         <Button  onClick={toPostItem} variant="contained" sx={{ bgcolor: "primary.dark", fontWeight: "bold"}} startIcon={<AddCircleIcon fontSize="large" />}>
                             Create Product
                         </Button>

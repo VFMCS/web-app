@@ -12,7 +12,7 @@ const CustomerFAQPage = () => {
         title: "Customer FAQ",
         rows: [
             {   title: "How do I return to the product overview?",
-                content: "From another page, you can simply click the logo in the top toolbar.\nYou will also be redirected to this page whenever you sign in."
+                content: "From another page, you can simply click the logo in the top toolbar. <br /> You will also be redirected to this page whenever you sign in."
             },
             {   title: "How does searching work?",
                 content: "When viewing products, simply enter a query term and click the magnifying glass. Try to keep query terms short and generic"
@@ -33,7 +33,10 @@ const CustomerFAQPage = () => {
                 content: "When on the products page, unselect all filters."
             },
             {   title: "I reserved an item, now what?",
-                content: "Your reservation is now pending farmer approval. Once approved, you will have 24 hours to pick up the items from the farmer's location."
+                content: "Your reservation is now pending farmer approval. <br /> Once approved, you will have 24 hours to pick up the items from the farmer's location. <br /> You may check the status of your order on the Orders page."
+            },
+            {   title: "I would like to file a complaint about a farmer",
+                content: "Please submit all complaints to the following email: ______@gmail.com. Be sure to describe the incident and all parties involved."
             },
         ]
     }

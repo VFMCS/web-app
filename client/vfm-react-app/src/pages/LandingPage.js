@@ -7,7 +7,8 @@ import SignUpButton from '../components/buttons/SignUpButton.js';
 import LoginButton from '../components/buttons/LoginButton.js';
 import HeaderImage from '../images/pexels-rgr-g.jpg';
 import BackgroundFarmImage from '../images/pexels-tim-mossholder.jpg'
-
+import HowItWorksBackground from '../images/how-it-works-background.jpg'
+import Footer from '../components/Footer.js';
 
 // The General Landing Page for all users
 // TODO: We still have to add actions for all buttons (to sign up/login)
@@ -29,6 +30,14 @@ const LandingPage = () => {
                         <LoginButton color="primary" variant="contained"/>    
                     </Stack>
                 </Box>
+                <Box id="explanation" display="flex" justifyContent="center" alignItems="center" height="100vh" sx={{ backgroundSize: 'cover', backgroundImage: `url(${HowItWorksBackground})`}}>
+                    <Paper sx={{width: "50vw", height: "50vh", p: 2}}>
+                        <Typography variant="h3" align="center" sx={{m: 2, color: "primary.dark"}}>
+                            How it works
+                        </Typography>
+                                          
+                    </Paper>
+                </Box>
                 <Box id="mission" display="flex" justifyContent="center" alignItems="center" height="100vh" sx={{ backgroundSize: 'cover', backgroundImage: `url(${BackgroundFarmImage})`}}>
                     <Paper sx={{width: "50vw", height: "50vh", p: 2}}>
                         <Typography variant="h3" align="center" sx={{m: 2, color: "primary.dark"}}>
@@ -42,15 +51,7 @@ const LandingPage = () => {
                         </Typography>                  
                     </Paper>
                 </Box>
-                <Box justifyContent="center" alignItems="center" sx={{backgroundColor: "primary.dark", p: 2}}>
-                    <Typography align='center' color={"white"}>
-                        Have a question? Please send all inquiries to ____@gmail.com!
-                    </Typography>
-                    <Typography align='center' color={"white"}>
-                        Created in 2022 by VFMCS as a CS320 Project.
-                    </Typography>
-                    
-                </Box>
+                <Footer />
             </Stack>
         </ThemeProvider>
         

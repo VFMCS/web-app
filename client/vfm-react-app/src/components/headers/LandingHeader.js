@@ -6,7 +6,7 @@ import MenuIcon from "@mui/icons-material/Menu"
 import SignUpButton from '../buttons/SignUpButton';
 import LoginButton from '../buttons/LoginButton';
 import { useNavigate } from "react-router-dom";
-import OurMissionButton from '../buttons/OurMissionButton';
+import JumpingButton from '../buttons/JumpingButton';
 
 // A Header Component used for the General Landing Page
 // Contains a Menu Item, the logo/title, sign up button, and login button
@@ -28,9 +28,8 @@ const LandingHeader = ({landing}) => {
                             </Typography>
                         </Button>
                         </Box>
-                        {landing &&
-                        <OurMissionButton />
-                        }
+                        {landing && <JumpingButton id={"explanation"} label={"How It Works"} />}
+                        {landing && <JumpingButton id={"mission"} label={"Our Mission"}/>}
                         <LoginButton landingTextColor="primary.light"/>
                         <SignUpButton />
                     </Toolbar>
