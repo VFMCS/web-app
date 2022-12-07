@@ -16,6 +16,7 @@ const ProductCard = (props) => {
     //let item = props.item;
     let [modalOpen, setModalState] = React.useState(false);
     let toPostItem = () => setModalState(true)
+	//console.log(props.item)
 
     let [shoppingSidebarOpen, setShoppingSidebarOpen] = React.useState(false);
 
