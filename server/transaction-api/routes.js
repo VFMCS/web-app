@@ -16,5 +16,7 @@ router.delete("/:id", controller.deleteTransaction);
 router.post("/past", controller.addPastTransaction);
 router.get("/past/customer/:id", controller.getPastCustomerTransaction);
 router.get("/past/vendor/:id", controller.getPastVendorTransaction);
+router.patch("/past", controller.completePastTransaction);
+
 
 module.exports = router;
