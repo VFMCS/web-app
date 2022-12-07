@@ -97,17 +97,17 @@ const FarmerProfileView = (props) => {
                 <Divider />
                 <Box sx={{margin: 4}}>
 
-                    <Stack spacing={4}  direction="column" sx={{ width: '100%' }}>
+                    <Stack spacing={7}  direction="column" sx={{ width: '100%' }}>
                         {reviews.map((item) => (
-                            <Box>
+                            <Stack justifyContent="left" direction="column">
                                 <Rating 
                                     initialValue={item.rating}
                                 />
 
-                                <Typography variant="h6" sx={{margin: 2, color: "black"}}>
+                                <Typography variant="h7" sx={{margin: 1, color: "black"}}>
                                     {item.review}
                                 </Typography>
-                            </Box>
+                            </Stack>
 
 
                         ))}
