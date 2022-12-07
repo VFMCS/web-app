@@ -62,7 +62,7 @@ const FarmerHeader = () => {
                         <Box sx={{flexGrow: 3}}>
                         <SearchBar />
                         </Box>
-                        <IconButton  onClick={setProfileModalState(true)} variant="contained" sx={{ bgcolor: "primary.dark", fontWeight: "bold"}}>
+                        <IconButton  onClick={() => setProfileModalState(true)} variant="contained" sx={{ bgcolor: "primary.dark", fontWeight: "bold"}}>
                             <AccountCircleIcon />
                         </IconButton>
                         <Button  onClick={toPostItem} variant="contained" sx={{ bgcolor: "primary.dark", fontWeight: "bold"}} startIcon={<AddCircleIcon fontSize="large" />}>
