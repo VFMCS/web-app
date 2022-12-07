@@ -70,7 +70,7 @@ const CustomerSearch = () => {
             <Stack direction="column">
                 <ConsumerHeader />
                 <Typography variant="h6" sx={{ margin: 2, color: "black" }}>
-                    Search results for "{search_query}"
+                     for "{search_query}"
                 </Typography>
                 <Divider />
                 <center>

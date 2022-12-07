@@ -54,7 +54,7 @@ const FarmerDashboard = () => {
       </Typography>
       <Divider />
 
-      <Stack direction="row" alignItems="left" spacing={3} marginTop={5} marginLeft={5}>
+      <Stack direction="row" alignItems="left" spacing={3} marginTop={5} marginLeft={5} minHeight="75vh">
           <Card variant="outlined" sx={{ p: 2 }}>
             <Typography variant="h5" component="h2" gutterBottom>
               Your Products
