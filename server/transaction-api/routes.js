@@ -12,4 +12,9 @@ router.get("/order/:id", controller.getVendorReserveRequests);
 router.get("/reserves/:id", controller.getVendorReserves);
 router.delete("/:id", controller.deleteTransaction);
 
+
+router.post("/past", controller.addPastTransaction);
+router.get("/past/customer/:id", controller.getPastCustomerTransaction);
+router.get("/past/vendor/:id", controller.getPastVendorTransaction);
+
 module.exports = router;
