@@ -20,7 +20,7 @@ const FarmerCard = (props) => {
         <ThemeProvider theme={theme}>
             <CssBaseline enableColorScheme />
             <Card sx={{ maxWidth: 345 }}>
-                <CardActionArea>
+                <CardActionArea disableTouchRipple={true}>
                     <CardMedia
                         component="img"
                         height="300"

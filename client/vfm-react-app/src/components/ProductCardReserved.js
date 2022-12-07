@@ -116,22 +116,22 @@ const ProductCardReserved = (props) => {
                     alt="Product Image"
                     />
                     <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
+                        <Typography textAlign="left" gutterBottom variant="h5" component="div">
                             {props.item.name}
                         </Typography>
-                        <Typography variant="body2" color="text.secondary" component="div" >
+                        <Typography textAlign="left" variant="body2" color="text.secondary" component="div" >
                             {props.item.details}
                         </Typography>
-                        <Typography gutterBottom variant="subtitle1" component="div" margin={1}>
-                            {" $" + props.item.price + "/item"}
+                        <Typography textAlign="left" gutterBottom variant="subtitle1" component="div">
+                            {" $" + props.item.price + "/lb"}
                         </Typography>
-                        <Typography gutterBottom variant="subtitle1" component="div" margin={-1}>
-                            {props.item.vendor_quantity} in Stock
+                        <Typography textAlign="left" gutterBottom variant="subtitle1" component="div">
+                            Reserve quantity: {props.item.quantity} 
                         </Typography>
 
                         {props.isFarmer &&
                             <Typography sx={{marginTop: 2}} gutterBottom variant="subtitle1" component="div" margin={-1}>
-                            Time remaining to pickup reserved item: {time_left} 
+                                Time remaining to pickup reserved item: {time_left} 
                             </Typography>
                         }
 
@@ -162,6 +162,13 @@ const ProductCardReserved = (props) => {
                             <Button  onClick={toLeaveAReview(props.item)} sx={{ marginTop: 2, bgcolor: "transparent", fontWeight: "bold"}}>
                                 Leave a Review
                             </Button>
+                            
+                        }
+
+                        {props.isPending &&
+                            <Typography textAlign="left" color="red" sx={{marginTop: 2}} gutterBottom variant="subtitle1" component="div">
+                                Pending Approval
+                            </Typography>
                             
                         }
 

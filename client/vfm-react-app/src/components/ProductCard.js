@@ -102,16 +102,16 @@ const ProductCard = (props) => {
                     alt="Product Image"
                     />
                     <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
+                        <Typography textAlign="left" gutterBottom variant="h5" component="div">
                             {props.item.name}
                         </Typography>
-                        <Typography variant="body2" color="text.secondary" component="div" >
+                        <Typography textAlign="left" variant="body2" color="text.secondary" component="div" >
                             {props.item.details}
                         </Typography>
-                        <Typography gutterBottom variant="subtitle1" component="div" margin={1}>
-                            {" $" + props.item.price + "/item"}
+                        <Typography textAlign="left" gutterBottom variant="subtitle1" component="div">
+                            {" $" + props.item.price + "/lb"}
                         </Typography>
-                        <Typography gutterBottom variant="subtitle1" component="div" margin={-1}>
+                        <Typography textAlign="left" gutterBottom variant="subtitle1" component="div">
                             {props.item.quantity} in Stock
                         </Typography>
                         {props.editMode &&
