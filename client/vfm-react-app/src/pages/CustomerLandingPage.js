@@ -87,7 +87,7 @@ const CustomerLandingPage = () => {
         {selectedFilters.length === 0 &&
         <div>
           <center>
-            <Typography variant="h5" sx={{ margin: 6, color: "black" }}>
+            <Typography textAlign="left" variant="h5" sx={{ margin: 4, color: "black" }}>
             Featured Farmers
             </Typography>
           </center>
@@ -104,7 +104,7 @@ const CustomerLandingPage = () => {
           </center>
         </div>
         }
-        <center><Typography variant="h5" sx={{ margin: 6, color: "black" }}>
+        <center><Typography textAlign="left" variant="h5" sx={{ margin: 4, color: "black" }}>
           {(selectedFilters.length === 0 ? "Featured " : "") + "Products"}
         </Typography> </center>
 
