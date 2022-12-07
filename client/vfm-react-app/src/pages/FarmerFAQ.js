@@ -40,9 +40,9 @@ const FarmerFAQPage = () => {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline enableColorScheme />
+                <FarmerHeader />
                 <Stack direction="column">
-                    <FarmerHeader />
-                    <Box sx={{m: 3}}>
+                    <Box sx={{m: 3, minHeight: "75vh"}}>
                         <Faq data={data} styles={styles} />
                     </Box> 
                 </Stack>

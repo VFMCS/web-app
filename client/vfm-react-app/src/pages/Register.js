@@ -6,7 +6,7 @@ import LoginHeader from '../components/headers/LandingHeader.js';
 import FarmerLandingPage from "./FarmerLandingPage.js";
 import { NavigateBefore } from '@mui/icons-material';
 import FarmerProfileModal from "../components/FarmerProfileModal.js"
-import {Alert, Box} from "@mui/material"
+import {Alert, Stack} from "@mui/material"
 
 
 export const Register = () => {
@@ -152,10 +152,9 @@ export const Register = () => {
   }
 
   return (
-    <Box>
-      <LoginHeader />
+      <Stack spacing={4} minHeight={"92vh"}>
       <div id="auth-wrapper-register" className="auth-wrapper">
-      
+      <LoginHeader />
       <div className="auth-inner">
         <form onSubmit={handleSubmit}>
           <h3>Sign Up</h3>
@@ -236,8 +235,7 @@ export const Register = () => {
       </div>
       <FarmerProfileModal open={profileModalOpen} setModalState={setProfileModalState} onClose={modalCloseHandler} profile={credentials} changeHandler={handleChange}/>
     </div>
-    </Box>
-    
+    </Stack>
   );
 };
 

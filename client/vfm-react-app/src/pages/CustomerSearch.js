@@ -47,6 +47,7 @@ const CustomerSearch = () => {
                 <CssBaseline enableColorScheme />
                 <Stack direction="column">
                     <ConsumerHeader />
+                    <Stack direction="column" minHeight={"85vh"}>
                     <Typography variant="h5" sx={{ margin: 2, color: "primary.main" }}>
                         Search Results
                     </Typography>
@@ -56,6 +57,8 @@ const CustomerSearch = () => {
                             No Search Results Found
                         </Typography>
                     </center>
+                    </Stack>
+                    
                 </Stack>
             </ThemeProvider>
         )
@@ -71,7 +74,7 @@ const CustomerSearch = () => {
                 </Typography>
                 <Divider />
                 <center>
-                    <Box sx={{ margin: 4 }}>
+                    <Box sx={{ margin: 4, minHeight: "75vh"}}>
                         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                             {searchOutput.map((item) => (
                                 <Grid item xs={2} sm={4} md={4} key={item.product_id}>

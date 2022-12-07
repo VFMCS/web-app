@@ -41,7 +41,7 @@ const FarmerSearch = () => {
         return (
             <ThemeProvider theme={theme}>
                 <CssBaseline enableColorScheme />
-                <Stack direction="column">
+                <Stack direction="column" minHeight={"95vh"}>
                     <FarmerHeader />
                     <Typography variant="h5" sx={{ margin: 2, color: "primary.main" }}>
                         Search Results

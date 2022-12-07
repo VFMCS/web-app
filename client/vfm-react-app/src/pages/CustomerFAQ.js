@@ -43,9 +43,9 @@ const CustomerFAQPage = () => {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline enableColorScheme />
+                <ConsumerHeader />
                 <Stack direction="column">
-                    <ConsumerHeader />
-                    <Box sx={{m: 3}}>
+                    <Box sx={{m: 3, minHeight: "75vh"}}>
                         <Faq data={data} styles={styles} />
                     </Box> 
                 </Stack>
