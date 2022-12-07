@@ -44,7 +44,6 @@ const patchProductByProductID = (req, res) => {
     })
 }
 
-<<<<<<< HEAD
 const deleteProductByProductID = (req, res) => {
 	const id = req.params.product_id
 	const values = [ id ]
