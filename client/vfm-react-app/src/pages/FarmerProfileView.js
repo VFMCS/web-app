@@ -11,7 +11,7 @@ import { Rating } from 'react-simple-star-rating'
 
 
 //Customer views this farmer profile upon being signed in an hitting the view profile from the landing page
-const FarmerProfileView = (props) => {
+const FarmerProfileView = ({forFarmer}) => {
     const [products, setProducts] = React.useState([]) // capture data from GET request
     const [farmer_name, setFarmer_Name] = React.useState('')
     const [farmer_first_name, setFarmer_First_Name] = React.useState('')
@@ -20,17 +20,19 @@ const FarmerProfileView = (props) => {
     const [farmer_image_url, setFarmer_Image_Url] = React.useState('');
     const [reviews, setReviews] = React.useState([]);
 
+
     React.useEffect(() => {
         //using placeholder farmer of vendor_id=0
-        let url = 'http://localhost:3001/api/products/' + localStorage.getItem('clicked-on-user-id');
+        let url = 'http://localhost:3001/api/products/' + (forFarmer ? localStorage.getItem('curr_user_id') : localStorage.getItem('clicked-on-user-id'));
         
         //get farmer's products
         console.log(url);
         fetch(url).then(response => response.json()).then(data => setProducts(data))
             .catch(err => console.error(err));
-        
-        //get farmer's deatils
-        url = 'http://localhost:3001/api/vendors/' + localStorage.getItem('clicked-on-user-id');
+    }, [])
+
+    React.useEffect(() => {
+        let url = 'http://localhost:3001/api/vendors/' + (forFarmer ? localStorage.getItem('curr_user_id') : localStorage.getItem('clicked-on-user-id'));
         console.log(url);
         fetch(url).then(response => response.json()).then(data => {setFarmer_Name(data[0].first_name + " " + data[0].last_name); setFarmer_First_Name(data[0].first_name); setFarmer_Description(data[0].about_me); setFarmer_Location(data[0].address); setFarmer_Image_Url(data[0].image_url)})
             .catch(err => console.error(err));
@@ -51,7 +53,8 @@ const FarmerProfileView = (props) => {
             <ThemeProvider theme={theme}>
             <CssBaseline enableColorScheme />
             <Stack direction="column">
-            <ConsumerHeader />
+            {forFarmer  && <FarmerHeader />}
+            {!forFarmer  && <ConsumerHeader />}
             <Box sx={{backgroundColor: "secondary.light", display:"flex", alignItems:'center', justifyContent:'center'}} >
                 <Grid container direction="row" sx={{alignItems:"center", display:"flex", justifyContent:'center'}} >
                     <Grid item sx={{alignItems:"center", display:"flex", justifyContent:'center'}}>

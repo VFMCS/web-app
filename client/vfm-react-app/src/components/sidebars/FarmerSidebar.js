@@ -6,9 +6,9 @@ import EqualizerIcon from '@mui/icons-material/Equalizer';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import ListIcon from '@mui/icons-material/ListAlt'
 import PendingActionsIcon from '@mui/icons-material/PendingActions';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 // A Header Component used by the Farmer
 // Contains: Menu button, Logo, Dashboard button, and Products Button
@@ -23,6 +23,12 @@ const FarmerSidebar = ({isOpen, toggle}) => {
         localStorage.setItem('curr_user_id', JSON.stringify(-1));
         navigate("/")
     }
+    let toFAQ = () => {
+        navigate("/farmer/faq")
+    }
+    let toFarmerProfileView = () => {
+        navigate("/farmer/profile")
+    }
 
     return (
         <Drawer open={isOpen} onClose={toggle}>
@@ -34,7 +40,7 @@ const FarmerSidebar = ({isOpen, toggle}) => {
             >
                 <List>
                     <ListItem key={"Profile"} disablePadding>
-                        <ListItemButton>
+                        <ListItemButton onClick={toFarmerProfileView}>
                             <ListItemIcon>
                                 <AccountCircleIcon />
                             </ListItemIcon>
@@ -63,6 +69,14 @@ const FarmerSidebar = ({isOpen, toggle}) => {
                                 <InventoryIcon />
                             </ListItemIcon>
                             <ListItemText primary="Your Products" />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem key={"FAQ"} disablePadding>
+                        <ListItemButton onClick={toFAQ}>
+                            <ListItemIcon>
+                                <ListIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="FAQ" />
                         </ListItemButton>
                     </ListItem>
                     <ListItem key={"Dashboard"} disablePadding>

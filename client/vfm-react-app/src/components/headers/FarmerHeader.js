@@ -8,11 +8,14 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import SearchBar from '../SearchBar';
 import FarmerSidebar from '../sidebars/FarmerSidebar';
 import FarmerPostItem from '../FarmerPostItem';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import FarmerProfileModal from '../FarmerProfileModal';
 
 // A Header Component used by the Farmer
 // Contains: Menu button, Logo, Dashboard button, and Products Button
 const FarmerHeader = () => {
     const [modalOpen, setModalState] = React.useState(false);
+    const [profileModalOpen, setProfileModalState] = React.useState(false);
     let navigate = useNavigate()
     let toDashboard = () => navigate("/dashboard")
     let toPostItem = () => setModalState(true)
@@ -22,6 +25,54 @@ const FarmerHeader = () => {
     let toggleSidebar = () => {
         setSidebarState(!sideBarOpen)
     }
+
+    const [credentials, setCredentials] = React.useState({
+        password: "",
+        first_name: "",
+        last_name: "",
+        address:"",
+        is_vendor:false,
+        photo:null,
+        about_me:"",
+        email: "",
+        created_on: new Date(),
+        image_url:"",
+        role:"farmer"
+      });
+
+      
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+
+        setCredentials((prev) => {
+            return {
+            ...prev,
+            [name]: value,
+            };
+        });
+        console.log(credentials)
+    };
+
+    const patchCredentials = () => {
+        // Send patch request with credentials
+    }
+
+    React.useEffect(() => {
+        let url = 'http://localhost:3001/api/vendors/' + (localStorage.getItem('curr_user_id'));
+        console.log(url);
+        fetch(url).then(response => response.json()).then(data => {setCredentials(data[0])})
+            .catch(err => console.error(err));
+    }, [])
+
+    let modalCloseHandler = (e, reason) => {
+        if (reason === "backdropClick") {
+            setProfileModalState(false)
+            return
+        }
+        setProfileModalState(false)
+        patchCredentials()
+    }
+
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline enableColorScheme />
@@ -43,6 +94,9 @@ const FarmerHeader = () => {
                         <Box sx={{flexGrow: 3}}>
                         <SearchBar />
                         </Box>
+                        <IconButton disableRipple onClick={() => setProfileModalState(true)} variant="contained" color='inherit' sx={{ bgcolor: "primary.dark", fontWeight: "bold", mr: 2}}>
+                            <AccountCircleIcon />
+                        </IconButton>
                         <Button  onClick={toPostItem} variant="contained" sx={{ bgcolor: "primary.dark", fontWeight: "bold"}} startIcon={<AddCircleIcon fontSize="large" />}>
                             Create Product
                         </Button>
@@ -59,6 +113,7 @@ const FarmerHeader = () => {
                                 <FarmerPostItem setModalState={setModalState} />
                             </Box>
                         </Modal>
+                        <FarmerProfileModal editMode open={profileModalOpen} setModalState={setProfileModalState} onClose={modalCloseHandler} profile={credentials} changeHandler={handleChange} />
                     </Toolbar>
                 </AppBar>
             </Box>

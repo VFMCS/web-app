@@ -64,6 +64,7 @@ const CustomerLandingPage = () => {
 
   const [displayedProducts, setDisplayedProducts] = React.useState([])
 
+  // Set products to display based on selected filters
   React.useEffect( () => {
     if (selectedFilters.length === 0) {
       setDisplayedProducts(products.slice(0, 5)) // Featured Products
@@ -74,6 +75,7 @@ const CustomerLandingPage = () => {
     }
   }, [selectedFilters, products])
 
+  // Fetch all products on first render
   React.useEffect(() => {
     fetch('http://localhost:3001/api/products').then(response => response.json()).then(data => {setProducts(data);})
       .catch(err => console.error(err));
@@ -109,7 +111,7 @@ const CustomerLandingPage = () => {
         </Typography> </center>
 
         <center>
-          <Box sx={{ margin: 2, marginTop: 0, marginBottom: 4}}>
+          <Box sx={{ margin: 2, marginTop: 0, marginBottom: 4, minHeight: "60vh"}}>
             <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 4, sm: 4, md: 20 }}>
               {displayedProducts.map((item) => (
                 <Grid item xs={1} sm={3} md={4} key={item.product_id}>
