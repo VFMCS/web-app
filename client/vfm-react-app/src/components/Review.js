@@ -22,8 +22,7 @@ const Review = ({ editMode, setModalState, initItem }) => {
 
     const [rating, setRating] = useState(0);
     const [review, setReview] = useState('');
-    const [reviewer, setReviewer] = useState(parseInt(localStorage.getItem('curr_user_id')));
-
+    const [reviewer, setReviewer] = useState(localStorage.getItem('curr_user_id'));
     
     var errorExp = ""
     var onSave = () => {
