@@ -31,7 +31,7 @@ const ProductCardReserved = (props) => {
         let transaction_date_time = transaction_date.substring(11,16);
 
         let curr_start_min = parseInt(curr_date_time.substring(0,2)) * 60 + parseInt(curr_date_time.substring(3,5));
-        let transaction_start_min = parseInt(transaction_date_time.substring(0,2)) * 60 + parseInt(transaction_date_time.substring(3,5));
+        let transaction_start_min = ((parseInt(transaction_date_time.substring(0,2)) + 19) % 24) * 60 + parseInt(transaction_date_time.substring(3,5));
 
         let min_diff = curr_start_min - transaction_start_min;
 

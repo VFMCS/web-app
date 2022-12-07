@@ -5,6 +5,9 @@ const router = Router();
 
 router.post("/", controller.addTransaction);
 router.get("/get-in-cart/:id", controller.getTransactionInCartByProdID);
+router.get("/get-by-vendor/:id", controller.getTransactionsByVendorID);
+
+
 router.patch("/update/", controller.updateTransaction);
 router.get("/cart/:id", controller.getCustomerCart);
 router.get("/customer-current-orders/:id", controller.getCustomerCurrentOrders);

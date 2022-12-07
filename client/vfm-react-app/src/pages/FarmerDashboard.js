@@ -1,3 +1,4 @@
+import * as React from 'react' 
 import { Circle } from "@mui/icons-material";
 import {
   Avatar,
@@ -14,70 +15,77 @@ import {
   TableHead,
   TableRow,
   Typography,
+  Divider,
+  Box,
+  
 } from "@mui/material";
 import { color, Stack, ThemeProvider } from "@mui/system";
 import FarmerHeader from "../components/headers/FarmerHeader.js";
 import theme from "../theme/theme.js";
 
 const FarmerDashboard = () => {
+  const [farmer_name, setFarmer_Name] = React.useState('')
+  const [farmer_first_name, setFarmer_First_Name] = React.useState('')
+  const [farmer_description, setFarmer_Description] = React.useState('')
+  const [farmer_location, setFarmer_Location] = React.useState('')
+  const [farmer_image_url, setFarmer_Image_Url] = React.useState('');
+
+
+  React.useEffect(() => {
+    
+    //get farmer's details
+    let url = 'http://localhost:3001/api/vendors/' + localStorage.getItem("curr_user_id");
+    console.log(url);
+    fetch(url).then(response => response.json()).then(data => {setFarmer_Name(data[0].first_name + " " + data[0].last_name); setFarmer_First_Name(data[0].first_name); setFarmer_Description(data[0].about_me); setFarmer_Location(data[0].address); setFarmer_Image_Url(data[0].image_url)})
+        .catch(err => console.error(err));
+
+
+  }, [])
+
+  
+
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline enableColorScheme />
+    <CssBaseline enableColorScheme />
       <FarmerHeader />
-      <Grid container spacing={2} p={4}>
-        <Grid item xs={12} md={4}>
-          <Stack
-            height="100%"
-            width="100%"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Avatar sx={{ width: 100, height: 100 }} />
-            <Typography variant="h5">John Doe</Typography>
-          </Stack>
-        </Grid>
-        <Grid item xs={12} md={8}>
-          <Typography variant="h5" component="h1" gutterBottom>
-            Farmer Dashboard
-          </Typography>
-          <Typography
-            variant="body1"
-            gutterBottom
-            sx={{ mb: 2, color: "text.secondary" }}
-          >
-            This is the farmer dashboard. Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-            cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum.
-          </Typography>
-        </Grid>
 
-        <Grid item xs={12} sm={6} md={4}>
+      <Typography variant="h5" sx={{margin: 2, color: "black"}}>
+        {farmer_first_name}'s Dashboard
+      </Typography>
+      <Divider />
+
+      <Stack direction="row" alignItems="left" spacing={3} marginTop={5} marginLeft={5}>
           <Card variant="outlined" sx={{ p: 2 }}>
             <Typography variant="h5" component="h2" gutterBottom>
               Your Products
             </Typography>
             <ProductTable />
           </Card>
-        </Grid>
-        <Grid item xs={12} sm={6} md={8}>
+
           <Card variant="outlined" sx={{ p: 2 }}>
             <Typography variant="h5" component="h2" gutterBottom>
               Your Orders
             </Typography>
             <OrderTable />
           </Card>
-        </Grid>
-      </Grid>
+        </Stack>
     </ThemeProvider>
   );
 };
 
 const ProductTable = () => {
+
+  const [products, setProducts] = React.useState([]) // capture data from GET request
+
+  React.useEffect(() => {
+     //get farmer's products
+     let url = 'http://localhost:3001/api/products/' + localStorage.getItem("curr_user_id");
+     console.log(url);
+     fetch(url).then(response => response.json()).then(data => setProducts(data))
+         .catch(err => console.error(err));
+
+  }, [])
+
   const CreateRow = (name, price, stock) => {
     return {
       name: name,
@@ -86,16 +94,11 @@ const ProductTable = () => {
     };
   };
 
-  const rows = [
-    CreateRow("Potato", 75, 100),
-    CreateRow("Tomato", 500, 100),
-    CreateRow("Orange", 100, 100),
-    CreateRow("Banana", 50, 100),
-    CreateRow("Pineapple", 100, 100),
-    CreateRow("Apple", 100, 100),
-    CreateRow("Grapes", 100, 100),
-    CreateRow("Mango", 100, 100),
-  ];
+  const rows = [];
+
+  products.forEach(prod => {
+    rows.push(CreateRow(prod.name, prod.price, prod.quantity));
+  });
 
   return (
     <Table>
@@ -120,6 +123,21 @@ const ProductTable = () => {
 };
 
 const OrderTable = () => {
+  const [transactions, setTransactions] = React.useState([]) // capture data from GET request
+  const [customer_name, setCustomerName] = React.useState('')
+
+
+  React.useEffect(() => {
+     //get all of farmer's transactions
+     let url = 'http://localhost:3001/api/transaction/get-by-vendor/' + localStorage.getItem('curr_user_id');
+     console.log(url);
+
+     fetch(url).then(response => response.json()).then(data => setTransactions(data))
+         .catch(err => console.error(err));
+
+
+  }, [])
+
   const CreateRow = (id, customer, total, status) => {
     return {
       id: id,
@@ -129,15 +147,17 @@ const OrderTable = () => {
     };
   };
 
-  const rows = [
-    CreateRow("I-1001", "John Doe", 1000, "Pending"),
-    CreateRow("I-1002", "Jane Doe", 1000, "Pending"),
-    CreateRow("O-1003", "John Doe", 1000, "Completed"),
-    CreateRow("O-1004", "Jane Doe", 1000, "In Transit"),
-    CreateRow("I-1005", "John Doe", 1000, "Pending"),
-    CreateRow("I-1006", "Jane Doe", 1000, "Pending"),
-    CreateRow("O-1007", "John Doe", 1000, "Completed"),
-  ];
+  //transaction-id, name of customer, total cost, and status
+  const rows = [];
+
+  transactions.forEach(transaction => {
+    let url = 'http://localhost:3001/curr-user-api/' + transaction.customer_id;
+    console.log(url);
+
+    fetch(url).then(response => response.json()).then(data => {console.log(data[0].first_name + ' ' + data[0].last_name); setCustomerName(data[0].first_name + ' ' + data[0].last_name)}).then(rows.push(CreateRow(transaction.transaction_id, customer_name, transaction.price, 'Pending')))
+         .catch(err => console.error(err));
+    
+  });
 
   return (
     <Table>
