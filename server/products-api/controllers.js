@@ -36,6 +36,14 @@ const patchProductByProductID = (req, res) => {
     })
 }
 
+const patchImageByProductID = (req, res) => {
+	const id = req.params.product_id
+	const values = [ req.body.photo, id ]
+	pool.query(queries.patchImageByProductID, values, (error, results) => {
+		if (error) throw error;
+		res.status(201).send("Product updated at product ID: " + id)
+	})
+}
 
 /*
 const insertProdByID = (req, res) => {
@@ -54,5 +62,6 @@ module.exports = {
     insertProd,
     getProductByVendorID,
     patchProductByProductID,
+	patchImageByProductID
     //insertProdByID
 }

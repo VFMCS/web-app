@@ -25,7 +25,29 @@ const FarmerPostItem = ({ editMode, setModalState, initItem }) => {
 	const [curImage, setCurImage] = useState(new FormData())
 	const [switchStatus, setSwitchStatus] = useState(true)
 	const [test, setTest] = useState("")
+	const [imgChanged, setImgChanged] = useState(false);
+    const [stockImg, setStockImg] = useState(false);
     //here, we initially set the vendor_id to what we need it to be
+
+    let curObj = {  'Lemon': "https://cdn.britannica.com/84/188484-050-F27B0049/lemons-tree.jpg", 
+                        'Apples': "https://post.healthline.com/wp-content/uploads/2020/09/Do_Apples_Affect_Diabetes_and_Blood_Sugar_Levels-732x549-thumbnail-1-732x549.jpg", 
+                        'Pears': "https://rainierfruit.com/wp-content/uploads/2021/10/Rainier-Fruit-Pears.png", 
+                        'Oranges': "https://www.collinsdictionary.com/images/full/orange_342874121.jpg", 
+                        'Grapefruit': "https://cdn.shopify.com/s/files/1/2045/8185/products/9449104_600x600.png?v=1598374091", 
+                        'Lime': "https://cdn.britannica.com/90/80590-050-F94F0332/Limes-peels-pulp-sections.jpg", 
+                        'Peaches': "https://www.tastingtable.com/img/gallery/what-peach-rankings-really-mean/l-intro-1663616604.jpg", 
+                        'Tomatoes': "https://post.healthline.com/wp-content/uploads/2020/09/AN313-Tomatoes-732x549-Thumb-732x549.jpg", 
+                        'Blueberries': "http://cdn.shopify.com/s/files/1/2336/3219/products/shutterstock_167872100blueberry1_1024x1024.jpg?v=1531795854", 
+                        'Cherries': "https://www.tastingtable.com/img/gallery/how-to-pick-out-the-best-fresh-cherries/intro-1655490775.webp", 
+                        'Onion': "https://www.tastingtable.com/img/gallery/the-most-popular-types-of-onions-explained/yellow-onion-1649945533.jpg", 
+                        'Garlic': "https://post.healthline.com/wp-content/uploads/2018/06/garlic-1200x628-facebook-1200x628.jpg", 
+                        'Potatoes': "https://www.macmillandictionary.com/external/slideshow/full/141151_full.jpg", 
+                        'Asparagus': "https://www.feastingathome.com/wp-content/uploads/2020/03/roasted-asparagus-7-1.jpg", 
+                        'Celery': "https://images.immediate.co.uk/production/volatile/sites/30/2020/02/Celery-stalks-and-leaves-7860193.jpg?quality=90&resize=556,505", 
+                        'Broccoli': "https://www.savoryonline.com/app/uploads/recipes/154194/blanched-broccoli-florets-2-1256x1256-c-default.jpg", 
+                        'Cabbage': "https://www.freshpoint.com/wp-content/uploads/2020/02/Freshpoint-green-cabbage.jpg", 
+                        'Cauliflower': "https://www.producemarketguide.com/sites/default/files/Commodities.tar/Commodities/cauliflower_commodity-page.png" 
+    }
 
 
     const [item, setItem] = useState(editMode ? initItem : {
@@ -46,6 +68,8 @@ const FarmerPostItem = ({ editMode, setModalState, initItem }) => {
             setShowBox(true)
             setShowUploadButton(true)
             setUploadImage(null)
+            setStockImg(false)
+            setImgChanged(false)
         }
         else{
             if(typeEvent.target.value != null){
@@ -64,18 +88,20 @@ const FarmerPostItem = ({ editMode, setModalState, initItem }) => {
 
     var handleDefaultImageChange = (event) => {
         let selection = event.target.value;
-        let curObj = { 'Lemon': Lemon, 'Apples': Apple, 'Pears': Pear, 'Oranges': Orange, 'Grapefruit': Grapefruit, 'Lime': Lime, 'Peaches': Peaches, 'Tomatoes': Tomato, 'Blueberries': Blueberry, 'Cherries': Cherry, 'Onion': Onion, 'Garlic': Garlic, 'Potatoes': Potato, 'Asparagus': Asparagus, 'Celery': Celery, 'Broccoli': Broccoli, 'Cabbage': Cabbage, 'Cauliflower': Cauliflower }
+//        let curObj = { 'Lemon': Lemon, 'Apples': Apple, 'Pears': Pear, 'Oranges': Orange, 'Grapefruit': Grapefruit, 'Lime': Lime, 'Peaches': Peaches, 'Tomatoes': Tomato, 'Blueberries': Blueberry, 'Cherries': Cherry, 'Onion': Onion, 'Garlic': Garlic, 'Potatoes': Potato, 'Asparagus': Asparagus, 'Celery': Celery, 'Broccoli': Broccoli, 'Cabbage': Cabbage, 'Cauliflower': Cauliflower }
+ 
         setShowBox(false)
         setShowUploadButton(false)
         setUploadImage(curObj[selection])
+        setStockImg(true)
+        setImgChanged(true)
+
     }
 
     var handleImageUpload = (event) => {
         var file = event.target.files[0];
-		console.log(file)
 		const formData = new FormData();
 		formData.append("product", file);
-		console.log(formData)
 
         const reader = new FileReader();
         reader.readAsDataURL(file);
@@ -87,8 +113,7 @@ const FarmerPostItem = ({ editMode, setModalState, initItem }) => {
             setShowUploadButton(false)
         }, false);
 		setCurImage(formData)
-		console.log(curImage)
-		console.log("fuck")
+		setImgChanged(true)
 	}
 
     var errorExp = ""
@@ -116,7 +141,7 @@ const FarmerPostItem = ({ editMode, setModalState, initItem }) => {
             item["price"] = parseFloat(value)
         }
 		if (switchStatus === true){
-			if(showUploadButton === true){
+			if(!editMode && showUploadButton === true){
 				valid = false
 				errorExp = errorExp + "validimg "
 			}
@@ -125,19 +150,26 @@ const FarmerPostItem = ({ editMode, setModalState, initItem }) => {
             errorExp = ""
             setShowEmptyEntryError("")
             //save to database
-            console.log(item)
-            console.log(editMode)
             if(!editMode){
-                console.log("curr_user_id: " + localStorage.getItem('curr_user_id'));
-				fetch("http://localhost:3001/api/cloudinary/upload-product/"+localStorage.getItem('curr_user_id'), { method: "POST", body: curImage})
-                .then(res => res.json())
-				.then(data => {
-					item["photo"] = data.result
-					fetch("http://localhost:3001/api/products", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(item) }).then(data => console.log(data))
-					setModalState(false);
-					window.location.reload(false)
-					navigate('/farmer');
-				})
+                if(!stockImg){
+                    console.log("curr_user_id: " + localStorage.getItem('curr_user_id'));
+    				fetch("http://localhost:3001/api/cloudinary/upload-product/"+localStorage.getItem('curr_user_id'), { method: "POST", body: curImage})
+                    .then(res => res.json())
+    				.then(data => {
+    					item["photo"] = data.result
+    					fetch("http://localhost:3001/api/products", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(item) }).then(data => console.log(data))
+    					setModalState(false);
+    					window.location.reload(false)
+    					navigate('/farmer');
+    				})
+                }
+                else{
+                    item["photo"] = curObj[item["product_type"]]
+                    fetch("http://localhost:3001/api/products", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(item) }).then(data => console.log(data))
+                    setModalState(false);
+                    window.location.reload(false)
+                    navigate('/farmer');
+                }
                 //fetch("http://localhost:3001/api/products", { method: "GET" }).then(data => console.log(data))
 				//fetch("http://localhost:3001/api/products", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(item) }).then(data => console.log(data));
                 //fetch("http://localhost:3001/api/products", { method: "GET" }).then(data => console.log(data))
@@ -146,11 +178,36 @@ const FarmerPostItem = ({ editMode, setModalState, initItem }) => {
                 //navigate('/farmer');
             }
             else{
+				console.log(item)
                 const url = "http://localhost:3001/api/products/patch/" + item.product_id
                 fetch(url, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(item) }).then(data => console.log(data));
-                setModalState(false);
-                window.location.reload(false)
-                navigate('/farmer');
+				if(imgChanged){
+                    if(!stockImg){
+    					fetch("http://localhost:3001/api/cloudinary/upload-product/"+localStorage.getItem('curr_user_id'), { method: "POST", body: curImage})
+    					.then(res => res.json())
+    					.then(data => {
+    						item["photo"] = data.result
+    						const imgurl = "http://localhost:3001/api/products/patchimg/" + item.product_id
+    	  					fetch(imgurl, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(item) }).then(data => console.log(data))
+    						setModalState(false);
+    						window.location.reload(false)
+    	  					navigate('/farmer');
+    	  				})	
+                    }
+                    else{
+                        item["photo"] = curObj[item["product_type"]]
+                        const imgurl = "http://localhost:3001/api/products/patchimg/" + item.product_id
+                        fetch(imgurl, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(item) }).then(data => console.log(data))
+                        setModalState(false);
+                        window.location.reload(false)
+                        navigate('/farmer');
+                    }	
+				}
+				else{
+                	setModalState(false);
+                	window.location.reload(false)
+                	navigate('/farmer');
+				}
             }
         }
         else {
@@ -211,7 +268,7 @@ const FarmerPostItem = ({ editMode, setModalState, initItem }) => {
                         </Button>)}
                     </div>)}
                     {uploadImage && (<img alt="sampleImg}" src={uploadImage} id="imageUpload"/>)}
-                    <FormControlLabel onChange={defaultImageCheck} sx={{ left: "50%" }} control={<Switch defaultChecked />} labelPlacement="bottom" label="Use Default Image" />
+                    <FormControlLabel onChange={defaultImageCheck} sx={{ left: "50%" }} control={<Switch /*defaultChecked*/ />} labelPlacement="bottom" label="Use Default Image" />
                 </Stack>
                 <Stack spacing={2} direction="column" sx={{ width: '60%' }}>
                     <TextField name="name" onChange={handleTextChange} defaultValue={item["name"]} id="outlined-basic" label="Name" variant="outlined" />

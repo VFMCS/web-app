@@ -10,7 +10,7 @@ const ProductCard = (props) => {
     //let item = props.item || {name: "Item", price: "0", description: "This is a description"}
     let [modalOpen, setModalState] = React.useState(false);
     let toPostItem = () => setModalState(true)
-	console.log(props.item)
+	//console.log(props.item)
 
     return (
         <ThemeProvider data-testid="product-card" theme={theme}>
