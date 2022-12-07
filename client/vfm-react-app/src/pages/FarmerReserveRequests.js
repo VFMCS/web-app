@@ -34,7 +34,7 @@ const FarmerReserveRequests = () => {
                 </Typography>
                 <Divider />
                 <center>
-                    <Box sx={{ margin: 4 }}>
+                    <Box sx={{ margin: 4, minHeight: "70vh" }}>
                         <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 4, sm: 8, md: 20 }}>
                             {/* Replace with current vendor id*/}
                             {products.map((item) => (

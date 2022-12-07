@@ -6,8 +6,7 @@ import FarmerHeader from '../components/headers/FarmerHeader.js';
 import ProductCard from '../components/ProductCard.js'
 import EditIcon from '@mui/icons-material/Edit';
 
-//Customer landing page upon customer being signed in
-
+// Farmer landing page upon Farmer being signed in (Products view)
 const FarmerLandingPage = () => {    
     const [products, setProducts] = React.useState([]) // capture data from GET request
 	const curr_user_id = localStorage.getItem('curr_user_id');
@@ -33,7 +32,7 @@ const FarmerLandingPage = () => {
                 </Typography>
                 <Divider />
                 <center>
-                    <Box sx={{ margin: 4 }}>
+                    <Box sx={{ margin: 4, minHeight: "70vh" }}>
                         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                             {/* Replace with current vendor id*/}
                             {products.map((item) => (

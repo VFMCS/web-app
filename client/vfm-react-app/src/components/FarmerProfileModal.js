@@ -8,6 +8,7 @@ import UploadButton from './buttons/UploadButton.js';
 // Upload Image Code based on:
 // https://plainenglish.io/blog/how-to-add-a-file-input-button-and-display-a-preview-image-with-react-2568d9d849f5
 
+// Modal for creating and updating farmer profile
 
 const FarmerProfileModal = ({open, setModalState, onClose, editMode, profile, changeHandler}) => {
 
@@ -16,6 +17,7 @@ const FarmerProfileModal = ({open, setModalState, onClose, editMode, profile, ch
     const [imageUrl, setImageUrl] = useState(null);
     const [selectedImage, setSelectedImage] = useState(null);
 
+    // When selected image is changed
     var handleImageChange = (event) => {
         setShowUploadButton(false)
         console.log(event)
@@ -23,6 +25,10 @@ const FarmerProfileModal = ({open, setModalState, onClose, editMode, profile, ch
         setSelectedImage(event.target.files[0])
         document.getElementById("uploadBox").style.border = 0
     }
+
+    React.useEffect(() => {
+        // TODO: If user already has an image, setSelectedImage to be the image
+    }, [])
 
     React.useEffect(() => {
         if (selectedImage) {
@@ -46,42 +52,50 @@ const FarmerProfileModal = ({open, setModalState, onClose, editMode, profile, ch
             return
         }
         setShowEmptyEntryError(false)
-        // POST or PATCH profile here
         setModalState(false)
         onClose()
     }
 
     return (
-        <Modal open={open} onClose={onClose} closeAfterTransition sx={{display: 'flex', p: 1, alignItems: 'center', justifyContent: 'center'}}>
+        <Modal open={open} onClose={onClose} closeAfterTransition sx={{display: 'flex', p: 1, m: 2, alignItems: 'center', justifyContent: 'center'}}>
             <Box sx={{
                 position: 'relative',
                 bgcolor: 'background.paper',
                 border: '2px solid #000',
                 boxShadow: (theme) => theme.shadows[5],
                 p: 4,
-                width: 1/2
+                width: "75vw",
+                height: "70vh"
                 }}>
                 <ThemeProvider theme={theme}>
-                    <Stack spacing={2} direction="row" sx={{ width: '100%', height: 'max-content'}}>
-                        <Stack spacing={2} direction="column" sx={{ width: '50%', height: '100%'}}>
+                    <Stack spacing={2} direction="row" p={2} m={2}>
+                        <Box display="flex" justifyContent="center" alignItems="center" sx={{ width: '50%', height: '50%'}}>
                             {showUploadButton &&
                             <div id="uploadBox">
                                  <UploadButton id="uploadButton" name="image_url" onChange={handleImageChange} color="secondary" />
                             </div>}
-                            {imageUrl && selectedImage && (
-                                    <img src={imageUrl} alt={selectedImage.name} width="100%"/>
-                            )}
-                        </Stack>
-                        <Stack spacing={2} direction="column" >
-                            <TextField required name="name" onChange={() => false} id="outlined-basic" label="Name" variant="outlined" />
-                            <TextField required name="address" onChange={changeHandler} id="outlined-basic" label="Location" variant="outlined" />
-                            <TextField required onChange={changeHandler} name="about_me" multiline={true} rows={6} id="outlined-basic" label="Description" variant="outlined" />
+                            {imageUrl && selectedImage && 
+                                    <Stack spacing={2} direction="column">
+                                        <img src={imageUrl} alt={selectedImage.name} width="100%"/>
+                                        <UploadButton id="uploadButton" name="image_url" onChange={handleImageChange} color="secondary" />
+                                    </Stack>    
+                            }
+                        </Box>
+                        <Stack spacing={2} direction="column" sx={{}}>
+                            {editMode &&
+                                <Stack spacing={2} direction="row" >
+                                    <TextField required name="first-name" onChange={() => false} id="outlined-basic" label="First Name" variant="outlined" defaultValue={profile.first_name} />
+                                    <TextField required name="last-name" onChange={() => false} id="outlined-basic" label="Last Name" variant="outlined" defaultValue={profile.last_name} />
+                                </Stack>
+                            }
+                            <TextField required name="address" onChange={changeHandler} id="outlined-basic" label="Location" variant="outlined" defaultValue={profile.address}/>
+                            <TextField required onChange={changeHandler} name="about_me" multiline={true} rows={6} id="outlined-basic" label="Description" variant="outlined" defaultValue={profile.about_me}/>
                             <Stack sx={{height: '60%'}}>
                                 <p style={{color: "tomato"}}>
                                     {showEmptyEntryError && "You have invalid or missing data"}
                                 </p>
                             </Stack>
-                            <Stack sx={{height: "40%"}} direction="row">
+                            <Stack sx={{}} direction="row">
                                 <Button onClick={onSubmit} variant= "contained" style={{ height: '100%', width: '50%'}} size="medium" color="success" sx={{fontWeight: "bold"}}>Submit</Button>
                             </Stack>
                         </Stack>
