@@ -22,6 +22,9 @@ const FarmerPostItem = ({ editMode, setModalState, initItem }) => {
     const [uploadMode, setUploadMode] = useState(false);
     const [uploadImage, setUploadImage] = useState(null)
     const [showBox, setShowBox] = useState(true)
+	const [curImage, setCurImage] = useState(new FormData())
+	const [switchStatus, setSwitchStatus] = useState(true)
+	const [test, setTest] = useState("")
     //here, we initially set the vendor_id to what we need it to be
 
 
@@ -38,6 +41,7 @@ const FarmerPostItem = ({ editMode, setModalState, initItem }) => {
 
     var defaultImageCheck = () => {
         setUploadMode(!uploadMode)
+		setSwitchStatus(!switchStatus)
         if(uploadMode){
             setShowBox(true)
             setShowUploadButton(true)
@@ -82,12 +86,13 @@ const FarmerPostItem = ({ editMode, setModalState, initItem }) => {
             setShowBox(false)
             setShowUploadButton(false)
         }, false);
-		fetch("http://localhost:3001/api/cloudinary/upload-product", { method: "POST", body: formData}).then(res => res.json()).then(data => item["photo"] = data.result)
-		console.log(item)
+		setCurImage(formData)
+		console.log(curImage)
+		console.log("fuck")
 	}
 
     var errorExp = ""
-    var onSave = () => {
+    var onSave = async () => {
         var valid = true
         if (item["name"] === null) {
             errorExp = errorExp + "name ";
@@ -110,6 +115,12 @@ const FarmerPostItem = ({ editMode, setModalState, initItem }) => {
             setShowPriceValidError(prev => false)
             item["price"] = parseFloat(value)
         }
+		if (switchStatus === true){
+			if(showUploadButton === true){
+				valid = false
+				errorExp = errorExp + "validimg "
+			}
+		}
         if (valid) {
             errorExp = ""
             setShowEmptyEntryError("")
@@ -118,12 +129,21 @@ const FarmerPostItem = ({ editMode, setModalState, initItem }) => {
             console.log(editMode)
             if(!editMode){
                 console.log("curr_user_id: " + localStorage.getItem('curr_user_id'));
-                fetch("http://localhost:3001/api/products", { method: "GET" }).then(data => console.log(data));
-                fetch("http://localhost:3001/api/products", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(item) }).then(data => console.log(data));
-                fetch("http://localhost:3001/api/products", { method: "GET" }).then(data => console.log(data));
-                setModalState(false);
-                window.location.reload(false)
-                navigate('/farmer');
+				fetch("http://localhost:3001/api/cloudinary/upload-product/"+localStorage.getItem('curr_user_id'), { method: "POST", body: curImage})
+                .then(res => res.json())
+				.then(data => {
+					item["photo"] = data.result
+					fetch("http://localhost:3001/api/products", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(item) }).then(data => console.log(data))
+					setModalState(false);
+					window.location.reload(false)
+					navigate('/farmer');
+				})
+                //fetch("http://localhost:3001/api/products", { method: "GET" }).then(data => console.log(data))
+				//fetch("http://localhost:3001/api/products", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(item) }).then(data => console.log(data));
+                //fetch("http://localhost:3001/api/products", { method: "GET" }).then(data => console.log(data))
+                //setModalState(false);
+                //window.location.reload(false)
+                //navigate('/farmer');
             }
             else{
                 const url = "http://localhost:3001/api/products/patch/" + item.product_id
@@ -152,8 +172,10 @@ const FarmerPostItem = ({ editMode, setModalState, initItem }) => {
 
         if (name === "product_type") {
             setTypeEvent(e)
-            handleDefaultImageChange(e)
-        }
+			if(switchStatus === false){
+	            handleDefaultImageChange(e)
+			}
+		}
         if (name === 'name') {
             if (value.length === 0) {
                 valid = false
@@ -185,7 +207,7 @@ const FarmerPostItem = ({ editMode, setModalState, initItem }) => {
                     {showBox && (<div id="uploadBox">
                         {showUploadButton && (<Button data-testid = "upload" color="secondary" sx={{ p: '5', width: '100%', height: '100%'}} variant="contained" component="label">
                         Upload
-                        <input hidden accept="image/*" multiple type="file" enctype='multipart/form-data' onChange={handleImageUpload}/>
+                        <input hidden accept="image/*" multiple type="file" encType='multipart/form-data' onChange={handleImageUpload}/>
                         </Button>)}
                     </div>)}
                     {uploadImage && (<img alt="sampleImg}" src={uploadImage} id="imageUpload"/>)}

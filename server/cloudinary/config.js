@@ -20,9 +20,6 @@ const upload = multer({ storage: storage })
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//app.use(express.static(__dirname + '/public'));
-//app.use('/uploads', express.static('uploads'));
-
 cloudinary.config({
 	cloud_name: "dqjys2mv8",
 	api_key: "412412668186564",
@@ -32,9 +29,9 @@ cloudinary.config({
 async function uploadToCloudinary(locaFilePath, cloudinaryFilePath, fileName) {
 	var mainFolderName = "main"
 	//var filePathOnCloudinary = mainFolderName + "/farmer/" + locaFilePath
-	var filePathOnCloudinary = mainFolderName + "/" + cloudinaryFilePath + "/" + fileName
+	var filePathOnCloudinary = mainFolderName + "/" + cloudinaryFilePath
 
-	return cloudinary.uploader.upload(locaFilePath,{"public_id":filePathOnCloudinary})
+	return cloudinary.uploader.upload(locaFilePath,{"folder": filePathOnCloudinary, "use_filename":true, "overwrite": false, "unique_filename": true})//{"public_id":filePathOnCloudinary})
 	.then((result) => {
     	fs.unlinkSync(locaFilePath)
     
@@ -48,19 +45,22 @@ async function uploadToCloudinary(locaFilePath, cloudinaryFilePath, fileName) {
   	});
 }
 
-app.post('/upload-product', upload.single('product'), async (req, res, next) => {
+app.post('/upload-product/:vendor_id', upload.single('product'), async (req, res, next) => {
+	var vendor_id = req.params.vendor_id
 	var locaFilePath = req.file.path
-	var filePathOnCloudinary = "products" //need to get current farmer id
+	var filePathOnCloudinary = vendor_id + "/products" 
 	var fileName = req.file.filename
 	var result = await uploadToCloudinary(locaFilePath, filePathOnCloudinary, fileName)
 	return res.status(200).json({result: result.url})
 })
-/*
-app.post('/upload-farmer', upload.single('profile-img'), async(req, res, next) => {
+
+app.post('/upload-farmer/:vendor_id', upload.single('profile-img'), async(req, res, next) => {
+	var vendor_id = req.params.vendor_id
 	var localFilePath = req.file.path
-	var filePathOnCloudinary = "/profile-picture/" // need to get current farmer id + "/" 
-	var result = await uploadToCloudinary(localFilePath, filePathOnCloudinary)
-	return res.send(result.url)
-})*/
+	var filePathOnCloudinary = vendor_id + "/profile-picture/"
+	var fileName = req.file.filename
+	var result = await uploadToCloudinary(localFilePath, filePathOnCloudinary, fileName)
+	return res.status(200).json({result: result.url})
+})
 
 module.exports = app;
