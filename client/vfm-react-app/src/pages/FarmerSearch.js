@@ -43,12 +43,12 @@ const FarmerSearch = () => {
                 <CssBaseline enableColorScheme />
                 <Stack direction="column">
                     <FarmerHeader />
-                    <Typography variant="h5" sx={{ margin: 2, color: "primary.main" }}>
+                    <Typography variant="h6" sx={{ margin: 2, color: "black" }}>
                         Search results for "{search_query}"
                     </Typography>
                     <Divider />
                     <center>
-                        <Typography variant="h5" sx={{ margin: 2, color: "black" }}>
+                        <Typography variant="h6" sx={{ margin: 2, color: "black" }}>
                             No Search Results Found
                         </Typography>
                     </center>
@@ -62,7 +62,7 @@ const FarmerSearch = () => {
             <CssBaseline enableColorScheme />
             <Stack direction="column">
                 <FarmerHeader />
-                <Typography variant="h5" sx={{ margin: 2, color: "primary.main" }}>
+                <Typography variant="h6" sx={{ margin: 2, color: "black" }}>
                     Search results for "{search_query}"
                 </Typography>
                 <Divider />

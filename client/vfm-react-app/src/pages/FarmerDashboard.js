@@ -49,7 +49,7 @@ const FarmerDashboard = () => {
     <CssBaseline enableColorScheme />
       <FarmerHeader />
 
-      <Typography variant="h5" sx={{margin: 2, color: "black"}}>
+      <Typography variant="h6" sx={{margin: 2, color: "black"}}>
         {farmer_first_name}'s Dashboard
       </Typography>
       <Divider />

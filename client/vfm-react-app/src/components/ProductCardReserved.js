@@ -107,7 +107,7 @@ const ProductCardReserved = (props) => {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline enableColorScheme />
-            <Card sx={{ maxWidth: 320 }}>
+            <Card sx={{ maxWidth: 260 }}>
                 <CardActionArea disableTouchRipple={true}>
                     <CardMedia
                     component="img"
@@ -118,9 +118,6 @@ const ProductCardReserved = (props) => {
                     <CardContent>
                         <Typography textAlign="left" gutterBottom variant="h5" component="div">
                             {props.item.name}
-                        </Typography>
-                        <Typography textAlign="left" variant="body2" color="text.secondary" component="div" >
-                            {props.item.details}
                         </Typography>
                         <Typography textAlign="left" gutterBottom variant="subtitle1" component="div">
                             {" $" + props.item.price + "/lb"}
@@ -159,14 +156,14 @@ const ProductCardReserved = (props) => {
                         }
 
                         {props.isCompleted &&
-                            <Button  onClick={toLeaveAReview(props.item)} sx={{ marginTop: 2, bgcolor: "transparent", fontWeight: "bold"}}>
+                            <Button  alignItems="left" onClick={toLeaveAReview(props.item)} sx={{ marginTop: 2, bgcolor: "transparent", fontWeight: "bold"}}>
                                 Leave a Review
                             </Button>
                             
                         }
 
                         {props.isPending &&
-                            <Typography textAlign="left" color="red" sx={{marginTop: 2}} gutterBottom variant="subtitle1" component="div">
+                            <Typography textAlign="left" color="secondary" sx={{marginTop: 2}} gutterBottom variant="subtitle1" component="div">
                                 Pending Approval
                             </Typography>
                             

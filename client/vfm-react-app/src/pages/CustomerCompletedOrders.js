@@ -38,7 +38,7 @@ const CustomerCompletedOrders = () => {
             <CssBaseline enableColorScheme />
             <Stack direction="column">
                 <ConsumerHeader />
-                <Typography variant="h5" sx={{ margin: 2, color: "primary.main" }}>
+                <Typography variant="h6" sx={{ margin: 2, color: "black" }}>
                     Completed Orders
                 </Typography>
                 <Divider />

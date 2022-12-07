@@ -20,8 +20,9 @@ const ProductCard = (props) => {
     let [shoppingSidebarOpen, setShoppingSidebarOpen] = React.useState(false);
 
     let [time_left, setTimeLeft] = React.useState("24h 0m");
-    
     let navigate = useNavigate();
+
+    const [farmer_name, setFarmerName] = React.useState("");
     
     let toAddItem = () => {
         //console.log('setshoppingsidebaropen'); 
@@ -86,14 +87,27 @@ const ProductCard = (props) => {
 
     }
 
+    let toFarmer = item => () => {
+        localStorage.setItem('clicked-on-user-id', item.vendor_id);
+        navigate('/farmer-profile');
+    }
+
     let toggleShoppingSidebar = () => {
         setShoppingSidebarOpen(!shoppingSidebarOpen)
     }
 
+    React.useEffect(() => {
+        //get farmer's details
+        let url = 'http://localhost:3001/curr-user-api/' + props.item.vendor_id;
+        console.log(url);
+        fetch(url).then(response => response.json()).then(data => {setFarmerName(data[0].first_name + " " + data[0].last_name)})
+            .catch(err => console.error(err));
+    }, [])
+
     return (
         <ThemeProvider data-testid="product-card" theme={theme}>
             <CssBaseline enableColorScheme />
-            <Card sx={{ maxWidth: 320 }}>
+            <Card sx={{ maxWidth: 260 }}>
                 <CardActionArea disableTouchRipple={true}>
                     <CardMedia
                     component="img"
@@ -105,15 +119,18 @@ const ProductCard = (props) => {
                         <Typography textAlign="left" gutterBottom variant="h5" component="div">
                             {props.item.name}
                         </Typography>
-                        <Typography textAlign="left" variant="body2" color="text.secondary" component="div" >
-                            {props.item.details}
-                        </Typography>
+                        
                         <Typography textAlign="left" gutterBottom variant="subtitle1" component="div">
                             {" $" + props.item.price + "/lb"}
                         </Typography>
                         <Typography textAlign="left" gutterBottom variant="subtitle1" component="div">
                             {props.item.quantity} in Stock
                         </Typography>
+
+                        <Typography sx={{textDecoration: 'underline'}} marginTop={2} textAlign="left" variant="subtitle1" color="primary" onClick={toFarmer(props.item)}>
+                            {farmer_name}
+                        </Typography>
+
                         {props.editMode &&
                             <Box>
                                 <Fab color="secondary" aria-label="edit" sx={{position: 'absolute',
