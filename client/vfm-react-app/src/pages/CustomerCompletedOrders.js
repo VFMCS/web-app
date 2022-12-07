@@ -22,11 +22,11 @@ const CustomerCompletedOrders = () => {
 
     const [modalOpen, setModalState] = React.useState(false);
 
-    const [customer_current_orders, setCustomerCurrentOrders] = React.useState([]) // capture data from GET request
+    const [customer_completed_orders, setCustomerCompletedOrders] = React.useState([]) // capture data from GET request
     React.useEffect(() => {
-        let url = 'http://localhost:3001/api/transaction/customer-current-orders/' + localStorage.getItem('curr_user_id');
+        let url = 'http://localhost:3001/api/transaction/past/customer/' + localStorage.getItem('curr_user_id');
         console.log(url);
-        fetch(url).then(response => response.json()).then(data => setCustomerCurrentOrders(data))
+        fetch(url).then(response => response.json()).then(data => setCustomerCompletedOrders(data))
             .catch(err => console.error(err));
 
     }, [])
@@ -45,7 +45,7 @@ const CustomerCompletedOrders = () => {
                 <center>
                     <Box sx={{ margin: 4, minHeight: "75vh"}}>
                         <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 4, sm: 8, md: 20 }}>
-                            {customer_current_orders.map((item) => (
+                            {customer_completed_orders.map((item) => (
                                 <Grid item xs={2} sm={3} md={4} key={item.product_id}>
                                     <ProductCardReserved isCompleted item={item} />
                                 </Grid>

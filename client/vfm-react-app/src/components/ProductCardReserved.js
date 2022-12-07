@@ -10,6 +10,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import CheckIcon from '@mui/icons-material/Check';
 import { useNavigate } from 'react-router-dom';
 import Review from './Review';
+import { ProductionQuantityLimitsSharp, PropaneSharp } from '@mui/icons-material';
 
 let reviewee = '';
 
@@ -19,6 +20,8 @@ const ProductCardReserved = (props) => {
     let [modalOpen, setModalState] = React.useState(false);
     let [shoppingSidebarOpen, setShoppingSidebarOpen] = React.useState(false);
     let [time_left, setTimeLeft] = React.useState("24h 0m");
+    let [is_completed, setIsCompleted] = React.useState(false);
+    let [is_pending, setIsPending] = React.useState(false);
     let navigate = useNavigate();
 
 
@@ -51,7 +54,16 @@ const ProductCardReserved = (props) => {
         console.log("time_diff: " + parseInt(time_diff));
 
         if(time_diff >= (1000*60*60*24)){
-            
+            fetch("http://localhost:3001/api/transaction/past", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(props.item)}).then(data => console.log(data).then(() =>
+                {
+                    fetch("http://localhost:3001/api/transaction", { method: "DELETE", headers: { "Content-Type": "application/json" }, body: JSON.stringify(props.item)}).then(data => console.log(data));
+                }
+            ))
+
+            setIsCompleted(true);
+        }
+        else{
+            setIsPending(true);
         }
 
 
@@ -141,7 +153,7 @@ const ProductCardReserved = (props) => {
                         </Typography>
 
                         {props.isFarmer &&
-                            <Typography sx={{marginTop: 2}} gutterBottom variant="subtitle1" component="div" margin={-1}>
+                            <Typography textAlign="left" sx={{marginTop: 2}} gutterBottom variant="subtitle1" component="div" margin={0}>
                                 Time remaining to pickup reserved item: {time_left} 
                             </Typography>
                         }
@@ -167,33 +179,15 @@ const ProductCardReserved = (props) => {
                             </Box>
                         }
 
-                        {props.isCompleted &&
-                            <Button  alignItems="left" onClick={toLeaveAReview(props.item)} sx={{ marginTop: 2, bgcolor: "transparent", fontWeight: "bold"}}>
-                                Leave a Review
-                            </Button>
-                            
-                        }
-
-                        {props.isPending &&
+                        {props.isPending && props.item.is_reserved ?
+                            <Typography textAlign="left" sx={{marginTop: 2}} gutterBottom variant="subtitle1" component="div" margin={0}>
+                                Time remaining to pickup reserved item: {time_left} 
+                            </Typography>
+                            :
                             <Typography textAlign="left" color="secondary" sx={{marginTop: 2}} gutterBottom variant="subtitle1" component="div">
                                 Pending Approval
                             </Typography>
-                            
                         }
-
-                            <Modal open={modalOpen} onClose={() => setModalState(false)} closeAfterTransition sx={{display: 'flex', p: 1, alignItems: 'center', justifyContent: 'center'}}>
-                                <Box sx={{
-                                    position: 'relative',
-                                    width: '1000px',
-                                    height: '400px',
-                                    bgcolor: 'background.paper',
-                                    border: '2px solid #000',
-                                    boxShadow: (theme) => theme.shadows[5],
-                                    p: 4,
-                                    }}>
-                                    <Review setModalState={setModalState} />
-                                </Box>
-                            </Modal>
                         
                     </CardContent>
                 </CardActionArea>
