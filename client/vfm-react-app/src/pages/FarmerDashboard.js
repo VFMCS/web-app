@@ -125,7 +125,8 @@ const ProductTable = () => {
 const OrderTable = () => {
   const [transactions, setTransactions] = React.useState([]) // capture data from GET request
   const [customer_name, setCustomerName] = React.useState('')
-
+  const [completed_customer_name, setCompletedCustomerName] = React.useState('')
+  const [completed_transactions, setCompletedTransactions] = React.useState([]) // capture data from GET request
 
   React.useEffect(() => {
      //get all of farmer's transactions
@@ -134,6 +135,12 @@ const OrderTable = () => {
 
      fetch(url).then(response => response.json()).then(data => setTransactions(data))
          .catch(err => console.error(err));
+
+         url = 'http://localhost:3001/api/transaction/past/vendor/' + localStorage.getItem('curr_user_id');
+         console.log(url);
+         
+         fetch(url).then(response => response.json()).then(data => setCompletedTransactions(data))
+             .catch(err => console.error(err));
 
 
   }, [])
@@ -157,6 +164,14 @@ const OrderTable = () => {
     fetch(url).then(response => response.json()).then(data => {console.log(data[0].first_name + ' ' + data[0].last_name); setCustomerName(data[0].first_name + ' ' + data[0].last_name)}).then(rows.push(CreateRow(transaction.transaction_id, customer_name, transaction.price, 'Pending')))
          .catch(err => console.error(err));
     
+  });
+
+  completed_transactions.forEach(completed_transaction => {
+    let url = 'http://localhost:3001/curr-user-api/' + completed_transaction.customer_id;
+    console.log(url);
+
+    fetch(url).then(response => response.json()).then(data => {console.log(data[0].first_name + ' ' + data[0].last_name); setCompletedCustomerName(data[0].first_name + ' ' + data[0].last_name)}).then(rows.push(CreateRow(completed_transaction.past_transaction_id, completed_customer_name, completed_transaction.price, 'Completed')))
+        .catch(err => console.error(err));
   });
 
   return (
