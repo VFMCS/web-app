@@ -18,7 +18,7 @@ const LandingHeader = ({landing}) => {
         <ThemeProvider theme={theme}>
             <CssBaseline enableColorScheme />
             <Box sx={{flexGrow: 1}}>
-                <AppBar position='static' sx={{background: "transparent"}}>
+                <AppBar position='static' sx={{background: "transparent", width: "100vw"}}>
                     <Toolbar> 
                         <Box sx={{flexGrow: 1}}>
                         <Button onClick={toLanding}>

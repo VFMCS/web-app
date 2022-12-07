@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { CssBaseline } from '@mui/material';
+import Footer from './components/Footer';
 
 export const Lemon = require('./images/vegetable-images/lemons.jpeg');
 export const Apple = require('./images/vegetable-images/apple.jpeg');
@@ -30,6 +31,7 @@ root.render(
   <React.StrictMode>
     <CssBaseline />
     <App />
+    <Footer />
   </React.StrictMode>
 );
 

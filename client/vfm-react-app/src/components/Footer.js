@@ -7,9 +7,10 @@ import theme from '../theme/theme.js'
 const Footer = () => {
     
     return (
+        <div>
         <ThemeProvider theme={theme}>
             <CssBaseline enableColorScheme />
-            <Box justifyContent="center" alignItems="center" sx={{backgroundColor: "primary.dark", p: 2}}>
+            <Box justifyContent="center" alignItems="center" sx={{backgroundColor: "primary.dark", p: 2, bottom: 0, width: "100vw"}}>
                     <Typography align='center' color={"white"}>
                         Have a question? Please send all inquiries to ____@gmail.com!
                     </Typography>
@@ -19,6 +20,7 @@ const Footer = () => {
                     
             </Box>
         </ThemeProvider>
+        </div>
     );
 };
   

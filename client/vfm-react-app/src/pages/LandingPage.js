@@ -51,7 +51,6 @@ const LandingPage = () => {
                         </Typography>                  
                     </Paper>
                 </Box>
-                <Footer />
             </Stack>
         </ThemeProvider>
         
