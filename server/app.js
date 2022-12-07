@@ -1,6 +1,7 @@
 //See server readme for endpoint documentation
 const express = require("express");
 const cors = require('cors');
+const fs = require('fs');
 const authProxy = require('./db/db.js');
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -19,6 +20,7 @@ const srchEndpoint = require('./search-endpoint/routes.js');
 const curr_user_api = require('./curr-user-api/routes.js');
 const trnapi = require('./transaction-api/routes.js');
 const revapi = require('./reviews-api/routes.js')
+const cloudinary_api = require('./cloudinary/config.js');
 
 //Endpoint main routes
 app.use('/api/transaction', trnapi);
@@ -28,5 +30,6 @@ app.use('/api/vendors', farmapi);
 app.use('/search', srchEndpoint);
 app.use('/curr-user-api', curr_user_api);
 app.use('/api/reviews', revapi);
+app.use('/api/cloudinary', cloudinary_api);
 
 
