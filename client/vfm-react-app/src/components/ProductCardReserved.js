@@ -1,5 +1,5 @@
 import * as React from 'react' 
-import {ThemeProvider, CssBaseline, Typography, Paper, Card, CardContent, CardActionArea, CardMedia, Fab, Box, Modal} from '@mui/material';
+import {Button, ThemeProvider, CssBaseline, Typography, Paper, Card, CardContent, CardActionArea, CardMedia, Fab, Box, Modal} from '@mui/material';
 import basketImage from "../images/vegetable-basket.png"
 import theme from "../theme/theme"
 import EditIcon from "@mui/icons-material/Edit"
@@ -9,7 +9,9 @@ import ShoppingSidebar from './sidebars/ShoppingSidebar';
 import CloseIcon from '@mui/icons-material/Close';
 import CheckIcon from '@mui/icons-material/Check';
 import { useNavigate } from 'react-router-dom';
+import Review from './Review';
 
+let reviewee = '';
 
 // This is a component that displays important information about a product
 const ProductCardReserved = (props) => {
@@ -90,6 +92,13 @@ const ProductCardReserved = (props) => {
 
     }
 
+    let toLeaveAReview = item => () => {
+        //Handle if the farmer rejects the item in which consumer must be alerted if the reserve request was rejected
+        console.log('review');
+        reviewee = item.vendor_id;
+        setModalState(true);
+
+    }
 
     let toggleShoppingSidebar = () => {
         setShoppingSidebarOpen(!shoppingSidebarOpen)
@@ -99,7 +108,7 @@ const ProductCardReserved = (props) => {
         <ThemeProvider theme={theme}>
             <CssBaseline enableColorScheme />
             <Card sx={{ maxWidth: 320 }}>
-                <CardActionArea disableTouchRipple={props.editMode}>
+                <CardActionArea disableTouchRipple={true}>
                     <CardMedia
                     component="img"
                     height="220"
@@ -148,6 +157,27 @@ const ProductCardReserved = (props) => {
                                 
                             </Box>
                         }
+
+                        {props.isCompleted &&
+                            <Button  onClick={toLeaveAReview(props.item)} sx={{ marginTop: 2, bgcolor: "transparent", fontWeight: "bold"}}>
+                                Leave a Review
+                            </Button>
+                            
+                        }
+
+                            <Modal open={modalOpen} onClose={() => setModalState(false)} closeAfterTransition sx={{display: 'flex', p: 1, alignItems: 'center', justifyContent: 'center'}}>
+                                <Box sx={{
+                                    position: 'relative',
+                                    width: '1000px',
+                                    height: '400px',
+                                    bgcolor: 'background.paper',
+                                    border: '2px solid #000',
+                                    boxShadow: (theme) => theme.shadows[5],
+                                    p: 4,
+                                    }}>
+                                    <Review setModalState={setModalState} />
+                                </Box>
+                            </Modal>
                         
                     </CardContent>
                 </CardActionArea>
@@ -155,5 +185,6 @@ const ProductCardReserved = (props) => {
         </ThemeProvider>
     );
 };
-  
+
+export { reviewee };
 export default ProductCardReserved;

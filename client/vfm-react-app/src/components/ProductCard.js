@@ -1,5 +1,5 @@
 import * as React from 'react' 
-import {ThemeProvider, CssBaseline, Typography, Paper, Card, CardContent, CardActionArea, CardMedia, Fab, Box, Modal} from '@mui/material';
+import {Button, ThemeProvider, CssBaseline, Typography, Paper, Card, CardContent, CardActionArea, CardMedia, Fab, Box, Modal} from '@mui/material';
 import basketImage from "../images/vegetable-basket.png"
 import theme from "../theme/theme"
 import EditIcon from "@mui/icons-material/Edit"
@@ -94,7 +94,7 @@ const ProductCard = (props) => {
         <ThemeProvider data-testid="product-card" theme={theme}>
             <CssBaseline enableColorScheme />
             <Card sx={{ maxWidth: 320 }}>
-                <CardActionArea disableTouchRipple={props.editMode}>
+                <CardActionArea disableTouchRipple={true}>
                     <CardMedia
                     component="img"
                     height="220"
@@ -172,6 +172,7 @@ const ProductCard = (props) => {
                                 
                             </Box>
                         }
+
                     </CardContent>
                 </CardActionArea>
             </Card>
