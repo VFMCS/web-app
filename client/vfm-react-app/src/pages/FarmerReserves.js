@@ -29,17 +29,17 @@ const FarmerReserves = () => {
             <CssBaseline enableColorScheme />
             <Stack direction="column">
                 <FarmerHeader />
-                <Typography variant="h5" sx={{ margin: 2, color: "primary.main" }}>
+                <Typography variant="h6" sx={{ margin: 2, color: "black" }}>
                     Current Reserves
                 </Typography>
                 <Divider />
                 <center>
                     <Box sx={{ margin: 4, minHeight: "70vh"}}>
-                        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                        <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 4, sm: 4, md: 20 }}>
                             {/* Replace with current vendor id*/}
                             {products.map((item) => (
-                                <Grid item xs={2} sm={4} md={4} key={item.name}>
-                                    <ProductCardReserved item={item} />
+                                <Grid item xs={1} sm={3} md={4} key={item.transaction_id}>
+                                    <ProductCardReserved isFarmer item={item} />
                                 </Grid>
                             ))}
                         </Grid>

@@ -1,5 +1,5 @@
 import * as React from 'react' 
-import {ThemeProvider, CssBaseline, Typography, Paper, Card, CardContent, CardActionArea, CardMedia, Fab, Box, Modal} from '@mui/material';
+import {Button, ThemeProvider, CssBaseline, Typography, Paper, Card, CardContent, CardActionArea, CardMedia, Fab, Box, Modal} from '@mui/material';
 import basketImage from "../images/vegetable-basket.png"
 import theme from "../theme/theme"
 import EditIcon from "@mui/icons-material/Edit"
@@ -8,6 +8,7 @@ import AddIcon from '@mui/icons-material/Add';
 import ShoppingSidebar from './sidebars/ShoppingSidebar';
 import CloseIcon from '@mui/icons-material/Close';
 import CheckIcon from '@mui/icons-material/Check';
+import { useNavigate } from 'react-router-dom';
 
 
 // This is a component that displays important information about a product
@@ -18,15 +19,18 @@ const ProductCard = (props) => {
 
     let [shoppingSidebarOpen, setShoppingSidebarOpen] = React.useState(false);
 
-    let [time_left, setTimeLeft] = React.useState("24h 0m")
+    let [time_left, setTimeLeft] = React.useState("24h 0m");
+    let navigate = useNavigate();
+
+    const [farmer_name, setFarmerName] = React.useState("");
     
     let toAddItem = () => {
-        console.log('setshoppingsidebaropen'); 
+        //console.log('setshoppingsidebaropen'); 
         //const { vendor_id, customer_id, quantity, product_id } = req.body;
         //console.log(props.item.vendor_id)
-        console.log(props.item);
+        //console.log(props.item);
 
-        const prod = {
+        let prod = {
             'vendor_id': props.item.vendor_id,
             'customer_id': parseInt(localStorage.getItem('curr_user_id')),
             'quantity': 1,
@@ -42,8 +46,26 @@ const ProductCard = (props) => {
             'image_url': props.item.image_url
               
         };
+
+        console.log('getting');
+
+        fetch('http://localhost:3001/api/transaction/get-in-cart/' + prod.product_id).then(response => response.json()).then(data => {
+            console.log('get transaction data: ' + JSON.stringify(data))
+            if(JSON.stringify(data) === '[]'){
+                console.log('posting');
+                fetch("http://localhost:3001/api/transaction", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(prod) }).then(data => {console.log(prod); console.log("data: " + JSON.stringify(data)); toggleShoppingSidebar();});   
+            }
+            else{
+                console.log('incrementing prod quantity');
+                data[0].quantity = data[0].quantity + 1;
+                //prod = data;
+                //console.log('prod: ' + JSON.stringify(prod));
+                fetch("http://localhost:3001/api/transaction/update/", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data[0]) }).then(data => {console.log("data: " + JSON.stringify(data))})
+            }
+        }).then().catch(err => console.error(err))
         
-        fetch("http://localhost:3001/api/transaction", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(prod) }).then(data => {console.log(prod); console.log(data); });   
+        //window.location.reload();
+        
     }
 
     let toAcceptItem = item => () => {
@@ -51,7 +73,8 @@ const ProductCard = (props) => {
         item.transaction_date = new Date();
         const url = "http://localhost:3001/api/transaction/update/"
         fetch(url, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(item) }).then(data => console.log(data));
-        window.location.reload(false)
+        window.location.reload();
+        navigate('/farmer-reserves');
 
     }
 
@@ -64,15 +87,28 @@ const ProductCard = (props) => {
 
     }
 
+    let toFarmer = item => () => {
+        localStorage.setItem('clicked-on-user-id', item.vendor_id);
+        navigate('/farmer-profile');
+    }
+
     let toggleShoppingSidebar = () => {
         setShoppingSidebarOpen(!shoppingSidebarOpen)
     }
 
+    React.useEffect(() => {
+        //get farmer's details
+        let url = 'http://localhost:3001/curr-user-api/' + props.item.vendor_id;
+        console.log(url);
+        fetch(url).then(response => response.json()).then(data => {setFarmerName(data[0].first_name + " " + data[0].last_name)})
+            .catch(err => console.error(err));
+    }, [])
+
     return (
         <ThemeProvider data-testid="product-card" theme={theme}>
             <CssBaseline enableColorScheme />
-            <Card sx={{ maxWidth: 320 }}>
-                <CardActionArea disableTouchRipple={props.editMode}>
+            <Card sx={{ maxWidth: 260 }}>
+                <CardActionArea disableTouchRipple={true}>
                     <CardMedia
                     component="img"
                     height="220"
@@ -80,18 +116,21 @@ const ProductCard = (props) => {
                     alt="Product Image"
                     />
                     <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
+                        <Typography textAlign="left" gutterBottom variant="h5" component="div">
                             {props.item.name}
                         </Typography>
-                        <Typography variant="body2" color="text.secondary" component="div" >
-                            {props.item.details}
+                        
+                        <Typography textAlign="left" gutterBottom variant="subtitle1" component="div">
+                            {" $" + props.item.price + "/lb"}
                         </Typography>
-                        <Typography gutterBottom variant="subtitle1" component="div" margin={1}>
-                            {" $" + props.item.price + "/item"}
-                        </Typography>
-                        <Typography gutterBottom variant="subtitle1" component="div" margin={-1}>
+                        <Typography textAlign="left" gutterBottom variant="subtitle1" component="div">
                             {props.item.quantity} in Stock
                         </Typography>
+
+                        <Typography sx={{textDecoration: 'underline'}} marginTop={2} textAlign="left" variant="subtitle1" color="primary" onClick={toFarmer(props.item)}>
+                            {farmer_name}
+                        </Typography>
+
                         {props.editMode &&
                             <Box>
                                 <Fab color="secondary" aria-label="edit" sx={{position: 'absolute',
@@ -111,7 +150,7 @@ const ProductCard = (props) => {
                                          boxShadow: (theme) => theme.shadows[5],
                                          p: 4,
                                         }}>
-                                            <FarmerPostItem initItem={props.item} setModalState={setModalState} editMode/> {/* Update to support editing mode */}
+                                        <FarmerPostItem initItem={props.item} setModalState={setModalState} editMode/> {/* Update to support editing mode */}
                                     </Box>
                                 </Modal>
                             </Box>
@@ -150,6 +189,7 @@ const ProductCard = (props) => {
                                 
                             </Box>
                         }
+
                     </CardContent>
                 </CardActionArea>
             </Card>

@@ -12,16 +12,17 @@ const FarmerCard = (props) => {
     //let item = props.item || {name: "Item", location: "0", description: "This is a description"}
     let navigate = useNavigate();
     const toFarmerProfile = () => {
-        clickedOnUserId = props.item.user_id;
+        localStorage.setItem('clicked-on-user-id', props.item.user_id);
         navigate('/farmer-profile');
     };
-    
+
+    let truncate  = str => str.length > 105 ? str.substring(0, 7) + "..." : str;
 
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline enableColorScheme />
-            <Card sx={{ maxWidth: 345 }}>
-                <CardActionArea>
+            <Card sx={{ maxWidth: 290, height: 480}}>
+                <CardActionArea disableTouchRipple={true}>
                     <CardMedia
                         component="img"
                         height="300"
@@ -29,20 +30,21 @@ const FarmerCard = (props) => {
                     />
 
                     <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
+                        <Typography textAlign="left" gutterBottom variant="h5" component="div">
                             {props.item.first_name}
                         </Typography>
-                        <Typography gutterBottom variant="subtitle1" component="div">
+                        <Typography textAlign="left" gutterBottom variant="subtitle1" component="div">
                             {props.item.location}
                         </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            {props.item.about_me}
+                        <Typography textAlign="left" variant="body2" color="text.secondary">
+                            {truncate(props.item.about_me)}
                         </Typography>
-                        <Button onClick={toFarmerProfile}>
-                            <Typography sx={{ color: "primary.dark", fontWeight: "bold" }}>
-                                View Profile
-                            </Typography>
-                        </Button>
+
+                        <Typography marginTop={2} textAlign="left" variant="subtitle1" color="primary" onClick={toFarmerProfile}>
+                            View Profile
+                        </Typography>
+
+
                     </CardContent>
                 </CardActionArea>
             </Card>
@@ -50,5 +52,4 @@ const FarmerCard = (props) => {
     );
 };
 
-export {clickedOnUserId}
 export default FarmerCard;

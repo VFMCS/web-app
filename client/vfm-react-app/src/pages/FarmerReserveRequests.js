@@ -5,6 +5,7 @@ import theme from '../theme/theme.js'
 import FarmerHeader from '../components/headers/FarmerHeader.js';
 import ProductCard from '../components/ProductCard.js'
 import EditIcon from '@mui/icons-material/Edit';
+import ProductCardReserved from '../components/ProductCardReserved.js';
 
 //Customer landing page upon customer being signed in
 
@@ -28,17 +29,17 @@ const FarmerReserveRequests = () => {
             <CssBaseline enableColorScheme />
             <Stack direction="column">
                 <FarmerHeader />
-                <Typography variant="h5" sx={{ margin: 2, color: "primary.main"}}>
+                <Typography variant="h6" sx={{ margin: 2, color: "black" }}>
                     Reserve Requests
                 </Typography>
                 <Divider />
                 <center>
-                    <Box sx={{ margin: 4, minHeight: "70vh"}}>
-                        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                    <Box sx={{ margin: 4, minHeight: "70vh" }}>
+                        <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 4, sm: 8, md: 20 }}>
                             {/* Replace with current vendor id*/}
                             {products.map((item) => (
-                                <Grid item xs={2} sm={4} md={4} key={item.name}>
-                                    <ProductCard reserveRequestMode item={item} />
+                                <Grid item xs={2} sm={3} md={4} key={item.name}>
+                                    <ProductCardReserved reserveRequestMode item={item} />
                                 </Grid>
                             ))}
                         </Grid>

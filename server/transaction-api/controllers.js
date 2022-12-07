@@ -10,6 +10,15 @@ const getCustomerCart = (req, res) => {
     })
 }
 
+const getCustomerCurrentOrders = (req, res) => {
+    const customer_id = req.params.id;
+    console.log(customer_id);
+    pool.query(queries.getCustomerCurrentOrders, [customer_id], (error, results) => {
+        if (error) throw error;
+        res.status(200).json(results.rows);
+    })
+}
+
 const getVendorReserveRequests = (req, res) => {
     const vendor_id = req.params.id;
     pool.query(queries.getVendorReserveRequests, [vendor_id], (error, results) => {
@@ -30,9 +39,29 @@ const addTransaction = (req, res) => {
     //const { vendor_id, customer_id, quantity, product_id } = req.body;
     const values = [req.body.vendor_id, req.body.customer_id, req.body.quantity, req.body.product_id, req.body.name, req.body.details, req.body.date_added, req.body.for_sale, req.body.vendor_quantity, req.body.photo, req.body.product_type, req.body.product_category, req.body.price, req.body.image_url];
     pool.query(queries.addTransaction, values, (error, results) => {
-        if (error){}
+        if (error) { }
         else res.status(200).json(results.rows);
-        
+
+    })
+}
+
+const getTransactionInCartByProdID = (req, res) => {
+    //const { vendor_id, customer_id, quantity, product_id } = req.body;
+    const product_id = req.params.id;
+    pool.query(queries.getTransactionInCartByProdID, [product_id], (error, results) => {
+        if (error) throw error
+        else { res.status(200).json(results.rows) };
+
+    })
+}
+
+const getTransactionsByVendorID = (req, res) => {
+    //const { vendor_id, customer_id, quantity, product_id } = req.body;
+    const vendor_id = req.params.id;
+    pool.query(queries.getTransactionsByVendorID, [vendor_id], (error, results) => {
+        if (error) throw error
+        else { res.status(200).json(results.rows) };
+
     })
 }
 
@@ -48,6 +77,7 @@ const deleteTransaction = (req, res) => {
 //send null for values not being updated
 const updateTransaction = (req, res) => {
     const values = [req.body.transaction_id, req.body.quantity, req.body.is_reserved, req.body.in_cart];
+    console.log(req.body.transaction_id);
     /*
     if (req.body.quantity != null) {
         pool.query(queries.updateTransactionQuantity, [req.body.transaction_id, req.body.quantity], (error, results) => {
@@ -69,17 +99,49 @@ const updateTransaction = (req, res) => {
     }
     */
     pool.query(queries.updateTransaction, values, (error, results) => {
-        if (error) throw error;
-        res.status(200).json(results.rows);
+        if (error) { }
+        else res.status(200).json(results.rows);
     })
 
-    
+
+
+}
+
+const addPastTransaction = (req, res) => {
+    const values = [req.body.vendor_id, req.body.customer_id, req.body.quantity, req.body.product_id, req.body.name, req.body.details, req.body.date_added, req.body.for_sale, req.body.vendor_quantity, req.body.photo, req.body.product_type, req.body.product_category, req.body.price, req.body.image_url];
+    pool.query(queries.addPastTransaction, values, (error, results) => {
+        if (error) throw error
+        else res.status(200).json(results.rows);
+
+    })
+}
+
+const getPastCustomerTransaction = (req, res) => {
+    const customer_id = req.params.id;
+    pool.query(queries.getPastCustomerTransaction, [customer_id], (error, results) => {
+        if (error) throw error
+        res.status(200).json(results.rows);
+    })
+}
+
+const getPastVendorTransaction = (req, res) => {
+    const vendor_id = req.params.id;
+    pool.query(queries.getPastVendorTransaction, [vendor_id], (error, results) => {
+        if (error) throw error
+        res.status(200).json(results.rows);
+    })
 }
 
 module.exports = {
+    addPastTransaction,
+    getPastCustomerTransaction,
+    getPastVendorTransaction,
     addTransaction,
+    getTransactionInCartByProdID,
+    getTransactionsByVendorID,
     updateTransaction,
     getCustomerCart,
+    getCustomerCurrentOrders,
     getVendorReserveRequests,
     getVendorReserves,
     deleteTransaction

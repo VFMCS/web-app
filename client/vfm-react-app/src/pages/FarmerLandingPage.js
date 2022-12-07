@@ -28,7 +28,7 @@ const FarmerLandingPage = () => {
             <CssBaseline enableColorScheme />
             <Stack direction="column">
                 <FarmerHeader />
-                <Typography variant="h5" sx={{ margin: 2, color: "primary.main" }}>
+                <Typography variant="h5" sx={{ margin: 2, color: "black" }}>
                     Your Products
                 </Typography>
                 <Divider />
