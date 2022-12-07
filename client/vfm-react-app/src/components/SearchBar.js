@@ -30,9 +30,16 @@ const SearchBar = () => {
       navigate('/customer-search', { state: { refresh: true } });
     }
   }
+
+  const handleKeyPress = (e) => {
+    console.log(e.charCode)
+    console.log(e.key)
+    if (e.key === "Enter") {
+      onSubmit()
+    }
+  }
   return (
     <Paper
-      component="form"
       sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400}}
     >
       <InputBase
@@ -40,6 +47,7 @@ const SearchBar = () => {
         placeholder="Search..."
         inputProps={{ 'aria-label': 'search for products' }}
         onChange={(event) => setText(event.target.value)}
+        onKeyDown={handleKeyPress}
       />
       <IconButton type="button" sx={{ p: '10px' }} aria-label="search" onClick={onSubmit}>
         <SearchIcon />
