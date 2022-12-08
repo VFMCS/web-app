@@ -57,12 +57,7 @@ const ProductCardReserved = (props) => {
         console.log("time_diff: " + parseInt(time_diff));
 
         if(time_diff >= (1000*60*60*24)){
-            fetch("http://localhost:3001/api/transaction/past", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(props.item)}).then(data => console.log(data).then(() =>
-                {
-                    fetch("http://localhost:3001/api/transaction", { method: "DELETE", headers: { "Content-Type": "application/json" }, body: JSON.stringify(props.item)}).then(data => console.log(data));
-                }
-            ))
-
+            fetch("http://localhost:3001/api/transaction", { method: "DELETE", headers: { "Content-Type": "application/json" }, body: JSON.stringify(props.item)}).then(data => console.log(data));
             setIsCompleted(true);
         }
         else{
