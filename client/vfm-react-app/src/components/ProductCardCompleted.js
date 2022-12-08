@@ -22,6 +22,8 @@ const ProductCardCompleted = (props) => {
     let [time_left, setTimeLeft] = React.useState("24h 0m");
     let [is_completed, setIsCompleted] = React.useState(false);
     let [is_pending, setIsPending] = React.useState(false);
+    const [farmer_name, setFarmerName] = React.useState("");
+
     let navigate = useNavigate();
 
     let toLeaveAReview = item => () => {
@@ -32,9 +34,16 @@ const ProductCardCompleted = (props) => {
 
     }
 
+    let toFarmer = item => () => {
+        localStorage.setItem('clicked-on-user-id', item.vendor_id);
+        navigate('/farmer-profile');
+    }
+
     let toggleShoppingSidebar = () => {
         setShoppingSidebarOpen(!shoppingSidebarOpen)
     }
+
+    
 
     return (
         <ThemeProvider theme={theme}>
@@ -59,12 +68,16 @@ const ProductCardCompleted = (props) => {
                         </Typography>
 
                         {props.isCustomer &&
-                            <Button  alignItems="left" onClick={toLeaveAReview(props.item)} sx={{ marginTop: 2, bgcolor: "transparent", fontWeight: "bold"}}>
+                            <Typography sx={{textDecoration: 'underline'}} marginTop={2} textAlign="left" variant="subtitle1" color="primary" onClick={toFarmer(props.item)}>
+                                {farmer_name}
+                            </Typography>
+                        }
+
+                        {props.isCustomer &&
+                            <Button  alignItems="left" onClick={toLeaveAReview(props.item)} sx={{ marginTop: 0, bgcolor: "transparent", fontWeight: "bold"}}>
                                 Leave a Review
                             </Button>
                         }
-
-                        
 
                             <Modal open={modalOpen} onClose={() => setModalState(false)} closeAfterTransition sx={{display: 'flex', p: 1, alignItems: 'center', justifyContent: 'center'}}>
                                 <Box sx={{

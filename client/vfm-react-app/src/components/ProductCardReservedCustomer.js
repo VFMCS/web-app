@@ -22,6 +22,8 @@ const ProductCardReservedCustomer = (props) => {
     let [time_left, setTimeLeft] = React.useState("24h 0m");
     let [is_completed, setIsCompleted] = React.useState(false);
     let [is_pending, setIsPending] = React.useState(false);
+    const [farmer_name, setFarmerName] = React.useState("");
+
     let navigate = useNavigate();
 
 
@@ -98,7 +100,18 @@ const ProductCardReservedCustomer = (props) => {
         */
 
         setTimeLeft(time_left);
+
+        //get farmer's details
+        let url = 'http://localhost:3001/curr-user-api/' + props.item.vendor_id;
+        console.log(url);
+        fetch(url).then(response => response.json()).then(data => {setFarmerName(data[0].first_name + " " + data[0].last_name)})
+            .catch(err => console.error(err));
     }, []);
+
+    let toFarmer = item => () => {
+        localStorage.setItem('clicked-on-user-id', item.vendor_id);
+        navigate('/farmer-profile');
+    }
 
     let toAcceptItem = item => () => {
         item.is_reserved = true;
@@ -152,29 +165,12 @@ const ProductCardReservedCustomer = (props) => {
                             Reserve quantity: {props.item.quantity} lb
                         </Typography>
 
-                        {props.reserveRequestMode &&
-                            <Box>
-                                <Fab color="primary" aria-label="add" sx={{position: 'absolute',
-                                bottom: 77,
-                                right: 16,
-                                }}
-                                onClick={toAcceptItem(props.item)}>
-                                    <CheckIcon />
-                                </Fab>
-
-                                <Fab color="secondary" ria-label="add" sx={{position: 'absolute',
-                                bottom: 12,
-                                right: 16,
-                                }}
-                                onClick={toRejectItem(props.item)}>
-                                    <CloseIcon />
-                                </Fab>
-                                <ShoppingSidebar isOpen={shoppingSidebarOpen} toggle= {toggleShoppingSidebar} onClose={() => setShoppingSidebarOpen(false)}/>            
-                            </Box>
-                        }
+                        <Typography sx={{textDecoration: 'underline'}} marginTop={2} textAlign="left" variant="subtitle1" color="primary" onClick={toFarmer(props.item)}>
+                            {farmer_name}
+                        </Typography>
 
                         {props.isPending && 
-                        props.item.is_reserved ?
+                            props.item.is_reserved ?
                             <Typography textAlign="left" sx={{marginTop: 2}} gutterBottom variant="subtitle1" component="div" margin={0}>
                                 Time remaining to pickup reserved item: {time_left} 
                             </Typography>

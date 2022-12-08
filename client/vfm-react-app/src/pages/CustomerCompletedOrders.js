@@ -9,6 +9,7 @@ import { useLocation } from "react-router-dom";
 import ConsumerHeader from '../components/headers/ConsumerHeader.js';
 import {createStore} from 'state-pool';
 import ProductCardReserved from '../components/ProductCardReserved.js';
+import ProductCardCompleted from '../components/ProductCardCompleted.js';
 
 const store = createStore();  // Create store for storing our global state
 
@@ -47,7 +48,7 @@ const CustomerCompletedOrders = () => {
                         <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 4, sm: 8, md: 20 }}>
                             {customer_completed_orders.map((item) => (
                                 <Grid item xs={2} sm={3} md={4} key={item.product_id}>
-                                    <ProductCardReserved isCompleted item={item} />
+                                    <ProductCardCompleted isCustomer item={item} />
                                 </Grid>
                             ))}
                         </Grid>
