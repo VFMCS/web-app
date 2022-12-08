@@ -69,6 +69,9 @@ const CustomerLandingPage = () => {
     if (selectedFilters.length === 0) {
       setDisplayedProducts(products.slice(0, 5)) // Featured Products
     }
+    else if (selectedFilters.includes("All")) {
+      setDisplayedProducts(products)
+    }
     else {
       console.log(selectedFilters)
       setDisplayedProducts(products.filter(p => selectedFilters.includes(p.product_type) || selectedFilters.includes(p.product_category))) // Filtered Products
@@ -104,10 +107,10 @@ const CustomerLandingPage = () => {
           </center>
         </div>  
         <center><Typography textAlign="left" variant="h5" sx={{ margin: 4, marginBottom: 0, color: "black" }}>
-          Featured Products       
+          {selectedFilters.length === 0 && "Featured"} Products       
         </Typography> </center>
 
-        <FiltersBar noOutput={selectedFilters.length === 0} filters={["Fruit", "Vegetable", "Organic"].concat(allCategories.slice(0,5))} exclusive selectedItems={selectedFilters} setSelectedItems={setSelectedFilters}/> 
+        <FiltersBar noOutput={selectedFilters.length === 0} filters={["All","Fruit", "Vegetable", "Organic"].concat(allCategories.slice(0,5))} exclusive selectedItems={selectedFilters} setSelectedItems={setSelectedFilters}/> 
         
         <center>
           <Box sx={{ margin: 2, marginTop: 0, marginBottom: 4, minHeight: "60vh"}}>
