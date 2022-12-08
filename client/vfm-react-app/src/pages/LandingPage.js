@@ -9,7 +9,6 @@ import HeaderImage from '../images/pexels-rgr-g.jpg';
 import BackgroundFarmImage from '../images/pexels-tim-mossholder.jpg'
 import HowItWorksBackground from '../images/how-it-works-background.jpg'
 import Footer from '../components/Footer.js';
-import infographic from '../images/info.svg';
 
 // The General Landing Page for all users
 // TODO: We still have to add actions for all buttons (to sign up/login)
@@ -32,17 +31,7 @@ const LandingPage = () => {
                     </Stack>
                 </Box>
                 <Box id="explanation" display="flex" justifyContent="center" alignItems="center" height="90vh" sx={{ backgroundSize: 'cover', backgroundColor:'primary.light'}}>
-                    <Box
-                            component="img"
-                            sx={{
-                            marginLeft: 0,
-                            marginTop: -0,
-                            height: 1050,
-                            width: 3000,
-                            }}
-                            alt="info"
-                            src={infographic}
-                        />
+                    
                     
                 </Box>
                 <Box id="mission" display="flex" justifyContent="center" alignItems="center" height="100vh" sx={{ backgroundSize: 'cover', backgroundImage: `url(${BackgroundFarmImage})`}}>
