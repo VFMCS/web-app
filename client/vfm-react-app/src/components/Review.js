@@ -13,7 +13,7 @@ import { faStar, faStarHalfAlt } from "@fortawesome/free-solid-svg-icons";
 import { faStar as faStarEmpty } from "@fortawesome/free-regular-svg-icons";
 import { Rating } from 'react-simple-star-rating'
 import { useNavigate } from 'react-router-dom';
-import {reviewee} from './ProductCardReserved'
+import {reviewee, product_name} from './ProductCardCompleted'
 
 
 // TODO: Update to support editing items
@@ -23,22 +23,38 @@ const Review = ({ editMode, setModalState, initItem }) => {
     const [rating, setRating] = useState(0);
     const [review, setReview] = useState('');
     const [reviewer, setReviewer] = useState(localStorage.getItem('curr_user_id'));
-    
+    const [title, setTitle] = useState('');
+    const [reviewer_first_name, setReviewerFirstName] = useState('');
+    //const [reviewee_full_name, setRevieweeFullName] = useState('');
+    //reviewee and product_name are imported from ProductCardReserved
+
     var errorExp = ""
+
+    React.useState(() => {
+        //get reviewer's first name
+        let url = 'http://localhost:3001/curr-user-api/' + localStorage.getItem('curr_user_id');
+        console.log(url);
+
+        fetch(url).then(response => response.json()).then(data => setReviewerFirstName(data[0].first_name));
+    }, [])
+
     var onSave = () => {
         console.log('saving');
         //bug
-        let full_review = {'rating': rating, 'reviewer': reviewer, 'reviewee': reviewee,'review': review};
-
-        fetch("http://localhost:3001/api/reviews", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(full_review)}).then(data => {console.log(data)});
-        setModalState(false);
+        let full_review = {'rating': rating, 'reviewer': reviewer, 'reviewee': reviewee,'review': review, 'title':title, 'reviewer_first_name' : reviewer_first_name, 'product_name' : product_name};
+        fetch("http://localhost:3001/api/reviews", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(full_review)}).then(data => {console.log(data)}); setModalState(false);
     }
 
     var onCancel = () => {
         setModalState(false);
     }
 
-    var handleTextChange = (e) => {
+    var handleTitleTextChange = (e) => {
+        setTitle(e.target.value);
+
+    }
+
+    var handleReviewTextChange = (e) => {
         setReview(e.target.value);
 
     }
@@ -70,7 +86,8 @@ const Review = ({ editMode, setModalState, initItem }) => {
                         />
                     </Stack>
                 </center>
-                    <TextField onChange={handleTextChange} name="details" multiline={true} rows={6} id="outlined-basic" defaultValue={''} label="Details" variant="outlined" />
+                    <TextField onChange={handleTitleTextChange} name="title" multiline={true} rows={1} id="outlined-basic" defaultValue={''} label="Title" variant="outlined" />
+                    <TextField onChange={handleReviewTextChange} name="details" multiline={true} rows={6} id="outlined-basic" defaultValue={''} label="Details" variant="outlined" />
                     <Stack sx={{ height: "40%" }} direction="row">
                         <Button onClick={onSave} variant="contained" style={{ height: '100%', width: '50%' }} size="medium" color="success" sx={{ fontWeight: "bold" }}>{editMode ? "Update" : "Publish"}</Button>
                         <Button onClick={onCancel} variant="text" style={{ height: '100%', width: '50%' }} size="medium" color="success" sx={{ fontWeight: "bold" }}>Cancel</Button>

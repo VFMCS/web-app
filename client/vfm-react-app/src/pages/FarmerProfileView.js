@@ -103,11 +103,13 @@ const FarmerProfileView = ({forFarmer}) => {
                         {reviews.map((item) => (
                             <Stack justifyContent="left" direction="column">
                                 <Rating 
-                                    readonly
-                                    initialValue={item.rating}
+                                        readonly
+                                        initialValue={item.rating}
                                 />
-
-                                <Typography variant="h7" sx={{margin: 1, color: "black"}}>
+                                <Typography variant="h7" sx={{margin: 1, fontWeight:"bold", color: "black"}}>
+                                        {item.title}
+                                    </Typography>
+                                <Typography variant="h8" sx={{margin: 1, color: "black"}}>
                                     {item.review}
                                 </Typography>
                             </Stack>

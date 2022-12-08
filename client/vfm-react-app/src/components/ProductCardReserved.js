@@ -13,6 +13,7 @@ import Review from './Review';
 import { ProductionQuantityLimitsSharp, PropaneSharp } from '@mui/icons-material';
 
 let reviewee = '';
+let product_name = '';
 
 // This is a component that displays important information about a product
 const ProductCardReserved = (props) => {
@@ -26,6 +27,8 @@ const ProductCardReserved = (props) => {
     const [customer_name, setCustomerName] = React.useState("");
 
     React.useEffect(() => {
+        localStorage.setItem('reviewee', props.customer_id);
+        product_name = props.item.name;
         let curr_date = (new Date()).toString();
         let curr_date_full = new Date();
         let transaction_date = (props.item.transaction_date).toString();
@@ -229,5 +232,5 @@ const ProductCardReserved = (props) => {
     );
 };
 
-export { reviewee };
+export { reviewee, product_name };
 export default ProductCardReserved;

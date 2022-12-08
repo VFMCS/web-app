@@ -13,6 +13,8 @@ import Review from './Review';
 import { ProductionQuantityLimitsSharp, PropaneSharp } from '@mui/icons-material';
 
 let reviewee = '';
+let product_name = '';
+
 
 // This is a component that displays important information about a product
 const ProductCardCompleted = (props) => {
@@ -83,7 +85,7 @@ const ProductCardCompleted = (props) => {
                                 <Box sx={{
                                     position: 'relative',
                                     width: '1000px',
-                                    height: '400px',
+                                    height: '440px',
                                     bgcolor: 'background.paper',
                                     border: '2px solid #000',
                                     boxShadow: (theme) => theme.shadows[5],
@@ -100,5 +102,5 @@ const ProductCardCompleted = (props) => {
     );
 };
 
-export { reviewee };
+export { reviewee, product_name };
 export default ProductCardCompleted;
