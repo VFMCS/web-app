@@ -44,6 +44,23 @@ const patchProductByProductID = (req, res) => {
     })
 }
 
+const deleteProductByProductID = (req, res) => {
+	const id = req.params.product_id
+	const values = [ id ]
+	pool.query(queries.deleteProductByProductID, values, (error, results) => {
+		if (error) throw error;
+		res.status(201).send("Product deleted at product ID: " + id)
+	})
+}
+
+const patchImageByProductID = (req, res) => {
+	const id = req.params.product_id
+	const values = [ req.body.photo, id ]
+	pool.query(queries.patchImageByProductID, values, (error, results) => {
+		if (error) throw error;
+		res.status(201).send("Product updated at product ID: " + id)
+	})
+}
 
 /*
 const insertProdByID = (req, res) => {
@@ -62,6 +79,8 @@ module.exports = {
     insertProd,
     getProductByVendorID,
     getProductByProductID,
-    patchProductByProductID
+    patchProductByProductID,
+	deleteProductByProductID,
+	patchImageByProductID,
     //insertProdByID
 }

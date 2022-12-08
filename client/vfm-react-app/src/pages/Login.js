@@ -4,6 +4,7 @@ import "../login-styles/auth.css";
 import LoginHeader from '../components/headers/LandingHeader.js';
 import LandingHeader from '../components/headers/LandingHeader.js';
 import { useNavigate } from 'react-router-dom';
+import {Stack} from '@mui/material'
 
 
 const Login = () => {
@@ -71,6 +72,7 @@ const Login = () => {
   }).catch(err => console.error(err));
 }
   return (
+    <Stack spacing={4} minHeight={"92vh"}>
     <div id="login-auth-wrap" className="auth-wrapper">
         <LandingHeader/>
 
@@ -111,7 +113,7 @@ const Login = () => {
         </form>
       </div>
     </div>
-
+    </Stack>
   );
 };
 

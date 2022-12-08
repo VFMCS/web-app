@@ -41,14 +41,14 @@ const FarmerSearch = () => {
         return (
             <ThemeProvider theme={theme}>
                 <CssBaseline enableColorScheme />
-                <Stack direction="column">
+                <Stack direction="column" minHeight={"95vh"}>
                     <FarmerHeader />
-                    <Typography variant="h5" sx={{ margin: 2, color: "primary.main" }}>
+                    <Typography variant="h6" sx={{ margin: 2, color: "black" }}>
                         Search results for "{search_query}"
                     </Typography>
                     <Divider />
                     <center>
-                        <Typography variant="h5" sx={{ margin: 2, color: "black" }}>
+                        <Typography variant="h6" sx={{ margin: 2, color: "black" }}>
                             No Search Results Found
                         </Typography>
                     </center>
@@ -62,15 +62,15 @@ const FarmerSearch = () => {
             <CssBaseline enableColorScheme />
             <Stack direction="column">
                 <FarmerHeader />
-                <Typography variant="h5" sx={{ margin: 2, color: "primary.main" }}>
+                <Typography variant="h6" sx={{ margin: 2, color: "black" }}>
                     Search results for "{search_query}"
                 </Typography>
                 <Divider />
                 <center>
-                    <Box sx={{ margin: 4 }}>
-                        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                    <Box sx={{ margin: 4, minHeight: "80vh"}}>
+                        <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 4, sm: 8, md: 20 }}>
                             {searchOutput.map((item) => (
-                                <Grid item xs={2} sm={4} md={4} key={item.product_id}>
+                                <Grid item xs={2} sm={3} md={4} key={item.product_id}>
                                     <ProductCard editMode item={item} />
                                 </Grid>
                             ))}

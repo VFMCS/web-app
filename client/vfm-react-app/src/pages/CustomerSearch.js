@@ -47,15 +47,18 @@ const CustomerSearch = () => {
                 <CssBaseline enableColorScheme />
                 <Stack direction="column">
                     <ConsumerHeader />
-                    <Typography variant="h5" sx={{ margin: 2, color: "primary.main" }}>
-                        Search Results for "{search_query}"
-                    </Typography>
-                    <Divider />
-                    <center>
-                        <Typography variant="h5" sx={{ margin: 2, color: "black" }}>
-                            No Search Results Found
+                    <Stack direction="column" minHeight={"85vh"}>
+                        <Typography variant="h6" sx={{ margin: 2, color: "black" }}>
+                            Search results for "{search_query}"
                         </Typography>
-                    </center>
+                        <Divider />
+                        <center>
+                            <Typography variant="h6" sx={{ margin: 2, color: "black" }}>
+                                No Search Results Found
+                            </Typography>
+                        </center>
+                    </Stack>
+                    
                 </Stack>
             </ThemeProvider>
         )
@@ -66,15 +69,15 @@ const CustomerSearch = () => {
             <CssBaseline enableColorScheme />
             <Stack direction="column">
                 <ConsumerHeader />
-                <Typography variant="h5" sx={{ margin: 2, color: "primary.main" }}>
-                    Search Results for "{search_query}"
+                <Typography variant="h6" sx={{ margin: 2, color: "black" }}>
+                     for "{search_query}"
                 </Typography>
                 <Divider />
                 <center>
-                    <Box sx={{ margin: 4 }}>
-                        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                    <Box sx={{ margin: 4, minHeight: "75vh"}}>
+                        <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 4, sm: 4, md: 20 }}>
                             {searchOutput.map((item) => (
-                                <Grid item xs={2} sm={4} md={4} key={item.product_id}>
+                                <Grid item xs={1} sm={3} md={4} key={item.product_id}>
                                     <ProductCard addMode item={item} />
                                 </Grid>
                             ))}

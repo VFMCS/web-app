@@ -15,15 +15,17 @@ import { ProductionQuantityLimitsSharp, PropaneSharp } from '@mui/icons-material
 let reviewee = '';
 
 // This is a component that displays important information about a product
-const ProductCardReserved = (props) => {
+const ProductCardReservedCustomer = (props) => {
     //let item = props.item;
-    let navigate = useNavigate();
     let [modalOpen, setModalState] = React.useState(false);
     let [shoppingSidebarOpen, setShoppingSidebarOpen] = React.useState(false);
     let [time_left, setTimeLeft] = React.useState("24h 0m");
     let [is_completed, setIsCompleted] = React.useState(false);
     let [is_pending, setIsPending] = React.useState(false);
-    const [customer_name, setCustomerName] = React.useState("");
+    const [farmer_name, setFarmerName] = React.useState("");
+
+    let navigate = useNavigate();
+
 
     React.useEffect(() => {
         let curr_date = (new Date()).toString();
@@ -100,12 +102,16 @@ const ProductCardReserved = (props) => {
         setTimeLeft(time_left);
 
         //get farmer's details
-        let url = 'http://localhost:3001/curr-user-api/' + props.item.customer_id;
+        let url = 'http://localhost:3001/curr-user-api/' + props.item.vendor_id;
         console.log(url);
-        fetch(url).then(response => response.json()).then(data => {setCustomerName(data[0].first_name + " " + data[0].last_name)})
+        fetch(url).then(response => response.json()).then(data => {setFarmerName(data[0].first_name + " " + data[0].last_name)})
             .catch(err => console.error(err));
-
     }, []);
+
+    let toFarmer = item => () => {
+        localStorage.setItem('clicked-on-user-id', item.vendor_id);
+        navigate('/farmer-profile');
+    }
 
     let toAcceptItem = item => () => {
         item.is_reserved = true;
@@ -125,16 +131,12 @@ const ProductCardReserved = (props) => {
 
     }
 
-    let toPickupItem = item => () => {
-        console.log('item being picked up');
-        fetch("http://localhost:3001/api/transaction/past", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(props.item)}).then(data => console.log(data)).then(() =>
-                {
-                    console.log('item.transaction_id: ' +item.transaction_id);
-                    const url = "http://localhost:3001/api/transaction/" + item.transaction_id;
-                    fetch(url, { method: "DELETE", headers: { "Content-Type": "application/json" }, body: JSON.stringify(item) }).then(data => console.log(data));
-                }
-        ).then(() => {window.location.reload(false)});
-        
+    let toLeaveAReview = item => () => {
+        //Handle if the farmer rejects the item in which consumer must be alerted if the reserve request was rejected
+        console.log('review');
+        reviewee = item.vendor_id;
+        setModalState(true);
+
     }
 
     let toggleShoppingSidebar = () => {
@@ -163,64 +165,20 @@ const ProductCardReserved = (props) => {
                             Reserve quantity: {props.item.quantity} lb
                         </Typography>
 
-                        {props.isFarmer &&
-                            <Box>
-                                <Typography textAlign="left" sx={{marginTop: 2}} gutterBottom variant="subtitle1" component="div" margin={0}>
-                                    Customer: {customer_name}
-                                </Typography>
+                        <Typography sx={{textDecoration: 'underline'}} marginTop={2} textAlign="left" variant="subtitle1" color="primary" onClick={toFarmer(props.item)}>
+                            {farmer_name}
+                        </Typography>
 
-                                <Typography textAlign="left" sx={{marginTop: 2}} gutterBottom variant="subtitle1" component="div" margin={0}>
-                                    Time remaining to pickup reserved item: {time_left} 
-                                </Typography>
-
-                                <Typography textAlign="left" sx={{color: 'primary.dark', marginTop: 4, marginBottom: 4}} gutterBottom variant="subtitle1" component="div" margin={0}>
-                                    Item picked up?
-                                </Typography>
-
-                                <Fab color="primary" aria-label="add" sx={{position: 'absolute',
-                                bottom: 35,
-                                right: 16,
-                                }}
-                                onClick={toPickupItem(props.item)}>
-                                    <CheckIcon />
-                                </Fab>
-                            </Box>
+                        {props.isPending && 
+                            props.item.is_reserved ?
+                            <Typography textAlign="left" sx={{marginTop: 2}} gutterBottom variant="subtitle1" component="div" margin={0}>
+                                Time remaining to pickup reserved item: {time_left} 
+                            </Typography>
+                            :
+                            <Typography textAlign="left" color="secondary" sx={{marginTop: 2}} gutterBottom variant="subtitle1" component="div">
+                                Pending Approval
+                            </Typography>
                         }
-
-                        {props.reserveRequestMode &&
-                            <Box marginBottom={10}>
-                                <Typography textAlign="left" sx={{marginTop: 2}} gutterBottom variant="subtitle1" component="div" margin={0}>
-                                    Customer: {customer_name}
-                                </Typography>
-                                
-                            </Box>
-                        }
-
-                        {props.reserveRequestMode &&
-                            <Box >
-                                <Fab color="primary" aria-label="add" sx={{position: 'absolute',
-                                bottom: 12,
-                                left: 16,
-                                }}
-                                onClick={toAcceptItem(props.item)}>
-                                    <CheckIcon />
-                                </Fab>
-
-                                <Fab color="secondary" ria-label="add" sx={{position: 'absolute',
-                                bottom: 12,
-                                right: 16,
-                                }}
-                                onClick={toRejectItem(props.item)}>
-                                    <CloseIcon />
-                                </Fab>
-                                <ShoppingSidebar isOpen={shoppingSidebarOpen} toggle= {toggleShoppingSidebar} onClose={() => setShoppingSidebarOpen(false)}/>            
-                            </Box>
-   
-
-                        }
-
-
-
                         
                     </CardContent>
                 </CardActionArea>
@@ -230,4 +188,4 @@ const ProductCardReserved = (props) => {
 };
 
 export { reviewee };
-export default ProductCardReserved;
+export default ProductCardReservedCustomer;

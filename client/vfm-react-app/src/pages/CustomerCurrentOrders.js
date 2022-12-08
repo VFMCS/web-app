@@ -9,6 +9,8 @@ import { useLocation } from "react-router-dom";
 import ConsumerHeader from '../components/headers/ConsumerHeader.js';
 import {createStore} from 'state-pool';
 import ProductCardReserved from '../components/ProductCardReserved.js';
+import ProductCardReservedCustomer from '../components/ProductCardReservedCustomer.js';
+
 
 const store = createStore();  // Create store for storing our global state
 
@@ -34,16 +36,16 @@ const CustomerCurrentOrders = () => {
             <CssBaseline enableColorScheme />
             <Stack direction="column">
                 <ConsumerHeader />
-                <Typography variant="h5" sx={{ margin: 2, color: "primary.main" }}>
+                <Typography variant="h6" sx={{ margin: 2, color: "black" }}>
                     Reserves
                 </Typography>
                 <Divider />
                 <center>
-                    <Box sx={{ margin: 4 }}>
-                        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                    <Box sx={{ margin: 4, minHeight: "75vh"}}>
+                        <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 4, sm: 8, md: 20 }}>
                             {customer_current_orders.map((item) => (
-                                <Grid item xs={2} sm={4} md={4} key={item.product_id}>
-                                    <ProductCardReserved item={item} />
+                                <Grid item xs={2} sm={3} md={4} key={item.product_id}>
+                                    <ProductCardReservedCustomer isPending item={item} />
                                 </Grid>
                             ))}
                         </Grid>

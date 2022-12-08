@@ -13,6 +13,8 @@ import Login from './pages/Login';
 import FarmerReserves from './pages/FarmerReserves';
 import FarmerReserveRequests from './pages/FarmerReserveRequests';
 import FarmerDashboard from './pages/FarmerDashboard';
+import CustomerFAQPage from './pages/CustomerFAQ';
+import FarmerFAQ from './pages/FarmerFAQ';
 import CustomerCurrentOrders from './pages/CustomerCurrentOrders';
 import CustomerCompletedOrders from './pages/CustomerCompletedOrders';
 
@@ -60,6 +62,9 @@ function App() {
         <Route path="/farmer-reserves" element={<FarmerReserves />} />
         <Route path="/farmer-reserve-requests" element={<FarmerReserveRequests />} />
         <Route path="/dashboard" element={<FarmerDashboard />} />
+        <Route path="/customer/faq/" element={<CustomerFAQPage />} />
+        <Route path="/farmer/faq/" element={<FarmerFAQ />} />
+        <Route path="/farmer/profile/" element={<FarmerProfileView forFarmer />} />
         {/*Add more routes here (can also create nested routes)*/}
       </Routes>
     </BrowserRouter>
