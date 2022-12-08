@@ -10,7 +10,6 @@ const createReview = (req, res) => {
         req.body.review,
         req.body.title,
         req.body.reviewer_first_name,
-        req.body.reviewee_full_name,
         req.body.product_name];
     pool.query(queries.createReview, values, (error, results) => {
         if (error) throw error;
