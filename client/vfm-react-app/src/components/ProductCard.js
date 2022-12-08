@@ -128,9 +128,11 @@ const ProductCard = (props) => {
                             {props.item.quantity} lb in Stock
                         </Typography>
 
-                        <Typography sx={{textDecoration: 'underline'}} marginTop={2} textAlign="left" variant="subtitle1" color="primary" onClick={toFarmer(props.item)}>
-                            {farmer_name}
-                        </Typography>
+                        {props.isCustomer &&
+                            <Typography sx={{textDecoration: 'underline'}} marginTop={2} textAlign="left" variant="subtitle1" color="primary" onClick={toFarmer(props.item)}>
+                                {farmer_name}
+                            </Typography>
+                        }
 
                         {props.editMode &&
                             <Box>

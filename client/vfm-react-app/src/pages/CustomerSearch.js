@@ -70,7 +70,7 @@ const CustomerSearch = () => {
             <Stack direction="column">
                 <ConsumerHeader />
                 <Typography variant="h6" sx={{ margin: 2, color: "black" }}>
-                     for "{search_query}"
+                    Search results for "{search_query}"
                 </Typography>
                 <Divider />
                 <center>
@@ -78,7 +78,7 @@ const CustomerSearch = () => {
                         <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 4, sm: 4, md: 20 }}>
                             {searchOutput.map((item) => (
                                 <Grid item xs={1} sm={3} md={4} key={item.product_id}>
-                                    <ProductCard addMode item={item} />
+                                    <ProductCard isCustomer addMode item={item} />
                                 </Grid>
                             ))}
                         </Grid>
