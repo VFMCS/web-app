@@ -107,7 +107,7 @@ const CustomerLandingPage = () => {
           </center>
         </div>  
         <center><Typography textAlign="left" variant="h5" sx={{ margin: 4, marginBottom: 0, color: "black" }}>
-          {selectedFilters.length === 0 && "Featured"} Products       
+          {selectedFilters.length === 0 ? "Featured" : (selectedFilters.includes("All") ? "All" : "Filtered")} Products       
         </Typography> </center>
 
         <FiltersBar noOutput={selectedFilters.length === 0} filters={["All","Fruit", "Vegetable", "Organic"].concat(allCategories.slice(0,5))} exclusive selectedItems={selectedFilters} setSelectedItems={setSelectedFilters}/> 
