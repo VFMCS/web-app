@@ -17,13 +17,13 @@ let reviewee = '';
 // This is a component that displays important information about a product
 const ProductCardReserved = (props) => {
     //let item = props.item;
+    let navigate = useNavigate();
     let [modalOpen, setModalState] = React.useState(false);
     let [shoppingSidebarOpen, setShoppingSidebarOpen] = React.useState(false);
     let [time_left, setTimeLeft] = React.useState("24h 0m");
     let [is_completed, setIsCompleted] = React.useState(false);
     let [is_pending, setIsPending] = React.useState(false);
-    let navigate = useNavigate();
-
+    const [customer_name, setCustomerName] = React.useState("");
 
     React.useEffect(() => {
         let curr_date = (new Date()).toString();
@@ -98,6 +98,13 @@ const ProductCardReserved = (props) => {
         */
 
         setTimeLeft(time_left);
+
+        //get farmer's details
+        let url = 'http://localhost:3001/curr-user-api/' + props.item.customer_id;
+        console.log(url);
+        fetch(url).then(response => response.json()).then(data => {setCustomerName(data[0].first_name + " " + data[0].last_name)})
+            .catch(err => console.error(err));
+
     }, []);
 
     let toAcceptItem = item => () => {
@@ -128,7 +135,6 @@ const ProductCardReserved = (props) => {
                 }
         ).then(() => {window.location.reload(false)});
         
-    
     }
 
     let toggleShoppingSidebar = () => {
@@ -160,6 +166,10 @@ const ProductCardReserved = (props) => {
                         {props.isFarmer &&
                             <Box>
                                 <Typography textAlign="left" sx={{marginTop: 2}} gutterBottom variant="subtitle1" component="div" margin={0}>
+                                    Customer: {customer_name}
+                                </Typography>
+
+                                <Typography textAlign="left" sx={{marginTop: 2}} gutterBottom variant="subtitle1" component="div" margin={0}>
                                     Time remaining to pickup reserved item: {time_left} 
                                 </Typography>
 
@@ -178,10 +188,19 @@ const ProductCardReserved = (props) => {
                         }
 
                         {props.reserveRequestMode &&
-                            <Box>
+                            <Box marginBottom={10}>
+                                <Typography textAlign="left" sx={{marginTop: 2}} gutterBottom variant="subtitle1" component="div" margin={0}>
+                                    Customer: {customer_name}
+                                </Typography>
+                                
+                            </Box>
+                        }
+
+                        {props.reserveRequestMode &&
+                            <Box >
                                 <Fab color="primary" aria-label="add" sx={{position: 'absolute',
-                                bottom: 77,
-                                right: 16,
+                                bottom: 12,
+                                left: 16,
                                 }}
                                 onClick={toAcceptItem(props.item)}>
                                     <CheckIcon />
@@ -196,7 +215,10 @@ const ProductCardReserved = (props) => {
                                 </Fab>
                                 <ShoppingSidebar isOpen={shoppingSidebarOpen} toggle= {toggleShoppingSidebar} onClose={() => setShoppingSidebarOpen(false)}/>            
                             </Box>
+   
+
                         }
+
 
 
                         
