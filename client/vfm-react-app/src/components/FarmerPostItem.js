@@ -5,29 +5,34 @@ import { Stack } from '@mui/system';
 import { Select, MenuItem, InputLabel, FormControl, TextField, ThemeProvider, InputAdornment, Button } from '@mui/material';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
-import { Lemon, Apple, Pear, Orange, Grapefruit, Lime, Peaches, Tomato, Blueberry, Cherry, Onion, Garlic, Potato, Asparagus, Celery, Broccoli, Cabbage, Cauliflower }
-    from '..';
-
 import { useNavigate } from 'react-router-dom';
 
 
-// TODO: Update to support editing items
+//Modal for uploading items on the farmer side
 const FarmerPostItem = ({ editMode, setModalState, initItem }) => {
     const navigate = useNavigate();
     
-    const [showUploadButton, setShowUploadButton] = useState(true);
-    const [showPriceValidError, setShowPriceValidError] = useState(false);
-    const [showEmptyEntryError, setShowEmptyEntryError] = useState("");
-    const [typeEvent, setTypeEvent] = useState(null);
+    const [showUploadButton, setShowUploadButton] = useState(true); //Hook for showing upload button when no image is uploaded
+    const [showPriceValidError, setShowPriceValidError] = useState(false); //Shows an error when user doesn't input a valid price in form of _.__
+    const [showEmptyEntryError, setShowEmptyEntryError] = useState(""); //Shows an error when a required field is left empty
+    const [typeEvent, setTypeEvent] = useState(null); //Event for changing the image if
     const [uploadMode, setUploadMode] = useState(false);
     const [uploadImage, setUploadImage] = useState(null)
     const [showBox, setShowBox] = useState(true)
 	const [curImage, setCurImage] = useState(new FormData())
 	const [switchStatus, setSwitchStatus] = useState(true)
-	const [test, setTest] = useState("")
 	const [imgChanged, setImgChanged] = useState(false);
     const [stockImg, setStockImg] = useState(false);
-    //here, we initially set the vendor_id to what we need it to be
+    const [item, setItem] = useState(editMode ? initItem : {
+        'vendor_id': localStorage.getItem('curr_user_id'),
+        'product_type': null,
+        'quantity': null,
+        'price': null,
+        'product_category': null,
+        'details': null,
+        'name': null,
+		'photo': null
+        });
 
     let curObj = {  'Lemon': "https://cdn.britannica.com/84/188484-050-F27B0049/lemons-tree.jpg", 
                         'Apples': "https://post.healthline.com/wp-content/uploads/2020/09/Do_Apples_Affect_Diabetes_and_Blood_Sugar_Levels-732x549-thumbnail-1-732x549.jpg", 
@@ -49,17 +54,6 @@ const FarmerPostItem = ({ editMode, setModalState, initItem }) => {
                         'Cauliflower': "https://www.producemarketguide.com/sites/default/files/Commodities.tar/Commodities/cauliflower_commodity-page.png" 
     }
 
-
-    const [item, setItem] = useState(editMode ? initItem : {
-        'vendor_id': localStorage.getItem('curr_user_id'),
-        'product_type': null,
-        'quantity': null,
-        'price': null,
-        'product_category': null,
-        'details': null,
-        'name': null,
-		'photo': null
-        });
 
     var defaultImageCheck = () => {
         setUploadMode(!uploadMode)
@@ -88,8 +82,6 @@ const FarmerPostItem = ({ editMode, setModalState, initItem }) => {
 
     var handleDefaultImageChange = (event) => {
         let selection = event.target.value;
-//        let curObj = { 'Lemon': Lemon, 'Apples': Apple, 'Pears': Pear, 'Oranges': Orange, 'Grapefruit': Grapefruit, 'Lime': Lime, 'Peaches': Peaches, 'Tomatoes': Tomato, 'Blueberries': Blueberry, 'Cherries': Cherry, 'Onion': Onion, 'Garlic': Garlic, 'Potatoes': Potato, 'Asparagus': Asparagus, 'Celery': Celery, 'Broccoli': Broccoli, 'Cabbage': Cabbage, 'Cauliflower': Cauliflower }
- 
         setShowBox(false)
         setShowUploadButton(false)
         setUploadImage(curObj[selection])
@@ -116,19 +108,21 @@ const FarmerPostItem = ({ editMode, setModalState, initItem }) => {
 		setImgChanged(true)
 	}
 
-    var errorExp = ""
+    
     var onSave = async () => {
+        var errorExp = ""
+        var errorArr = [];
         var valid = true
         if (item["name"] === null) {
-            errorExp = errorExp + "name ";
+            errorArr.push("Name");
             valid = false;
         }
         if (item["quantity"] === null) {
-            errorExp = errorExp + "quantity "
+            errorArr.push("Quantity");
             valid = false;
         }
         if (item["price"] === null) {
-            errorExp = errorExp + "price "
+            errorArr.push("Price") 
             valid = false;
         }
         const value = item["price"]
@@ -143,9 +137,15 @@ const FarmerPostItem = ({ editMode, setModalState, initItem }) => {
 		if (switchStatus === true){
 			if(!editMode && showUploadButton === true){
 				valid = false
-				errorExp = errorExp + "validimg "
+				errorArr.push("Valid Image")
 			}
-		}
+        }
+        for(var i = 0; i < errorArr.length; ++i){
+            errorExp = errorExp + errorArr[i]
+            if(i != errorArr.length - 1){
+                errorExp = errorExp + ", "
+            }
+        }
         if (valid) {
             errorExp = ""
             setShowEmptyEntryError("")
@@ -170,12 +170,6 @@ const FarmerPostItem = ({ editMode, setModalState, initItem }) => {
                     window.location.reload(false)
                     navigate('/farmer');
                 }
-                //fetch("http://localhost:3001/api/products", { method: "GET" }).then(data => console.log(data))
-				//fetch("http://localhost:3001/api/products", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(item) }).then(data => console.log(data));
-                //fetch("http://localhost:3001/api/products", { method: "GET" }).then(data => console.log(data))
-                //setModalState(false);
-                //window.location.reload(false)
-                //navigate('/farmer');
             }
             else{
 				console.log(item)
@@ -267,7 +261,13 @@ const FarmerPostItem = ({ editMode, setModalState, initItem }) => {
                         <input hidden accept="image/*" multiple type="file" encType='multipart/form-data' onChange={handleImageUpload}/>
                         </Button>)}
                     </div>)}
-                    {uploadImage && (<img alt="sampleImg}" src={uploadImage} id="imageUpload"/>)}
+                    {uploadImage && 
+                    (<img alt="sampleImg}" src={uploadImage} id="imageUpload"/>)}
+                    {uploadImage &&
+                    (<Button data-testid = "upload" color="secondary" sx={{ p: '5', width: '100%', height: '100%'}} variant="contained" component="label">
+                        Upload
+                        <input hidden accept="image/*" multiple type="file" encType='multipart/form-data' onChange={handleImageUpload}/>
+                    </Button>)}
                     <FormControlLabel onChange={defaultImageCheck} sx={{ left: "50%" }} control={<Switch /*defaultChecked*/ />} labelPlacement="bottom" label="Use Default Image" />
                 </Stack>
                 <Stack spacing={2} direction="column" sx={{ width: '60%' }}>

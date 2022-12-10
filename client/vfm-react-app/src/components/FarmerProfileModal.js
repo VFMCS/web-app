@@ -65,11 +65,11 @@ const FarmerProfileModal = ({open, setModalState, onClose, editMode, profile, ch
                 boxShadow: (theme) => theme.shadows[5],
                 p: 4,
                 width: "75vw",
-                height: "70vh"
+                height: "90vh"
                 }}>
                 <ThemeProvider theme={theme}>
                     <Stack spacing={2} direction="row" p={2} m={2}>
-                        <Box display="flex" justifyContent="center" alignItems="center" sx={{ width: '50%', height: '50%'}}>
+                        <Box display="flex" justifyContent="center" alignItems="center" sx={{ width: '100%', height: '50%'}}>
                             {showUploadButton &&
                             <div id="uploadBox">
                                  <UploadButton id="uploadButton" name="image_url" onChange={handleImageChange} color="secondary" />
@@ -81,14 +81,14 @@ const FarmerProfileModal = ({open, setModalState, onClose, editMode, profile, ch
                                     </Stack>    
                             }
                         </Box>
-                        <Stack spacing={2} direction="column" sx={{}}>
+                        <Stack spacing={2} direction="column" sx={{width: '100%'}}>
                             {editMode &&
-                                <Stack spacing={2} direction="row" >
+                                <Stack spacing={2} direction="row">
                                     <TextField required name="first-name" onChange={() => false} id="outlined-basic" label="First Name" variant="outlined" defaultValue={profile.first_name} />
                                     <TextField required name="last-name" onChange={() => false} id="outlined-basic" label="Last Name" variant="outlined" defaultValue={profile.last_name} />
                                 </Stack>
                             }
-                            <TextField required name="address" onChange={changeHandler} id="outlined-basic" label="Location" variant="outlined" defaultValue={profile.address}/>
+                            <TextField sx={{ width: '100%'}} required name="address" onChange={changeHandler} id="outlined-basic" label="Location" variant="outlined" defaultValue={profile.address}/>
                             <TextField required onChange={changeHandler} name="about_me" multiline={true} rows={6} id="outlined-basic" label="Description" variant="outlined" defaultValue={profile.about_me}/>
                             <Stack sx={{height: '60%'}}>
                                 <p style={{color: "tomato"}}>
@@ -96,7 +96,7 @@ const FarmerProfileModal = ({open, setModalState, onClose, editMode, profile, ch
                                 </p>
                             </Stack>
                             <Stack sx={{}} direction="row">
-                                <Button onClick={onSubmit} variant= "contained" style={{ height: '100%', width: '50%'}} size="medium" color="success" sx={{fontWeight: "bold"}}>Submit</Button>
+                                <Button onClick={onSubmit} variant= "contained" style={{ height: '100%', width: '100%'}} size="medium" color="success" sx={{fontWeight: "bold"}}>Submit</Button>
                             </Stack>
                         </Stack>
                     </Stack>
