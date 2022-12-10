@@ -40,7 +40,7 @@
     "start": "concurrently \"npm run dev\" \"npm run client\"",
     "test:server": "NODE_ENV='test' mocha tests/server-tests",
     "test:client": "NODE_ENV='test' mocha tests/client-tests --require babel-core/register --require tests/client-tests/setup.js",
-    "test": "cd server && node mocha-backend-test.js"
+    "test": "jest"
   },
   "repository": {
     "type": "git",

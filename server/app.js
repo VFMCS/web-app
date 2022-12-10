@@ -32,4 +32,6 @@ app.use('/curr-user-api', curr_user_api);
 app.use('/api/reviews', revapi);
 app.use('/api/cloudinary', cloudinary_api);
 
+module.exports = app
+
 

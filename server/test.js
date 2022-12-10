@@ -1,24 +1,24 @@
 //test.js
 
-const server = require('../app.js');
-const supertest = require('supertest');
-const requestWithSupertest = supertest(server);
+const app = require("../server");
+const mongoose = require("mongoose");
+const supertest = require("supertest");
 
-describe('User Endpoints', () => {
+test("GET /api/posts", async () => {
+  const post = await Post.create({ title: "Post 1", content: "Lorem ipsum" });
 
-    it('GET /user should show all users', async () => {
-      const res = await requestWithSupertest.get('/users');
-        expect(res.status).toEqual(200);
-        expect(res.type).toEqual(expect.stringContaining('json'));
-        expect(res.body).toHaveProperty('users')
+  await supertest(app).get("/api/posts")
+    .expect(200)
+    .then((response) => {
+      // Check type and length
+      expect(Array.isArray(response.body)).toBeTruthy();
+      expect(response.body.length).toEqual(1);
+
+      // Check data
+      expect(response.body[0]._id).toBe(post.id);
+      expect(response.body[0].title).toBe(post.title);
+      expect(response.body[0].content).toBe(post.content);
     });
+});
 
-    it('GET /user/:id should show a user', async () => {
-        const res = await requestWithSupertest.get('/users/3')
-        expect(res.statusCode).toEqual(200)
-        expect(res.body).toHaveProperty('user3')
-    });
-
-  
-  });
   
