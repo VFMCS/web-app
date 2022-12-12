@@ -3,6 +3,7 @@ const pool = require("../db/db.js").pool;
 const queries = require("./queries.js")
 const moment = require("moment")
 
+//Controllers for retrieving, setting, and removing products
 const getAllProducts = (req, res) => {
     pool.query(queries.getAllProducts, (error, results) => {
         if (error) throw error;

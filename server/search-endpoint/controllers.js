@@ -1,6 +1,7 @@
 const pool = require("../db/db.js").pool;
 const queries = require("./queries.js")
 
+//Controllers for retrieving vendors and products dependent on the user's search query
 const productSearch = (req, res) => {
     search_query = '%' + req.params.key + '%';
     pool.query(queries.productSearch, [search_query], (error, results) => {

@@ -2,6 +2,7 @@
 const pool = require("../db/db.js").pool;
 const queries = require("./queries.js")
 
+//Controllers for retrieving, setting, and removing transactions
 const getCustomerCart = (req, res) => {
     const customer_id = req.params.id;
     pool.query(queries.getCustomerCart, [customer_id], (error, results) => {
