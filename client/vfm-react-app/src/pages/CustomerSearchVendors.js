@@ -12,11 +12,11 @@ import FarmerCard from '../components/FarmerCard.js';
 
 const store = createStore();  // Create store for storing our global state
 
-const CustomerSearchVendors = () => {
 
-    //let [products, setProducts] = React.useState([])
-    //let potatoArr = Array(10).fill({name: "Potato", price: "75", description: "This is a potato"})
-    //let products = [{name: "Tomato", price: "500", description: "This is a tomato"},{name: "Squash", price: "30", description: "This is a squash"}].concat(potatoArr)
+// When the Customer Search switch is flipped, you can search for farmers. This will display the results
+// in a grid. 
+
+const CustomerSearchVendors = () => {
 
     const location = useLocation();
 
@@ -29,18 +29,6 @@ const CustomerSearchVendors = () => {
 
     }, [location.state])
 
-    /*
-    React.useEffect(() => {
-        const fetchData = async () => {
-            console.log(search_query);
-            let url = 'http://localhost:3001/search/' + search_query;
-
-            const result = await fetch(url).then(response => response.json()).then(data => setSearchOutput(data))
-            .catch(err => console.error(err));
-        }
-        fetchData();
-    }, [])
-    */
     if (searchOutput.length === 0) {
         return (
             <ThemeProvider theme={theme}>

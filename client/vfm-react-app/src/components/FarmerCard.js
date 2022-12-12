@@ -4,12 +4,12 @@ import basketImage from "../images/vegetable-basket.png"
 import theme from "../theme/theme"
 import { useNavigate } from 'react-router-dom';
 
-// This is a component that displays important information about a farmer
+// This is a component that displays important information about a farmer. Displayed on the farmer landing page.
+// Includes their name and their description.xs 
 
 let clickedOnUserId = 0;
 
 const FarmerCard = (props) => {
-    //let item = props.item || {name: "Item", location: "0", description: "This is a description"}
     let navigate = useNavigate();
     const toFarmerProfile = () => {
         localStorage.setItem('clicked-on-user-id', props.item.user_id);

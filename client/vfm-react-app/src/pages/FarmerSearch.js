@@ -8,6 +8,8 @@ import { search_query } from '../components/SearchBar.js'
 import { useLocation } from "react-router-dom";
 import ConsumerHeader from '../components/headers/ConsumerHeader.js';
 
+// Farmer is able to search for their own products using the above search bar. This code displays
+// it in a grid-like fashion. 
 const FarmerSearch = () => {
     const location = useLocation();
 
@@ -24,18 +26,6 @@ const FarmerSearch = () => {
             .catch(err => console.error(err));
     }, [location.state])
 
-    /*
-    React.useEffect(() => {
-        const fetchData = async () => {
-            console.log(search_query);
-            let url = 'http://localhost:3001/search/' + search_query;
-
-            const result = await fetch(url).then(response => response.json()).then(data => setSearchOutput(data))
-            .catch(err => console.error(err));
-        }
-        fetchData();
-    }, [])
-    */
 
     if (searchOutput.length === 0) {
         return (

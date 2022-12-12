@@ -25,8 +25,6 @@ const Review = ({ editMode, setModalState, initItem }) => {
     const [reviewer, setReviewer] = useState(localStorage.getItem('curr_user_id'));
     const [title, setTitle] = useState('');
     const [reviewer_first_name, setReviewerFirstName] = useState('');
-    //const [reviewee_full_name, setRevieweeFullName] = useState('');
-    //reviewee and product_name are imported from ProductCardReserved
 
     var errorExp = ""
 

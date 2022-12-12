@@ -1,10 +1,12 @@
 import * as React from 'react'
-import { Chip, Box, Stack,ToggleButton } from '@mui/material';
+import { Chip, Box, Stack, ToggleButton } from '@mui/material';
 
 
+// These filter bars appear below the search bar. On click, they show items under that category
+// in the search results 
 
 const FiltersBar = ({filters, exclusive, selectedItems, setSelectedItems, noOutput}) => {
-    let createInitialItemStates = () => {
+    let createInitialItemStates = () => { // Sets all the filters to false
         const filterStates = {};
         for (const name of filters) {
             filterStates[name] = false;

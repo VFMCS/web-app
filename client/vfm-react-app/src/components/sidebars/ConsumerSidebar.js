@@ -14,6 +14,7 @@ import SearchIcon from '@mui/icons-material/Search';
 
 
 // A Sidebar Menu Component used by the Consumer/Customer
+// Includes FAQ, Customer, Customer Current Orders, Customer Completed Orders
 const ConsumerSidebar = ({isOpen, toggle}) => {
     let navigate = useNavigate()
     let toHome = () => {

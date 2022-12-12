@@ -11,12 +11,11 @@ import CheckIcon from '@mui/icons-material/Check';
 import { useNavigate } from 'react-router-dom';
 
 
-// This is a component that displays important information about a product
+// This is a component that displays important information about a product card. 
+// It shows the quantity, picture and details.
 const ProductCard = (props) => {
-    //let item = props.item;
     let [modalOpen, setModalState] = React.useState(false);
     let toPostItem = () => setModalState(true)
-	//console.log(props.item)
 
     let [shoppingSidebarOpen, setShoppingSidebarOpen] = React.useState(false);
 
@@ -26,10 +25,6 @@ const ProductCard = (props) => {
     const [farmer_name, setFarmerName] = React.useState("");
     
     let toAddItem = () => {
-        //console.log('setshoppingsidebaropen'); 
-        //const { vendor_id, customer_id, quantity, product_id } = req.body;
-        //console.log(props.item.vendor_id)
-        //console.log(props.item);
 
         let prod = {
             'vendor_id': props.item.vendor_id,
@@ -69,6 +64,7 @@ const ProductCard = (props) => {
         
     }
 
+    // Patches item when item is accepted by reducing reserving
     let toAcceptItem = item => () => {
         item.is_reserved = true;
         item.transaction_date = new Date();
@@ -79,6 +75,7 @@ const ProductCard = (props) => {
 
     }
 
+    // Rejects item when item is rejected
     let toRejectItem = item => () => {
         //Handle if the farmer rejects the item in which consumer must be alerted if the reserve request was rejected
         const url = "http://localhost:3001/api/transaction/" + item.transaction_id;

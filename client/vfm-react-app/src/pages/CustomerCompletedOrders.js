@@ -14,10 +14,8 @@ import ProductCardCompleted from '../components/ProductCardCompleted.js';
 const store = createStore();  // Create store for storing our global state
 
 
+// Query and show a grid of customer's completed orders
 const CustomerCompletedOrders = () => {
-    //let [products, setProducts] = React.useState([])
-    //let potatoArr = Array(10).fill({name: "Potato", price: "75", description: "This is a potato"})
-    //let products = [{name: "Tomato", price: "500", description: "This is a tomato"},{name: "Squash", price: "30", description: "This is a squash"}].concat(potatoArr)
 
     const location = useLocation();
 

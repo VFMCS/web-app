@@ -20,8 +20,6 @@ const FarmerLandingPage = () => {
             .catch(err => console.error(err));
     }, [])
 
-    //let potatoArr = Array(1).fill({name: "Potato", price: "75", description: "This is a potato"})
-    //let products = [{name: "Tomato", price: "500", description: "This is a tomato"},{name: "Squash", price: "30", description: "This is a squash"}].concat(potatoArr)
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline enableColorScheme />

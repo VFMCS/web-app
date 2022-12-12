@@ -18,7 +18,6 @@ let product_name = '';
 
 // This is a component that displays important information about a product
 const ProductCardCompleted = (props) => {
-    //let item = props.item;
     let [modalOpen, setModalState] = React.useState(false);
     let [shoppingSidebarOpen, setShoppingSidebarOpen] = React.useState(false);
     let [time_left, setTimeLeft] = React.useState("24h 0m");

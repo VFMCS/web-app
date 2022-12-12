@@ -16,8 +16,8 @@ let reviewee = '';
 
 // This is a component that displays important information about a product
 const ProductCardReservedCustomer = (props) => {
-    //let item = props.item;
-    let [modalOpen, setModalState] = React.useState(false);
+
+    let [modalOpen, setModalState] = React.useState(false); 
     let [shoppingSidebarOpen, setShoppingSidebarOpen] = React.useState(false);
     let [time_left, setTimeLeft] = React.useState("24h 0m");
     let [is_completed, setIsCompleted] = React.useState(false);
@@ -49,8 +49,6 @@ const ProductCardReservedCustomer = (props) => {
         console.log("curr date full: " + curr_date_full);
         console.log("transaction date full: " + transaction_date_full);
         
-        //console.log("curr_date_time: " + curr_date_time);
-        //console.log("transaction_date_time: " + transaction_date_time);
 
         let time_diff = curr_date_full.getTime() - transaction_date_full.getTime();
         console.log("time_diff: " + parseInt(time_diff));
@@ -66,34 +64,6 @@ const ProductCardReservedCustomer = (props) => {
 
 
         let time_left = parseInt(((24*60 - min_diff) / 60)).toString() + "h " + ((24*60 - min_diff) % 60).toString() + "m";
-
-        
-
-        /*
-        let hour_diff = parseInt(curr_date_time.substring(0,2)) - parseInt(transaction_date_time.substring(0,2))
-
-        if(hour_diff < 0){
-            hour_diff = 24 - (-1)*(hour_diff);
-        }
-        */
-
-
-        /*
-        console.log("curr hours: " + parseInt(curr_date_time.substring(0,2)));
-        console.log("transaction hours: " + parseInt(transaction_date_time.substring(0,2)));
-        console.log("curr mins: " + parseInt(curr_date_time.substring(3,5)));
-        console.log("transaction mins: " + parseInt(transaction_date_time.substring(3,5)));
-        console.log("curr_start_min: " + curr_start_min);
-        console.log("transaction_start_min: " + transaction_start_min);
-        //console.log("min_diff: " + (parseInt(curr_date_time.substring(3,5)) - parseInt(transaction_date_time.substring(3,5))));
-        
-
-        //let completete_min_diff = hour_diff * 60 + (parseInt(curr_date_time.substring(3,5)) - parseInt(transaction_date_time.substring(3,5)))
-        //console.log("complete_min_diff: " + completete_min_diff);
-        
-        //let min_diff = curr_start_min - transaction_start_min;
-        console.log("complete_min_diff: " + min_diff);
-        */
 
         setTimeLeft(time_left);
 
@@ -122,7 +92,6 @@ const ProductCardReservedCustomer = (props) => {
         //Handle if the farmer rejects the item in which consumer must be alerted if the reserve request was rejected
         const url = "http://localhost:3001/api/transaction/" + item.transaction_id;
         fetch(url, { method: "DELETE", headers: { "Content-Type": "application/json" }, body: JSON.stringify(item) }).then(data => console.log(data));
-        //window.location.reload(false)
         window.location.reload(false)
 
     }

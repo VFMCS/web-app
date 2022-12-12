@@ -11,7 +11,6 @@ import HowItWorksBackground from '../images/how-it-works-background.jpg'
 import Footer from '../components/Footer.js';
 
 // The General Landing Page for all users
-// TODO: We still have to add actions for all buttons (to sign up/login)
 
 const LandingPage = () => {
     return ( 

@@ -17,7 +17,7 @@ let product_name = '';
 
 // This is a component that displays important information about a product
 const ProductCardReserved = (props) => {
-    //let item = props.item;
+    
     let navigate = useNavigate();
     let [modalOpen, setModalState] = React.useState(false);
     let [shoppingSidebarOpen, setShoppingSidebarOpen] = React.useState(false);

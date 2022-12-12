@@ -1,18 +1,20 @@
 import * as React from 'react'
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-//import Login from "../Login";
 import LoginHeader from '../components/headers/LandingHeader.js';
 import FarmerLandingPage from "./FarmerLandingPage.js";
 import { NavigateBefore } from '@mui/icons-material';
 import FarmerProfileModal from "../components/FarmerProfileModal.js"
 import {Alert, Stack} from "@mui/material"
 
-
+// When any sign-up button is clicked, this modal provides a place for vendors or farmers to create a new account. 
+// It makes sure no fields are left blank and all of the information entered is valid for our database by providing the user
+// with error statements if it is not passed.
+// Once a farmer registers, they are provided with a modal to create their profile, including uploading an image.  
 export const Register = () => {
   let navigate = useNavigate();
 
-  let [profileModalOpen, setProfileModalState] = useState(false);
+  let [profileModalOpen, setProfileModalState] = useState(false); // Open profile modal when user is done registering.
   let [curr_user_id, setCurr_User_Id] = useState(localStorage.getItem('curr_user_id'));
 
   const [credentials, setCredentials] = useState({
@@ -36,7 +38,7 @@ export const Register = () => {
     { value: "consumer", label: "Consumer" },
   ];
 
-  const handleChange = (e) => {
+  const handleChange = (e) => { // Changes the new user data entry for a farmer. 
     const { name, value } = e.target;
 
     setCredentials((prev) => {
@@ -63,7 +65,7 @@ export const Register = () => {
    })
 }, [])
 
-  const postCredentials = () => {
+  const postCredentials = () => { // Saves the credentials of a new user to the database. Prints all to console first.
     console.log('post starting');
 
     fetch("http://localhost:3001/api/users", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(credentials)}).then(data => {console.log(data);
@@ -87,29 +89,9 @@ export const Register = () => {
       });
     });
   }
-
-    
-    
-
-    /*
-    //Using random number for user_id for now, should check for collisions of user_id in the future
-    fetch('http://localhost:3001/api/users', {
-    method: 'POST', // or 'PUT'
-    body: JSON.stringify(credentials),
-    })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log('Success:', data);
-    })
-    .catch((error) => {
-      //console.error('Error:', error);
-    });
-    */
-    
     
   
-
-  const handleSubmit = (e) => {
+  const handleSubmit = (e) => { // On submit of the first registering button. After this is submitted, the modal opens.
     e.preventDefault();
 
     credentials.is_vendor = credentials.is_vendor === "farmer";
@@ -141,7 +123,7 @@ export const Register = () => {
   };
 
   
-  let modalCloseHandler = (e, reason) => {
+  let modalCloseHandler = (e, reason) => { // Modal closes finally once pictures are uploaded.
       if (reason === "backdropClick") {
           return
       }

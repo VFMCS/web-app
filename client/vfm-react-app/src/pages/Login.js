@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import {Stack} from '@mui/material'
 
 
+// Provides an interface, when Log-in button is clicked, for users to log in. 
 const Login = () => {
   let navigate = useNavigate();
 

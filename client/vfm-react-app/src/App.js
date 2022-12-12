@@ -18,22 +18,14 @@ import FarmerFAQ from './pages/FarmerFAQ';
 import CustomerCurrentOrders from './pages/CustomerCurrentOrders';
 import CustomerCompletedOrders from './pages/CustomerCompletedOrders';
 
+// Organizes app and sets global variable for current user id if user is logged in. 
 function App() {
-  //Access current user id using following statements: localStorage.getItem('curr_user_id'), localStorage.setItem('curr_user_id', JSON.stringify(curr_user_id))
 
-  /*
-  let init_curr_user_id; 
-  if(localStorage.getItem('curr_user_id') === undefined) 
-    init_curr_user_id = 0;
-  else{
-    init_curr_user_id = JSON.parse(localStorage.getItem('curr_user_id'));
-  }
-  */
-  const [curr_user_id, setCurr_User_Id] = React.useState(
+  const [curr_user_id, setCurr_User_Id] = React.useState( // Hook for the current user ID if user is logged in.
     JSON.parse(localStorage.getItem('curr_user_id')) || -1
   );
   
-  const [curr_user_is_vendor, setCurr_User_Is_Vendor] = React.useState(
+  const [curr_user_is_vendor, setCurr_User_Is_Vendor] = React.useState( // Hook for showing either a vendor screen or a customer screen.
     JSON.parse(localStorage.getItem('curr_user_is_vendor')) || false
   );
   
@@ -42,8 +34,6 @@ function App() {
     if(localStorage.getItem('curr_user_is_vendor') === null) {setCurr_User_Is_Vendor(false); localStorage.setItem('curr_user_is_vendor', false);}
   }, [])
 
-
-  //localStorage.setItem('curr_user_id', JSON.stringify(curr_user_id));
 
   return (
     <BrowserRouter>

@@ -16,18 +16,11 @@ import FiltersBar from '../components/FiltersBar.js';
 import { useNavigate } from 'react-router-dom';
 
 //Customer landing page upon customer being signed in
-//const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 localStorage.setItem('isFarmerSearch', false);
 
 const CustomerLandingPage = () => {
-  //TESTING///////
-  /*
-  let farmerArr = Array(10).fill({name: "Steve", location : "1234 Street Street", description : "Coolest farmer in Amherst"})
-  let farmers = [{name : "Greg", location : "152 North Street", descripton : "Great potatoes"}, {name : "John", location : "100 South Street", description : "dope squash"}].concat(farmerArr)
-  let potatoArr = Array(10).fill({name: "Potato", price: "75", description: "This is a potato"})
-  let products = [{name: "Tomato", price: "500", description: "This is a tomato"},{name: "Squash", price: "30", description: "This is a squash"}].concat(potatoArr)
-  */
+  
   const allCategories = [
     "Lemon",
     "Apples",

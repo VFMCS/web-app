@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import "../login-styles/login-navbar.css";
 import logo from "../../public/logo.svg";
 
+  // Header for Log-In
+  // Contains the link to sign up, sign in and the FarmFresh logo
 const LoginHeader = () => {
   let navigate = useNavigate();
   let toLanding = () => navigate("/");

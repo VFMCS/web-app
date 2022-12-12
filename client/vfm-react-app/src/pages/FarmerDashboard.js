@@ -23,6 +23,8 @@ import { color, Stack, ThemeProvider } from "@mui/system";
 import FarmerHeader from "../components/headers/FarmerHeader.js";
 import theme from "../theme/theme.js";
 
+// Displays a set of tables and useful information for the farmer including transaction history and transaction status. 
+
 const FarmerDashboard = () => {
   const [farmer_name, setFarmer_Name] = React.useState('')
   const [farmer_first_name, setFarmer_First_Name] = React.useState('')

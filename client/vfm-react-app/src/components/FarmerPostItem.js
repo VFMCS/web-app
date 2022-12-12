@@ -8,22 +8,26 @@ import Switch from '@mui/material/Switch';
 import { useNavigate } from 'react-router-dom';
 
 
-//Modal for uploading items on the farmer side
+// Modal for uploading items on the farmer side. 
+// Allows a user to upload an Image, Product Name, Product Category, Product Type, Price and Quantity. 
+// Handles input error by users by telling them if they filled out a field incorrectly or left one blank.
+// Also allows people to upload a default image
+
 const FarmerPostItem = ({ editMode, setModalState, initItem }) => {
     const navigate = useNavigate();
     
-    const [showUploadButton, setShowUploadButton] = useState(true); //Hook for showing upload button when no image is uploaded
-    const [showPriceValidError, setShowPriceValidError] = useState(false); //Shows an error when user doesn't input a valid price in form of _.__
-    const [showEmptyEntryError, setShowEmptyEntryError] = useState(""); //Shows an error when a required field is left empty
-    const [typeEvent, setTypeEvent] = useState(null); //Event for changing the image if
-    const [uploadMode, setUploadMode] = useState(false);
-    const [uploadImage, setUploadImage] = useState(null)
-    const [showBox, setShowBox] = useState(true)
-	const [curImage, setCurImage] = useState(new FormData())
-	const [switchStatus, setSwitchStatus] = useState(true)
-	const [imgChanged, setImgChanged] = useState(false);
-    const [stockImg, setStockImg] = useState(false);
-    const [item, setItem] = useState(editMode ? initItem : {
+    const [showUploadButton, setShowUploadButton] = useState(true); // Hook for showing upload button when no image is uploaded
+    const [showPriceValidError, setShowPriceValidError] = useState(false); // Shows an error when user doesn't input a valid price in form of _.__
+    const [showEmptyEntryError, setShowEmptyEntryError] = useState(""); // Shows an error when a required field is left empty
+    const [typeEvent, setTypeEvent] = useState(null); // Event for changing the image if a new product type is put in 
+    const [uploadMode, setUploadMode] = useState(false); // Mode for uploading items vs. using a default image
+    const [uploadImage, setUploadImage] = useState(null); // Hook for uploading image
+    const [showBox, setShowBox] = useState(true) // Shows upload box if no image is selected or no default image is selected
+	const [curImage, setCurImage] = useState(new FormData()) // Sets image in the case of an uploaded image
+	const [switchStatus, setSwitchStatus] = useState(true) // Switches status of default
+	const [imgChanged, setImgChanged] = useState(false); // Sets a boolean on if an image is changed or not
+    const [stockImg, setStockImg] = useState(false); // Sets the stock image to use based on the product type
+    const [item, setItem] = useState(editMode ? initItem : { // Sets the item to be posted or patched
         'vendor_id': localStorage.getItem('curr_user_id'),
         'product_type': null,
         'quantity': null,
@@ -108,7 +112,9 @@ const FarmerPostItem = ({ editMode, setModalState, initItem }) => {
 		setImgChanged(true)
 	}
 
-    
+    // Handles when upload button is pressed. Handles errors if any field is left blank, or incorrectly filled in. 
+    // If nothing is incorrectly filled in, then we move on to POST or PATCH depending on if we're in editMode or not,
+    // which basically is a boolean passed to the modal to decide if you're adding an item or editing the item. 
     var onSave = async () => {
         var errorExp = ""
         var errorArr = [];
@@ -150,7 +156,7 @@ const FarmerPostItem = ({ editMode, setModalState, initItem }) => {
             errorExp = ""
             setShowEmptyEntryError("")
             //save to database
-            if(!editMode){
+            if(!editMode){ // If editMode is selected and if it's a off
                 if(!stockImg){
                     console.log("curr_user_id: " + localStorage.getItem('curr_user_id'));
     				fetch("http://localhost:3001/api/cloudinary/upload-product/"+localStorage.getItem('curr_user_id'), { method: "POST", body: curImage})
