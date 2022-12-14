@@ -1,24 +1,30 @@
-//test.js
-
-const app = require("../server");
-const mongoose = require("mongoose");
+const server = require("./server");
+//const mongoose = require("mongoose");
 const supertest = require("supertest");
+const { TestWatcher } = require("jest");
+const { expect } = require("chai");
 
-test("GET /api/posts", async () => {
-  const post = await Post.create({ title: "Post 1", content: "Lorem ipsum" });
-
-  await supertest(app).get("/api/posts")
-    .expect(200)
-    .then((response) => {
-      // Check type and length
-      expect(Array.isArray(response.body)).toBeTruthy();
-      expect(response.body.length).toEqual(1);
-
-      // Check data
-      expect(response.body[0]._id).toBe(post.id);
-      expect(response.body[0].title).toBe(post.title);
-      expect(response.body[0].content).toBe(post.content);
-    });
+//Get users testing json retrieval
+describe('GET /users', () => {
+  test('respond with 200 status code', async () => {
+    await supertest(server).get("/users").expect(200)
+    //expect(response.statusCode.toBe(200))
+  })
 });
 
-  
+//Post users testing json retrieval
+describe('POST /users', () => {
+  test('respond with 200 status code', async () => {
+    await supertest(server).post("/users").expect(200)
+    //expect(response.statusCode.toBe(200))
+  })
+});
+
+//Patch users testing json retrieval
+describe('PATCH /users', () => {
+  test('respond with 200 status code', async () => {
+    await supertest(server).patch("/users").expect(200)
+    //expect(response.statusCode.toBe(200))
+  })
+});
+

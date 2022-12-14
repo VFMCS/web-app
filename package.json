@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@babel/plugin-syntax-jsx": "^7.18.6",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@fortawesome/fontawesome-svg-core": "^6.2.1",
@@ -16,6 +17,7 @@
     "dotenv": "^16.0.3",
     "ejs": "^3.1.8",
     "express": "^4.18.2",
+    "jest-fetch-mock": "^3.0.3",
     "moment": "^2.29.4",
     "multer": "^1.4.5-lts.1",
     "nodemon": "^2.0.20",
@@ -28,6 +30,7 @@
     "react-scripts": "^5.0.1",
     "react-simple-star-rating": "^5.1.7",
     "react-star-rating-component-new": "^1.0.6",
+    "save-dev": "^0.0.1-security",
     "state-pool": "^0.8.1"
   },
   "name": "web-app",
@@ -38,7 +41,7 @@
     "dev": "cd server && nodemon app.js",
     "client": "cd client && cd vfm-react-app && npm start",
     "start": "concurrently \"npm run dev\" \"npm run client\"",
-    "test:server": "NODE_ENV='test' mocha tests/server-tests",
+    "test:server": "cd server && jest",
     "test:client": "NODE_ENV='test' mocha tests/client-tests --require babel-core/register --require tests/client-tests/setup.js",
     "test": "jest"
   },
