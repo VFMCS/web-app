@@ -30,7 +30,7 @@ const Review = ({ editMode, setModalState, initItem }) => {
 
     React.useState(() => {
         //get reviewer's first name
-        let url = 'http://localhost:3001/curr-user-api/' + localStorage.getItem('curr_user_id');
+        let url = 'http://localhost:5001/curr-user-api/' + localStorage.getItem('curr_user_id');
         console.log(url);
 
         fetch(url).then(response => response.json()).then(data => setReviewerFirstName(data[0].first_name));
@@ -40,7 +40,7 @@ const Review = ({ editMode, setModalState, initItem }) => {
         console.log('saving');
         //bug
         let full_review = {'rating': rating, 'reviewer': reviewer, 'reviewee': reviewee,'review': review, 'title':title, 'reviewer_first_name' : reviewer_first_name, 'product_name' : product_name};
-        fetch("http://localhost:3001/api/reviews", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(full_review)}).then(data => {console.log(data)}); setModalState(false);
+        fetch("http://localhost:5001/api/reviews", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(full_review)}).then(data => {console.log(data)}); setModalState(false);
     }
 
     var onCancel = () => {

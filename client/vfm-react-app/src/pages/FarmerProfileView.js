@@ -23,7 +23,7 @@ const FarmerProfileView = ({forFarmer}) => {
 
     React.useEffect(() => {
         //using placeholder farmer of vendor_id=0
-        let url = 'http://localhost:3001/api/products/' + (forFarmer ? localStorage.getItem('curr_user_id') : localStorage.getItem('clicked-on-user-id'));
+        let url = 'http://localhost:5001/api/products/' + (forFarmer ? localStorage.getItem('curr_user_id') : localStorage.getItem('clicked-on-user-id'));
         
         //get farmer's products
         console.log(url);
@@ -32,7 +32,7 @@ const FarmerProfileView = ({forFarmer}) => {
     }, [])
 
     React.useEffect(() => {
-        let url = 'http://localhost:3001/api/vendors/' + (forFarmer ? localStorage.getItem('curr_user_id') : localStorage.getItem('clicked-on-user-id'));
+        let url = 'http://localhost:5001/api/vendors/' + (forFarmer ? localStorage.getItem('curr_user_id') : localStorage.getItem('clicked-on-user-id'));
         console.log(url);
         fetch(url).then(response => response.json()).then(data => {setFarmer_Name(data[0].first_name + " " + data[0].last_name); setFarmer_First_Name(data[0].first_name); setFarmer_Description(data[0].about_me); setFarmer_Location(data[0].address); setFarmer_Image_Url(data[0].image_url)})
             .catch(err => console.error(err));

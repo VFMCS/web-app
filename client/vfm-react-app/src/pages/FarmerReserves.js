@@ -15,7 +15,7 @@ const FarmerReserves = () => {
 
     React.useEffect(() => {
         console.log("curr_user_id for products: " + localStorage.getItem('curr_user_id'));
-        let url = 'http://localhost:3001/api/transaction/reserves/' + localStorage.getItem('curr_user_id');
+        let url = 'http://localhost:5001/api/transaction/reserves/' + localStorage.getItem('curr_user_id');
         console.log(url);
 
         fetch(url).then(response => response.json()).then(data => setProducts(data))
