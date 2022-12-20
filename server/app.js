@@ -1,5 +1,4 @@
 //See server readme for endpoint documentation
-const https = require('https');
 const express = require("express");
 const cors = require('cors');
 const fs = require('fs');
@@ -10,18 +9,9 @@ const PORT = process.env.PORT || 5001;
 app.use(cors());
 app.use(express.json());
 
-https
-  .createServer({
-    key: fs.readFileSync("key.pem"),
-    cert: fs.readFileSync("cert.pem"),
-  }, app)
-  .listen(PORT, () => {
-    console.log(`Express server listening on Port: ${PORT}`)
-  });
-/*
 app.listen(PORT, () => {
   console.log(`Express server listening on Port: ${PORT}`)
-})*/
+})
 authProxy.startAuthProxy();
 //Endpoint route files
 const usrapi = require('./user-api/routes.js');
