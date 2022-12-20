@@ -45,7 +45,7 @@ const Login = () => {
     }
 
     //Get the user by email and id
-    let url = 'http://0.0.0.0:5001/api/users/' + login.email + "/" + login.password;
+    let url = 'http://127.0.0.1:5001/api/users/' + login.email + "/" + login.password;
     console.log(url);
     fetch(url).then(response => response.json()).then(data => {
       if (data.length === 0) {
@@ -56,7 +56,7 @@ const Login = () => {
       localStorage.setItem('curr_user_id', data[0].user_id)
     }).then(() => {
       console.log("curr_user_id: " + localStorage.getItem('curr_user_id'));
-      fetch('http://0.0.0.0:5001/curr-user-api/' + localStorage.getItem('curr_user_id')).then(response => response.json()).then(data => {
+      fetch('http://127.0.0.1:5001/curr-user-api/' + localStorage.getItem('curr_user_id')).then(response => response.json()).then(data => {
         console.log(data);
         localStorage.setItem('curr_user_is_vendor', data[0].is_vendor)
 
