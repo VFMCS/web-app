@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 5001;
 //Start express server and cloud sql proxy
 app.use(cors());
 app.use(express.json());
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Express server listening on Port: ${PORT}`)
 })
 authProxy.startAuthProxy();
