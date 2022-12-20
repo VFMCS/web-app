@@ -57,7 +57,7 @@ const ProductCardReserved = (props) => {
         console.log("time_diff: " + parseInt(time_diff));
 
         if(time_diff >= (1000*60*60*24)){
-            fetch("http://localhost:3001/api/transaction", { method: "DELETE", headers: { "Content-Type": "application/json" }, body: JSON.stringify(props.item)}).then(data => console.log(data));
+            fetch("http://localhost:5001/api/transaction", { method: "DELETE", headers: { "Content-Type": "application/json" }, body: JSON.stringify(props.item)}).then(data => console.log(data));
             setIsCompleted(true);
         }
         else{
@@ -98,7 +98,7 @@ const ProductCardReserved = (props) => {
         setTimeLeft(time_left);
 
         //get farmer's details
-        let url = 'http://localhost:3001/curr-user-api/' + props.item.customer_id;
+        let url = 'http://localhost:5001/curr-user-api/' + props.item.customer_id;
         console.log(url);
         fetch(url).then(response => response.json()).then(data => {setCustomerName(data[0].first_name + " " + data[0].last_name)})
             .catch(err => console.error(err));
@@ -108,7 +108,7 @@ const ProductCardReserved = (props) => {
     let toAcceptItem = item => () => {
         item.is_reserved = true;
         item.transaction_date = new Date();
-        const url = "http://localhost:3001/api/transaction/update/"
+        const url = "http://localhost:5001/api/transaction/update/"
         fetch(url, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(item) }).then(data => {console.log(data); window.location.reload();});
         navigate('/farmer-reserves');
 
@@ -116,7 +116,7 @@ const ProductCardReserved = (props) => {
 
     let toRejectItem = item => () => {
         //Handle if the farmer rejects the item in which consumer must be alerted if the reserve request was rejected
-        const url = "http://localhost:3001/api/transaction/" + item.transaction_id;
+        const url = "http://localhost:5001/api/transaction/" + item.transaction_id;
         fetch(url, { method: "DELETE", headers: { "Content-Type": "application/json" }, body: JSON.stringify(item) }).then(data => console.log(data));
         //window.location.reload(false)
         window.location.reload(false)
@@ -125,10 +125,10 @@ const ProductCardReserved = (props) => {
 
     let toPickupItem = item => () => {
         console.log('item being picked up');
-        fetch("http://localhost:3001/api/transaction/past", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(props.item)}).then(data => console.log(data)).then(() =>
+        fetch("http://localhost:5001/api/transaction/past", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(props.item)}).then(data => console.log(data)).then(() =>
                 {
                     console.log('item.transaction_id: ' +item.transaction_id);
-                    const url = "http://localhost:3001/api/transaction/" + item.transaction_id;
+                    const url = "http://localhost:5001/api/transaction/" + item.transaction_id;
                     fetch(url, { method: "DELETE", headers: { "Content-Type": "application/json" }, body: JSON.stringify(item) }).then(data => console.log(data));
                 }
         ).then(() => {window.location.reload(false)});

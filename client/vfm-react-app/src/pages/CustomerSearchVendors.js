@@ -22,7 +22,7 @@ const CustomerSearchVendors = () => {
 
     const [searchOutput, setSearchOutput] = React.useState([]) // capture data from GET request
     React.useEffect(() => {
-        let url = 'http://localhost:3001/search/vendors/' + search_query;
+        let url = 'http://localhost:5001/search/vendors/' + search_query;
         console.log(url);
         fetch(url).then(response => response.json()).then(data => setSearchOutput(data))
             .catch(err => console.error(err));

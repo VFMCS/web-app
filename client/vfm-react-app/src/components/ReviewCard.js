@@ -21,7 +21,7 @@ const ReviewCard = (props) => {
 
     React.useEffect(() => {
         //get farmer's details
-        let url = 'http://localhost:3001/curr-user-api/' + props.item.vendor_id;
+        let url = 'http://localhost:5001/curr-user-api/' + props.item.vendor_id;
         console.log(url);
         fetch(url).then(response => response.json()).then(data => {setFarmerName(data[0].first_name + " " + data[0].last_name)})
             .catch(err => console.error(err));

@@ -45,18 +45,18 @@ const ProductCard = (props) => {
 
         console.log('getting');
 
-        fetch('http://localhost:3001/api/transaction/get-in-cart/' + prod.product_id).then(response => response.json()).then(data => {
+        fetch('http://localhost:5001/api/transaction/get-in-cart/' + prod.product_id).then(response => response.json()).then(data => {
             console.log('get transaction data: ' + JSON.stringify(data))
             if(JSON.stringify(data) === '[]'){
                 console.log('posting');
-                fetch("http://localhost:3001/api/transaction", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(prod) }).then(data => {console.log(prod); console.log("data: " + JSON.stringify(data)); toggleShoppingSidebar();});   
+                fetch("http://localhost:5001/api/transaction", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(prod) }).then(data => {console.log(prod); console.log("data: " + JSON.stringify(data)); toggleShoppingSidebar();});   
             }
             else{
                 console.log('incrementing prod quantity');
                 data[0].quantity = data[0].quantity + 1;
                 //prod = data;
                 //console.log('prod: ' + JSON.stringify(prod));
-                fetch("http://localhost:3001/api/transaction/update/", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data[0]) }).then(data => {console.log("data: " + JSON.stringify(data))})
+                fetch("http://localhost:5001/api/transaction/update/", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data[0]) }).then(data => {console.log("data: " + JSON.stringify(data))})
             }
         }).then().catch(err => console.error(err))
         
@@ -68,7 +68,7 @@ const ProductCard = (props) => {
     let toAcceptItem = item => () => {
         item.is_reserved = true;
         item.transaction_date = new Date();
-        const url = "http://localhost:3001/api/transaction/update/"
+        const url = "http://localhost:5001/api/transaction/update/"
         fetch(url, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(item) }).then(data => console.log(data));
         window.location.reload();
         navigate('/farmer-reserves');
@@ -78,7 +78,7 @@ const ProductCard = (props) => {
     // Rejects item when item is rejected
     let toRejectItem = item => () => {
         //Handle if the farmer rejects the item in which consumer must be alerted if the reserve request was rejected
-        const url = "http://localhost:3001/api/transaction/" + item.transaction_id;
+        const url = "http://localhost:5001/api/transaction/" + item.transaction_id;
         fetch(url, { method: "DELETE", headers: { "Content-Type": "application/json" }, body: JSON.stringify(item) }).then(data => console.log(data));
         //window.location.reload(false)
         window.location.reload(false)
@@ -96,7 +96,7 @@ const ProductCard = (props) => {
 
     React.useEffect(() => {
         //get farmer's details
-        let url = 'http://localhost:3001/curr-user-api/' + props.item.vendor_id;
+        let url = 'http://localhost:5001/curr-user-api/' + props.item.vendor_id;
         console.log(url);
         fetch(url).then(response => response.json()).then(data => {setFarmerName(data[0].first_name + " " + data[0].last_name)})
             .catch(err => console.error(err));

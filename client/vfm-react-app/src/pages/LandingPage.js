@@ -9,6 +9,7 @@ import HeaderImage from '../images/pexels-rgr-g.jpg';
 import BackgroundFarmImage from '../images/pexels-tim-mossholder.jpg'
 import HowItWorksBackground from '../images/how-it-works-background.jpg'
 import Footer from '../components/Footer.js';
+import Infographic from '../images/farmfresh_infographic.svg'
 
 // The General Landing Page for all users
 

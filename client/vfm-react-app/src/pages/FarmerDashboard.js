@@ -36,7 +36,7 @@ const FarmerDashboard = () => {
   React.useEffect(() => {
     
     //get farmer's details
-    let url = 'http://localhost:3001/api/vendors/' + localStorage.getItem("curr_user_id");
+    let url = 'http://localhost:5001/api/vendors/' + localStorage.getItem("curr_user_id");
     console.log(url);
     fetch(url).then(response => response.json()).then(data => {setFarmer_Name(data[0].first_name + " " + data[0].last_name); setFarmer_First_Name(data[0].first_name); setFarmer_Description(data[0].about_me); setFarmer_Location(data[0].address); setFarmer_Image_Url(data[0].image_url)})
         .catch(err => console.error(err));
@@ -81,7 +81,7 @@ const ProductTable = () => {
 
   React.useEffect(() => {
      //get farmer's products
-     let url = 'http://localhost:3001/api/products/' + localStorage.getItem("curr_user_id");
+     let url = 'http://localhost:5001/api/products/' + localStorage.getItem("curr_user_id");
      console.log(url);
      fetch(url).then(response => response.json()).then(data => setProducts(data))
          .catch(err => console.error(err));
@@ -132,13 +132,13 @@ const OrderTable = () => {
 
   React.useEffect(() => {
      //get all of farmer's transactions
-     let url = 'http://localhost:3001/api/transaction/get-by-vendor/' + localStorage.getItem('curr_user_id');
+     let url = 'http://localhost:5001/api/transaction/get-by-vendor/' + localStorage.getItem('curr_user_id');
      console.log(url);
 
      fetch(url).then(response => response.json()).then(data => setTransactions(data))
          .catch(err => console.error(err));
 
-         url = 'http://localhost:3001/api/transaction/past/vendor/' + localStorage.getItem('curr_user_id');
+         url = 'http://localhost:5001/api/transaction/past/vendor/' + localStorage.getItem('curr_user_id');
          console.log(url);
          
          fetch(url).then(response => response.json()).then(data => setCompletedTransactions(data))
@@ -160,7 +160,7 @@ const OrderTable = () => {
   const rows = [];
 
   transactions.forEach(transaction => {
-    let url = 'http://localhost:3001/curr-user-api/' + transaction.customer_id;
+    let url = 'http://localhost:5001/curr-user-api/' + transaction.customer_id;
     console.log(url);
 
     fetch(url).then(response => response.json()).then(data => {console.log(data[0].first_name + ' ' + data[0].last_name); setCustomerName(data[0].first_name + ' ' + data[0].last_name)}).then(rows.push(CreateRow(transaction.transaction_id, customer_name, transaction.price, 'Pending')))
@@ -169,7 +169,7 @@ const OrderTable = () => {
   });
 
   completed_transactions.forEach(completed_transaction => {
-    let url = 'http://localhost:3001/curr-user-api/' + completed_transaction.customer_id;
+    let url = 'http://localhost:5001/curr-user-api/' + completed_transaction.customer_id;
     console.log(url);
 
     fetch(url).then(response => response.json()).then(data => {console.log(data[0].first_name + ' ' + data[0].last_name); setCompletedCustomerName(data[0].first_name + ' ' + data[0].last_name)}).then(rows.push(CreateRow(completed_transaction.past_transaction_id, completed_customer_name, completed_transaction.price, 'Completed')))

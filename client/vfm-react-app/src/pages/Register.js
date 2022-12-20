@@ -68,9 +68,9 @@ export const Register = () => {
   const postCredentials = () => { // Saves the credentials of a new user to the database. Prints all to console first.
     console.log('post starting');
 
-    fetch("http://localhost:3001/api/users", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(credentials)}).then(data => {console.log(data);
+    fetch("http://localhost:5001/api/users", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(credentials)}).then(data => {console.log(data);
       //Get the user by email and password to then retrieve the id
-      let url = 'http://localhost:3001/api/users/' + credentials.email + "/" + credentials.password;
+      let url = 'http://localhost:5001/api/users/' + credentials.email + "/" + credentials.password;
       console.log(url);
       fetch(url).then(response => response.json()).then(data => {
         console.log("data: " + data)

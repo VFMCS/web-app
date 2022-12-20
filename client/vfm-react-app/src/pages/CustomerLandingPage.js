@@ -46,7 +46,7 @@ const CustomerLandingPage = () => {
   const [farmers, setFarmers] = React.useState([]) // capture data from GET request
 
   React.useEffect(() => {
-    fetch('http://localhost:3001/api/vendors').then(response => response.json()).then(data => {setFarmers(data); })
+    fetch('http://localhost:5001/api/vendors').then(response => response.json()).then(data => {setFarmers(data); })
       .catch(err => console.error(err));
   }, [])
 
@@ -73,7 +73,7 @@ const CustomerLandingPage = () => {
 
   // Fetch all products on first render
   React.useEffect(() => {
-    fetch('http://localhost:3001/api/products').then(response => response.json()).then(data => {setProducts(data);})
+    fetch('http://localhost:5001/api/products').then(response => response.json()).then(data => {setProducts(data);})
       .catch(err => console.error(err));
   }, [])
   return (

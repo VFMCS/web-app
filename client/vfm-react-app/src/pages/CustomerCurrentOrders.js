@@ -21,7 +21,7 @@ const CustomerCurrentOrders = () => {
 
     const [customer_current_orders, setCustomerCurrentOrders] = React.useState([]) // capture data from GET request
     React.useEffect(() => {
-        let url = 'http://localhost:3001/api/transaction/customer-current-orders/' + localStorage.getItem('curr_user_id');
+        let url = 'http://localhost:5001/api/transaction/customer-current-orders/' + localStorage.getItem('curr_user_id');
         console.log(url);
         fetch(url).then(response => response.json()).then(data => setCustomerCurrentOrders(data))
             .catch(err => console.error(err));
