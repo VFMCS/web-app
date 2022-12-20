@@ -11,7 +11,7 @@ app.use(cors({
 }));
 app.use(express.json());
 
-app.listen(PORT, '127.0.0.1', () => {
+app.listen(PORT, () => {
   console.log(`Express server listening on Port: ${PORT}`)
 })
 /*
