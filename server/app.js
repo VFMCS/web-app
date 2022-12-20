@@ -12,6 +12,7 @@ app.listen(PORT, '0.0.0.0', () => {
   console.log(`Express server listening on Port: ${PORT}`)
 })
 authProxy.startAuthProxy();
+app.options('*', cors())
 //Endpoint route files
 const usrapi = require('./user-api/routes.js');
 const prdapi = require('./products-api/routes.js');
