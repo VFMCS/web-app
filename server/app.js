@@ -22,6 +22,7 @@ var certificate = fs.readFileSync('cert.pem', 'utf8');
 var credentials = { key: privateKey, cert: certificate };
 var express = require('express');
 var app = express();
+const cors = require('cors');
 app.use(cors());
 var httpsServer = https.createServer(credentials, app);
 httpsServer.listen(5001);
