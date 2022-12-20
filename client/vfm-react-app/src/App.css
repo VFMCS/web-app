@@ -1,3 +1,5 @@
+App.css
+
 .App {
   text-align: center;
 }
@@ -26,6 +28,27 @@
 
 .App-link {
   color: #61dafb;
+}
+
+#uploadBox {
+  height: 100%;
+  width: 100%;
+  border-style: dashed;
+  border-width: 10px;
+  border-color: grey;
+  padding-bottom: 50%;
+  padding-top: 50%;
+  padding-left: 35%;
+  padding-right: 35%;
+  cursor: pointer;
+}
+
+#login-auth-wrap {
+  height: 600px;
+}
+
+#auth-wrapper-register {
+  height: 725px;
 }
 
 @keyframes App-logo-spin {

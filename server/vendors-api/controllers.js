@@ -2,6 +2,7 @@
 const pool = require("../db/db.js").pool;
 const queries = require("./queries.js")
 
+//Controllers for retrieving, setting, and removing vendors
 const getFarmers = (req, res) => {
     //console.log(req)
     pool.query(queries.getFarmers, (error, results) => {
@@ -13,6 +14,7 @@ const getFarmerById = (req, res) => {
     const user_id = req.params.user_id;
     //console.log(req)
     pool.query(queries.getFarmerById, [user_id], (error, results) => {
+        console.log(results);
         if (error) throw error;
         res.status(200).json(results.rows);
     })

@@ -3,6 +3,7 @@ const pool = require("../db/db.js").pool;
 const queries = require("./queries.js")
 const moment = require("moment")
 
+//Controllers for retrieving, setting, and removing products
 const getAllProducts = (req, res) => {
     pool.query(queries.getAllProducts, (error, results) => {
         if (error) throw error;
@@ -18,6 +19,14 @@ const getProductByVendorID = (req, res) => {
     })
 }
 
+const getProductByProductID = (req, res) => {
+    product_id = req.params.product_id;
+    pool.query(queries.getProductByProductID, [product_id], (error, results) => {
+        if (error) throw error;
+        res.status(200).json(results.rows);
+    })
+}
+
 const insertProd = (req, res) => {
     const values = [req.body.vendor_id, req.body.name, req.body.details, moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"), "true", req.body.quantity, req.body.price, req.body.photo, req.body.product_type, req.body.product_category];
     console.log(req.vendor_id);
@@ -27,6 +36,32 @@ const insertProd = (req, res) => {
     })
 }
 
+const patchProductByProductID = (req, res) => {
+    const id = req.params.product_id
+    const values = [ req.body.name, req.body.details, req.body.quantity, req.body.price, req.body.product_type, req.body.product_category, id ]
+    pool.query(queries.patchProductByProductID, values, (error, results) => {
+        if (error) throw error;
+        res.status(201).send("Product updated at product ID: " + id)
+    })
+}
+
+const deleteProductByProductID = (req, res) => {
+	const id = req.params.product_id
+	const values = [ id ]
+	pool.query(queries.deleteProductByProductID, values, (error, results) => {
+		if (error) throw error;
+		res.status(201).send("Product deleted at product ID: " + id)
+	})
+}
+
+const patchImageByProductID = (req, res) => {
+	const id = req.params.product_id
+	const values = [ req.body.photo, id ]
+	pool.query(queries.patchImageByProductID, values, (error, results) => {
+		if (error) throw error;
+		res.status(201).send("Product updated at product ID: " + id)
+	})
+}
 
 /*
 const insertProdByID = (req, res) => {
@@ -44,5 +79,9 @@ module.exports = {
     getAllProducts,
     insertProd,
     getProductByVendorID,
+    getProductByProductID,
+    patchProductByProductID,
+	deleteProductByProductID,
+	patchImageByProductID,
     //insertProdByID
 }

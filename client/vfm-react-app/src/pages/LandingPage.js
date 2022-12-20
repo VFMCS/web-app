@@ -1,85 +1,51 @@
 import * as React from 'react' 
-import LandingHeader from '../components/LandingHeader.js';
-import {Box, ThemeProvider, CssBaseline, Typography, Button} from "@mui/material"
+import LandingHeader from '../components/headers/LandingHeader.js';
+import {Box, ThemeProvider, CssBaseline, Typography, Paper} from "@mui/material"
 import { Stack } from '@mui/system';
-import theme from '../css/theme.js'
+import theme from '../theme/theme.js'
 import SignUpButton from '../components/buttons/SignUpButton.js';
 import LoginButton from '../components/buttons/LoginButton.js';
-
-//import {farmersMockData} from '../mockData.js';
-
-//import {data} from '../../server/controllers/data.js';
+import HeaderImage from '../images/pexels-rgr-g.jpg';
+import BackgroundFarmImage from '../images/pexels-tim-mossholder.jpg'
+import HowItWorksBackground from '../images/how-it-works-background.jpg'
+import Footer from '../components/Footer.js';
+import Infographic from '../images/farmfresh_infographic.svg'
 
 // The General Landing Page for all users
-// TODO: We still have to add actions for all buttons (to sign up/login)
+
 const LandingPage = () => {
-    const [text, setText] = React.useState("No data")
-    const [data, setData] = React.useState({})
-
-    React.useEffect(() => {
-        fetch('http://localhost:3001/farmers').then(response => response.json()).then(data => setData(data))
-        .catch(err => console.error(err));
-    }, [])
-    
-    let dataButtonHandler = () => {
-        let dataOutput = "";
-
-        for(let i = 0; i < data.data.length; i++){
-            dataOutput += data.data[i].username.toString() + " ";
-        }
-
-        setText("Farmers: " + dataOutput);
-    }
     return ( 
         <ThemeProvider theme={theme}>
             <CssBaseline enableColorScheme />
             <Stack direction="column">
-                <LandingHeader />
-                <Box sx={{backgroundColor: "secondary.light"}}>
-                    <Typography variant="h3" align="center" sx={{margin: 4, color: "secondary.contrastText"}}>
-                        Welcome to the Virtual Farmer's Market!
+                <LandingHeader landing/>
+                <Box marginTop={-12} sx={{height: '102vh', backgroundSize: 'cover', backgroundImage: `url(${HeaderImage})`}}>
+                    <Typography variant="h3" align="left" sx={{margin: 4, marginTop: 20, color: "secondary.contrastText"}}>
+                        Welcome to FarmFresh!
                     </Typography>
-                    <Typography variant="body2" sx={{margin: 4}}>
-                        {/* TODO: Change this text/body */}
-                        <p>
-                        We are developing a Web Application to allow farmers to post fresh produce they have recently harvested to be purchased by consumers online. 
-                        We hope that this product gives consumers a platform to purchase directly from farmers, as opposed to having to purchase from a large-chain grocery store. 
-                        With this in mind, we anticipate that this will allow our customers to get better quality produce that is in season, build relationships with local farmers, and get a better picture of where and how their food is produced. 
-                        </p>
-                        <p>
-                        Our project has multiple major benefits which differentiate it from other similar products on the market. 
-                        First, our product emphasizes the purchase of local produce as opposed to purchasing from large-scale grocery stores or industrial farms. 
-                        This will hopefully generate connection and partnership between farmers and consumers in the local area, greatly benefiting the local agriculture industry. 
-                        In creating this direct relationship, our consumers will have much more knowledge about the practices used in cultivating their food (what pesticides are used, what farming practices are used, whether or not animals are treated ethically) in comparison to a consumer who purchases their food through traditional grocery stores. 
-                        Additionally, by cutting out the middleman and allowing farmers to sell directly to consumers, we develop a system which is more economically viable for smaller-scale farms. 
-                        Lastly, we hope that our design allows for increased accessibility for anyone seeking to purchase produce.
-                        </p>
-                    </Typography>
-                </Box>
-                <Box alignItems="center" justifyContent="center" sx={{backgroundColor: "white"}}>
-                    <Stack direction="column" justifyContent="center" alignItems="center" spacing={4} sx={{margin: 4}}>
-                        <Button onClick={dataButtonHandler} color="secondary" variant="contained"> 
-                            Click to show data
-                        </Button>
-                        <Typography variant="h3" align="center" sx={{margin: 4, color: "primary.main"}}>
-                            {text}
-                        </Typography>
-                    </Stack>
-                    <Typography variant="h3" align="center" sx={{margin: 4, color: "primary.main"}}>
-                        Ready to Join?
-                    </Typography>
-                    <Stack direction="row" justifyContent="center" alignItems="center" spacing={4}>
+
+                    <Stack direction="row" justifyContent="left" alignItems="center" spacing={4} sx={{marginLeft: 4}}>
                         <SignUpButton label="Become a Farmer" />
                         <SignUpButton label="Become a Consumer" />
+                        <LoginButton color="primary" variant="contained"/>    
                     </Stack>
-                    <Typography variant="h3" align="center" sx={{margin: 4, color: "primary.main"}}>
-                        Already a User?
-                    </Typography>
-                    <Stack direction="row" justifyContent="center" alignItems="center" spacing={4}>
-                        <LoginButton color="secondary" variant="contained" /> 
-                    </Stack>
+                </Box>
+                <Box id="explanation" display="flex" justifyContent="center" alignItems="center" height="90vh" sx={{ backgroundSize: 'cover', backgroundColor:'primary.light'}}>
                     
-
+                    
+                </Box>
+                <Box id="mission" display="flex" justifyContent="center" alignItems="center" height="100vh" sx={{ backgroundSize: 'cover', backgroundImage: `url(${BackgroundFarmImage})`}}>
+                    <Paper sx={{width: "50vw", height: "50vh", p: 2}}>
+                        <Typography variant="h3" align="center" sx={{m: 2, color: "primary.light"}}>
+                            Our Mission
+                        </Typography>
+                        <Typography variant="h6" align="center" sx={{m: 2, color: "primary.dark"}}>
+                            We are creating a platform to connect small-business farmers with local consumers. For farmers, we offer a place to post fresh produce as soon as it is harvested. For consumers, we offer a virtual marketplace to shop for local produce and support small-business farmers. 
+                        </Typography>
+                        <Typography variant="h5" align="center" sx={{mt: 4, color: "primary.dark"}}>
+                            Join us in our mission to shop local!
+                        </Typography>                  
+                    </Paper>
                 </Box>
             </Stack>
         </ThemeProvider>
