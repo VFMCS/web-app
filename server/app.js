@@ -4,7 +4,7 @@ const cors = require('cors');
 const fs = require('fs');
 const authProxy = require('./db/db.js');
 const app = express();
-const PORT = process.env.PORT || 5002;
+const PORT = process.env.PORT || 5001;
 //Start express server and cloud sql proxy
 app.use(cors());
 app.use(express.json());
