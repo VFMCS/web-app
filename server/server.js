@@ -2,7 +2,7 @@
 const express = require("express");
 const cors = require('cors');
 const server = express();
-const PORT = 3002
+const PORT = 5002
 //Start express server and cloud sql proxy
 server.use(cors());
 server.use(express.json());

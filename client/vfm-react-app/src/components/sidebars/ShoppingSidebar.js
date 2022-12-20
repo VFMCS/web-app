@@ -30,7 +30,7 @@ const ShoppingSidebar = ({isOpen, toggle}) => {
     let [cart_transactions, setCartTransactions] = React.useState([]) // capture data from GET request
 
     let toMakeCart = () => {
-        let url = 'http://localhost:3001/api/transaction/cart/' + localStorage.getItem('curr_user_id');
+        let url = 'http://localhost:5001/api/transaction/cart/' + localStorage.getItem('curr_user_id');
         //console.log(url);
         fetch(url).then(response => response.json()).then(data => {console.log(data); setCartTransactions(data)})
           .catch(err => console.error(err));     
@@ -45,7 +45,7 @@ const ShoppingSidebar = ({isOpen, toggle}) => {
         console.log("quantity: " + event.target.value);
         console.log("in_cart: " + item.in_cart);
 
-        const url = "http://localhost:3001/api/transaction/update/"
+        const url = "http://localhost:5001/api/transaction/update/"
         if(event.target.value !== '' || event.target.value > 0){
             item.quantity = event.target.value;
             fetch(url, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(item) }).then(data => console.log(data));
@@ -61,7 +61,7 @@ const ShoppingSidebar = ({isOpen, toggle}) => {
         temp.forEach(item => {
             if(item.quantity > 0){
                 item.in_cart = false;
-                const url = "http://localhost:3001/api/transaction/update/"
+                const url = "http://localhost:5001/api/transaction/update/"
                 fetch(url, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(item) }).then(data => console.log(data));
             }
         });
@@ -70,7 +70,7 @@ const ShoppingSidebar = ({isOpen, toggle}) => {
     }
 
     let toDelete = item => () => {
-        const url = "http://localhost:3001/api/transaction/" + item.transaction_id;
+        const url = "http://localhost:5001/api/transaction/" + item.transaction_id;
         fetch(url, { method: "DELETE", headers: { "Content-Type": "application/json" }, body: JSON.stringify(item) }).then(data => console.log(data));
         //window.location.reload(false)
         toggle();
